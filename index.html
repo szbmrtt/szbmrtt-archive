@@ -11,6 +11,7 @@
             --text-color: #2C3E50;
             --accent-color: #800020;
             --white: #ffffff;
+            --header-height: 90px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -19,14 +20,16 @@
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            line-height: 1.6;
+            line-height: 1.7;
+            overflow-x: hidden;
         }
 
         h1, h2, h3, h4, .motto { font-family: 'Libre Baskerville', serif; }
 
-        /* FEJLÉC ÉS NAVIGÁCIÓ */
+        /* --- HEADER & NAVIGATION --- */
         header {
-            padding: 15px 5%;
+            height: var(--header-height);
+            padding: 0 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -37,116 +40,135 @@
             z-index: 2000;
         }
 
-        .logo-group { display: flex; align-items: center; gap: 15px; text-decoration: none; color: inherit; }
-        .logo-img { height: 80px; width: auto; object-fit: contain; }
-        .logo-text b { display: block; font-size: 1.4rem; color: var(--accent-color); }
-        .logo-text span { font-size: 0.9rem; font-weight: 600; display: block; max-width: 400px; }
+        .logo-group { display: flex; align-items: center; gap: 15px; text-decoration: none; color: inherit; max-width: 75%; }
+        .logo-img { height: 70px; width: auto; flex-shrink: 0; }
+        .logo-text b { display: block; font-size: clamp(1rem, 2.5vw, 1.4rem); color: var(--accent-color); }
+        .logo-text span { font-size: clamp(0.7rem, 1.8vw, 0.9rem); font-weight: 600; display: block; line-height: 1.2; }
 
-        .nav-controls { display: flex; gap: 30px; align-items: center; }
-        .lang-switch { font-size: 1.8rem; display: flex; gap: 15px; cursor: pointer; }
+        .nav-controls { display: flex; gap: 20px; align-items: center; }
+        .lang-switch { font-size: 1.6rem; cursor: pointer; display: flex; gap: 10px; }
         
         .menu-btn { 
             cursor: pointer; 
             font-weight: bold; 
-            font-size: 1.6rem; 
+            font-size: 1.5rem; 
             display: flex; 
             align-items: center; 
             gap: 10px;
-            padding: 10px;
+            background: #f4f4f4;
+            padding: 10px 15px;
+            border-radius: 4px;
             transition: 0.3s;
         }
+        .menu-btn:hover { background: #e8e8e8; }
 
-        /* ELŐUGRÓ MENÜ (OVERLAY) */
+        /* --- OVERLAY MENU --- */
         .nav-overlay {
             position: fixed;
             top: 0;
-            right: -100%;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(44, 62, 80, 0.98);
+            background: rgba(128, 0, 32, 0.98); 
             z-index: 3000;
-            transition: 0.4s ease;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
         }
 
-        .nav-overlay.active { right: 0; }
+        .nav-overlay.active { opacity: 1; visibility: visible; }
 
         .close-menu {
             position: absolute;
-            top: 30px;
+            top: 25px;
             right: 5%;
-            font-size: 3rem;
+            font-size: 4rem;
             color: white;
             cursor: pointer;
         }
 
-        .nav-links { list-style: none; text-align: center; }
+        .nav-links { list-style: none; text-align: center; width: 90%; max-height: 80vh; overflow-y: auto; }
         .nav-links li { margin: 15px 0; }
         .nav-links a { 
             color: white; 
             text-decoration: none; 
-            font-size: 1.5rem; 
+            font-size: clamp(1.2rem, 5vw, 1.8rem); 
             font-family: 'Libre Baskerville', serif;
             transition: 0.3s;
         }
-        .nav-links a:hover { color: #f39c12; }
-        .nav-links .main-cat { color: var(--accent-color); font-weight: bold; font-size: 1.8rem; margin-bottom: 10px; }
+        .nav-links a:hover { color: #f1c40f; }
 
-        /* HERO */
-        .hero { padding: 120px 10%; text-align: center; background: var(--white); }
-        .motto { font-size: 3rem; color: var(--accent-color); text-transform: uppercase; letter-spacing: 3px; line-height: 1.2; }
+        /* --- HERO --- */
+        .hero { padding: 100px 5%; text-align: center; background: var(--white); border-bottom: 1px solid #eee; }
+        .motto { 
+            font-size: clamp(1.6rem, 6vw, 3.2rem); 
+            color: var(--accent-color); 
+            text-transform: uppercase; 
+            letter-spacing: 3px; 
+            max-width: 1000px; 
+            margin: 0 auto; 
+            line-height: 1.1;
+        }
 
-        /* TARTALOM */
+        /* --- CONTENT --- */
         .container { max-width: 1100px; margin: 0 auto; padding: 40px 5%; }
 
         .menu-point-title {
-            font-size: 2.2rem;
+            font-size: clamp(1.5rem, 4.5vw, 2.4rem);
             color: var(--accent-color);
-            border-bottom: 3px solid var(--accent-color);
+            border-bottom: 4px solid var(--accent-color);
             margin: 80px 0 40px 0;
             padding-bottom: 15px;
             text-transform: uppercase;
         }
 
+        .president-section { display: block; overflow: hidden; margin-bottom: 50px; }
+        
         .elnok-foto {
-            width: 380px;
+            width: 100%;
+            max-width: 380px;
             height: auto;
-            float: left;
-            margin: 0 40px 30px 0;
+            margin-bottom: 25px;
             border: 1px solid #ddd;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 15px 15px 30px rgba(0,0,0,0.07);
         }
 
-        .section-header { margin-bottom: 30px; clear: both; }
-        .subsection-title { font-weight: bold; text-transform: uppercase; margin: 30px 0 15px 0; font-size: 1.1rem; border-left: 4px solid var(--accent-color); padding-left: 10px; }
+        @media (min-width: 850px) {
+            .elnok-foto { float: left; margin: 0 45px 35px 0; }
+        }
+
+        .section-header { margin-bottom: 35px; }
+        .subsection-title { 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            margin: 30px 0 15px 0; 
+            color: #1a1a1a;
+            border-left: 6px solid var(--accent-color);
+            padding-left: 15px;
+            font-size: 1.15rem;
+        }
         
-        ul { margin: 15px 0 25px 40px; }
-        li { margin-bottom: 12px; font-size: 1.05rem; }
+        ul { margin: 15px 0 30px 30px; }
+        li { margin-bottom: 12px; text-align: justify; font-size: 1.05rem; }
 
         .gremium-item {
-            background: #fdfdfd;
-            padding: 25px;
+            background: #ffffff;
+            padding: 30px;
             border: 1px solid #eee;
-            border-left: 6px solid var(--accent-color);
+            border-left: 8px solid var(--accent-color);
             margin-bottom: 20px;
-            font-size: 1.1rem;
             text-align: justify;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
         }
 
-        /* MOBIL RESZPONZIVITÁS */
-        @media (max-width: 900px) {
-            header { padding: 15px 3%; }
-            .logo-img { height: 60px; }
-            .logo-text b { font-size: 1.1rem; }
-            .logo-text span { font-size: 0.75rem; }
-            .motto { font-size: 1.8rem; }
-            .elnok-foto { width: 100%; float: none; margin: 0 0 30px 0; }
-        }
-
+        /* --- FOOTER --- */
         footer { background: #2C3E50; color: white; padding: 60px 5%; text-align: center; margin-top: 100px; }
+
     </style>
 </head>
 <body>
@@ -161,14 +183,13 @@
     </div>
     <div class="nav-controls">
         <div class="lang-switch"><span>🇭🇺</span> <span>🇬🇧</span></div>
-        <div class="menu-btn" onclick="toggleMenu()">MENÜ ☰</div>
+        <div class="menu-btn" onclick="toggleMenu()">☰ MENÜ</div>
     </div>
 </header>
 
 <div class="nav-overlay" id="menuOverlay">
     <div class="close-menu" onclick="toggleMenu()">×</div>
     <ul class="nav-links">
-        <li class="main-cat">SZBMRTT</li>
         <li><a href="#" onclick="toggleMenu()">Bemutatkozás, küldetésünk</a></li>
         <li><a href="#" onclick="toggleMenu()">A Diszciplína</a></li>
         <li><a href="#" onclick="toggleMenu()">A társaság szervezete</a></li>
@@ -197,40 +218,35 @@
 
     <h2 class="menu-point-title">A társaság szervezete</h2>
     
-    <div class="section-header">
-        <h3 style="color: var(--accent-color); text-transform: uppercase; margin-bottom: 20px; font-size: 1.8rem;">ELNÖK</h3>
+    <div class="president-section">
+        <h3 style="color: var(--accent-color); text-transform: uppercase; margin-bottom: 20px; font-size: 1.6rem; letter-spacing: 1px;">ELNÖK</h3>
         <img src="dr-paradi-jozsef-elnok.jpg" alt="Dr. Parádi József" class="elnok-foto">
-        <h2 style="font-size: 2.5rem; margin-bottom: 10px;">Dr. Parádi József CSc, mestertanár</h2>
-        <p style="font-size: 1.3rem;"><b>A rendvédelem-történeti diszciplina megteremtője Magyarországon</b></p>
-    </div>
+        <div class="section-header">
+            <h2 style="font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 10px;">Dr. Parádi József CSc, mestertanár</h2>
+            <p style="font-size: 1.3rem; font-weight: 600; color: #444;">A rendvédelem-történeti diszciplina megteremtője Magyarországon</p>
+        </div>
 
-    <div class="section-header">
         <div class="subsection-title">SZAKMAI ÉLETÚT ÉS TANULMÁNYOK</div>
         <ul>
             <li>Pályafutását 1972-ben kezdte a Határőrségnél, a Kossuth Lajos Katonai Főiskola elvégzését követően. Ezt követően oktatói és kutatói munkát végzett több rendvédelmi intézményben.</li>
             <li>Diplomáját és bölcsészdoktori címét az ELTE BTK-n szerezte (1984), majd a Magyar Tudományos Akadémián a Hadtudományok kandidátusa (CSc) fokozatot is elnyerte (1990).</li>
             <li>1984-től a Rendőrtiszti Főiskola meghatározó oktatója és kutatója, 1991-től főiskolai tanár.</li>
         </ul>
-    </div>
 
-    <div class="section-header">
         <div class="subsection-title">A RENDVÉDELEM-TÖRTÉNET MINT SZAKTERÜLET MEGTEREMTÉSE</div>
         <ul>
             <li>A magyar rendvédelem-történeti diszciplina létrehozása, módszertani megalapozása és magának a rendvédelem kifejezésnek a magyar szóhasználatba való bevezetése Dr. Parádi József nevéhez fűződik.</li>
             <li>Munkássága felszámolta a nyugat-európai országokhoz képest fennálló több évtizedes hazai lemaradást.</li>
             <li>Tudományos műhelyt hozott létre, amely a dualizmus és a két világháború közötti időszak fegyveres őrtestületeinek történetét kutatja.</li>
         </ul>
-    </div>
 
-    <div class="section-header">
         <div class="subsection-title">KUTATÓI ÉS PUBLIKÁCIÓS TEVÉKENYSÉG</div>
-        <p>Fő kutatási területe a 19–20. századi magyar rendvédelem: határőrizet, csendőrség, rendőrség, pénzügyőrség. Több mint 300 tudományos közlemény, 101 folyóiratcikk, 35 könyv, számos könyvrészlet és szerkesztés fűződik a nevéhez. Hirsch-indexe: 25. Meghatározó műve: „A magyar rendvédelem története” című komplex monográfia. Az Új Révai Lexikon rendvédelemre vonatkozó szócikkeinek szerzője.</p>
-    </div>
+        <p style="text-align: justify; margin-bottom: 15px; font-size: 1.05rem;">Fő kutatási területe a 19–20. századi magyar rendvédelem: határőrizet, csendőrség, rendőrség, pénzügyőrség. Több mint 300 tudományos közlemény, 101 folyóiratcikk, 35 könyv, számos könyvrészlet és szerkesztés fűződik a nevéhez. Hirsch-indexe: 25. Meghatározó műve: „A magyar rendvédelem története” című komplex monográfia. Az Új Révai Lexikon rendvédelemre vonatkozó szócikkeinek szerzője.</p>
 
-    <div class="section-header">
         <div class="subsection-title">TUDOMÁNYOS KÖZÉLETI SZEREPVÁLLALÁS ÉS NEMZETKÖZI KAPCSOLATOK</div>
-        <p><b>A SZBMRTT alapítója és elnöke</b></p>
-        <p>A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaságot ő alapította. A társaság, amely több mint 300 fővel került tagsági viszonyba és széles szimpatizánsi körrel rendelkezik, Magyarország meghatározó szakmai műhelyévé vált.</p>
+        <p style="margin-bottom: 10px;"><b>A SZBMRTT alapítója és elnöke</b></p>
+        <p style="text-align: justify; margin-bottom: 15px;">A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaságot ő alapította. A társaság, amely több mint 300 fővel került tagsági viszonyba és széles szimpatizánsi körrel rendelkezik, Magyarország meghatározó szakmai műhelyévé vált.</p>
+        
         <p><b>Nemzetközi együttműködések</b></p>
         <ul>
             <li>Franciaország: Szoros kapcsolat a Francia Nemzeti Csendőrség Történeti Szolgálatával (SHGN, a jelenlegi SHD jogelődje). Meghívásukra tartott előadást a Sorbonne Egyetemen Georges Philippot tábornok felkérésére.</li>
@@ -240,7 +256,7 @@
     </div>
 
     <h2 class="menu-point-title">Tudományos grémiumok</h2>
-    <p style="margin-bottom: 25px; text-align: justify;">Tudományos társaságunknál a szakosztályok szerepét szellemi alkotóműhelyek töltik be. Ezen műhelyek élén magas tudományos fokozatot elért, illetve kimagasló munkássággal és az adott témakörben alapozó kutatásokkal rendelkező tagtársaink állnak. A teljesség igénye nélkül legjelentősebb szellemi grémiumaink:</p>
+    <p style="margin-bottom: 35px; text-align: justify; font-size: 1.1rem;">Tudományos társaságunknál a szakosztályok szerepét szellemi alkotóműhelyek töltik be. Ezen műhelyek élén magas tudományos fokozatot elért, illetve kimagasló munkássággal és az adott témakörben alapozó kutatásokkal rendelkező tagtársaink állnak. A teljesség igénye nélkül legjelentősebb szellemi grémiumaink:</p>
 
     <div class="gremium-item"><b>Csendőrség-történeti:</b> Dr. Parádi József CSc – Dr. Szakály Sándor Dsc</div>
     <div class="gremium-item"><b>Civil rendvédelem-történet, nem állami fegyveres testületként működő, fegyveres és fegyver nélküli rendvédelmi szervezetek története:</b> Parádi Ákos</div>
@@ -269,7 +285,8 @@
 <script>
     function toggleMenu() {
         const overlay = document.getElementById('menuOverlay');
-        overlay.classList.toggle('active');
+        const isActive = overlay.classList.toggle('active');
+        document.body.style.overflow = isActive ? 'hidden' : 'auto';
     }
 </script>
 
