@@ -1,200 +1,123 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SzBMRTT - Hivatalos Oldal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bordoo: #800020;
-            --sotet: #2C3E50;
-            --vilagos: #FDFDFD;
-            --feher: #ffffff;
-            --atmenet: 0.3s ease;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: var(--vilagos); color: var(--sotet); line-height: 1.8; }
-        h1, h2, h3, .motto { font-family: 'Libre Baskerville', serif; }
-
-        /* --- MODERN FEJLÉC --- */
-        header {
-            background: var(--feher);
-            border-bottom: 3px solid var(--bordoo);
-            padding: 10px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .brand { display: flex; align-items: center; gap: 15px; text-decoration: none; color: inherit; }
-        .logo-img { height: clamp(50px, 8vw, 75px); width: auto; }
-        .brand-text b { display: block; font-size: clamp(1rem, 2.5vw, 1.4rem); color: var(--bordoo); }
-        .brand-text span { font-size: clamp(0.7rem, 1.5vw, 0.85rem); font-weight: 600; display: block; max-width: 450px; }
-
-        /* --- NAVIGÁCIÓS VEZÉRLŐK --- */
-        .nav-tools { display: flex; align-items: center; gap: 20px; }
-        .hamburger {
-            font-size: 1.8rem;
-            cursor: pointer;
-            background: var(--bordoo);
-            color: white;
-            padding: 5px 12px;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .hamburger span { font-size: 1rem; font-weight: bold; font-family: 'Inter'; text-transform: uppercase; }
-
-        /* --- OLDALMENÜ (DRAWER) --- */
-        #mobileNav {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 300px;
-            height: 100%;
-            background: var(--sotet);
-            z-index: 2000;
-            transition: var(--atmenet);
-            padding: 40px 20px;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.3);
-        }
-        #mobileNav.open { right: 0; }
-        .close-btn { color: white; font-size: 2.5rem; cursor: pointer; position: absolute; top: 10px; right: 20px; }
-        
-        .nav-links { list-style: none; margin-top: 40px; }
-        .nav-links li { border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .nav-links a { color: white; text-decoration: none; padding: 15px 0; display: block; font-size: 1.1rem; transition: var(--atmenet); }
-        .nav-links a:hover { color: #f1c40f; padding-left: 10px; }
-
-        /* --- TARTALOM --- */
-        .hero { background: var(--feher); padding: 60px 5%; text-align: center; border-bottom: 1px solid #eee; }
-        .motto { font-size: clamp(1.4rem, 5vw, 2.8rem); color: var(--bordoo); letter-spacing: 2px; text-transform: uppercase; }
-
-        main { max-width: 1100px; margin: 0 auto; padding: 40px 5%; }
-        
-        .section-title { 
-            font-size: clamp(1.5rem, 4vw, 2.2rem); 
-            color: var(--bordoo); 
-            margin: 60px 0 30px; 
-            border-bottom: 2px solid var(--bordoo);
-            padding-bottom: 10px;
-        }
-
-        /* --- ELNÖKI BEMUTATÁS --- */
-        .president-card { display: flex; flex-wrap: wrap; gap: 30px; margin-bottom: 50px; }
-        .elnok-foto { 
-            flex: 1 1 300px; 
-            max-width: 400px; 
-            height: auto; 
-            border: 1px solid #ddd; 
-            box-shadow: 10px 10px 20px rgba(0,0,0,0.05);
-        }
-        .president-info { flex: 2 1 400px; }
-        .sub-h { font-weight: bold; text-transform: uppercase; margin-top: 25px; border-left: 5px solid var(--bordoo); padding-left: 15px; color: #111; }
-        
-        ul { margin: 15px 0 25px 25px; }
-        li { margin-bottom: 10px; text-align: justify; }
-
-        /* --- GRÉMIUMOK (GRID) --- */
-        .gremium-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
-        .gremium-card { background: white; padding: 20px; border: 1px solid #eee; border-top: 4px solid var(--bordoo); transition: 0.3s; }
-        .gremium-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-
-        footer { background: var(--sotet); color: white; padding: 40px 5%; text-align: center; margin-top: 80px; }
-
-        /* MOBIL KIJELZŐRE OPTIMALIZÁLVA */
-        @media (max-width: 600px) {
-            .hamburger span { display: none; }
-            .hero { padding: 40px 5%; }
-            main { padding: 20px 5%; }
-        }
-    </style>
-</head>
-<body>
-
-<header>
-    <a href="#" class="brand">
-        <img src="szemere-bertalan-rendvedelem-torteneti-tarsasag-szbmrtt-logo-official.png" alt="SzBMRTT Logo" class="logo-img">
-        <div class="brand-text">
-            <b>SzBMRTT</b>
-            <span>Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</span>
-        </div>
-    </a>
-    <div class="nav-tools">
-        <div class="hamburger" onclick="toggleMenu()">
-            <span>Menü</span> ☰
-        </div>
-    </div>
-</header>
-
-<nav id="mobileNav">
-    <div class="close-btn" onclick="toggleMenu()">×</div>
-    <ul class="nav-links">
-        <li><a href="#" onclick="toggleMenu()">Bemutatkozás</a></li>
-        <li><a href="#" onclick="toggleMenu()">A Diszciplína</a></li>
-        <li><a href="#" onclick="toggleMenu()">A Társaság szervezete</a></li>
-        <li><a href="#" onclick="toggleMenu()">Rendezvényeink</a></li>
-        <li><a href="#" onclick="toggleMenu()">Kiadványaink</a></li>
-        <li><a href="#" onclick="toggleMenu()">Körlevelek</a></li>
-        <li><a href="#" onclick="toggleMenu()">Rólunk írták</a></li>
-        <li><a href="#" onclick="toggleMenu()">Kapcsolat</a></li>
-    </ul>
-</nav>
-
-<div class="hero">
-    <h1 class="motto">Történelemmel a biztonságért</h1>
-</div>
-
-<main>
-    <h2 class="section-title">A Társaság szervezete</h2>
-    
-    <div class="president-card">
-        <img src="dr-paradi-jozsef-elnok.jpg" alt="Dr. Parádi József" class="elnok-foto">
-        <div class="president-info">
-            <h3 style="font-size: 2rem;">Dr. Parádi József CSc</h3>
-            <p><i>A rendvédelem-történeti diszciplina megteremtője Magyarországon</i></p>
-
-            <div class="sub-h">SZAKMAI ÉLETÚT ÉS TANULMÁNYOK</div>
-            <ul>
-                <li>Pályafutását 1972-ben kezdte a Határőrségnél.</li>
-                <li>Diplomáját és bölcsészdoktori címét az ELTE BTK-n szerezte (1984).</li>
-                <li>A Magyar Tudományos Akadémián a Hadtudományok kandidátusa (1990).</li>
-            </ul>
-
-            <div class="sub-h">DISZCIPLINA MEGTEREMTÉSE</div>
-            <p>Munkássága felszámolta a nyugat-európai országokhoz képest fennálló több évtizedes hazai lemaradást. Tudományos műhelyt hozott létre a fegyveres őrtestületek kutatására.</p>
-        </div>
-    </div>
-
-    <h2 class="section-title">Tudományos grémiumok</h2>
-    <div class="gremium-grid">
-        <div class="gremium-card"><b>Csendőrség-történeti:</b><br>Dr. Parádi József CSc – Dr. Szakály Sándor Dsc</div>
-        <div class="gremium-card"><b>Civil rendvédelem-történet:</b><br>Parádi Ákos</div>
-        <div class="gremium-card"><b>Fegyőrség-története:</b><br>Dr. Mezey Barna Dsc</div>
-        <div class="gremium-card"><b>Határőrizet-történet:</b><br>Dr. Parádi József CSc</div>
-        <div class="gremium-card"><b>Rendőrség-története:</b><br>Dr.jur. Ernyes Mihály</div>
-        <div class="gremium-card"><b>Segédtudományok (Heraldika, Numizmatika):</b><br>Zeidler Sándor</div>
-        <div class="gremium-card"><b>Testőrség és Koronaőrség:</b><br>Dr. Hegedűs Ernő Ph.D. – Dr. Hennel Sándor Ph.D.</div>
-    </div>
-</main>
-
-<footer>
-    <p>&copy; 2026 Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</p>
-</footer>
-
-<script>
-    function toggleMenu() {
-        const nav = document.getElementById('mobileNav');
-        nav.classList.toggle('open');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .hero-bg {
+      background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://via.placeholder.com/1920x1080?text=Hero+Image');
+      background-size: cover;
+      background-position: center;
     }
-</script>
+  </style>
+</head>
+<body class="bg-gray-50 font-sans">
 
+  <!-- NAV -->
+  <nav class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="https://via.placeholder.com/60" alt="SZBMRTT Logo" class="h-12 w-12">
+        <div>
+          <h1 class="text-xl font-bold text-gray-900">SzBMRTT</h1>
+          <p class="text-xs text-gray-600">Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</p>
+        </div>
+      </div>
+
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex items-center gap-8 text-sm">
+        <a href="#" class="hover:text-blue-600 transition">Bemutatkozás</a>
+        <a href="#" class="hover:text-blue-600 transition">Küldetésünk</a>
+        <a href="#" class="hover:text-blue-600 transition">A Diszciplína</a>
+        <a href="#" class="hover:text-blue-600 transition">A Társaság Szervezete</a>
+        <a href="#" class="hover:text-blue-600 transition">Rendezvényeink</a>
+        <a href="#" class="hover:text-blue-600 transition">Kapcsolat</a>
+      </div>
+
+      <!-- Language & Mobile Menu -->
+      <div class="flex items-center gap-4">
+        <div class="flex gap-2 text-sm">
+          <button class="font-medium text-blue-600">HU</button>
+          <button class="text-gray-500 hover:text-gray-700">EN</button>
+        </div>
+        <button id="mobile-menu-btn" class="md:hidden text-2xl">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+      <div class="px-6 py-4 flex flex-col gap-4 text-sm">
+        <a href="#" class="hover:text-blue-600">Bemutatkozás</a>
+        <a href="#" class="hover:text-blue-600">Küldetésünk</a>
+        <a href="#" class="hover:text-blue-600">A Diszciplína</a>
+        <a href="#" class="hover:text-blue-600">A Társaság Szervezete</a>
+        <a href="#" class="hover:text-blue-600">Rendezvényeink</a>
+        <a href="#" class="hover:text-blue-600">Kapcsolat</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero-bg h-screen flex items-center text-white">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h2 class="text-5xl md:text-6xl font-bold mb-6">Szemere Bertalan<br>Magyar Rendvédelem-történeti<br>Tudományos Társaság</h2>
+      <p class="text-xl md:text-2xl max-w-2xl mx-auto opacity-90">
+        A rendvédelem történetének tudományos kutatása és megőrzése
+      </p>
+    </div>
+  </section>
+
+  <!-- BEMUTATKOZÁS -->
+  <section class="py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center mb-12">Bemutatkozás, Küldetésünk</h2>
+      <div class="prose prose-lg mx-auto">
+        <p>A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság a magyar rendvédelem történetének tudományos kutatására, dokumentálására és népszerűsítésére alakult.</p>
+        <p>Küldetésünk a rendvédelem-történet mint önálló diszciplína megerősítése, a történelmi tudás átadása és a szakmai identitás erősítése.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ELNÖK -->
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center mb-12">A Társaság Szervezete</h2>
+      <div class="bg-white rounded-2xl shadow p-10">
+        <h3 class="text-2xl font-semibold mb-6">Elnök</h3>
+        <p class="text-xl font-medium">Dr. Parádi József CSc., mestertanár</p>
+        <p class="mt-4 text-gray-700">A rendvédelem-történeti diszciplína megteremtője Magyarországon.</p>
+        <!-- Itt folytathatod a teljes életrajzi szöveget -->
+      </div>
+    </div>
+  </section>
+
+  <!-- További szekciók helye -->
+  <section class="py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+      <p class="text-gray-500">További szekciók (A Diszciplína, Rendezvényeink, Kiadványaink, stb.) hamarosan kerülnek feltöltésre.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-gray-400 py-12">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+      <p>© 2026 Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</p>
+      <p class="text-sm mt-2">Minden jog fenntartva.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
 </body>
 </html>
