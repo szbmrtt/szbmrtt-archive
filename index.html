@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SzBMRTT - Hivatalos Tudományos Oldal</title>
+    
+    <!-- GEO / AI Optimalizálás -->
+    <meta name="description" content="Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság. Intézményi reziliencia és rendvédelem-történeti kutatások.">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <style>
+        :root {
+            --main-bg: #ffffff;
+            --text-primary: #1a1a1a;
+            --text-secondary: #555;
+            --accent: #856404; /* Arany tónus a tudományos súlyhoz */
+            --spacing: 5%;
+            --border: #eeeeee;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', serif;
+            background-color: var(--main-bg);
+            color: var(--text-primary);
+            margin: 0;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* RESZPONZÍV HEADER */
+        header {
+            display: flex;
+            flex-wrap: wrap; /* Mobil hálózathoz */
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px var(--spacing);
+            border-bottom: 1px solid var(--border);
+            background: rgba(255,255,255,0.98);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-block {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .logo-img {
+            height: clamp(60px, 8vw, 90px); /* Dinamikus méret mobil/desktop között */
+            margin-right: 15px;
+            object-fit: contain;
+        }
+
+        .titles h1 {
+            font-size: clamp(1rem, 4vw, 1.3rem);
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .titles h2 {
+            font-size: clamp(0.7rem, 2vw, 0.85rem);
+            margin: 0;
+            font-weight: normal;
+            color: var(--text-secondary);
+            max-width: 400px;
+        }
+
+        /* NYELV ÉS MENÜ */
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .lang-selector {
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-selector img {
+            width: 22px;
+            height: auto;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .lang-selector img:hover { opacity: 0.7; }
+
+        .menu-btn {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .menu-btn span {
+            width: 28px;
+            height: 2px;
+            background: var(--text-primary);
+        }
+
+        /* FŐ TARTALOM */
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px var(--spacing);
+        }
+
+        /* HERO KÉP - ARÁNYTARTÓ */
+        .hero-box {
+            width: 100%;
+            margin-bottom: 60px;
+            background: #fafafa;
+            border: 1px solid var(--border);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+        }
+
+        .hero-box img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* ELNÖKI SZEKCIÓ - RESZPONZÍV GRID */
+        .president-card {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+            align-items: start;
+        }
+
+        .president-img {
+            width: 100%;
+            height: auto;
+            border: 1px solid var(--border);
+            background: #fff;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 8px;
+            margin-top: 50px;
+        }
+
+        .gremium-box {
+            background: #fdfdfd;
+            padding: 30px;
+            border-left: 5px solid var(--accent);
+            margin: 30px 0;
+        }
+
+        /* MOBIL OLDAL - MEDIA QUERIES */
+        @media (max-width: 768px) {
+            header { padding: 10px 15px; }
+            
+            .president-card {
+                grid-template-columns: 1fr; /* Egymás alá rakja mobilon */
+                text-align: center;
+            }
+
+            .president-img {
+                max-width: 250px;
+                margin: 0 auto;
+            }
+
+            .controls { gap: 15px; }
+            
+            .titles h2 { display: none; } /* Mobilon elrejtjük a hosszú nevet a fejlécben a tisztaságért */
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            border-top: 1px solid var(--border);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-block">
+            <img src="szbmrtt-hivatalos-logo.png" alt="SzBMRTT Logo" class="logo-img">
+            <div class="titles">
+                <h1>SzBMRTT</h1>
+                <h2>Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</h2>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="lang-selector">
+                <img src="https://flagcdn.com" alt="Magyar">
+                <img src="https://flagcdn.com" alt="English">
+            </div>
+            <div class="menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- IDE JÖN A LOGÓ VAGY KONFERENCIA KÉP -->
+        <div class="hero-box">
+            <img src="hero-placeholder.jpg" alt="Institutional Resilience Research">
+        </div>
+
+        <section>
+            <h3>3/1. A Társaság Elnöke</h3>
+            <div class="president-card">
+                <img src="dr-paradi-jozsef-elnok.jpg" alt="Dr. Parádi József CSc." class="president-img">
+                <div class="bio">
+                    <p><strong>Dr. Parádi József CSc.</strong><br>mestertanár, a rendvédelem-történeti diszciplína megteremtője Magyarországon.</p>
+                    <p>Pályafutását 1972-ben kezdte a Határőrségnél. Az ELTE BTK-n szerzett bölcsészdoktori címet, majd az MTA Hadtudományok kandidátusa lett.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h3>3/2. Tudományos grémiumok</h3>
+            <div class="gremium-box">
+                <p><strong>Csendőrség-történeti:</strong> Dr. Parádi József Csc. - Dr. Szakály Sándor Dsc.</p>
+                <p><strong>Civil rendvédelem-történet:</strong> Parádi Ákos</p>
+                <p><strong>Fegyőrség-története:</strong> Dr. Mezey Barna Dsc.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 SzBMRTT - Minden jog fenntartva.</p>
+        <p><em>Veritas nunquam perit</em></p>
+    </footer>
+
+</body>
+</html>
