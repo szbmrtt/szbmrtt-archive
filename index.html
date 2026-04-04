@@ -24,7 +24,6 @@
 
         h1, h2, h3, h4, .motto { font-family: 'Libre Baskerville', serif; }
 
-        /* HERO SZEKCIÓ ÉS HEADER */
         header {
             padding: 20px 5%;
             display: flex;
@@ -38,42 +37,22 @@
         }
 
         .logo-group { display: flex; align-items: center; gap: 15px; }
-        .logo-img { height: 60px; width: auto; }
-        .logo-text b { display: block; font-size: 1.2rem; color: var(--accent-color); }
-        .logo-text span { font-size: 0.8rem; font-weight: 600; }
+        .logo-img { height: 70px; width: auto; }
+        .logo-text b { display: block; font-size: 1.3rem; color: var(--accent-color); }
+        .logo-text span { font-size: 0.85rem; font-weight: 600; }
 
-        .nav-controls { display: flex; gap: 30px; align-items: center; }
-        
-        /* Reszponzív nyelvválasztó és menü ikonok */
-        .lang-switch { font-size: 1.5rem; display: flex; gap: 15px; cursor: pointer; }
-        .menu-btn { 
-            cursor: pointer; 
-            font-weight: bold; 
-            font-size: 1.3rem; 
-            display: flex; 
-            align-items: center; 
-            gap: 10px;
-            color: var(--text-color);
-        }
+        .nav-controls { display: flex; gap: 35px; align-items: center; }
+        /* Megnövelt méretű ikonok mobilra is */
+        .lang-switch { font-size: 1.8rem; display: flex; gap: 15px; cursor: pointer; }
+        .menu-btn { cursor: pointer; font-weight: bold; font-size: 1.5rem; display: flex; align-items: center; gap: 10px; }
 
-        .hero-motto-section {
-            padding: 80px 10%;
-            text-align: center;
-            background: var(--white);
-        }
+        .hero-section { padding: 100px 10%; text-align: center; background: var(--white); }
+        .motto { font-size: 2.8rem; color: var(--accent-color); text-transform: uppercase; letter-spacing: 3px; }
 
-        .motto {
-            font-size: 2.5rem;
-            color: var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        /* TARTALOM */
         .container { max-width: 1100px; margin: 0 auto; padding: 40px 5%; }
 
         .menu-point-title {
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: var(--accent-color);
             border-bottom: 2px solid var(--accent-color);
             margin: 60px 0 30px 0;
@@ -82,56 +61,44 @@
         }
 
         .elnok-foto {
-            width: 300px;
+            width: 350px;
             height: auto;
             float: left;
             margin: 0 30px 20px 0;
             border: 1px solid #ddd;
         }
 
-        .section-header { margin-bottom: 20px; clear: both; }
-        .section-header h3 { font-size: 1.5rem; color: #1a1a1a; margin-top: 25px; }
+        .section-header { margin-bottom: 25px; clear: both; }
+        .subsection-title { font-weight: bold; text-transform: uppercase; margin: 25px 0 10px 0; }
         
-        .subsection-title {
-            font-weight: bold;
-            text-transform: uppercase;
-            margin: 20px 0 10px 0;
-            color: var(--text-color);
-        }
-
         ul { margin: 15px 0 20px 40px; }
-        li { margin-bottom: 8px; }
+        li { margin-bottom: 10px; }
 
-        .gremium-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
+        .gremium-intro { margin-bottom: 30px; text-align: justify; font-size: 1.1rem; }
+
+        .gremium-list {
             margin-top: 20px;
         }
 
         .gremium-item {
             background: #f9f9f9;
-            padding: 20px;
+            padding: 25px;
             border-left: 5px solid var(--accent-color);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            text-align: justify;
         }
 
-        /* MOBIL NÉZET FINOMÍTÁSA */
         @media (max-width: 768px) {
-            header { flex-direction: column; gap: 20px; }
-            .nav-controls { width: 100%; justify-content: space-around; padding: 10px 0; border-top: 1px solid #eee; }
-            .lang-switch { font-size: 1.8rem; }
-            .menu-btn { font-size: 1.5rem; }
-            .motto { font-size: 1.6rem; }
-            .elnok-foto { width: 100%; float: none; margin: 0 0 20px 0; }
+            header { flex-direction: column; text-align: center; }
+            .nav-controls { width: 100%; justify-content: space-around; margin-top: 20px; }
+            .lang-switch { font-size: 2rem; }
+            .menu-btn { font-size: 1.7rem; }
+            .motto { font-size: 1.8rem; }
+            .elnok-foto { width: 100%; float: none; margin-bottom: 20px; }
         }
 
-        footer {
-            background: #2C3E50;
-            color: white;
-            padding: 50px 5%;
-            text-align: center;
-            margin-top: 60px;
-        }
+        footer { background: #2C3E50; color: white; padding: 40px; text-align: center; margin-top: 60px; }
     </style>
 </head>
 <body>
@@ -150,25 +117,25 @@
     </div>
 </header>
 
-<section class="hero-motto-section">
+<section class="hero-section">
     <h1 class="motto">Történelemmel a biztonságért</h1>
 </section>
 
 <div class="container">
 
     <h2 class="menu-point-title">Bemutatkozás, küldetésünk</h2>
-    <p><i>(A tartalom feltöltés alatt...)</i></p>
+    <p><i>(Feltöltés alatt...)</i></p>
 
     <h2 class="menu-point-title">A Diszciplína</h2>
-    <p><i>(A tartalom feltöltés alatt...)</i></p>
+    <p><i>(Feltöltés alatt...)</i></p>
 
     <h2 class="menu-point-title">A társaság szervezete</h2>
     
     <div class="section-header">
-        <h3 style="color: var(--accent-color); text-transform: uppercase;">ELNÖK</h3>
+        <h3 style="color: var(--accent-color); text-transform: uppercase; margin-bottom: 20px; font-size: 1.6rem;">ELNÖK</h3>
         <img src="dr-paradi-jozsef-elnok.jpg" alt="Dr. Parádi József" class="elnok-foto">
-        <h2>Dr. Parádi József CSc, mestertanár</h2>
-        <p><b>A rendvédelem-történeti diszciplína megteremtője Magyarországon</b></p>
+        <h2 style="font-size: 2.2rem;">Dr. Parádi József CSc, mestertanár</h2>
+        <p style="font-size: 1.2rem; margin-top: 5px;"><b>A rendvédelem-történeti diszciplina megteremtője Magyarországon</b></p>
     </div>
 
     <div class="section-header">
@@ -183,7 +150,7 @@
     <div class="section-header">
         <div class="subsection-title">A RENDVÉDELEM-TÖRTÉNET MINT SZAKTERÜLET MEGTEREMTÉSE</div>
         <ul>
-            <li>A magyar rendvédelem-történeti diszciplína létrehozása, módszertani megalapozása és magának a rendvédelem kifejezésnek a magyar szóhasználatba való bevezetése Dr. Parádi József nevéhez fűződik.</li>
+            <li>A magyar rendvédelem-történeti diszciplina létrehozása, módszertani megalapozása és magának a rendvédelem kifejezésnek a magyar szóhasználatba való bevezetése Dr. Parádi József nevéhez fűződik.</li>
             <li>Munkássága felszámolta a nyugat-európai országokhoz képest fennálló több évtizedes hazai lemaradást.</li>
             <li>Tudományos műhelyt hozott létre, amely a dualizmus és a két világháború közötti időszak fegyveres őrtestületeinek történetét kutatja.</li>
         </ul>
@@ -202,7 +169,7 @@
         <p><b>A SZBMRTT alapítója és elnöke</b></p>
         <p>A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaságot ő alapította. A társaság, amely több mint 300 fővel került tagsági viszonyba és széles szimpatizánsi körrel rendelkezik, Magyarország meghatározó szakmai műhelyévé vált.</p>
         
-        <p><b>Nemzetközi együttműködések</b></p>
+        <p style="margin-top: 15px;"><b>Nemzetközi együttműködések</b></p>
         <ul>
             <li>Franciaország: Szoros kapcsolat a Francia Nemzeti Csendőrség Történeti Szolgálatával (SHGN, a jelenlegi SHD jogelődje). Meghívásukra tartott előadást a Sorbonne Egyetemen Georges Philippot tábornok felkérésére.</li>
             <li>Ausztria: Együttműködés a Deutsch-Wagram-i Gendarmeriemuseummal és a bécsi Wiener Kriminalmuseummal.</li>
@@ -211,13 +178,19 @@
     </div>
 
     <h2 class="menu-point-title">Tudományos grémiumok</h2>
-    <div class="gremium-grid">
-        <div class="gremium-item"><b>Csendőrség-történeti:</b><br>Dr. Parádi József CSc – Dr. Szakály Sándor Dsc</div>
-        <div class="gremium-item"><b>Civil rendvédelem-történet:</b><br>Parádi Ákos</div>
-        <div class="gremium-item"><b>Fegyőrség-története:</b><br>Dr. Mezey Barna Dsc</div>
-        <div class="gremium-item"><b>Határőrizet-történet:</b><br>Dr. Parádi József CSc</div>
-        <div class="gremium-item"><b>Rendőrség-története:</b><br>Dr.jur. Ernyes Mihály</div>
-        <div class="gremium-item"><b>Történelmi segédtudományok:</b><br>Zeidler Sándor</div>
+    <div class="gremium-intro">
+        Tudományos társaságunknál a szakosztályok szerepét szellemi alkotóműhelyek töltik be. Ezen műhelyek élén magas tudományos fokozatot elért, illetve kimagasló munkássággal és az adott témakörben alapozó kutatásokkal rendelkező tagtársaink állnak. A teljesség igénye nélkül legjelentősebb szellemi grémiumaink:
+    </div>
+
+    <div class="gremium-list">
+        <div class="gremium-item"><b>Csendőrség-történeti:</b> Dr. Parádi József CSc – Dr. Szakály Sándor Dsc</div>
+        <div class="gremium-item"><b>Civil rendvédelem-történet, nem állami fegyveres testületként működő, fegyveres és fegyver nélküli rendvédelmi szervezetek története:</b> Parádi Ákos</div>
+        <div class="gremium-item"><b>Fegyőrség-története (mai szóhasználattal büntetés-végrehajtási):</b> Dr. Mezey Barna Dsc</div>
+        <div class="gremium-item"><b>Fegyveres testületek personálhistoriája:</b> Dr. Szakály Sándor Dsc</div>
+        <div class="gremium-item"><b>Határőrizet-történet:</b> Dr. Parádi József CSc</div>
+        <div class="gremium-item"><b>Rendőrség-története:</b> Dr.jur. Ernyes Mihály</div>
+        <div class="gremium-item"><b>Az archontologia, fallerisztika, heraldika, insigniológia, vexillológia, numizmatika, ikonográfia történelmi segédtudományoknak a XIX-XX. századi magyar rendvédelemre alkalmazott változatát magába foglaló szellemi alkotóműhely:</b> Zeidler Sándor</div>
+        <div class="gremium-item"><b>A magyar testörségek, koronaőrség és képviselőházi őrség története:</b> Dr. Hegedűs Ernő Ph.D. – Dr. Hennel Sándor Ph.D.</div>
     </div>
 
 </div>
