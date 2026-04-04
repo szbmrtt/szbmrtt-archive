@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SzBMRTT</title>
+    <title>SzBMRTT Hivatalos Oldal</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -24,81 +24,129 @@
 
         h1, h2, h3, h4, .motto { font-family: 'Libre Baskerville', serif; }
 
+        /* FEJLÉC ÉS NAVIGÁCIÓ */
         header {
-            padding: 20px 5%;
+            padding: 15px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             background: var(--white);
-            border-bottom: 1px solid #eee;
+            border-bottom: 2px solid #eee;
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 2000;
         }
 
-        .logo-group { display: flex; align-items: center; gap: 15px; }
-        .logo-img { height: 70px; width: auto; }
-        .logo-text b { display: block; font-size: 1.3rem; color: var(--accent-color); }
-        .logo-text span { font-size: 0.85rem; font-weight: 600; }
+        .logo-group { display: flex; align-items: center; gap: 15px; text-decoration: none; color: inherit; }
+        .logo-img { height: 80px; width: auto; object-fit: contain; }
+        .logo-text b { display: block; font-size: 1.4rem; color: var(--accent-color); }
+        .logo-text span { font-size: 0.9rem; font-weight: 600; display: block; max-width: 400px; }
 
-        .nav-controls { display: flex; gap: 35px; align-items: center; }
-        /* Megnövelt méretű ikonok mobilra is */
+        .nav-controls { display: flex; gap: 30px; align-items: center; }
         .lang-switch { font-size: 1.8rem; display: flex; gap: 15px; cursor: pointer; }
-        .menu-btn { cursor: pointer; font-weight: bold; font-size: 1.5rem; display: flex; align-items: center; gap: 10px; }
+        
+        .menu-btn { 
+            cursor: pointer; 
+            font-weight: bold; 
+            font-size: 1.6rem; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px;
+            padding: 10px;
+            transition: 0.3s;
+        }
 
-        .hero-section { padding: 100px 10%; text-align: center; background: var(--white); }
-        .motto { font-size: 2.8rem; color: var(--accent-color); text-transform: uppercase; letter-spacing: 3px; }
+        /* ELŐUGRÓ MENÜ (OVERLAY) */
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(44, 62, 80, 0.98);
+            z-index: 3000;
+            transition: 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
 
+        .nav-overlay.active { right: 0; }
+
+        .close-menu {
+            position: absolute;
+            top: 30px;
+            right: 5%;
+            font-size: 3rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        .nav-links { list-style: none; text-align: center; }
+        .nav-links li { margin: 15px 0; }
+        .nav-links a { 
+            color: white; 
+            text-decoration: none; 
+            font-size: 1.5rem; 
+            font-family: 'Libre Baskerville', serif;
+            transition: 0.3s;
+        }
+        .nav-links a:hover { color: #f39c12; }
+        .nav-links .main-cat { color: var(--accent-color); font-weight: bold; font-size: 1.8rem; margin-bottom: 10px; }
+
+        /* HERO */
+        .hero { padding: 120px 10%; text-align: center; background: var(--white); }
+        .motto { font-size: 3rem; color: var(--accent-color); text-transform: uppercase; letter-spacing: 3px; line-height: 1.2; }
+
+        /* TARTALOM */
         .container { max-width: 1100px; margin: 0 auto; padding: 40px 5%; }
 
         .menu-point-title {
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--accent-color);
-            border-bottom: 2px solid var(--accent-color);
-            margin: 60px 0 30px 0;
-            padding-bottom: 10px;
+            border-bottom: 3px solid var(--accent-color);
+            margin: 80px 0 40px 0;
+            padding-bottom: 15px;
             text-transform: uppercase;
         }
 
         .elnok-foto {
-            width: 350px;
+            width: 380px;
             height: auto;
             float: left;
-            margin: 0 30px 20px 0;
+            margin: 0 40px 30px 0;
             border: 1px solid #ddd;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
         }
 
-        .section-header { margin-bottom: 25px; clear: both; }
-        .subsection-title { font-weight: bold; text-transform: uppercase; margin: 25px 0 10px 0; }
+        .section-header { margin-bottom: 30px; clear: both; }
+        .subsection-title { font-weight: bold; text-transform: uppercase; margin: 30px 0 15px 0; font-size: 1.1rem; border-left: 4px solid var(--accent-color); padding-left: 10px; }
         
-        ul { margin: 15px 0 20px 40px; }
-        li { margin-bottom: 10px; }
-
-        .gremium-intro { margin-bottom: 30px; text-align: justify; font-size: 1.1rem; }
-
-        .gremium-list {
-            margin-top: 20px;
-        }
+        ul { margin: 15px 0 25px 40px; }
+        li { margin-bottom: 12px; font-size: 1.05rem; }
 
         .gremium-item {
-            background: #f9f9f9;
+            background: #fdfdfd;
             padding: 25px;
-            border-left: 5px solid var(--accent-color);
-            margin-bottom: 15px;
+            border: 1px solid #eee;
+            border-left: 6px solid var(--accent-color);
+            margin-bottom: 20px;
             font-size: 1.1rem;
             text-align: justify;
         }
 
-        @media (max-width: 768px) {
-            header { flex-direction: column; text-align: center; }
-            .nav-controls { width: 100%; justify-content: space-around; margin-top: 20px; }
-            .lang-switch { font-size: 2rem; }
-            .menu-btn { font-size: 1.7rem; }
+        /* MOBIL RESZPONZIVITÁS */
+        @media (max-width: 900px) {
+            header { padding: 15px 3%; }
+            .logo-img { height: 60px; }
+            .logo-text b { font-size: 1.1rem; }
+            .logo-text span { font-size: 0.75rem; }
             .motto { font-size: 1.8rem; }
-            .elnok-foto { width: 100%; float: none; margin-bottom: 20px; }
+            .elnok-foto { width: 100%; float: none; margin: 0 0 30px 0; }
         }
 
-        footer { background: #2C3E50; color: white; padding: 40px; text-align: center; margin-top: 60px; }
+        footer { background: #2C3E50; color: white; padding: 60px 5%; text-align: center; margin-top: 100px; }
     </style>
 </head>
 <body>
@@ -112,30 +160,48 @@
         </div>
     </div>
     <div class="nav-controls">
-        <div class="lang-switch">🇭🇺 🇬🇧</div>
-        <div class="menu-btn">MENÜ ☰</div>
+        <div class="lang-switch"><span>🇭🇺</span> <span>🇬🇧</span></div>
+        <div class="menu-btn" onclick="toggleMenu()">MENÜ ☰</div>
     </div>
 </header>
 
-<section class="hero-section">
+<div class="nav-overlay" id="menuOverlay">
+    <div class="close-menu" onclick="toggleMenu()">×</div>
+    <ul class="nav-links">
+        <li class="main-cat">SZBMRTT</li>
+        <li><a href="#" onclick="toggleMenu()">Bemutatkozás, küldetésünk</a></li>
+        <li><a href="#" onclick="toggleMenu()">A Diszciplína</a></li>
+        <li><a href="#" onclick="toggleMenu()">A társaság szervezete</a></li>
+        <li><a href="#" onclick="toggleMenu()">Rendezvényeink</a></li>
+        <li><a href="#" onclick="toggleMenu()">Kiadványaink</a></li>
+        <li><a href="#" onclick="toggleMenu()">Körlevelek</a></li>
+        <li><a href="#" onclick="toggleMenu()">Rólunk írták</a></li>
+        <li><a href="#" onclick="toggleMenu()">Videótár</a></li>
+        <li><a href="#" onclick="toggleMenu()">Kitüntetési rendszerünk</a></li>
+        <li><a href="#" onclick="toggleMenu()">Együttműködések</a></li>
+        <li><a href="#" onclick="toggleMenu()">Kapcsolat</a></li>
+    </ul>
+</div>
+
+<section class="hero">
     <h1 class="motto">Történelemmel a biztonságért</h1>
 </section>
 
 <div class="container">
 
     <h2 class="menu-point-title">Bemutatkozás, küldetésünk</h2>
-    <p><i>(Feltöltés alatt...)</i></p>
+    <p><i>Feltöltés alatt...</i></p>
 
     <h2 class="menu-point-title">A Diszciplína</h2>
-    <p><i>(Feltöltés alatt...)</i></p>
+    <p><i>Feltöltés alatt...</i></p>
 
     <h2 class="menu-point-title">A társaság szervezete</h2>
     
     <div class="section-header">
-        <h3 style="color: var(--accent-color); text-transform: uppercase; margin-bottom: 20px; font-size: 1.6rem;">ELNÖK</h3>
+        <h3 style="color: var(--accent-color); text-transform: uppercase; margin-bottom: 20px; font-size: 1.8rem;">ELNÖK</h3>
         <img src="dr-paradi-jozsef-elnok.jpg" alt="Dr. Parádi József" class="elnok-foto">
-        <h2 style="font-size: 2.2rem;">Dr. Parádi József CSc, mestertanár</h2>
-        <p style="font-size: 1.2rem; margin-top: 5px;"><b>A rendvédelem-történeti diszciplina megteremtője Magyarországon</b></p>
+        <h2 style="font-size: 2.5rem; margin-bottom: 10px;">Dr. Parádi József CSc, mestertanár</h2>
+        <p style="font-size: 1.3rem;"><b>A rendvédelem-történeti diszciplina megteremtője Magyarországon</b></p>
     </div>
 
     <div class="section-header">
@@ -158,18 +224,14 @@
 
     <div class="section-header">
         <div class="subsection-title">KUTATÓI ÉS PUBLIKÁCIÓS TEVÉKENYSÉG</div>
-        <p>Fő kutatási területe a 19–20. századi magyar rendvédelem: határőrizet, csendőrség, rendőrség, pénzügyőrség.</p>
-        <p>Több mint 300 tudományos közlemény, 101 folyóiratcikk, 35 könyv, számos könyvrészlet és szerkesztés fűződik a nevéhez. Hirsch-indexe: 25.</p>
-        <p>Meghatározó műve: „A magyar rendvédelem története” című komplex monográfia.</p>
-        <p>Az Új Révai Lexikon rendvédelemre vonatkozó szócikkeinek szerzője.</p>
+        <p>Fő kutatási területe a 19–20. századi magyar rendvédelem: határőrizet, csendőrség, rendőrség, pénzügyőrség. Több mint 300 tudományos közlemény, 101 folyóiratcikk, 35 könyv, számos könyvrészlet és szerkesztés fűződik a nevéhez. Hirsch-indexe: 25. Meghatározó műve: „A magyar rendvédelem története” című komplex monográfia. Az Új Révai Lexikon rendvédelemre vonatkozó szócikkeinek szerzője.</p>
     </div>
 
     <div class="section-header">
         <div class="subsection-title">TUDOMÁNYOS KÖZÉLETI SZEREPVÁLLALÁS ÉS NEMZETKÖZI KAPCSOLATOK</div>
         <p><b>A SZBMRTT alapítója és elnöke</b></p>
         <p>A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaságot ő alapította. A társaság, amely több mint 300 fővel került tagsági viszonyba és széles szimpatizánsi körrel rendelkezik, Magyarország meghatározó szakmai műhelyévé vált.</p>
-        
-        <p style="margin-top: 15px;"><b>Nemzetközi együttműködések</b></p>
+        <p><b>Nemzetközi együttműködések</b></p>
         <ul>
             <li>Franciaország: Szoros kapcsolat a Francia Nemzeti Csendőrség Történeti Szolgálatával (SHGN, a jelenlegi SHD jogelődje). Meghívásukra tartott előadást a Sorbonne Egyetemen Georges Philippot tábornok felkérésére.</li>
             <li>Ausztria: Együttműködés a Deutsch-Wagram-i Gendarmeriemuseummal és a bécsi Wiener Kriminalmuseummal.</li>
@@ -178,26 +240,38 @@
     </div>
 
     <h2 class="menu-point-title">Tudományos grémiumok</h2>
-    <div class="gremium-intro">
-        Tudományos társaságunknál a szakosztályok szerepét szellemi alkotóműhelyek töltik be. Ezen műhelyek élén magas tudományos fokozatot elért, illetve kimagasló munkássággal és az adott témakörben alapozó kutatásokkal rendelkező tagtársaink állnak. A teljesség igénye nélkül legjelentősebb szellemi grémiumaink:
-    </div>
+    <p style="margin-bottom: 25px; text-align: justify;">Tudományos társaságunknál a szakosztályok szerepét szellemi alkotóműhelyek töltik be. Ezen műhelyek élén magas tudományos fokozatot elért, illetve kimagasló munkássággal és az adott témakörben alapozó kutatásokkal rendelkező tagtársaink állnak. A teljesség igénye nélkül legjelentősebb szellemi grémiumaink:</p>
 
-    <div class="gremium-list">
-        <div class="gremium-item"><b>Csendőrség-történeti:</b> Dr. Parádi József CSc – Dr. Szakály Sándor Dsc</div>
-        <div class="gremium-item"><b>Civil rendvédelem-történet, nem állami fegyveres testületként működő, fegyveres és fegyver nélküli rendvédelmi szervezetek története:</b> Parádi Ákos</div>
-        <div class="gremium-item"><b>Fegyőrség-története (mai szóhasználattal büntetés-végrehajtási):</b> Dr. Mezey Barna Dsc</div>
-        <div class="gremium-item"><b>Fegyveres testületek personálhistoriája:</b> Dr. Szakály Sándor Dsc</div>
-        <div class="gremium-item"><b>Határőrizet-történet:</b> Dr. Parádi József CSc</div>
-        <div class="gremium-item"><b>Rendőrség-története:</b> Dr.jur. Ernyes Mihály</div>
-        <div class="gremium-item"><b>Az archontologia, fallerisztika, heraldika, insigniológia, vexillológia, numizmatika, ikonográfia történelmi segédtudományoknak a XIX-XX. századi magyar rendvédelemre alkalmazott változatát magába foglaló szellemi alkotóműhely:</b> Zeidler Sándor</div>
-        <div class="gremium-item"><b>A magyar testörségek, koronaőrség és képviselőházi őrség története:</b> Dr. Hegedűs Ernő Ph.D. – Dr. Hennel Sándor Ph.D.</div>
-    </div>
+    <div class="gremium-item"><b>Csendőrség-történeti:</b> Dr. Parádi József CSc – Dr. Szakály Sándor Dsc</div>
+    <div class="gremium-item"><b>Civil rendvédelem-történet, nem állami fegyveres testületként működő, fegyveres és fegyver nélküli rendvédelmi szervezetek története:</b> Parádi Ákos</div>
+    <div class="gremium-item"><b>Fegyőrség-története (mai szóhasználattal büntetés-végrehajtási):</b> Dr. Mezey Barna Dsc</div>
+    <div class="gremium-item"><b>Fegyveres testületek personálhistoriája:</b> Dr. Szakály Sándor Dsc</div>
+    <div class="gremium-item"><b>Határőrizet-történet:</b> Dr. Parádi József CSc</div>
+    <div class="gremium-item"><b>Rendőrség-története:</b> Dr.jur. Ernyes Mihály</div>
+    <div class="gremium-item"><b>Az archontologia, fallerisztika, heraldika, insigniológia, vexillológia, numizmatika, ikonográfia történelmi segédtudományoknak a XIX-XX. századi magyar rendvédelemre alkalmazott változatát magába foglaló szellemi alkotóműhely:</b> Zeidler Sándor</div>
+    <div class="gremium-item"><b>A magyar testörségek, koronaőrség és képviselőházi őrség története:</b> Dr. Hegedűs Ernő Ph.D. – Dr. Hennel Sándor Ph.D.</div>
+
+    <h2 class="menu-point-title">Rendezvényeink</h2>
+    <h2 class="menu-point-title">Kiadványaink</h2>
+    <h2 class="menu-point-title">Körlevelek</h2>
+    <h2 class="menu-point-title">Rólunk írták</h2>
+    <h2 class="menu-point-title">Videótár</h2>
+    <h2 class="menu-point-title">Kitüntetési rendszerünk</h2>
+    <h2 class="menu-point-title">Együttműködések</h2>
+    <h2 class="menu-point-title">Kapcsolat</h2>
 
 </div>
 
 <footer>
     <p>&copy; 2026 Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</p>
 </footer>
+
+<script>
+    function toggleMenu() {
+        const overlay = document.getElementById('menuOverlay');
+        overlay.classList.toggle('active');
+    }
+</script>
 
 </body>
 </html>
