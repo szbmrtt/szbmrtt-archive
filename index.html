@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SZBMRTT</title>
+  <title>SZBMRTT - Hivatalos honlap</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     html { scroll-behavior: smooth; }
-    /* Menüpont fókusz szín */
-    .menu-item:focus { background-color: #e2e8f0; }
+    
+    /* Menüpont fókusz (lilásszürke) és interakciók */
+    .menu-item:focus { background-color: #e2e8f0; outline: none; }
     .rotate-180 { transform: rotate(180deg); }
     .transition-transform { transition: transform 0.2s ease; }
     
-    /* Trikolor stílus */
+    /* Trikolor stílus a bal felső sarokban */
     .trikolor {
       height: 4px;
       width: 60px;
@@ -21,17 +22,17 @@
       margin-bottom: 4px;
     }
 
-    /* Almenü megjelenítés - görgetősáv nélkül */
+    /* Almenü vezérlés */
     .submenu { 
       display: none; 
-      max-height: none; /* Nincs függőleges korlát */
+      max-height: none; 
       overflow: visible; 
     }
     .group:focus-within .submenu { display: block; }
 
-    /* Menüsor sűrítése, hogy ne legyen vízszintes görgetés */
+    /* Navigációs szöveg sűrítése a vízszintes helykihasználásért */
     .nav-container {
-      font-size: 0.875rem; /* Kicsit kisebb betűméret a befogadáshoz */
+      font-size: 0.875rem;
     }
   </style>
 </head>
@@ -53,100 +54,3 @@
         <div class="flex flex-col justify-center">
           <h2 class="text-xl font-semibold text-gray-900 uppercase tracking-tight">A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</h2>
           <p class="text-gray-500 font-light text-base">hivatalos honlapja</p>
-        </div>
-      </div>
-
-      <div class="relative w-64">
-        <input type="text" placeholder="Kutatáshoz" class="w-full border-b-2 border-blue-900 py-1 pr-10 focus:outline-none italic text-gray-500">
-        <button class="absolute right-0 top-1 text-blue-900">
-          <i class="fas fa-search"></i>
-        </button>
-      </div>
-    </div>
-
-    <div class="max-w-7xl mx-auto px-6 py-4 border-t border-gray-100">
-      <div class="text-left text-gray-500 font-light italic">
-        <p class="text-lg">Cum historia pro securitate.</p>
-        <p class="text-base">Történelemmel a biztonságért.</p>
-      </div>
-    </div>
-
-    <nav class="border-t border-gray-200 bg-white">
-      <div class="max-w-7xl mx-auto px-2 flex items-center nav-container">
-        
-        <div class="p-2 border-r border-gray-200 flex-shrink-0">
-          <img src="szemere-bertalan-rendvedelem-torteneti-tarsasag-szbmrtt-logo-official.png" 
-               alt="SzBMRTT" class="h-10 w-10 object-contain">
-        </div>
-
-        <div class="flex flex-1 justify-between items-center">
-          
-          <button class="group menu-item relative px-3 py-4 flex items-center gap-1 hover:bg-gray-50 outline-none transition-colors">
-            <span>Bemutatkozás</span>
-            <i class="fas fa-chevron-down text-[10px] transition-transform group-focus:rotate-180"></i>
-          </button>
-
-          <button class="group menu-item relative px-3 py-4 flex items-center gap-1 hover:bg-gray-50 outline-none transition-colors">
-            <span>A diszciplína</span>
-            <i class="fas fa-chevron-down text-[10px] transition-transform group-focus:rotate-180"></i>
-          </button>
-
-          <div class="group relative">
-            <button class="menu-item px-3 py-4 flex items-center gap-1 hover:bg-gray-50 outline-none transition-colors h-full">
-              <span>Szervezet</span>
-              <i class="fas fa-chevron-down text-[10px] transition-transform group-focus:rotate-180"></i>
-            </button>
-            <div class="submenu absolute left-0 top-full w-80 bg-white shadow-2xl border-t-2 border-blue-900 z-[100] py-2 text-left">
-              <a href="#" class="block px-6 py-2 hover:bg-gray-100 text-sm">Elnök</a>
-              <div class="px-6 py-2 font-semibold text-xs text-gray-400 uppercase border-t mt-2">Tudományos grémiumok</div>
-              <a href="#" class="block px-8 py-2 hover:bg-gray-100 text-sm">Csendőrség-történeti</a>
-              <a href="#" class="block px-8 py-2 hover:bg-gray-100 text-sm">Civil rendvédelem-történeti</a>
-              <a href="#" class="block px-8 py-2 hover:bg-gray-100 text-sm">Fegyőrség-történeti</a>
-              <a href="#" class="block px-8 py-2 hover:bg-gray-100 text-sm">Határőrizet-történet</a>
-              <a href="#" class="block px-8 py-2 hover:bg-gray-100 text-sm">Personalhistória</a>
-              <a href="#" class="block px-8 py-2 hover:bg-gray-100 text-sm">Rendőrségtörténeti</a>
-              <a href="#" class="block px-8 py-2 hover:bg-gray-100 text-sm">Történelmi segédtudományok</a>
-              <a href="#" class="block px-8 py-2 hover:bg-gray-100 text-sm">Testőrségek - koronaőrség - képviselőházi őrség-történeti</a>
-              <a href="#" class="block px-6 py-2 hover:bg-gray-100 text-sm border-t mt-2">Együttműködéseink</a>
-            </div>
-          </div>
-
-          <button class="group menu-item relative px-3 py-4 flex items-center gap-1 hover:bg-gray-50 outline-none transition-colors">
-            <span>Rendezvényeink</span>
-            <i class="fas fa-chevron-down text-[10px] transition-transform group-focus:rotate-180"></i>
-          </button>
-
-          <button class="group menu-item relative px-3 py-4 flex items-center gap-1 hover:bg-gray-50 outline-none transition-colors">
-            <span>Kiadványaink</span>
-            <i class="fas fa-chevron-down text-[10px] transition-transform group-focus:rotate-180"></i>
-          </button>
-
-          <div class="group relative">
-            <button class="menu-item px-3 py-4 flex items-center gap-1 hover:bg-gray-50 outline-none transition-colors h-full">
-              <span>Média</span>
-              <i class="fas fa-chevron-down text-[10px] transition-transform group-focus:rotate-180"></i>
-            </button>
-            <div class="submenu absolute left-0 top-full w-64 bg-white shadow-2xl border-t-2 border-blue-900 z-[100] py-2 text-left">
-              <a href="#" class="block px-6 py-2 hover:bg-gray-100 text-sm">Körleveleink</a>
-              <a href="#" class="block px-6 py-2 hover:bg-gray-100 text-sm">Rólunk írták</a>
-              <a href="#" class="block px-6 py-2 hover:bg-gray-100 text-sm">Videótár</a>
-            </div>
-          </div>
-
-          <button class="group menu-item relative px-3 py-4 flex items-center gap-1 hover:bg-gray-50 outline-none transition-colors text-center leading-tight">
-            <span>Kitüntetési rendszerünk</span>
-            <i class="fas fa-chevron-down text-[10px] transition-transform group-focus:rotate-180"></i>
-          </button>
-
-          <button class="group menu-item relative px-3 py-4 flex items-center gap-1 hover:bg-gray-50 outline-none transition-colors">
-            <span>Kapcsolat</span>
-            <i class="fas fa-chevron-down text-[10px] transition-transform group-focus:rotate-180"></i>
-          </button>
-
-        </div>
-      </div>
-    </nav>
-  </header>
-
-</body>
-</html>
