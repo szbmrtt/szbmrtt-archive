@@ -7,86 +7,118 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    .hero-bg {
-      background: linear-gradient(rgba(30,58,138,0.85), rgba(30,58,138,0.85)), 
-                  url('https://via.placeholder.com/1920x1080/1e3a8a/ffffff?text=SzBMRTT') center/cover no-repeat;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
+    html {
+      scroll-behavior: smooth;
     }
-    .logo-img {
-      width: 52px;
-      height: 52px;
-      object-fit: contain;
-      border-radius: 9999px; /* tökéletes kör */
+    /* Aktív menüpont lilásszürke árnyalata */
+    .menu-item:focus {
+      background-color: #e2e8f0; 
+    }
+    .rotate-180 {
+      transform: rotate(180deg);
+    }
+    .transition-transform {
+      transition: transform 0.2s ease;
+    }
+    .trikolor {
+      height: 4px;
+      width: 60px;
+      background: linear-gradient(to right, #ce1126 33.3%, #ffffff 33.3%, #ffffff 66.6%, #006847 66.6%);
+      margin-bottom: 4px;
+    }
+    /* Almenü logika */
+    .submenu {
+      display: none;
+    }
+    .group:focus-within .submenu {
+      display: block;
     }
   </style>
 </head>
-<body class="bg-gray-50 font-sans">
+<body class="bg-white font-sans text-gray-900">
 
-  <!-- NAV -->
-  <nav class="bg-white shadow-sm border-b sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-      <div class="flex items-center gap-4">
+  <header class="w-full border-b border-gray-200">
+    
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex flex-col">
+        <div class="trikolor"></div>
+        <span class="font-bold text-xl tracking-tighter">SZBMRTT</span>
+        <div class="text-xs italic leading-tight text-gray-700">
+          <p>veritas</p>
+          <p>nunquam</p>
+          <p>perit</p>
+        </div>
+      </div>
+
+      <div class="flex justify-center">
         <img src="szemere-bertalan-rendvedelem-torteneti-tarsasag-szbmrtt-logo-official.png" 
              alt="SzBMRTT Logo" 
-             class="logo-img">
-        <div>
-          <h1 class="text-2xl font-semibold text-gray-900">SzBMRTT</h1>
-          <p class="text-sm text-gray-600">Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</p>
-        </div>
+             class="h-20 w-20 object-contain">
       </div>
 
-      <div class="hidden md:flex items-center gap-10 text-sm font-medium">
-        <a href="#bemutatkozas" class="hover:text-blue-700 transition">Bemutatkozás</a>
-        <a href="#kuldes" class="hover:text-blue-700 transition">Küldetésünk</a>
-        <a href="#diszciplina" class="hover:text-blue-700 transition">A Diszciplína</a>
-        <a href="#szervezet" class="hover:text-blue-700 transition">Szervezet</a>
-        <a href="#rendezvenyek" class="hover:text-blue-700 transition">Rendezvényeink</a>
-        <a href="#kapcsolat" class="hover:text-blue-700 transition">Kapcsolat</a>
-      </div>
-
-      <div class="flex items-center gap-6">
-        <div class="flex gap-2 text-sm">
-          <button class="font-semibold text-blue-700">HU</button>
-          <button class="text-gray-500 hover:text-gray-700">EN</button>
-        </div>
-        <button id="mobile-btn" class="md:hidden text-3xl text-gray-700">
-          <i class="fas fa-bars"></i>
+      <div class="relative w-64">
+        <input type="text" placeholder="Kutatáshoz" class="w-full border-b-2 border-blue-900 py-1 pr-10 focus:outline-none italic text-gray-500">
+        <button class="absolute right-0 top-1 text-blue-900">
+          <i class="fas fa-search"></i>
         </button>
       </div>
     </div>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden bg-white border-t py-4">
-      <div class="px-6 flex flex-col gap-4 text-base">
-        <a href="#bemutatkozas" class="hover:text-blue-700">Bemutatkozás</a>
-        <a href="#kuldes" class="hover:text-blue-700">Küldetésünk</a>
-        <a href="#diszciplina" class="hover:text-blue-700">A Diszciplína</a>
-        <a href="#szervezet" class="hover:text-blue-700">Szervezet</a>
-        <a href="#rendezvenyek" class="hover:text-blue-700">Rendezvényeink</a>
-        <a href="#kapcsolat" class="hover:text-blue-700">Kapcsolat</a>
+    <div class="max-w-7xl mx-auto px-6 py-8">
+      <div class="text-left">
+        <h1 class="text-3xl font-bold leading-tight">A Szemere Bertalan</h1>
+        <h1 class="text-3xl font-bold leading-tight">Magyar Rendvédelem-történeti</h1>
+        <h1 class="text-3xl font-bold leading-tight">Tudományos Társaság</h1>
+        <p class="text-lg font-light text-gray-500 mt-1">tudományos honlapja</p>
       </div>
     </div>
-  </nav>
 
-  <!-- HERO -->
-  <section class="hero-bg text-white py-24 md:py-32">
-    <div class="max-w-5xl mx-auto px-6 text-center">
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-        Szemere Bertalan<br>Magyar Rendvédelem-történeti<br>Tudományos Társaság
-      </h1>
-      <p class="text-lg md:text-xl max-w-2xl mx-auto opacity-90">
-        A rendvédelem történetének tudományos kutatása és megőrzése
-      </p>
-    </div>
-  </section>
+    <nav class="border-t border-gray-200 bg-white">
+      <div class="max-w-7xl mx-auto px-2 flex items-center">
+        
+        <a href="#" class="p-4 border-r border-gray-200 hover:bg-gray-50 text-blue-900">
+          <i class="fas fa-home text-xl"></i>
+        </a>
 
-  <!-- ELNÖK -->
-  <section id="szervezet" class="py-20 bg-white">
+        <div class="flex flex-1">
+          <button class="group menu-item relative px-6 py-4 flex items-center gap-2 hover:bg-gray-50 outline-none transition-colors">
+            <span>Bemutatkozás</span>
+            <i class="fas fa-chevron-down text-xs transition-transform group-focus:rotate-180"></i>
+          </button>
+
+          <button class="group menu-item relative px-6 py-4 flex items-center gap-2 hover:bg-gray-50 outline-none transition-colors">
+            <span>A diszciplína</span>
+            <i class="fas fa-chevron-down text-xs transition-transform group-focus:rotate-180"></i>
+          </button>
+
+          <div class="group relative">
+            <button class="menu-item px-6 py-4 flex items-center gap-2 hover:bg-gray-50 outline-none transition-colors w-full h-full">
+              <span>Szervezet</span>
+              <i class="fas fa-chevron-down text-xs transition-transform group-focus:rotate-180"></i>
+            </button>
+            
+            <div class="submenu absolute left-0 top-full w-80 bg-white shadow-xl border-t-2 border-blue-900 z-[100] py-2 text-left">
+              <a href="#" class="block px-6 py-2 hover:bg-gray-100 text-sm">Elnök</a>
+              <div class="px-6 py-2 font-semibold text-xs text-gray-400 uppercase border-t mt-2">Tudományos grémiumok</div>
+              <a href="#" class="block px-8 py-2 hover:bg-gray-100 text-sm">Csendőrség-történeti</a>
+              <a href="#" class="block px-8 py-2 hover:bg-gray-100 text-sm">Civil rendvédelem-történeti</a>
+              <a href="#" class="block px-8 py-2 hover:bg-gray-100 text-sm">Fegyőrség-történeti</a>
+              <a href="#" class="block px-8 py-2 hover:bg-gray-100 text-sm">Határőrizet-történet</a>
+              <a href="#" class="block px-8 py-2 hover:bg-gray-100 text-sm">Personalhistória</a>
+              <a href="#" class="block px-8 py-2 hover:bg-gray-100 text-sm">Rendőrségtörténeti</a>
+              <a href="#" class="block px-8 py-2 hover:bg-gray-100 text-sm">Történelmi segédtudományok</a>
+              <a href="#" class="block px-8 py-2 hover:bg-gray-100 text-sm">Testőrségek - koronaőrség - képviselőházi őrség-történeti</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <section id="szervezet" class="py-20 bg-gray-50">
     <div class="max-w-5xl mx-auto px-6">
       <h2 class="text-3xl font-bold text-center mb-12">A Társaság Szervezete</h2>
-      <div class="grid md:grid-cols-2 gap-12 items-center bg-gray-50 p-10 rounded-3xl">
+      <div class="grid md:grid-cols-2 gap-12 items-center bg-white p-10 rounded-3xl shadow-sm">
         <div>
           <img src="dr-paradi-jozsef-elnok.jpg" 
                alt="Dr. Parádi József" 
@@ -95,7 +127,7 @@
         <div>
           <h3 class="text-2xl font-semibold mb-4">Elnök</h3>
           <p class="text-xl font-medium">Dr. Parádi József CSc., mestertanár</p>
-          <p class="mt-6 text-gray-700">A rendvédelem-történeti diszciplína megteremtője Magyarországon.</p>
+          <p class="mt-6 text-gray-700 leading-relaxed">A rendvédelem-történeti diszciplína megteremtője Magyarországon.</p>
         </div>
       </div>
     </div>
@@ -105,10 +137,5 @@
     <p>© 2026 Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</p>
   </footer>
 
-  <script>
-    document.getElementById('mobile-btn').addEventListener('click', () => {
-      document.getElementById('mobile-menu').classList.toggle('hidden');
-    });
-  </script>
 </body>
 </html>
