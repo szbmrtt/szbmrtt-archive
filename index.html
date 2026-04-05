@@ -3,189 +3,150 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SZBMRTT - Hivatalos honlap</title>
+  <title>SZBMRTT</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     html { scroll-behavior: smooth; }
+    /* Menüpont fókusz szín */
+    .menu-item:focus { background-color: #e2e8f0; }
+    .rotate-180 { transform: rotate(180deg); }
+    .transition-transform { transition: transform 0.2s ease; }
+    
+    /* Trikolor stílus */
     .trikolor {
       height: 4px;
       width: 60px;
       background: linear-gradient(to right, #ce1126 33.3%, #ffffff 33.3%, #ffffff 66.6%, #006847 66.6%);
       margin-bottom: 4px;
     }
+
+    /* Almenü megjelenítés - görgetősáv nélkül */
     .submenu { 
       display: none; 
-      position: absolute; 
-      top: 100%; 
-      left: 0; 
-      min-width: 300px; 
-      background: white; 
-      border-top: 3px solid #1e3a8a; 
-      z-index: 1000; 
-      box-shadow: 0 15px 30px rgba(0,0,0,0.1); 
+      max-height: none; /* Nincs függőleges korlát */
+      overflow: visible; 
     }
-    .group:hover .submenu { display: block; }
-    .content-card { transition: transform 0.2s; }
-    .content-card:hover { transform: translateY(-5px); }
+    .group:focus-within .submenu { display: block; }
+
+    /* Menüsor sűrítése, hogy ne legyen vízszintes görgetés */
+    .nav-container {
+      font-size: 0.875rem; /* Kicsit kisebb betűméret a befogadáshoz */
+    }
   </style>
 </head>
-<body class="bg-slate-50 font-sans text-gray-900">
+<body class="bg-white font-sans text-gray-900">
 
-  <header class="w-full bg-white border-b border-gray-200 sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-6">
-      <div class="flex items-center gap-8">
-        <div class="flex flex-col flex-shrink-0">
+  <header class="w-full border-b border-gray-200">
+    
+    <div class="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
+      <div class="flex items-start gap-8">
+        <div class="flex flex-col">
           <div class="trikolor"></div>
-          <span class="font-bold text-2xl tracking-tighter text-blue-900">SZBMRTT</span>
-          <div class="text-[9px] uppercase tracking-[0.2em] leading-tight text-gray-400 font-semibold">
-            <p>veritas nunquam perit</p>
+          <span class="font-bold text-xl tracking-tighter">SZBMRTT</span>
+          <div class="text-xs italic leading-tight text-gray-700">
+            <p>veritas</p>
+            <p>nunquam</p>
+            <p>perit</p>
           </div>
         </div>
-        <div class="border-l pl-8 border-gray-100">
-          <h1 class="text-xl md:text-2xl font-black text-slate-800 uppercase leading-none mb-1">
-            Szemere Bertalan Magyar Rendvédelem-történeti
-          </h1>
-          <h2 class="text-lg md:text-xl font-light text-slate-500 uppercase tracking-widest">
-            Tudományos Társaság
-          </h2>
+        <div class="flex flex-col justify-center">
+          <h2 class="text-xl font-semibold text-gray-900 uppercase tracking-tight">A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</h2>
+          <p class="text-gray-500 font-light text-base">hivatalos honlapja</p>
         </div>
       </div>
-      <div class="relative w-64 group">
-        <input type="text" placeholder="Keresés a tudástárban..." class="w-full border-b border-gray-300 py-2 pr-10 focus:outline-none focus:border-blue-900 italic text-sm transition-all bg-transparent">
-        <button class="absolute right-0 top-2 text-gray-400 group-hover:text-blue-900"><i class="fas fa-search"></i></button>
+
+      <div class="relative w-64">
+        <input type="text" placeholder="Kutatáshoz" class="w-full border-b-2 border-blue-900 py-1 pr-10 focus:outline-none italic text-gray-500">
+        <button class="absolute right-0 top-1 text-blue-900">
+          <i class="fas fa-search"></i>
+        </button>
       </div>
     </div>
 
-    <nav class="bg-white border-t border-gray-50">
-      <div class="max-w-7xl mx-auto px-6 flex items-center justify-start text-sm font-bold uppercase tracking-tight">
-        <a href="#bemutatkozas" class="px-5 py-4 hover:text-blue-900 border-b-2 border-transparent hover:border-blue-900 transition-all">Bemutatkozás</a>
+    <div class="max-w-7xl mx-auto px-6 py-4 border-t border-gray-100">
+      <div class="text-left text-gray-500 font-light italic">
+        <p class="text-lg">Cum historia pro securitate.</p>
+        <p class="text-base">Történelemmel a biztonságért.</p>
+      </div>
+    </div>
+
+    <nav class="border-t border-gray-200 bg-white">
+      <div class="max-w-7xl mx-auto px-2 flex items-center nav-container">
         
-        <div class="group relative">
-          <button class="px-5 py-4 hover:text-blue-900 flex items-center gap-2 transition-all">
-            Szervezet <i class="fas fa-chevron-down text-[10px] opacity-50"></i>
-          </button>
-          <div class="submenu py-4">
-            <a href="#szervezet-elnok" class="block px-6 py-3 hover:bg-blue-50 text-blue-900 border-l-4 border-transparent hover:border-blue-900">Az Elnök</a>
-            <div class="px-6 py-3 text-[10px] text-gray-400 border-t mt-2">Tudományos grémiumok</div>
-            <a href="#" class="block px-8 py-2 hover:bg-gray-50 text-xs normal-case font-medium">Csendőrség-történeti szakosztály</a>
-            <a href="#" class="block px-8 py-2 hover:bg-gray-50 text-xs normal-case font-medium italic text-blue-800">További szakosztályok feltöltés alatt...</a>
-          </div>
+        <div class="p-2 border-r border-gray-200 flex-shrink-0">
+          <img src="szemere-bertalan-rendvedelem-torteneti-tarsasag-szbmrtt-logo-official.png" 
+               alt="SzBMRTT" class="h-10 w-10 object-contain">
         </div>
 
-        <a href="#" class="px-5 py-4 hover:text-blue-900 transition-all">Rendezvények</a>
-        <a href="#" class="px-5 py-4 hover:text-blue-900 transition-all text-blue-900">Kiadványok</a>
-        <a href="#" class="px-5 py-4 hover:text-blue-900 transition-all">Kapcsolat</a>
+        <div class="flex flex-1 justify-between items-center">
+          
+          <button class="group menu-item relative px-3 py-4 flex items-center gap-1 hover:bg-gray-50 outline-none transition-colors">
+            <span>Bemutatkozás</span>
+            <i class="fas fa-chevron-down text-[10px] transition-transform group-focus:rotate-180"></i>
+          </button>
+
+          <button class="group menu-item relative px-3 py-4 flex items-center gap-1 hover:bg-gray-50 outline-none transition-colors">
+            <span>A diszciplína</span>
+            <i class="fas fa-chevron-down text-[10px] transition-transform group-focus:rotate-180"></i>
+          </button>
+
+          <div class="group relative">
+            <button class="menu-item px-3 py-4 flex items-center gap-1 hover:bg-gray-50 outline-none transition-colors h-full">
+              <span>Szervezet</span>
+              <i class="fas fa-chevron-down text-[10px] transition-transform group-focus:rotate-180"></i>
+            </button>
+            <div class="submenu absolute left-0 top-full w-80 bg-white shadow-2xl border-t-2 border-blue-900 z-[100] py-2 text-left">
+              <a href="#" class="block px-6 py-2 hover:bg-gray-100 text-sm">Elnök</a>
+              <div class="px-6 py-2 font-semibold text-xs text-gray-400 uppercase border-t mt-2">Tudományos grémiumok</div>
+              <a href="#" class="block px-8 py-2 hover:bg-gray-100 text-sm">Csendőrség-történeti</a>
+              <a href="#" class="block px-8 py-2 hover:bg-gray-100 text-sm">Civil rendvédelem-történeti</a>
+              <a href="#" class="block px-8 py-2 hover:bg-gray-100 text-sm">Fegyőrség-történeti</a>
+              <a href="#" class="block px-8 py-2 hover:bg-gray-100 text-sm">Határőrizet-történet</a>
+              <a href="#" class="block px-8 py-2 hover:bg-gray-100 text-sm">Personalhistória</a>
+              <a href="#" class="block px-8 py-2 hover:bg-gray-100 text-sm">Rendőrségtörténeti</a>
+              <a href="#" class="block px-8 py-2 hover:bg-gray-100 text-sm">Történelmi segédtudományok</a>
+              <a href="#" class="block px-8 py-2 hover:bg-gray-100 text-sm">Testőrségek - koronaőrség - képviselőházi őrség-történeti</a>
+              <a href="#" class="block px-6 py-2 hover:bg-gray-100 text-sm border-t mt-2">Együttműködéseink</a>
+            </div>
+          </div>
+
+          <button class="group menu-item relative px-3 py-4 flex items-center gap-1 hover:bg-gray-50 outline-none transition-colors">
+            <span>Rendezvényeink</span>
+            <i class="fas fa-chevron-down text-[10px] transition-transform group-focus:rotate-180"></i>
+          </button>
+
+          <button class="group menu-item relative px-3 py-4 flex items-center gap-1 hover:bg-gray-50 outline-none transition-colors">
+            <span>Kiadványaink</span>
+            <i class="fas fa-chevron-down text-[10px] transition-transform group-focus:rotate-180"></i>
+          </button>
+
+          <div class="group relative">
+            <button class="menu-item px-3 py-4 flex items-center gap-1 hover:bg-gray-50 outline-none transition-colors h-full">
+              <span>Média</span>
+              <i class="fas fa-chevron-down text-[10px] transition-transform group-focus:rotate-180"></i>
+            </button>
+            <div class="submenu absolute left-0 top-full w-64 bg-white shadow-2xl border-t-2 border-blue-900 z-[100] py-2 text-left">
+              <a href="#" class="block px-6 py-2 hover:bg-gray-100 text-sm">Körleveleink</a>
+              <a href="#" class="block px-6 py-2 hover:bg-gray-100 text-sm">Rólunk írták</a>
+              <a href="#" class="block px-6 py-2 hover:bg-gray-100 text-sm">Videótár</a>
+            </div>
+          </div>
+
+          <button class="group menu-item relative px-3 py-4 flex items-center gap-1 hover:bg-gray-50 outline-none transition-colors text-center leading-tight">
+            <span>Kitüntetési rendszerünk</span>
+            <i class="fas fa-chevron-down text-[10px] transition-transform group-focus:rotate-180"></i>
+          </button>
+
+          <button class="group menu-item relative px-3 py-4 flex items-center gap-1 hover:bg-gray-50 outline-none transition-colors">
+            <span>Kapcsolat</span>
+            <i class="fas fa-chevron-down text-[10px] transition-transform group-focus:rotate-180"></i>
+          </button>
+
+        </div>
       </div>
     </nav>
   </header>
-
-  <main class="py-20">
-    <div id="bemutatkozas" class="max-w-4xl mx-auto px-6">
-      
-      <div class="bg-white p-10 md:p-16 rounded-[3rem] shadow-sm border border-gray-100 mb-12">
-        <div class="text-center mb-12">
-          <span class="text-blue-900 font-bold tracking-[0.3em] uppercase text-xs">Alapítva: 1990</span>
-          <h3 class="text-4xl font-black text-slate-900 mt-4 mb-8 leading-tight">Bemutatkozás</h3>
-          <div class="h-1.5 w-24 bg-blue-900 mx-auto rounded-full"></div>
-        </div>
-
-        <div class="prose prose-slate max-w-none">
-          <p class="text-xl leading-relaxed text-slate-700 font-medium mb-10 text-justify">
-            Az 1990-ben alapított, majd a Fővárosi Bíróság által 1991. február 6-án a Pk.64.728/1990/1. számú határozattal, 3324. sorszámon nyilvántartásba vett Társaságunk a magyar rendvédelem története iránt érdeklődő szakemberek társadalmi egyesülése.
-          </p>
-
-          <div class="grid md:grid-cols-2 gap-8 my-12 pt-8 border-t border-gray-50">
-            <div class="bg-slate-50 p-6 rounded-2xl">
-              <p class="text-xs text-slate-400 uppercase font-bold mb-2 tracking-widest">Nyilvántartás</p>
-              <p class="text-sm text-slate-600 leading-relaxed italic">
-                A Magyar Tudományos Akadémia Könyvtár és Információs Központja (MTA KIK) által működtetett nemzeti tudományos bibliográfiai adatbázis, a Magyar Tudományos Művek Tára (MTMT) a <strong>23079-es számon</strong> vette nyilvántartásba tudományos társaságunkat.
-              </p>
-            </div>
-            <div class="bg-slate-50 p-6 rounded-2xl">
-              <p class="text-xs text-slate-400 uppercase font-bold mb-2 tracking-widest">Azonosító</p>
-              <p class="text-sm text-slate-600">Társaságunk adószáma:<br><span class="text-xl font-mono font-bold text-blue-900">19662706-1-41</span></p>
-            </div>
-          </div>
-
-          <div class="space-y-8 text-slate-600 leading-relaxed text-justify">
-            <p>
-              Tagjaink a magyar rendvédelem-történet, illetve azzal rokon fegyveres testületek történeti kutatásával és oktatásával foglalkoznak. Tagságunk döntően a rendvédelmi testületek személyi állománya, közgyűjtemények munkatársai, felsőoktatási intézmények oktatói köréből kerül ki. 
-            </p>
-            <p>
-              Vannak közöttünk olyanok is, akiknek a foglalkozása ugyan nem kapcsolódik a rendvédelem jelenéhez, vagy múltjához, azonban érdeklődnek a témakör iránt, illetve valamilyen formában művelik azt pld. gyűjtők. Mintegy negyven fő rendelkezik tudományos, illetve oktatói fokozattal, melynek skálája az akadémiai tagságtól a doktor univ., illetve a professzortól a tanársegéd fokozatig terjed. Többségük napjaink magyar tudmányos életének és felsőoktatásunknak elismert szakembere.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-8 mb-12">
-        <div class="bg-blue-900 text-white p-10 rounded-[2.5rem] shadow-xl">
-          <h4 class="text-xl font-bold mb-6 border-b border-blue-800 pb-4">Szakmai hitvallás</h4>
-          <p class="text-sm leading-loose opacity-90 text-justify">
-            Álláspontunk szerint a rendvédelem tevékenységet jelöl, amelynek elméleti alapjait számos tudományterület eredményei alkotják. A rendvédelem-történetét gyűjtőfogalomnak tekintjük, amelybe – tértől és időtől függetlenül – beletartozik az egyetemes történelem során megvalósult valamennyi rendvédelmi modell. A különböző korok rendvédelmi modelljei és azok változásai alkotják a rendvédelem-történetet.
-          </p>
-        </div>
-        <div class="bg-white p-10 rounded-[2.5rem] shadow-sm border border-gray-100">
-          <h4 class="text-xl font-bold text-blue-900 mb-6 border-b border-gray-50 pb-4">Célkitűzéseink</h4>
-          <p class="text-sm leading-loose text-slate-600 text-justify">
-            Célunk, hogy a szakterület művelésével, az írásos források és tárgyi emlékek feldolgozásával hozzájáruljunk a magyar és az egyetemes történelem gyarapításához, rendvédelem-történeti múltunk feltárása, a tapasztalatok hasznosítása által pedig a rendvédelem fejlesztéséhez.
-          </p>
-        </div>
-      </div>
-
-      <div class="bg-white p-10 md:p-16 rounded-[3rem] shadow-sm border border-gray-100 mb-12 text-justify">
-        <p class="mb-8">
-          Egyesületünk úgy véli, hogy nemzeti rendvédelem-történeti tradíciónk – elsősorban a XIX. és XX. századi hagyományaink – közkinccsé tételével a tapasztalatok megismertetésével elősegítheti a magyar rendvédelem fejlesztését, a személyi állomány identitástudatát, ezen keresztül pedig az etikai viszonyok fejlődését, valamint a lakosság rendvédelmi testületekről kialakított elképzelésének a kedvezőbbé tételét. Tudományos társaságunk szakosztályai szellemi alkotóműhely jelleggel tevékenykednek Társaságunk részt vesz a tudományos közéleti tevékenységben.
-        </p>
-        <p class="text-slate-600 italic border-l-4 border-blue-900 pl-6 py-2">
-          Tagjainkat rendszeresen felkérik témaorientált tanulmányok szaklektorálására, illetve tudományos fokozatszerzések bírálóbizottságaiban történő feladatvállalásra, akik a rendvédelem-történeti témakörben tudományos fokozatot elértek szinte valamennyien tudományos társaságunk segítségét élvezték.
-        </p>
-        <p class="mt-8">
-          A magyar rendvédelmi szervek több ízben kikérték társaságunk szakvéleményét a hagyományok felújítására vonatkozó kérdésekben. Szakmai segítséget nyújtunk a rendvédelem-történeti tartalmú gyűjtemények és kiállítások létrehozásához és működtetéséhez.
-        </p>
-      </div>
-
-      <div class="bg-slate-900 text-slate-300 p-10 md:p-16 rounded-[3rem] shadow-2xl overflow-hidden relative">
-        <div class="absolute top-0 right-0 p-12 opacity-5">
-          <i class="fas fa-graduation-cap text-9xl"></i>
-        </div>
-        <h3 class="text-2xl font-bold text-white mb-10 flex items-center gap-4">
-          <span class="w-12 h-px bg-blue-500"></span> A Társaság oktató munkája
-        </h3>
-        <div class="space-y-6 text-sm md:text-base leading-relaxed">
-          <p>
-            Egyesületünk tagjai részt vettek a rendvédelmi testületek személyi állományának történeti képzésében, a tananyag elkészítésében. A Tudományos Társaságunk által oktatott hallgatók számos esetben a rendvédelem témakörében készítették el diplomamunkájukat. A legtöbb rendvédelem-történeti diplomamunka a Rendőrtiszti Főiskolán készült.
-          </p>
-          <div class="bg-slate-800 p-8 rounded-2xl border-l-2 border-blue-500 my-8">
-            <p class="mb-4">
-              A magyarországi rendszerváltás óta több száz rendvédelem-történeti témájú dolgozatot védtek meg a hallgatók. Az Országos Tudományos Diákköri konferenciákon minden esetben indultak rendvédelem-történeti témájú tudományos diákköri dolgozatok, közülük több alkotás országos szintű elismerésben is részesült.
-            </p>
-            <p class="text-blue-400 font-bold">
-              A Magyar Tudományos Akadémia Pro Scientia aranyérmében 1990. és 2000. között két rendvédelem-történeti tartalmú tudományos diákköri pályamű részesült.
-            </p>
-          </div>
-          <p class="italic text-white text-lg border-b border-slate-800 pb-6">
-            "A rendvédelem-történeti témájú tudományos diákkörök legsikeresebb témavezetője, dr. Parádi József mestertanári kitüntetésben részesült 2003-ban."
-          </p>
-          <p class="pt-4">
-            A magyar felsőoktatás több tudományegyetemén, állam- és jogtudományi, illetve bölcsészettudományi karokon, valamint főiskolákon oktatják – részben társaságunk tagjainak közreműködésével – az egyesületünk által készített tananyag alapján, a magyar rendvédelem történetét közvetítő tárgyakat.
-          </p>
-        </div>
-      </div>
-
-    </div>
-  </main>
-
-  <footer class="bg-white border-t border-gray-100 py-20 text-center">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="trikolor mx-auto mb-8"></div>
-      <p class="text-2xl font-serif italic text-slate-800 mb-4 tracking-[0.2em]">veritas nunquam perit</p>
-      <p class="text-slate-400 text-xs uppercase tracking-widest font-bold">
-        © 2026 Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság
-      </p>
-    </div>
-  </footer>
 
 </body>
 </html>
