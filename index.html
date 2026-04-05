@@ -19,7 +19,7 @@
       position: absolute; 
       top: 100%; 
       left: 0; 
-      min-width: 320px; 
+      min-width: 350px; 
       background: white; 
       border-top: 2px solid #1e3a8a; 
       z-index: 1000; 
@@ -67,10 +67,10 @@
           <a href="#bemutatkozas" class="px-4 py-5 hover:text-blue-900">Bemutatkozás</a>
           
           <div class="group relative">
-            <button class="px-4 py-5 hover:text-blue-900 flex items-center gap-1 font-bold italic">Szervezet <i class="fas fa-chevron-down text-[10px]"></i></button>
+            <button class="px-4 py-5 hover:text-blue-900 flex items-center gap-1 font-bold italic underline decoration-blue-900 underline-offset-8">Szervezet <i class="fas fa-chevron-down text-[10px]"></i></button>
             <div class="submenu py-2">
-              <a href="#szervezet-elnok" class="block px-6 py-2 hover:bg-gray-50 font-semibold border-b">Elnök</a>
-              <div class="px-6 py-2 text-[10px] font-bold text-blue-900 uppercase bg-gray-50 tracking-widest">Tudományos grémiumok (Szakosztályok)</div>
+              <a href="#szervezet-elnok" class="block px-6 py-2 hover:bg-gray-50 font-bold text-blue-900 border-b">Elnök</a>
+              <div class="px-6 py-2 text-[10px] font-bold text-gray-400 uppercase bg-gray-50 tracking-widest">Tudományos grémiumok (Szakosztályok)</div>
               <a href="#" class="block px-8 py-2 hover:bg-gray-50 text-xs border-b">Csendőrség-történeti szakosztály</a>
               <a href="#" class="block px-8 py-2 hover:bg-gray-50 text-xs border-b">Civil rendvédelem-történeti szakosztály</a>
               <a href="#" class="block px-8 py-2 hover:bg-gray-50 text-xs border-b">Fegyőrség-történeti szakosztály</a>
@@ -93,22 +93,18 @@
   <main class="py-16">
     <div id="bemutatkozas" class="max-w-4xl mx-auto px-6">
       
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-blue-900 mb-8 border-b-2 border-blue-900 pb-1 inline-block uppercase">Bemutatkozás</h2>
+      <h2 class="text-3xl font-bold text-blue-900 mb-12 border-b-2 border-blue-900 pb-1 inline-block uppercase">Bemutatkozás</h2>
+      
+      <div class="space-y-6 text-justify text-gray-800 leading-relaxed">
         
-        <p class="text-xl leading-relaxed text-gray-800 font-bold mb-6 text-justify">
+        <p class="font-bold text-lg">
           Az 1990-ben alapított, majd a Fővárosi Bíróság által 1991. február 6-án a Pk.64.728/1990/1. számú határozattal, 3324. sorszámon nyilvántartásba vett Társaságunk a magyar rendvédelem története iránt érdeklődő szakemberek társadalmi egyesülése.
         </p>
 
-        <div class="text-gray-600 text-sm space-y-2 py-6 border-t border-b border-gray-100 text-left">
-          <p>A Magyar Tudományos Akadémia Könyvtár és Információs Központja (MTA KIK) által működtetett nemzeti tudományos bibliográfiai adatbázis,</p>
-          <p>a Magyar Tudományos Művek Tára (MTMT) a <strong>23079-es számon</strong> vette nyilvántartásba tudományos társaságunkat.</p>
-          <p>Társaságunk adószáma: <strong>19662706-1-41</strong></p>
-        </div>
-      </div>
+        <p>
+          A Magyar Tudományos Akadémia Könyvtár és Információs Központja (MTA KIK) által működtetett nemzeti tudományos bibliográfiai adatbázis, a Magyar Tudományos Művek Tára (MTMT) a 23079-es számon vette nyilvántartásba tudományos társaságunkat. Társaságunk adószáma: 19662706-1-41
+        </p>
 
-      <div class="space-y-8 text-justify text-gray-700 leading-relaxed">
-        
         <p>
           Tagjaink a magyar rendvédelem-történet, illetve azzal rokon fegyveres testületek történeti kutatásával és oktatásával foglalkoznak. Tagságunk döntően a rendvédelmi testületek személyi állománya, közgyűjtemények munkatársai, felsőoktatási intézmények oktatói köréből kerül ki. Vannak közöttünk olyanok is, akiknek a foglalkozása ugyan nem kapcsolódik a rendvédelem jelenéhez, vagy múltjához, azonban érdeklődnek a témakör iránt, illetve valamilyen formában művelik azt pld. gyűjtők. Mintegy negyven fő rendelkezik tudományos, illetve oktatói fokozattal, melynek skálája az akadémiai tagságtól a doktor univ., illetve a professzortól a tanársegéd fokozatig terjed. Többségük napjaink magyar tudmányos életének és felsőoktatásunknak elismert szakembere.
         </p>
@@ -130,12 +126,44 @@
         </p>
 
         <div class="mt-12 pt-8 border-t border-blue-900">
-          <h3 class="text-2xl font-bold text-gray-900 mb-6 uppercase">A Társaság oktató munkája:</h3>
-          <p class="mb-6 font-bold italic text-blue-900">
-            Egyesületünk tagjai részt vettek a rendvédelmi testületek személyi állományának történeti képzésében, a tananyag elkészítésében.
+          <h3 class="text-xl font-bold text-gray-900 mb-6 uppercase">A Társaság oktató munkája:</h3>
+          <p>
+            Egyesületünk tagjai részt vettek a rendvédelmi testületek személyi állományának történeti képzésében, a tananyag elkészítésében. A Tudományos Társaságunk által oktatott hallgatók számos esetben a rendvédelem témakörében készítették el diplomamunkájukat. A legtöbb rendvédelem-történeti diplomamunka a Rendőrtiszti Főiskolán készült.
           </p>
-          <p class="mb-4">
-            A Tudományos Társaságunk által oktatott hallgatók számos esetben a rendvédelem témakörében készítették el diplomamunkájukat. A legtöbb rendvédelem-történeti diplomamunka a Rendőrtiszti Főiskolán készült.
+          <p class="mt-4">
+            A magyarországi rendszerváltás óta több száz rendvédelem-történeti témájú dolgozatot védtek meg a hallgatók. Az Országos Tudományos Diákköri konferenciákon minden esetben indultak rendvédelem-történeti témájú tudományos diákköri dolgozatok, közülük több alkotás országos szintű elismerésben is részesült. A Magyar Tudományos Akadémia Pro Scientia aranyérmében 1990. és 2000. között két rendvédelem-történeti tartalmú tudományos diákköri pályamű részesült. A rendvédelem-történeti témájú tudományos diákkörök legsikeresebb témavezetője, dr. Parádi József mestertanári kitüntetésben részesült 2003-ban.
           </p>
-          <p class="mb-4">
-            A magyarországi rendszerváltás óta több száz rendvédelem-történeti témájú dolgozatot védtek meg a hallgatók. Az Országos Tudományos Diákköri konferenciákon minden esetben
+          <p class="mt-4">
+            A magyar felsőoktatás több tudományegyetemén, állam- és jogtudományi, illetve bölcsészettudományi karokon, valamint főiskolákon oktatják – részben társaságunk tagjainak közreműködésével – az egyesületünk által készített tananyag alapján, a magyar rendvédelem történetét közvetítő tárgyakat.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <section id="szervezet-elnok" class="py-20 bg-gray-50 border-t">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="bg-white p-8 md:p-12 rounded-3xl shadow-xl flex flex-col md:flex-row items-center gap-12 border border-gray-100">
+        <div class="w-full md:w-1/3">
+          <img src="dr-paradi-jozsef-elnok.jpg" alt="Dr. Parádi József" onerror="this.src='https://via.placeholder.com/300x400?text=Dr.+Parádi+József'" class="rounded-2xl shadow-md w-full">
+        </div>
+        <div class="w-full md:w-2/3">
+          <h4 class="text-blue-900 font-bold uppercase tracking-widest text-[10px] mb-2">A Társaság Elnöke</h4>
+          <h3 class="text-3xl font-bold text-gray-900 mb-1">Dr. Parádi József</h3>
+          <p class="text-lg text-gray-500 mb-6 font-medium italic">CSc., mestertanár</p>
+          <div class="h-1 w-20 bg-blue-900 mb-6"></div>
+          <p class="text-gray-700 leading-relaxed italic">
+            A rendvédelem-történeti diszciplína megteremtője Magyarországon, a tudományos kutatás és oktatás évtizedek óta meghatározó alakja.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-gray-900 text-white py-12 text-center">
+    <p class="text-xl font-serif italic mb-4 tracking-widest">veritas nunquam perit</p>
+    <p class="text-gray-500 text-sm">© 2026 Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</p>
+  </footer>
+
+</body>
+</html>
