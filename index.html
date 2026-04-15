@@ -4,28 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>SzBMRTT - Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</title>
+  <meta name="description" content="A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság hivatalos honlapja. Bemutatkozás, rendvédelem-történeti diszciplína, szervezet, rendezvények, kiadványok.">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     html { scroll-behavior: smooth; }
-    
-    /* Almenü hover/fókusz (asztali) */
     .group:hover .submenu,
     .group:focus-within .submenu { display: block; }
     .group:hover i, .group:focus-within i { transform: rotate(180deg); }
     .submenu { display: none; transition: all 0.1s ease; }
     .menu-item:focus { background-color: #e2e8f0; outline: none; }
-    .transition-transform { transition: transform 0.2s ease; }
-    
-    /* Trikolor */
     .trikolor {
       height: 4px;
       width: 60px;
       background: linear-gradient(to right, #ce1126 33.3%, #ffffff 33.3%, #ffffff 66.6%, #006847 66.6%);
       margin-bottom: 4px;
     }
-    
-    /* Mobil hamburger menü */
     .mobile-menu {
       position: fixed;
       top: 0;
@@ -52,8 +46,6 @@
       display: none;
     }
     .menu-overlay.active { display: block; }
-    
-    /* Asztali menü látszik, mobilban rejtett */
     @media (max-width: 1024px) {
       .desktop-nav { display: none; }
       .mobile-nav-toggle { display: flex; }
@@ -62,79 +54,41 @@
       .mobile-nav-toggle { display: none; }
       .desktop-nav { display: flex; }
     }
-    
-    /* Placeholder stílusok (logo, portré) */
-    .logo-placeholder {
-      width: 2.5rem;
-      height: 2.5rem;
-      background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: bold;
-      font-size: 0.9rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    .portrait-placeholder {
-      background: #eef2ff;
-      border-radius: 1rem;
-      width: 100%;
-      aspect-ratio: 4 / 5;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      border: 1px solid #d1d5db;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-    }
+    .logo-img { width: 2.5rem; height: 2.5rem; object-fit: contain; }
+    .portrait-img { width: 100%; height: auto; border-radius: 1rem; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
   </style>
 </head>
 <body class="bg-white font-sans text-gray-900">
 
-<!-- STICKY FEJLÉC (csak felső sáv + mottó) -->
+<!-- STICKY FEJLÉC (felső sáv + mottó) -->
 <header class="sticky top-0 z-50 w-full border-b border-gray-200 bg-white shadow-sm">
-  <!-- Felső sáv: bal oldal trikolor+SzBMRTT, jobb oldal keresőikon + hamburger (mobil) / nyelvválasztó (desktop) -->
   <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-    <!-- Bal oldali logó rész (mobilban kisebb betű) -->
     <div class="flex flex-col md:flex-row md:items-start gap-1 md:gap-4">
       <div class="flex flex-col">
         <div class="trikolor"></div>
-        <span class="font-bold text-base md:text-xl tracking-tighter">SzBMRTT</span>
+        <div class="flex items-center gap-2">
+          <img src="szemere-bertalan-rendvedelem-torteneti-tarsasag-szbmrtt-logo-official.png" 
+               alt="SzBMRTT logó" class="logo-img">
+          <span class="font-bold text-base md:text-xl tracking-tighter">SzBMRTT</span>
+        </div>
         <div class="text-[10px] md:text-xs italic leading-tight text-gray-700">
-          <p>veritas</p>
-          <p>nunquam</p>
-          <p>perit</p>
+          <p>veritas</p><p>nunquam</p><p>perit</p>
         </div>
       </div>
-      <!-- Asztali nézetben a társaság neve (itt csak asztalon) -->
       <div class="hidden md:block md:ml-4">
         <h2 class="text-lg font-semibold text-gray-900 uppercase tracking-tight">A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</h2>
         <p class="text-gray-500 font-light text-sm">hivatalos honlapja</p>
       </div>
     </div>
-
-    <!-- Jobb oldal: kereső ikon + nyelvválasztó (desktop) + hamburger (mobil) -->
     <div class="flex items-center gap-4">
-      <!-- Kereső ikon -->
-      <button id="searchIcon" class="text-blue-900 text-xl">
-        <i class="fas fa-search"></i>
-      </button>
-      <!-- Asztali nyelvválasztó -->
+      <button id="searchIcon" class="text-blue-900 text-xl"><i class="fas fa-search"></i></button>
       <div class="hidden md:flex gap-2 border-l pl-4 border-gray-300">
         <button class="text-sm font-medium text-blue-800 hover:underline">HU</button>
         <button class="text-sm font-medium text-gray-500 hover:underline">EN</button>
       </div>
-      <!-- Hamburger ikon (mobil) -->
-      <button id="hamburgerBtn" class="mobile-nav-toggle text-2xl text-blue-900 focus:outline-none">
-        <i class="fas fa-bars"></i>
-      </button>
+      <button id="hamburgerBtn" class="mobile-nav-toggle text-2xl text-blue-900"><i class="fas fa-bars"></i></button>
     </div>
   </div>
-
-  <!-- MOTTÓ (ez is sticky, mert a header része) - most az üdvözlő szöveg ELÉ kerül -->
   <div class="max-w-7xl mx-auto px-4 pb-3 pt-1 border-t border-gray-100">
     <div class="text-left text-gray-500 font-light italic">
       <p class="text-base md:text-lg">Cum historia pro securitate.</p>
@@ -143,11 +97,9 @@
   </div>
 </header>
 
-<!-- Mobil menü (oldalra nyíló) - a headeren kívül, de működik -->
+<!-- Mobil menü -->
 <div id="mobileMenu" class="mobile-menu">
-  <div class="flex justify-end mb-6">
-    <button id="closeMenuBtn" class="text-2xl"><i class="fas fa-times"></i></button>
-  </div>
+  <div class="flex justify-end mb-6"><button id="closeMenuBtn" class="text-2xl"><i class="fas fa-times"></i></button></div>
   <div class="flex gap-4 justify-center mb-8 pb-4 border-b">
     <button class="text-lg font-bold text-blue-800">HU</button>
     <button class="text-lg font-bold text-gray-400">EN</button>
@@ -155,34 +107,19 @@
   <nav class="flex flex-col gap-4">
     <a href="#bemutatkozas" class="text-lg font-medium py-2 border-b">Bemutatkozás</a>
     <a href="#diszciplina" class="text-lg font-medium py-2 border-b">A diszciplína</a>
-    <div class="relative">
-      <button class="w-full text-left text-lg font-medium py-2 border-b flex justify-between items-center" id="mobileSubmenuBtn">
-        Szervezet <i class="fas fa-chevron-down text-xs"></i>
-      </button>
+    <div><button class="w-full text-left text-lg font-medium py-2 border-b flex justify-between items-center" id="mobileSubmenuBtn">Szervezet <i class="fas fa-chevron-down text-xs"></i></button>
       <div id="mobileSubmenu" class="hidden pl-4 mt-1 space-y-2">
-        <a href="#szervezet-elnok" class="block py-1 text-gray-700">Elnök</a>
+        <a href="#szervezet-elnok" class="block py-1">Elnök</a>
         <div class="text-xs font-semibold text-gray-400 mt-2">Tudományos grémiumok</div>
-        <a href="#" class="block py-1 text-gray-600">Csendőrség-történeti</a>
-        <a href="#" class="block py-1 text-gray-600">Civil rendvédelem-történeti</a>
-        <a href="#" class="block py-1 text-gray-600">Fegyőrség-történeti</a>
-        <a href="#" class="block py-1 text-gray-600">Határőrizet-történet</a>
-        <a href="#" class="block py-1 text-gray-600">Personalhistória</a>
-        <a href="#" class="block py-1 text-gray-600">Rendőrségtörténeti</a>
-        <a href="#" class="block py-1 text-gray-600">Történelmi segédtudományok</a>
-        <a href="#" class="block py-1 text-gray-600">Testőrségek - koronaőrség - képviselőházi őrség-történeti</a>
-        <a href="#egyuttmukodes" class="block py-1 text-gray-600 border-t mt-2 pt-2">Együttműködéseink</a>
+        <a href="#">Csendőrség-történeti</a><a href="#">Civil rendvédelem-történeti</a><a href="#">Fegyőrség-történeti</a><a href="#">Határőrizet-történet</a><a href="#">Personalhistória</a><a href="#">Rendőrségtörténeti</a><a href="#">Történelmi segédtudományok</a><a href="#">Testőrségek - koronaőrség - képviselőházi őrség-történeti</a>
+        <a href="#egyuttmukodes" class="block border-t mt-2 pt-2">Együttműködéseink</a>
       </div>
     </div>
     <a href="#rendezvenyek" class="text-lg font-medium py-2 border-b">Rendezvényeink</a>
     <a href="#kiadvanyok" class="text-lg font-medium py-2 border-b">Kiadványaink</a>
-    <div>
-      <button class="w-full text-left text-lg font-medium py-2 border-b flex justify-between items-center" id="mobileMediaBtn">
-        Média <i class="fas fa-chevron-down text-xs"></i>
-      </button>
+    <div><button class="w-full text-left text-lg font-medium py-2 border-b flex justify-between items-center" id="mobileMediaBtn">Média <i class="fas fa-chevron-down text-xs"></i></button>
       <div id="mobileMediaSub" class="hidden pl-4 mt-1 space-y-2">
-        <a href="#korlevelek" class="block py-1">Körleveleink</a>
-        <a href="#rolunkirtak" class="block py-1">Rólunk írták</a>
-        <a href="#videotar" class="block py-1">Videótár</a>
+        <a href="#korlevelek">Körleveleink</a><a href="#rolunkirtak">Rólunk írták</a><a href="#videotar">Videótár</a>
       </div>
     </div>
     <a href="#kituntetesek" class="text-lg font-medium py-2 border-b">Kitüntetési rendszerünk</a>
@@ -191,29 +128,22 @@
 </div>
 <div id="overlay" class="menu-overlay"></div>
 
-<!-- ASZTALI NAVIGÁCIÓ (vízszintes menü) -->
+<!-- Asztali navigáció -->
 <div class="desktop-nav border-t border-gray-200 bg-white sticky top-[92px] z-40 shadow-sm">
   <div class="max-w-7xl mx-auto px-4">
     <div class="flex items-center gap-1 text-sm">
       <div class="p-2 border-r border-gray-200 flex-shrink-0">
-        <div class="logo-placeholder"><span>SzB</span></div>
+        <img src="szemere-bertalan-rendvedelem-torteneti-tarsasag-szbmrtt-logo-official.png" alt="logó" class="h-8 w-8 object-contain">
       </div>
       <a href="#bemutatkozas" class="menu-item px-3 py-4 hover:bg-gray-50">Bemutatkozás</a>
       <a href="#diszciplina" class="menu-item px-3 py-4 hover:bg-gray-50">A diszciplína</a>
       <div class="group relative">
         <button class="menu-item px-3 py-4 flex items-center gap-1">Szervezet <i class="fas fa-chevron-down text-[10px]"></i></button>
         <div class="submenu absolute left-0 top-full w-80 bg-white shadow-2xl border-t-2 border-blue-900 z-[100] py-2">
-          <a href="#szervezet-elnok" class="block px-6 py-2 hover:bg-gray-100">Elnök</a>
+          <a href="#szervezet-elnok" class="block px-6 py-2">Elnök</a>
           <div class="px-6 py-2 font-semibold text-xs text-gray-400 uppercase">Tudományos grémiumok</div>
-          <a href="#" class="block px-8 py-2 hover:bg-gray-100">Csendőrség-történeti</a>
-          <a href="#" class="block px-8 py-2 hover:bg-gray-100">Civil rendvédelem-történeti</a>
-          <a href="#" class="block px-8 py-2 hover:bg-gray-100">Fegyőrség-történeti</a>
-          <a href="#" class="block px-8 py-2 hover:bg-gray-100">Határőrizet-történet</a>
-          <a href="#" class="block px-8 py-2 hover:bg-gray-100">Personalhistória</a>
-          <a href="#" class="block px-8 py-2 hover:bg-gray-100">Rendőrségtörténeti</a>
-          <a href="#" class="block px-8 py-2 hover:bg-gray-100">Történelmi segédtudományok</a>
-          <a href="#" class="block px-8 py-2 hover:bg-gray-100">Testőrségek - koronaőrség - képviselőházi őrség-történeti</a>
-          <a href="#egyuttmukodes" class="block px-6 py-2 hover:bg-gray-100 border-t mt-2">Együttműködéseink</a>
+          <a href="#" class="block px-8 py-2">Csendőrség-történeti</a><a href="#" class="block px-8 py-2">Civil rendvédelem-történeti</a><a href="#" class="block px-8 py-2">Fegyőrség-történeti</a><a href="#" class="block px-8 py-2">Határőrizet-történet</a><a href="#" class="block px-8 py-2">Personalhistória</a><a href="#" class="block px-8 py-2">Rendőrségtörténeti</a><a href="#" class="block px-8 py-2">Történelmi segédtudományok</a><a href="#" class="block px-8 py-2">Testőrségek - koronaőrség - képviselőházi őrség-történeti</a>
+          <a href="#egyuttmukodes" class="block px-6 py-2 border-t mt-2">Együttműködéseink</a>
         </div>
       </div>
       <a href="#rendezvenyek" class="menu-item px-3 py-4">Rendezvényeink</a>
@@ -221,9 +151,7 @@
       <div class="group relative">
         <button class="menu-item px-3 py-4 flex items-center gap-1">Média <i class="fas fa-chevron-down text-[10px]"></i></button>
         <div class="submenu absolute left-0 top-full w-64 bg-white shadow-2xl border-t-2 border-blue-900 py-2">
-          <a href="#korlevelek" class="block px-6 py-2">Körleveleink</a>
-          <a href="#rolunkirtak" class="block px-6 py-2">Rólunk írták</a>
-          <a href="#videotar" class="block px-6 py-2">Videótár</a>
+          <a href="#korlevelek" class="block px-6 py-2">Körleveleink</a><a href="#rolunkirtak" class="block px-6 py-2">Rólunk írták</a><a href="#videotar" class="block px-6 py-2">Videótár</a>
         </div>
       </div>
       <a href="#kituntetesek" class="menu-item px-3 py-4">Kitüntetési rendszerünk</a>
@@ -232,9 +160,8 @@
   </div>
 </div>
 
-<!-- HERO SZEKCIÓ (Üdvözlő szöveg) - NEM RAGADÓS -->
+<!-- Hero szekció (nem ragad) -->
 <div class="max-w-7xl mx-auto px-4 py-8 mt-2">
-  <!-- Mobil verzió (5 sor) - csak mobilon látszik -->
   <div class="block md:hidden text-left">
     <p class="text-2xl font-bold text-blue-900 leading-tight">Üdvözöljük</p>
     <p class="text-xl font-semibold text-gray-800 leading-tight mt-1">a Szemere Bertalan</p>
@@ -242,68 +169,64 @@
     <p class="text-xl font-semibold text-gray-800 leading-tight">Tudományos Társaság</p>
     <p class="text-lg font-medium text-gray-700 italic leading-tight mt-1">hivatalos honlapján</p>
   </div>
-  <!-- Asztali verzió (2 sor) - csak asztalon látszik -->
   <div class="hidden md:block text-left">
-    <p class="text-2xl md:text-3xl font-semibold text-gray-800 leading-tight">
-      Üdvözöljük a Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság
-    </p>
+    <p class="text-2xl md:text-3xl font-semibold text-gray-800 leading-tight">Üdvözöljük a Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</p>
     <p class="text-xl text-gray-600 font-light italic mt-1">hivatalos honlapján</p>
   </div>
 </div>
 
 <main>
-<!-- ================= BEMUTATKOZÁS SZEKCIÓ (pontos szöveg) ================= -->
-<section id="bemutatkozas" class="py-16 bg-white scroll-mt-24">
-  <div class="max-w-5xl mx-auto px-6">
-    <h2 class="text-3xl font-bold text-blue-900 mb-8 border-b-2 border-blue-900 pb-2 inline-block uppercase tracking-wide">Bemutatkozás</h2>
-    <div class="space-y-6 text-gray-700 leading-relaxed text-justify">
-      <p>Tagjaink a magyar rendvédelem-történet, illetve azzal rokon fegyveres testületek történeti kutatásával és oktatásával foglalkoznak. Tagságunk döntően a rendvédelmi testületek személyi állománya, közgyűjtemények munkatársai, felsőoktatási intézmények oktatói köréből kerül ki. Vannak közöttünk olyanok is, akiknek a foglalkozása ugyan nem kapcsolódik a rendvédelem jelenéhez, vagy múltjához, azonban érdeklődnek a témakör iránt, illetve valamilyen formában művelik azt pld. gyűjtők. Mintegy negyven fő rendelkezik tudományos, illetve oktatói fokozattal, melynek skálája az akadémiai tagságtól a doktor univ., illetve a professzortól a tanársegéd fokozatig terjed. Többségük napjaink magyar tudományos életének és felsőoktatásunknak elismert szakembere.</p>
-      <p>Álláspontunk szerint a rendvédelem tevékenységet jelöl, amelynek elméleti alapjait számos tudományterület eredményei alkotják. A rendvédelem-történetét gyűjtőfogalomnak tekintjük, amelybe – tértől és időtől függetlenül – beletartozik az egyetemes történelem során megvalósult valamennyi rendvédelmi modell. A különböző korok rendvédelmi modelljei és azok változásai alkotják az egyetemes rendvédelem-történetet.</p>
-      <p>Célunk, hogy a szakterület művelésével, az írásos források és tárgyi emlékek feldolgozásával hozzájáruljunk a magyar és az egyetemes történelem gyarapításához, rendvédelem-történeti múltunk feltárása, a tapasztalatok hasznosítása által pedig a rendvédelem fejlesztéséhez.</p>
-      <p>Egyesületünk úgy véli, hogy nemzeti rendvédelem-történeti tradíciónk – elsősorban a XIX. és XX. századi hagyományaink – közkinccsé tételével a tapasztalatok megismertetésével elősegítheti a magyar rendvédelem fejlesztését, a személyi állomány identitástudatát, ezen keresztül pedig az etikai viszonyok fejlődését, valamint a lakosság rendvédelmi testületekről kialakított elképzelésének a kedvezőbbé tételét. Tudományos társaságunk szakosztályai szellemi alkotóműhely jelleggel tevékenykednek.</p>
-      <p>Társaságunk részt vesz a tudományos közéleti tevékenységben. Tagjainkat rendszeresen felkérik tudományos írásművek szaklektorálására, tudományos fokozatszerzések és oktatói habilitációk bírálóbizottságaiban történő feladatvállalásra. Akik a rendvédelem-történeti témakörben tudományos fokozatot elértek, szinte valamennyien tudományos társaságunk tagjainak segítségét élvezték. A magyar rendvédelmi szervek több ízben kikérték társaságunk szakvéleményét a hagyományok felújítására vonatkozó kérdésekben. Szakmai segítséget nyújtunk a rendvédelem-történeti tartalmú gyűjtemények és kiállítások létrehozásához és működtetéséhez.</p>
-
-      <h3 class="text-2xl font-semibold text-gray-900 mt-8 mb-4 border-l-4 border-blue-900 pl-4">A Társaság oktató munkája</h3>
-      <p>Egyesületünk tagjai részt vettek a magyar  rendvédelmi testületek személyi állományának történeti képzésében, a tananyag elkészítésében. A Tudományos Társaságunk által oktatott hallgatók számos esetben rendvédelem-történet témakörében készítették el diplomamunkájukat. A legtöbb rendvédelem-történeti diplomamunka a Rendőrtiszti Főiskolán — a Nemzeti Közszolgálati Egyetem Rendészettudományi Karának jogelőd intézményénél — készült.</p>
-      <p>A magyarországi rendszerváltás óta több száz rendvédelem-történeti témájú dolgozatot védtek meg a hallgatók. Az Országos Tudományos Diákköri konferenciákon számos esetben indultak rendvédelem-történeti témájú tudományos diákköri dolgozatok, közülük több alkotás országos szintű elismerésben is részesült. A Magyar Tudományos Akadémia Pro Scientia aranyérem elismerésében 1990. és 2000. között két rendvédelem-történeti tartalmú tudományos diákköri pályamű részesült. A rendvédelem-történeti témájú tudományos diákkörök legsikeresebb témavezetője, dr. Parádi József ezirányú tevékenységét mestertanári kitüntetéssel ismerték el 2003-ban.</p>
-      <p>A magyar felsőoktatás több tudományegyetemén, állam- és jogtudományi, illetve bölcsészettudományi karokon, valamint főiskolákon oktatják – részben társaságunk tagjainak közreműködésével – az egyesületünk által készített tananyag alapján, a magyar rendvédelem történetét közvetítő tárgyakat.</p>
-
-      <h3 class="text-2xl font-semibold text-gray-900 mt-8 mb-4 border-l-4 border-blue-900 pl-4">A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság (SZBMRTT) Küldetésnyilatkozata</h3>
-      <p>Tudományos társaságunk működésének alapszabályban rögzített célja a magyar rendvédelem történet művelése, a feltárt eredmények közkinccsé tétele. Tevékenységünk szellemiségének a lényegét kívánjuk küldetésnyilatkozatunkban közzétenni.</p>
-      <p>A szakterületünknek tekintett témakör gondozása során a történelmi tényeken alapuló igazság feltárását és bemutatását részesítjük előnyben. Nem támogatjuk az ideológiai, vagy a csoportérdekek elvárásaihoz igazadó hipotéziseket, magyarázatokat, kutatásokat és értelmezéseket. Tevékenységünk során az objektív történelemszemléleten nyugvó kutatások, illetve azok eredményeinek közkinccsé tétele számára biztosítunk primátust.</p>
-      <p>A történelmi hűség biztosítását munkánk vezérlő elvének tartjuk. Nem tekintjük elfogadhatónak a későbbi korok viszonyainak és elvárásainak a vizsgált időszakra való visszavetítését. Ugyanígy elfogadhatatlannak tekintjük a pontatlanságot, a bizonyítatlan álláspontok hangoztatását.</p>
-      <p>A magyar rendvédelem történetét a történelemtudomány körébe tartozó területként határozzuk meg, melyet e tudomány metodikáival művelünk.</p>
-      <p>Szakterületünk művelése során elengedhetetlennek tartjuk az etikai tisztaság primátusa elvének a követését. Az etikai tisztaságnak nem csupán a tudományos társaságunk tevékenységében, illetve a vonzáskörünkbe tartozó kutatók tekintetében, hanem a szakterületünk többi művelőit illetően is igyekszünk érvényt szerezni.</p>
-      <p>Álláspontunk szerint a polgári nemzetállamok kialakulásának a részeként fejlődtek ki a mai értelemben vett fegyveres őrtestületek, melyeket nemzeti testületeknek értékelünk.</p>
-      <p>Létüket és működésüket többre tartjuk, mint a szolgáltatást nyújtó szervezetekét. Ezen fegyveres őrtestületeket a nemzeti szuverenitás fontos és elengedhetetlen részének tekintjük.</p>
-      <p>Értelemszerűen a valamilyen formában Magyarországon is működő idegen hatalmak irányítása alá tartozó szervezeteket nem tartjuk a magyar testületek közé tartozónak még akkor sem, ha hatásuk a korabeli magyar rendvédelemre egyértelmű. Ezen szervezetekkel való foglalkozástól ugyan nem lehet eltekinteni, azonban – mivel nem a nemzeti kultúránkból fejlődtek ki, illetve nem a nemzet érdekében tevékenykedtek – ezeket nem lehet nemzeti szervezetként értékelni.</p>
-      <p>Természetesen a többé-kevésbé nemzeti rendvédelmünk perifériáján elhelyezkedő – nem őrtestületi struktúrában működő – állami, önkormányzati és magán fegyveres csoportosulásokat is nemzeti rendvédelem-történetünk részének tartjuk.</p>
-      <p>Úgy gondoljuk, ahogyan a nyelvében él a nemzet, ahhoz hasonlóan a szakkifejezéseiben él a szakterület. Ezért káros jelenségnek tartjuk a magyar kultúrközegben kialakult szakterületi terminológia-rendszernek az idegen kultúrközegben létrejött szakkifejezésekkel való felváltására való törekvést, azonban üdvözöljük az új jelenségekhez kapcsolódó szakkifejezéseknek a magyar kultúrközegben kialakult szakterminológiai rendszerbe történő adaptációját.</p>
-      <p>A küldetésnyilatkozatunkban foglaltakat vízválasztónak tekintjük. Mindenkit szívesen fogadunk, aki a vázolt szellemiség kereteit el tudja fogadni. Úgy gondoljuk, hogy értelmes vitát is ezen keretek között lehet folytatni.</p>
+  <!-- BEMUTATKOZÁS (a hiányzó bekezdéssel kiegészítve) -->
+  <section id="bemutatkozas" class="py-16 bg-white scroll-mt-24">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="text-3xl font-bold text-blue-900 mb-8 border-b-2 border-blue-900 pb-2 inline-block uppercase tracking-wide">Bemutatkozás</h2>
+      <div class="space-y-6 text-gray-700 leading-relaxed text-justify">
+        <!-- Ide került a hiányzó bekezdés -->
+        <p>Az 1990-ben alapított, majd a Fővárosi Bíróság által 1991. február 6.-án a Pk.64.728/1990/1. számú határozattal, 3324. sorszámon nyilvántartásba vett Társaságunk a magyar rendvédelem története iránt érdeklődő szakemberek társadalmi egyesülése. A Magyar Tudományos Akadémia Könyvtár és Információs Központja (MTA KIK) által működtetett nemzeti tudományos bibliográfiai adatbázis, a Magyar Tudományos Művek Tárában (MTMT) tudományos műveink kiadójaként a 23079-es nyilvántartási számon (<a href="https://m2.mtmt.hu/api/institute/23079" target="_blank" class="text-blue-700 hover:underline">https://m2.mtmt.hu/api/institute/23079</a>) szerepel tudományos társaságunk. Társaságunk adószáma: 19662706-1-41.</p>
+        <p>Tagjaink a magyar rendvédelem-történet, illetve azzal rokon fegyveres testületek történeti kutatásával és oktatásával foglalkoznak. Tagságunk döntően a rendvédelmi testületek személyi állománya, közgyűjtemények munkatársai, felsőoktatási intézmények oktatói köréből kerül ki. Vannak közöttünk olyanok is, akiknek a foglalkozása ugyan nem kapcsolódik a rendvédelem jelenéhez, vagy múltjához, azonban érdeklődnek a témakör iránt, illetve valamilyen formában művelik azt pld. gyűjtők. Mintegy negyven fő rendelkezik tudományos, illetve oktatói fokozattal, melynek skálája az akadémiai tagságtól a doktor univ., illetve a professzortól a tanársegéd fokozatig terjed. Többségük napjaink magyar tudományos életének és felsőoktatásunknak elismert szakembere.</p>
+        <p>Álláspontunk szerint a rendvédelem tevékenységet jelöl, amelynek elméleti alapjait számos tudományterület eredményei alkotják. A rendvédelem-történetét gyűjtőfogalomnak tekintjük, amelybe – tértől és időtől függetlenül – beletartozik az egyetemes történelem során megvalósult valamennyi rendvédelmi modell. A különböző korok rendvédelmi modelljei és azok változásai alkotják az egyetemes rendvédelem-történetet.</p>
+        <p>Célunk, hogy a szakterület művelésével, az írásos források és tárgyi emlékek feldolgozásával hozzájáruljunk a magyar és az egyetemes történelem gyarapításához, rendvédelem-történeti múltunk feltárása, a tapasztalatok hasznosítása által pedig a rendvédelem fejlesztéséhez.</p>
+        <p>Egyesületünk úgy véli, hogy nemzeti rendvédelem-történeti tradíciónk – elsősorban a XIX. és XX. századi hagyományaink – közkinccsé tételével a tapasztalatok megismertetésével elősegítheti a magyar rendvédelem fejlesztését, a személyi állomány identitástudatát, ezen keresztül pedig az etikai viszonyok fejlődését, valamint a lakosság rendvédelmi testületekről kialakított elképzelésének a kedvezőbbé tételét. Tudományos társaságunk szakosztályai szellemi alkotóműhely jelleggel tevékenykednek.</p>
+        <p>Társaságunk részt vesz a tudományos közéleti tevékenységben. Tagjainkat rendszeresen felkérik tudományos írásművek szaklektorálására, tudományos fokozatszerzések és oktatói habilitációk bírálóbizottságaiban történő feladatvállalásra. Akik a rendvédelem-történeti témakörben tudományos fokozatot elértek, szinte valamennyien tudományos társaságunk tagjainak segítségét élvezték. A magyar rendvédelmi szervek több ízben kikérték társaságunk szakvéleményét a hagyományok felújítására vonatkozó kérdésekben. Szakmai segítséget nyújtunk a rendvédelem-történeti tartalmú gyűjtemények és kiállítások létrehozásához és működtetéséhez.</p>
+        <h3 class="text-2xl font-semibold text-gray-900 mt-8 mb-4 border-l-4 border-blue-900 pl-4">A Társaság oktató munkája</h3>
+        <p>Egyesületünk tagjai részt vettek a magyar rendvédelmi testületek személyi állományának történeti képzésében, a tananyag elkészítésében. A Tudományos Társaságunk által oktatott hallgatók számos esetben rendvédelem-történet témakörében készítették el diplomamunkájukat. A legtöbb rendvédelem-történeti diplomamunka a Rendőrtiszti Főiskolán — a Nemzeti Közszolgálati Egyetem Rendészettudományi Karának jogelőd intézményénél — készült.</p>
+        <p>A magyarországi rendszerváltás óta több száz rendvédelem-történeti témájú dolgozatot védtek meg a hallgatók. Az Országos Tudományos Diákköri konferenciákon számos esetben indultak rendvédelem-történeti témájú tudományos diákköri dolgozatok, közülük több alkotás országos szintű elismerésben is részesült. A Magyar Tudományos Akadémia Pro Scientia aranyérem elismerésében 1990. és 2000. között két rendvédelem-történeti tartalmú tudományos diákköri pályamű részesült. A rendvédelem-történeti témájú tudományos diákkörök legsikeresebb témavezetője, dr. Parádi József ezirányú tevékenységét mestertanári kitüntetéssel ismerték el 2003-ban.</p>
+        <p>A magyar felsőoktatás több tudományegyetemén, állam- és jogtudományi, illetve bölcsészettudományi karokon, valamint főiskolákon oktatják – részben társaságunk tagjainak közreműködésével – az egyesületünk által készített tananyag alapján, a magyar rendvédelem történetét közvetítő tárgyakat.</p>
+        <h3 class="text-2xl font-semibold text-gray-900 mt-8 mb-4 border-l-4 border-blue-900 pl-4">A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság (SZBMRTT) Küldetésnyilatkozata</h3>
+        <p>Tudományos társaságunk működésének alapszabályban rögzített célja a magyar rendvédelem történet művelése, a feltárt eredmények közkinccsé tétele. Tevékenységünk szellemiségének a lényegét kívánjuk küldetésnyilatkozatunkban közzétenni.</p>
+        <p>A szakterületünknek tekintett témakör gondozása során a történelmi tényeken alapuló igazság feltárását és bemutatását részesítjük előnyben. Nem támogatjuk az ideológiai, vagy a csoportérdekek elvárásaihoz igazadó hipotéziseket, magyarázatokat, kutatásokat és értelmezéseket. Tevékenységünk során az objektív történelemszemléleten nyugvó kutatások, illetve azok eredményeinek közkinccsé tétele számára biztosítunk primátust.</p>
+        <p>A történelmi hűség biztosítását munkánk vezérlő elvének tartjuk. Nem tekintjük elfogadhatónak a későbbi korok viszonyainak és elvárásainak a vizsgált időszakra való visszavetítését. Ugyanígy elfogadhatatlannak tekintjük a pontatlanságot, a bizonyítatlan álláspontok hangoztatását.</p>
+        <p>A magyar rendvédelem történetét a történelemtudomány körébe tartozó területként határozzuk meg, melyet e tudomány metodikáival művelünk.</p>
+        <p>Szakterületünk művelése során elengedhetetlennek tartjuk az etikai tisztaság primátusa elvének a követését. Az etikai tisztaságnak nem csupán a tudományos társaságunk tevékenységében, illetve a vonzáskörünkbe tartozó kutatók tekintetében, hanem a szakterületünk többi művelőit illetően is igyekszünk érvényt szerezni.</p>
+        <p>Álláspontunk szerint a polgári nemzetállamok kialakulásának a részeként fejlődtek ki a mai értelemben vett fegyveres őrtestületek, melyeket nemzeti testületeknek értékelünk. Létüket és működésüket többre tartjuk, mint a szolgáltatást nyújtó szervezetekét. Ezen fegyveres őrtestületeket a nemzeti szuverenitás fontos és elengedhetetlen részének tekintjük.</p>
+        <p>Értelemszerűen a valamilyen formában Magyarországon is működő idegen hatalmak irányítása alá tartozó szervezeteket nem tartjuk a magyar testületek közé tartozónak még akkor sem, ha hatásuk a korabeli magyar rendvédelemre egyértelmű. Ezen szervezetekkel való foglalkozástól ugyan nem lehet eltekinteni, azonban – mivel nem a nemzeti kultúránkból fejlődtek ki, illetve nem a nemzet érdekében tevékenykedtek – ezeket nem lehet nemzeti szervezetként értékelni.</p>
+        <p>Természetesen a többé-kevésbé nemzeti rendvédelmünk perifériáján elhelyezkedő – nem őrtestületi struktúrában működő – állami, önkormányzati és magán fegyveres csoportosulásokat is nemzeti rendvédelem-történetünk részének tartjuk.</p>
+        <p>Úgy gondoljuk, ahogyan a nyelvében él a nemzet, ahhoz hasonlóan a szakkifejezéseiben él a szakterület. Ezért káros jelenségnek tartjuk a magyar kultúrközegben kialakult szakterületi terminológia-rendszernek az idegen kultúrközegben létrejött szakkifejezésekkel való felváltására való törekvést, azonban üdvözöljük az új jelenségekhez kapcsolódó szakkifejezéseknek a magyar kultúrközegben kialakult szakterminológiai rendszerbe történő adaptációját.</p>
+        <p>A küldetésnyilatkozatunkban foglaltakat vízválasztónak tekintjük. Mindenkit szívesen fogadunk, aki a vázolt szellemiség kereteit el tudja fogadni. Úgy gondoljuk, hogy értelmes vitát is ezen keretek között lehet folytatni.</p>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ================= A DISZCIPLÍNA SZEKCIÓ (pontos szöveg) ================= -->
-<section id="diszciplina" class="py-16 bg-gray-50 border-t scroll-mt-24">
-  <div class="max-w-5xl mx-auto px-6">
-    <h2 class="text-3xl font-bold text-blue-900 mb-8 border-b-2 border-blue-900 pb-2 inline-block uppercase">A diszciplína</h2>
-    <div class="space-y-6 text-gray-700 leading-relaxed text-justify">
-      <p>A rendvédelem fogalmát e bemutatkozás keretében tüzetesen ugyan nem kívánjuk definiálni, a lényeg azonban néhány mondatban is összefoglalható. A rendvédelemhez tartozónak tekintjük valamennyi állami és önkormányzati, a rendfenntartásra specializálódott fegyveres szervezetet. E testületek struktúráját, díszlokációját, feladataikat, működésüket, jogi meghatározottságukat, felszereltségüket, személyi állo­mányuk képzési, szociális, gazdasági és erkölcsi helyzetét is a fogalom részének tartjuk. A fogalomkör integráns részének tekintjük továbbá ezen testületek vezetését, irányítását, szolgálati metodikáját, az együttműködést, továbbá a szimbólumrendszereiket. A rendvédelem-történetét gyűjtőfogalomnak tekintjük, amelybe – tértől és időtől függetlenül – beletartozik az egyetemes történelem során megvalósult valamennyi rendvédelmi modell. A különböző korok rendvédelmi modelljei és azok változásai alkotják a rendvédelem-történetet.</p>
-      <p>A rendvédelem fogalma a Tudományos Társaság elnökétől dr. Parádi József Csc-től származik, melyet szervezetünk szisztematikusan használt. Így vált közismertté a magyar közéletben. A rendszerváltás után keletkezett és a magyar rendvédelem egyes szakterületeit szabályozó valamennyi – összességében több száz – jogszabály tartalmazza a rendvédelem kifejezést. A törvényhozásban is polgárjogot nyert a rendvédelem fogalom.</p>
-      <p>A rendvédelem-történet az egyetemes történelemtudomány része. A magyar rendvédelem-történet nemzeti történelmünk elidegeníthetetlen alkotóeleme. A nemzeti rendvédelem-történetek összessége alkotja a rendvédelem világtörténetét.</p>
-      <p>A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság a magyar rendvédelem-történet gondozását tartja hivatásának. Ezen belül elsősorban a XIX-XX. századi – főként a polgári magyar állam időszakára kiterjedő – magyar rendvédelem-történetet tekinti a szakterületének. Azért fordítunk kitüntetett figyelmet a magyar rendvédelem-történet ezen időszakára, mert a XXI. századi modern rendvédelmi struktúrák gyökerei a polgári nemzetállamok kialakulásáig nyúlnak vissza. Tulajdonképpen a polgári nemzetállamok fejlődésének a részeként jött létre a nemzeti rendvédelmi fegyveres testületek azon rendszere, amely – több-kevesebb módosítással – napjainkban is fenntartja a rendet. Magyarországon ez a folyamat – leszámítva a korábbi birodalmi beavatkozási kísérleteket – lényegében a XIX–XX. században valósult meg, bár természetesen voltak előzményei is.</p>
-      <p>Meggyőződésünk, hogy nemzeti rendvédelem-történetünk ezen időszakának tapasztalatai nyújthatják a legtöbb közvetlenül hasznosítható ismeretanyagot a XXI. századi polgári magyar állam rendvédelmének a fejlesztéséhez. Nyilvánvalóan súlyos hiba volna azonban csupán a rendvédelmi struktúrára szorítkozni a nemzeti rendvédelem-történetünk tapasztalatainak a forrásait illetően. A magyar rendvédelem-történeti hagyományok ennél jóval szerteágazóbbak és mélyebbek. A magyar nemzeti karakterünkből és nemzeti kultúránkból, illetve történelmünkből fakadóan pedig a magyar rendvédelem-történet rendelkezik a különböző korszakokon átívelő tapasztalattal is.</p>
-      <p>E tapasztalat lényegének azt tekintjük, hogy nemzeti rendvédelmünk formálódása során előbb-utóbb mindig sikerült létrehozni azt a legoptimálisabb rendvédelmi felállást, amelyet a magyar állam nemzetiségei és az aktuális társadalmi berendezkedés osztályai, továbbá a vallási felekezetek összeegyeztethetőnek találtak a saját közösségük érdekeivel és erkölcsi elvárásaival. Ezt tekintjük a magyar rendvédelem-történet fejlődése egyik legfontosabb vonásának, függetlenül a korszakonként változó struktúráktól és szabályoktól.</p>
-      <p>Ezen tapasztalat szellemiségének a lényegéhez tartozik az is, hogy a magyar rendvédelem nem volt el a nemzeti szuverenitásunk gondolatkörétől, illetve a haderővel és a közigazgatással együttműködve látta el a feladatait. Ez a szellemiség jutott kifejezésre a polgári magyar állam rendvédelmében is.</p>
-      <p>Ezen vezérlő gondolatok mentén közelíthető meg a magyar rendvédelem-történeti diszciplína lényege. Ez jut kifejezésre a tudományos társaságunk alapító tagjától és elnökétől dr. PARÁDI József (sk) nyá. főiskolai tanártól származó – rendvédelem-történet terminológia használatában. Álláspontunk szerint ugyanis más jellegű szakkifejezés használatával a rendvédelem terminológia lényege sikkadna el. Ezen terminológia atyjának a mondását idézve: „Ahogyan a nyelvben él a nemzet, ahhoz hasonlóan a szakkifejezéseiben él a szakterület.”</p>
-      <p>Azt valljuk, hogy minden tudományág a saját metodikájával művelhető a legeredményesebben. Ebből fakadóan nemzeti rendvédelem-történetet a történelemtudomány módszertanával gondozzuk.</p>
-      <p>Megítélésünk szerint a magyar rendvédelem-történet tapasztalatai túlmutatnak a magyarországi fejlesztési lehetőségeken, lényegében adaptálhatók a hasonló helyzetben lévő nemzetállamok számára is. A választóvonal lényegét pedig abban látjuk, hogy a nemzeti érdek primátusának a biztosítását megvalósító rendvédelmi rendszer kiépítésére törekszik-e az adott ország politikai vezetése, vagy pedig valamilyen más  jellegű politikai érdekek – esetleg ideológiai álcájába bújtatott – elvárásainak kíván megfelelni.</p>
-      <p>A diszciplína művelése alapelvének tartjuk a történelmi igazság érvényre juttatását. A történelmi események, folyamatok valamilyen ideológia elvárásaihoz igazodó magyarázatát, a „műstatisztika” változatos formáit történelemhamisításnak tartjuk. Ezért is óvakodunk attól, hogy napjaink fogalmai, elvárásai visszavetítésre kerüljenek a vizsgált időszakra.</p>
-      <p>Működésünk nélkülözhetetlen részeként értelmezzük a forráskritika alkalmazását, a szerzői etika megtartását.</p>
+  <!-- A DISZCIPLÍNA -->
+  <section id="diszciplina" class="py-16 bg-gray-50 border-t scroll-mt-24">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="text-3xl font-bold text-blue-900 mb-8 border-b-2 border-blue-900 pb-2 inline-block uppercase">A diszciplína</h2>
+      <div class="space-y-6 text-gray-700 leading-relaxed text-justify">
+        <p>A rendvédelem fogalmát e bemutatkozás keretében tüzetesen ugyan nem kívánjuk definiálni, a lényeg azonban néhány mondatban is összefoglalható. A rendvédelemhez tartozónak tekintjük valamennyi állami és önkormányzati, a rendfenntartásra specializálódott fegyveres szervezetet. E testületek struktúráját, díszlokációját, feladataikat, működésüket, jogi meghatározottságukat, felszereltségüket, személyi állo­mányuk képzési, szociális, gazdasági és erkölcsi helyzetét is a fogalom részének tartjuk. A fogalomkör integráns részének tekintjük továbbá ezen testületek vezetését, irányítását, szolgálati metodikáját, az együttműködést, továbbá a szimbólumrendszereiket. A rendvédelem-történetét gyűjtőfogalomnak tekintjük, amelybe – tértől és időtől függetlenül – beletartozik az egyetemes történelem során megvalósult valamennyi rendvédelmi modell. A különböző korok rendvédelmi modelljei és azok változásai alkotják a rendvédelem-történetet.</p>
+        <p>A rendvédelem fogalma a Tudományos Társaság elnökétől dr. Parádi József Csc.-től származik, melyet szervezetünk szisztematikusan használt. Így vált közismertté a magyar közéletben. A rendszerváltás után keletkezett és a magyar rendvédelem egyes szakterületeit szabályozó valamennyi – összességében több száz – jogszabály tartalmazza a rendvédelem kifejezést. A törvényhozásban is polgárjogot nyert a rendvédelem fogalom.</p>
+        <p>A rendvédelem-történet az egyetemes történelemtudomány része. A magyar rendvédelem-történet nemzeti történelmünk elidegeníthetetlen alkotóeleme. A nemzeti rendvédelem-történetek összessége alkotja a rendvédelem világtörténetét.</p>
+        <p>A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság a magyar rendvédelem-történet gondozását tartja hivatásának. Ezen belül elsősorban a XIX-XX. századi – főként a polgári magyar állam időszakára kiterjedő – magyar rendvédelem-történetet tekinti a szakterületének. Azért fordítunk kitüntetett figyelmet a magyar rendvédelem-történet ezen időszakára, mert a XXI. századi modern rendvédelmi struktúrák gyökerei a polgári nemzetállamok kialakulásáig nyúlnak vissza. Tulajdonképpen a polgári nemzetállamok fejlődésének a részeként jött létre a nemzeti rendvédelmi fegyveres testületek azon rendszere, amely – több-kevesebb módosítással – napjainkban is fenntartja a rendet. Magyarországon ez a folyamat – leszámítva a korábbi birodalmi beavatkozási kísérleteket – lényegében a XIX–XX. században valósult meg, bár természetesen voltak előzményei is.</p>
+        <p>Meggyőződésünk, hogy nemzeti rendvédelem-történetünk ezen időszakának tapasztalatai nyújthatják a legtöbb közvetlenül hasznosítható ismeretanyagot a XXI. századi polgári magyar állam rendvédelmének a fejlesztéséhez. Nyilvánvalóan súlyos hiba volna azonban csupán a rendvédelmi struktúrára szorítkozni a nemzeti rendvédelem-történetünk tapasztalatainak a forrásait illetően. A magyar rendvédelem-történeti hagyományok ennél jóval szerteágazóbbak és mélyebbek. A magyar nemzeti karakterünkből és nemzeti kultúránkból, illetve történelmünkből fakadóan pedig a magyar rendvédelem-történet rendelkezik a különböző korszakokon átívelő tapasztalattal is.</p>
+        <p>E tapasztalat lényegének azt tekintjük, hogy nemzeti rendvédelmünk formálódása során előbb-utóbb mindig sikerült létrehozni azt a legoptimálisabb rendvédelmi felállást, amelyet a magyar állam nemzetiségei és az aktuális társadalmi berendezkedés osztályai, továbbá a vallási felekezetek összeegyeztethetőnek találtak a saját közösségük érdekeivel és erkölcsi elvárásaival. Ezt tekintjük a magyar rendvédelem-történet fejlődése egyik legfontosabb vonásának, függetlenül a korszakonként változó struktúráktól és szabályoktól.</p>
+        <p>Ezen tapasztalat szellemiségének a lényegéhez tartozik az is, hogy a magyar rendvédelem nem volt el a nemzeti szuverenitásunk gondolatkörétől, illetve a haderővel és a közigazgatással együttműködve látta el a feladatait. Ez a szellemiség jutott kifejezésre a polgári magyar állam rendvédelmében is.</p>
+        <p>Ezen vezérlő gondolatok mentén közelíthető meg a magyar rendvédelem-történeti diszciplína lényege. Ez jut kifejezésre a tudományos társaságunk alapító tagjától és elnökétől dr. PARÁDI József (sk) nyá. főiskolai tanártól származó – rendvédelem-történet terminológia használatában. Álláspontunk szerint ugyanis más jellegű szakkifejezés használatával a rendvédelem terminológia lényege sikkadna el. Ezen terminológia atyjának a mondását idézve: „Ahogyan a nyelvben él a nemzet, ahhoz hasonlóan a szakkifejezéseiben él a szakterület.”</p>
+        <p>Azt valljuk, hogy minden tudományág a saját metodikájával művelhető a legeredményesebben. Ebből fakadóan nemzeti rendvédelem-történetet a történelemtudomány módszertanával gondozzuk.</p>
+        <p>Megítélésünk szerint a magyar rendvédelem-történet tapasztalatai túlmutatnak a magyarországi fejlesztési lehetőségeken, lényegében adaptálhatók a hasonló helyzetben lévő nemzetállamok számára is. A választóvonal lényegét pedig abban látjuk, hogy a nemzeti érdek primátusának a biztosítását megvalósító rendvédelmi rendszer kiépítésére törekszik-e az adott ország politikai vezetése, vagy pedig valamilyen más  jellegű politikai érdekek – esetleg ideológiai álcájába bújtatott – elvárásainak kíván megfelelni.</p>
+        <p>A diszciplína művelése alapelvének tartjuk a történelmi igazság érvényre juttatását. A történelmi események, folyamatok valamilyen ideológia elvárásaihoz igazodó magyarázatát, a „műstatisztika” változatos formáit történelemhamisításnak tartjuk. Ezért is óvakodunk attól, hogy napjaink fogalmai, elvárásai visszavetítésre kerüljenek a vizsgált időszakra.</p>
+        <p>Működésünk nélkülözhetetlen részeként értelmezzük a forráskritika alkalmazását, a szerzői etika megtartását.</p>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <!-- SZERVEZETI ÁTTEKINTŐ -->
   <section id="szervezet" class="py-16 bg-white scroll-mt-24">
@@ -316,26 +239,34 @@
     </div>
   </section>
 
-  <!-- ELNÖK -->
+  <!-- ELNÖK SZEKCIÓ (teljes életrajzzal) -->
   <section id="szervezet-elnok" class="py-20 bg-gray-50 border-t scroll-mt-24">
     <div class="max-w-5xl mx-auto px-6">
-      <h2 class="text-3xl font-bold text-center mb-12 uppercase tracking-wide text-gray-800">A Társaság Vezetése</h2>
-      <div class="grid md:grid-cols-2 gap-12 items-center bg-white p-8 md:p-10 rounded-3xl shadow-lg">
-        <div class="relative group">
-          <div class="portrait-placeholder">
-            <i class="fas fa-user-graduate text-6xl text-blue-800/40 mb-4"></i>
-            <p class="font-bold text-xl text-gray-700">Dr. Parádi József</p>
-            <p class="text-gray-500 text-sm">CSc., mestertanár</p>
-            <div class="w-16 h-0.5 bg-blue-800 my-3"></div>
-            <p class="text-xs text-gray-400 italic">a rendvédelem-történet megteremtője</p>
+      <h2 class="text-3xl font-bold text-center mb-12 uppercase tracking-wide text-gray-800">A Társaság Vezetése – Elnök</h2>
+      <div class="grid md:grid-cols-2 gap-12 items-start bg-white p-8 md:p-10 rounded-3xl shadow-lg">
+        <div><img src="dr-paradi-jozsef-elnok.jpg" alt="Dr. Parádi József" class="portrait-img"></div>
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-blue-900 text-sm font-bold uppercase tracking-widest mb-2">Elnök</h3>
+            <p class="text-3xl font-bold text-gray-900 mb-1">Dr. Parádi József</p>
+            <p class="text-xl text-gray-600 font-medium">CSc., mestertanár, nyá.r.ezds.</p>
+            <div class="h-1 w-20 bg-blue-900 my-4"></div>
+            <p class="text-gray-700 italic">A rendvédelem-történeti diszciplína megteremtője Magyarországon.</p>
           </div>
-        </div>
-        <div>
-          <h3 class="text-blue-900 text-sm font-bold uppercase tracking-widest mb-2">Elnök</h3>
-          <p class="text-3xl font-bold text-gray-900 mb-2">Dr. Parádi József</p>
-          <p class="text-xl text-gray-600 font-medium">CSc., mestertanár</p>
-          <div class="h-1 w-20 bg-blue-900 my-6"></div>
-          <p class="text-gray-700 leading-relaxed italic">A rendvédelem-történeti diszciplína megteremtője Magyarországon, a tudományos kutatás és oktatás évtizedek óta meghatározó alakja.</p>
+          <div class="prose prose-sm text-gray-700 space-y-4 max-w-none">
+            <h4 class="font-bold text-gray-900">SZAKMAI ÉLETÚT ÉS TANULMÁNYOK</h4>
+            <p>Pályafutását 1972-ben kezdte a Határőrségnél, a Kossuth Lajos Katonai Főiskola elvégzését követően. Ezt követően oktatói és kutatói munkát végzett több rendvédelmi intézményben. Diplomáját és bölcsészdoktori címét az ELTE BTK-n szerezte (1984), majd a Magyar Tudományos Akadémián a Hadtudományok kandidátusa (CSc.) fokozatot is elnyerte (1990). 1984-től a Rendőrtiszti Főiskola meghatározó oktatója és kutatója, 1991-től főiskolai tanár.</p>
+            <h4 class="font-bold text-gray-900">A RENDVÉDELEM-TÖRTÉNET MINT SZAKTERÜLET MEGTEREMTÉSE</h4>
+            <p>A magyar rendvédelem-történeti diszciplína létrehozása, módszertani megalapozása és magának a rendvédelem kifejezésnek a magyar szóhasználatba való bevezetése Dr. Parádi József nevéhez fűződik. Munkássága felszámolta a nyugat-európai országokhoz képest fennálló több évtizedes hazai lemaradást. Tudományos műhelyt hozott létre, amely a dualizmus és a két világháború közötti időszak fegyveres őrtestületeinek történetét kutatja.</p>
+            <h4 class="font-bold text-gray-900">KUTATÓI ÉS PUBLIKÁCIÓS TEVÉKENYSÉG</h4>
+            <p>Fő kutatási területe a XIX-XX. századi magyar rendvédelem: határőrizet, csendőrség, rendőrség, pénzügyőrség. Több mint 300 tudományos közlemény, 101 folyóiratcikk, 35 könyv, számos könyvrészlet és szerkesztés fűződik a nevéhez. Hirsch-indexe: 25. Meghatározó műve: „A magyar rendvédelem története” című komplex monográfia. Az Új Révai Lexikon rendvédelemre vonatkozó szócikkeinek szerzője.</p>
+            <h4 class="font-bold text-gray-900">TUDOMÁNYOS KÖZÉLETI SZEREPVÁLLALÁS ÉS NEMZETKÖZI KAPCSOLATOK</h4>
+            <p>A SzBMRTT alapítója és elnöke. A társaság több mint 300 fővel került tagsági viszonyba. Nemzetközi együttműködések: Franciaország (kapcsolat a Francia Nemzeti Csendőrség Történeti Szolgálatával, előadás a Sorbonne Egyetemen), Ausztria (Deutsch-Wagram-i Gendarmeriemuseum, bécsi Wiener Kriminalmuseum), USA (kapcsolat az USA-beli Magyar Királyi Csendőr Bajtársi Közösséggel). Alapítója és mentora a Magyar Közbiztonság-történeti Tudományos Szimpózium- és a Magyar Rendvédelem-történeti Tudományos Konferencia-sorozatnak. Két tudományos folyóirat (Rendvédelem-történeti Füzetek, Rendvédelem-történeti Hírlevél) és hat tudományos szakkönyvsorozat alapítója és főszerkesztője.</p>
+            <h4 class="font-bold text-gray-900">OKTATÓI MUNKA ÉS SZAKMAI HITVALLÁS</h4>
+            <p>A rendvédelem-történet tantárgy bevezetése a magyar felsőoktatásba az ő nevéhez kötődik. Háromlépcsős képzési modell kidolgozója. Vezető szerepe volt a schengeni adaptációban, a Tempus Phare projektek magyarországi irányítójaként a hazai határőrizeti képzést a schengeni követelményeknek megfelelően modernizálták. Következetesen kiáll a „rendvédelem” terminológia mellett, szigorú tudományetikai elveket vall.</p>
+            <h4 class="font-bold text-gray-900">TEHETSÉGGONDOZÁS ÉS ELISMERÉSEK</h4>
+            <p>1987 óta aktív támogatója a TDK-munkának, több mint 70 dolgozat konzulense. Tanítványai közül többen Pro Scientia aranyérmesek. Legmagasabb állami elismerése: Magyar Érdemrend Lovagkeresztje (2016. augusztus 20.).</p>
+          </div>
         </div>
       </div>
     </div>
@@ -395,10 +326,8 @@
           <p class="mt-6 text-sm text-gray-500">Kérjük, előzetes egyeztetés alapján keressék irodánkat.</p>
         </div>
         <div class="bg-gray-50 p-6 rounded-xl">
-          <p class="font-semibold mb-2">Sajtókapcsolat:</p>
-          <p>dr. Kovács Zoltán (sajtóreferens) – sajto@szbmrtt.hu</p>
-          <p class="mt-4 font-semibold">Tagsági ügyek:</p>
-          <p>tagfelvetel@szbmrtt.hu</p>
+          <p class="font-semibold mb-2">Sajtókapcsolat:</p><p>dr. Kovács Zoltán (sajtóreferens) – sajto@szbmrtt.hu</p>
+          <p class="mt-4 font-semibold">Tagsági ügyek:</p><p>tagfelvetel@szbmrtt.hu</p>
         </div>
       </div>
     </div>
@@ -420,35 +349,28 @@
       <p class="text-sm">© 2026 Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</p>
     </div>
     <div class="flex gap-6 text-xl">
-      <a href="#" class="hover:text-white transition-colors"><i class="fab fa-facebook"></i></a>
-      <a href="#" class="hover:text-white transition-colors"><i class="fas fa-envelope"></i></a>
+      <a href="#" class="hover:text-white"><i class="fab fa-facebook"></i></a>
+      <a href="#" class="hover:text-white"><i class="fas fa-envelope"></i></a>
     </div>
   </div>
 </footer>
 
 <script>
-  // Mobil menü vezérlés
   const hamburger = document.getElementById('hamburgerBtn');
   const mobileMenu = document.getElementById('mobileMenu');
   const overlay = document.getElementById('overlay');
   const closeBtn = document.getElementById('closeMenuBtn');
-
   function openMenu() { mobileMenu.classList.add('open'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
   function closeMenu() { mobileMenu.classList.remove('open'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
-
   if (hamburger) hamburger.addEventListener('click', openMenu);
   if (closeBtn) closeBtn.addEventListener('click', closeMenu);
   if (overlay) overlay.addEventListener('click', closeMenu);
-
-  // Mobil almenük
   const subBtn = document.getElementById('mobileSubmenuBtn');
   const subMenu = document.getElementById('mobileSubmenu');
   if (subBtn) subBtn.addEventListener('click', () => subMenu.classList.toggle('hidden'));
   const mediaBtn = document.getElementById('mobileMediaBtn');
   const mediaSub = document.getElementById('mobileMediaSub');
   if (mediaBtn) mediaBtn.addEventListener('click', () => mediaSub.classList.toggle('hidden'));
-
-  // Kereső ikon: felugró keresőablak
   const searchIcon = document.getElementById('searchIcon');
   if (searchIcon) {
     searchIcon.addEventListener('click', () => {
@@ -456,15 +378,8 @@
       if (!searchBox) {
         searchBox = document.createElement('div');
         searchBox.id = 'dynamicSearchBox';
-        searchBox.innerHTML = `
-          <div class="fixed top-20 left-1/2 transform -translate-x-1/2 bg-white shadow-2xl rounded-xl p-4 z-[200] w-11/12 max-w-md border border-gray-300">
-            <input type="text" id="searchInput" placeholder="Keresés a honlapon..." class="w-full border-b-2 border-blue-900 py-2 px-3 focus:outline-none">
-            <button id="closeSearch" class="absolute top-2 right-2 text-gray-500"><i class="fas fa-times"></i></button>
-            <div id="searchResults" class="mt-2 text-sm text-gray-600 max-h-60 overflow-y-auto"></div>
-          </div>
-        `;
+        searchBox.innerHTML = `<div class="fixed top-20 left-1/2 transform -translate-x-1/2 bg-white shadow-2xl rounded-xl p-4 z-[200] w-11/12 max-w-md border border-gray-300"><input type="text" id="searchInput" placeholder="Keresés a honlapon..." class="w-full border-b-2 border-blue-900 py-2 px-3 focus:outline-none"><button id="closeSearch" class="absolute top-2 right-2 text-gray-500"><i class="fas fa-times"></i></button><div id="searchResults" class="mt-2 text-sm text-gray-600 max-h-60 overflow-y-auto"></div></div>`;
         document.body.appendChild(searchBox);
-
         const searchInput = document.getElementById('searchInput');
         const resultsDiv = document.getElementById('searchResults');
         searchInput.addEventListener('input', (e) => {
@@ -472,18 +387,11 @@
           if (!term) { resultsDiv.innerHTML = ''; return; }
           const sections = document.querySelectorAll('section, div[id]');
           let found = [];
-          sections.forEach(section => {
-            if (section.id && section.innerText.toLowerCase().includes(term)) {
-              found.push(`<a href="#${section.id}" class="block py-1 hover:bg-gray-100">${section.id.replace(/-/g,' ')}</a>`);
-            }
-          });
+          sections.forEach(section => { if (section.id && section.innerText.toLowerCase().includes(term)) { found.push(`<a href="#${section.id}" class="block py-1 hover:bg-gray-100">${section.id.replace(/-/g,' ')}</a>`); } });
           resultsDiv.innerHTML = found.length ? found.join('') : 'Nincs találat';
         });
-
         document.getElementById('closeSearch').addEventListener('click', () => searchBox.remove());
-      } else {
-        searchBox.style.display = 'block';
-      }
+      } else { searchBox.style.display = 'block'; }
     });
   }
 </script>
