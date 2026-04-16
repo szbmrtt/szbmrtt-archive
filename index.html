@@ -69,7 +69,6 @@
 
 <!-- STICKY FEJLÉC -->
 <header class="sticky top-0 z-50 w-full border-b border-gray-200 bg-white shadow-sm">
-  <!-- Felső sáv -->
   <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
     <div class="flex flex-col md:flex-row md:items-start gap-1 md:gap-4">
       <div class="flex flex-col">
@@ -94,7 +93,6 @@
     </div>
   </div>
 
-  <!-- MOTTÓ SOR: logó bal oldalon, mellette a mottó -->
   <div class="max-w-7xl mx-auto px-4 pb-3 pt-1 border-t border-gray-100">
     <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 text-left">
       <img src="szemere-bertalan-rendvedelem-torteneti-tarsasag-szbmrtt-logo-official.png" 
@@ -124,7 +122,7 @@
         <a href="#csendorseg" class="block py-1">Csendőrség-történeti</a>
         <a href="#civil" class="block py-1">Civil rendvédelem-történeti</a>
         <a href="#fegyors" class="block py-1">Fegyőrség-történeti</a>
-        <a href="#personalhistoria" class="block py-1">Personalhistória</a>
+        <!-- Personalhistória menüpont eltávolítva -->
         <a href="#folyamorseg" class="block py-1">Folyamőrség-történeti</a>
         <a href="#hatarorizet" class="block py-1">Határőrizet-történet</a>
         <a href="#rendorseg" class="block py-1">Rendőrségtörténeti</a>
@@ -165,7 +163,7 @@
           <a href="#csendorseg" class="block px-8 py-2">Csendőrség-történeti</a>
           <a href="#civil" class="block px-8 py-2">Civil rendvédelem-történeti</a>
           <a href="#fegyors" class="block px-8 py-2">Fegyőrség-történeti</a>
-          <a href="#personalhistoria" class="block px-8 py-2">Personalhistória</a>
+          <!-- Personalhistória menüpont eltávolítva -->
           <a href="#folyamorseg" class="block px-8 py-2">Folyamőrség-történeti</a>
           <a href="#hatarorizet" class="block px-8 py-2">Határőrizet-történet</a>
           <a href="#rendorseg" class="block px-8 py-2">Rendőrségtörténeti</a>
@@ -327,24 +325,18 @@
     </div>
   </section>
 
-  <!-- GRÉMIUMOK SZEKCIÓ (kártyák, vezetőkkel, fotókkal) -->
+  <!-- GRÉMIUMOK SZEKCIÓ (a personalhistória kivételével) -->
   <section id="gremiumok" class="py-20 bg-white scroll-mt-24">
     <div class="max-w-6xl mx-auto px-6">
       <h2 class="text-3xl font-bold text-center mb-12 uppercase tracking-wide text-gray-800">Tudományos grémiumok</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         
-        <!-- 1. Csendőrség-történet -->
+        <!-- 1. Csendőrség-történet (csak Parádi József) -->
         <div id="csendorseg" class="bg-gray-50 rounded-2xl shadow-md p-6 gremium-card scroll-mt-24">
           <h3 class="text-xl font-bold text-blue-900 mb-4 border-b border-blue-200 pb-2">Csendőrség-történet</h3>
-          <div class="flex flex-col sm:flex-row sm:justify-between gap-4">
-            <div class="flex items-center gap-3">
-              <img src="paradi_jozsef_jpg.jpg" alt="Dr. Parádi József" class="w-12 h-12 rounded-full object-cover shadow-sm">
-              <div><p class="font-semibold">Dr. Parádi József</p><p class="text-sm text-gray-600">Csc.</p></div>
-            </div>
-            <div class="flex items-center gap-3">
-              <img src="szakaly_sandor_jpg.jpg" alt="Dr. Szakály Sándor" class="w-12 h-12 rounded-full object-cover shadow-sm">
-              <div><p class="font-semibold">Dr. Szakály Sándor</p><p class="text-sm text-gray-600">Dsc.</p></div>
-            </div>
+          <div class="flex items-center gap-3">
+            <img src="paradi_jozsef_jpg.jpg" alt="Dr. Parádi József" class="w-12 h-12 rounded-full object-cover shadow-sm">
+            <div><p class="font-semibold">Dr. Parádi József</p><p class="text-sm text-gray-600">Csc.</p></div>
           </div>
         </div>
         
@@ -366,16 +358,7 @@
           </div>
         </div>
         
-        <!-- 4. Fegyveres testületek personálhistoriája -->
-        <div id="personalhistoria" class="bg-gray-50 rounded-2xl shadow-md p-6 gremium-card scroll-mt-24">
-          <h3 class="text-xl font-bold text-blue-900 mb-4 border-b border-blue-200 pb-2">Fegyveres testületek personálhistoriája</h3>
-          <div class="flex items-center gap-3">
-            <img src="szakaly_sandor_jpg.jpg" alt="Dr. Szakály Sándor" class="w-12 h-12 rounded-full object-cover shadow-sm">
-            <div><p class="font-semibold">Dr. Szakály Sándor</p><p class="text-sm text-gray-600">Dsc.</p></div>
-          </div>
-        </div>
-        
-        <!-- 5. Folyamőrség története -->
+        <!-- 4. Folyamőrség története -->
         <div id="folyamorseg" class="bg-gray-50 rounded-2xl shadow-md p-6 gremium-card scroll-mt-24">
           <h3 class="text-xl font-bold text-blue-900 mb-4 border-b border-blue-200 pb-2">Folyamőrség története</h3>
           <div class="flex items-center gap-3">
@@ -384,7 +367,7 @@
           </div>
         </div>
         
-        <!-- 6. Határőrizet-történet -->
+        <!-- 5. Határőrizet-történet -->
         <div id="hatarorizet" class="bg-gray-50 rounded-2xl shadow-md p-6 gremium-card scroll-mt-24">
           <h3 class="text-xl font-bold text-blue-900 mb-4 border-b border-blue-200 pb-2">Határőrizet-történet</h3>
           <div class="flex items-center gap-3">
@@ -393,7 +376,7 @@
           </div>
         </div>
         
-        <!-- 7. Rendőrség-történet -->
+        <!-- 6. Rendőrség-történet -->
         <div id="rendorseg" class="bg-gray-50 rounded-2xl shadow-md p-6 gremium-card scroll-mt-24">
           <h3 class="text-xl font-bold text-blue-900 mb-4 border-b border-blue-200 pb-2">Rendőrség-történet</h3>
           <div class="flex items-center gap-3">
@@ -402,7 +385,7 @@
           </div>
         </div>
         
-        <!-- 8. Pénzügyőrség-történet -->
+        <!-- 7. Pénzügyőrség-történet -->
         <div id="penzugyorseg" class="bg-gray-50 rounded-2xl shadow-md p-6 gremium-card scroll-mt-24">
           <h3 class="text-xl font-bold text-blue-900 mb-4 border-b border-blue-200 pb-2">Pénzügyőrség-történet</h3>
           <div class="flex items-center gap-3">
@@ -411,7 +394,7 @@
           </div>
         </div>
         
-        <!-- 9. Testőrségek, koronaőrség, képviselőházi őrség -->
+        <!-- 8. Testőrségek, koronaőrség, képviselőházi őrség -->
         <div id="testorsegek" class="bg-gray-50 rounded-2xl shadow-md p-6 gremium-card scroll-mt-24">
           <h3 class="text-xl font-bold text-blue-900 mb-4 border-b border-blue-200 pb-2">A magyar testőrségek, koronaőrség és képviselőházi őrség története</h3>
           <div class="flex flex-col sm:flex-row sm:justify-between gap-4">
@@ -426,7 +409,7 @@
           </div>
         </div>
         
-        <!-- 10. Történelmi segédtudományok -->
+        <!-- 9. Történelmi segédtudományok -->
         <div id="tortseged" class="bg-gray-50 rounded-2xl shadow-md p-6 gremium-card scroll-mt-24">
           <h3 class="text-xl font-bold text-blue-900 mb-4 border-b border-blue-200 pb-2">Az archontologia, fallerisztika, heraldika, insigniológia, vexillológia, numizmatika, ikonográfia történelmi segédtudományoknak a XIX-XX. századi magyar rendvédelemre alkalmazott változatát magába foglaló szellemi alkotóműhely</h3>
           <div class="flex items-center gap-3">
