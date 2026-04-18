@@ -63,11 +63,14 @@
       transform: translateY(-4px);
       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.01);
     }
-    /* Alapértelmezett sticky a desktop-nav-hoz, a top értéket JS állítja be */
     .desktop-nav {
       position: sticky;
       z-index: 40;
       transition: top 0.1s ease;
+    }
+    /* Eltolás a fix fejléc miatt (mobilban is) */
+    .scroll-mt-24 {
+      scroll-margin-top: 120px; /* Alapérték, de JS finomítja */
     }
   </style>
 </head>
@@ -118,7 +121,7 @@
     <button class="text-lg font-bold text-blue-800">HU</button>
     <button class="text-lg font-bold text-gray-400">EN</button>
   </div>
-  <nav class="flex flex-col gap-4">
+  <nav class="flex flex-col gap-4" id="mobileNavLinks">
     <a href="#bemutatkozas" class="text-lg font-medium py-2 border-b">Bemutatkozás</a>
     <a href="#diszciplina" class="text-lg font-medium py-2 border-b">A diszciplína</a>
     <div><button class="w-full text-left text-lg font-medium py-2 border-b flex justify-between items-center" id="mobileSubmenuBtn">Szervezet <i class="fas fa-chevron-down text-xs"></i></button>
@@ -151,7 +154,7 @@
 </div>
 <div id="overlay" class="menu-overlay"></div>
 
-<!-- Asztali navigáció (sticky, top érték dinamikusan a fejléc magasságából) -->
+<!-- Asztali navigáció (változatlan) -->
 <div id="desktopNav" class="desktop-nav border-t border-gray-200 bg-white shadow-sm">
   <div class="max-w-7xl mx-auto px-4">
     <div class="flex items-center gap-1 text-sm">
@@ -178,7 +181,6 @@
       </div>
       <a href="#rendezvenyek" class="menu-item px-3 py-4">Rendezvényeink</a>
       <a href="#kiadvanyok" class="menu-item px-3 py-4">Kiadványaink</a>
-      <!-- Média menüpont: link + külön nyíl az almenühöz -->
       <div class="group relative">
         <div class="flex items-center">
           <a href="#media" class="menu-item px-3 py-4 hover:bg-gray-50">Média</a>
@@ -407,7 +409,7 @@
               <div><p class="font-semibold">Dr. Hegedűs Ernő</p><p class="text-sm text-gray-600">Ph.D.</p></div>
             </div>
             <div class="flex items-center gap-3">
-              <img src="hennel_sándor_jpg.jpg" alt="Dr. Hennel Sándor" class="w-12 h-12 rounded-full object-cover shadow-sm">
+              <img src="hennel_sandor_jpg.jpg" alt="Dr. Hennel Sándor" class="w-12 h-12 rounded-full object-cover shadow-sm">
               <div><p class="font-semibold">Dr. Hennel Sándor</p><p class="text-sm text-gray-600">Ph.D.</p></div>
             </div>
           </div>
@@ -424,7 +426,7 @@
     </div>
   </section>
 
-  <!-- MÉDIA SZEKCIÓ (a link ide mutat) -->
+  <!-- MÉDIA SZEKCIÓ -->
   <section id="media" class="py-16 bg-white scroll-mt-24">
     <div class="max-w-5xl mx-auto px-6">
       <h2 class="text-3xl font-bold text-blue-900 mb-8 border-l-4 border-blue-900 pl-4">Média</h2>
@@ -527,7 +529,26 @@
   const mediaSub = document.getElementById('mobileMediaSub');
   if (mediaBtn) mediaBtn.addEventListener('click', () => mediaSub.classList.toggle('hidden'));
   
-  // Kereső ikon
+  // Mobil menü linkek kezelése: bezárás után ugrás
+  const mobileLinks = document.querySelectorAll('#mobileNavLinks a');
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();  // Megakadályozzuk az azonnali ugrást
+      const targetId = this.getAttribute('href'); // pl. "#bemutatkozas"
+      closeMenu(); // Bezárjuk a menüt
+      // Kis késleltetéssel ugrunk, hogy a menü bezárása befejeződjön
+      setTimeout(() => {
+        if (targetId && targetId !== '#') {
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      }, 150);
+    });
+  });
+
+  // Kereső ikon (változatlan)
   const searchIcon = document.getElementById('searchIcon');
   if (searchIcon) {
     searchIcon.addEventListener('click', () => {
@@ -552,7 +573,7 @@
     });
   }
 
-  // Dinamikus sticky menü: a header magasságához igazítjuk a desktop-nav top értékét
+  // Dinamikus sticky menü asztalra
   function setStickyMenuTop() {
     const header = document.getElementById('mainHeader');
     const desktopNav = document.getElementById('desktopNav');
@@ -561,10 +582,8 @@
       desktopNav.style.top = headerHeight + 'px';
     }
   }
-  // Beállítás betöltéskor és ablak átméretezésekor
   window.addEventListener('load', setStickyMenuTop);
   window.addEventListener('resize', setStickyMenuTop);
-  // Reszponzív nézetváltásnál is (pl. mobilos átméretezés)
   const observer = new ResizeObserver(() => setStickyMenuTop());
   const headerElement = document.getElementById('mainHeader');
   if (headerElement) observer.observe(headerElement);
