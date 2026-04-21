@@ -63,14 +63,14 @@
       transform: translateY(-4px);
       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.01);
     }
-    /* Reszponzív igazítás: balra zárt mobilon, sorkizárt asztalin */
-    .prose p, .text-justify-resp {
-      text-align: left;
+    .desktop-nav {
+      position: sticky;
+      z-index: 40;
+      transition: top 0.1s ease;
     }
-    @media (min-width: 768px) {
-      .prose p, .text-justify-resp {
-        text-align: justify;
-      }
+    /* Eltolás a fix fejléc miatt (mobilban is) */
+    .scroll-mt-24 {
+      scroll-margin-top: 120px; /* Alapérték, de JS finomítja */
     }
   </style>
 </head>
@@ -102,15 +102,13 @@
     </div>
   </div>
 
-  <!-- MOTTÓ SOR: mobilon egymás mellett (flex), logó kisebb -->
   <div class="max-w-7xl mx-auto px-4 pb-3 pt-1 border-t border-gray-100">
-    <div class="flex flex-row items-center gap-3 text-left">
+    <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 text-left">
       <img src="szemere-bertalan-rendvedelem-torteneti-tarsasag-szbmrtt-logo-official.png" 
-           alt="SzBMRTT logó" 
-           class="w-8 h-8 md:w-10 md:h-10 object-contain flex-shrink-0">
-      <div class="text-gray-500 font-light italic text-sm md:text-base">
-        <p>Cum historia pro securitate.</p>
-        <p>Történelemmel a biztonságért.</p>
+           alt="SzBMRTT logó" class="logo-img flex-shrink-0">
+      <div class="text-gray-500 font-light italic">
+        <p class="text-base md:text-lg">Cum historia pro securitate.</p>
+        <p class="text-sm md:text-base">Történelemmel a biztonságért.</p>
       </div>
     </div>
   </div>
@@ -123,7 +121,7 @@
     <button class="text-lg font-bold text-blue-800">HU</button>
     <button class="text-lg font-bold text-gray-400">EN</button>
   </div>
-  <nav class="flex flex-col gap-4">
+  <nav class="flex flex-col gap-4" id="mobileNavLinks">
     <a href="#bemutatkozas" class="text-lg font-medium py-2 border-b">Bemutatkozás</a>
     <a href="#diszciplina" class="text-lg font-medium py-2 border-b">A diszciplína</a>
     <div><button class="w-full text-left text-lg font-medium py-2 border-b flex justify-between items-center" id="mobileSubmenuBtn">Szervezet <i class="fas fa-chevron-down text-xs"></i></button>
@@ -156,8 +154,8 @@
 </div>
 <div id="overlay" class="menu-overlay"></div>
 
-<!-- Asztali navigáció -->
-<div id="desktopNav" class="desktop-nav border-t border-gray-200 bg-white shadow-sm" style="position: sticky; z-index: 40;">
+<!-- Asztali navigáció (változatlan) -->
+<div id="desktopNav" class="desktop-nav border-t border-gray-200 bg-white shadow-sm">
   <div class="max-w-7xl mx-auto px-4">
     <div class="flex items-center gap-1 text-sm">
       <div class="p-2 border-r border-gray-200 flex-shrink-0">
@@ -218,92 +216,113 @@
 </div>
 
 <main>
-  <!-- BEMUTATKOZÁS SZEKCIÓ (accordionos, kiemelt blokk) -->
-  <section id="bemutatkozas" class="py-16 bg-white scroll-mt-24">
-    <div class="max-w-5xl mx-auto px-6">
-      <h2 class="text-3xl font-bold text-blue-900 mb-8 border-b-2 border-blue-900 pb-2 inline-block uppercase tracking-wide">Bemutatkozás</h2>
+<!-- ================= BEMUTATKOZÁS SZEKCIÓ (accordionos, kiemelt blokk) ================= -->
+<section id="bemutatkozas" class="py-16 bg-white scroll-mt-24">
+  <div class="max-w-5xl mx-auto px-6">
+    <h2 class="text-3xl font-bold text-blue-900 mb-8 border-b-2 border-blue-900 pb-2 inline-block uppercase tracking-wide">Bemutatkozás</h2>
 
-      <!-- ÁLLANDÓAN LÁTHATÓ, KIEMELT BLOKK (kisebb, halványabb betű) -->
-      <div class="bg-gray-50 border-l-4 border-blue-800 rounded-lg p-5 mb-8 shadow-sm text-gray-600 text-sm leading-relaxed text-left md:text-justify">
-        <p class="mb-2">Az 1990-ben alapított, majd a Fővárosi Bíróság által 1991. február 6.-án a Pk.64.728/1990/1. számú határozattal, 3324. sorszámon nyilvántartásba vett Társaságunk a magyar rendvédelem története iránt érdeklődő szakemberek társadalmi egyesülése.</p>
-        <p class="mb-2">A Magyar Tudományos Akadémia Könyvtár és Információs Központja (MTA KIK) által működtetett nemzeti tudományos bibliográfiai adatbázis, a Magyar Tudományos Művek Tárában (MTMT) tudományos műveink kiadójaként a 23079-es nyilvántartási számon (<a href="https://m2.mtmt.hu/api/institute/23079" target="_blank" class="text-blue-700 hover:underline break-all">https://m2.mtmt.hu/api/institute/23079</a> <i class="fas fa-external-link-alt text-xs ml-1"></i>) szerepel tudományos társaságunk.</p>
-        <p class="mb-0">Társaságunk adószáma: <span class="font-mono">19662706-1-41</span></p>
+    <!-- ÁLLANDÓAN LÁTHATÓ, KIEMELT BLOKK (kisebb, halványabb betű) -->
+    <div class="bg-gray-50 border-l-4 border-blue-800 rounded-lg p-5 mb-8 shadow-sm text-gray-600 text-sm leading-relaxed">
+      <p class="mb-2">Az 1990-ben alapított, majd a Fővárosi Bíróság által 1991. február 6.-án a Pk.64.728/1990/1. számú határozattal, 3324. sorszámon nyilvántartásba vett Társaságunk a magyar rendvédelem története iránt érdeklődő szakemberek társadalmi egyesülése.</p>
+      <p class="mb-2">A Magyar Tudományos Akadémia Könyvtár és Információs Központja (MTA KIK) által működtetett nemzeti tudományos bibliográfiai adatbázis, a Magyar Tudományos Művek Tárában (MTMT) tudományos műveink kiadójaként a 23079-es nyilvántartási számon (<a href="https://m2.mtmt.hu/api/institute/23079" target="_blank" class="text-blue-700 hover:underline break-all">https://m2.mtmt.hu/api/institute/23079</a> <i class="fas fa-external-link-alt text-xs ml-1"></i>) szerepel tudományos társaságunk.</p>
+      <p class="mb-0">Társaságunk adószáma: <span class="font-mono">19662706-1-41</span></p>
+    </div>
+
+    <!-- ACCORDION SZEKCIÓK -->
+    <div class="space-y-4">
+      <!-- I. RENDVÉDELEM -->
+      <div class="border border-gray-200 rounded-lg overflow-hidden">
+        <button class="bemutatkozas-accordion-btn w-full text-left px-4 py-3 bg-gray-100 hover:bg-gray-200 font-semibold text-gray-800 flex justify-between items-center transition-colors" data-target="acc-rendvedelem">
+          <span>I. RENDVÉDELEM</span>
+          <i class="fas fa-chevron-down transition-transform duration-200"></i>
+        </button>
+        <div id="acc-rendvedelem" class="accordion-content hidden px-4 py-4 bg-white border-t border-gray-200 text-gray-700 leading-relaxed text-left md:text-justify">
+          <p>Álláspontunk szerint a rendvédelem tevékenységet jelöl, amelynek elméleti alapjait számos tudományterület eredményei alkotják. A rendvédelem-történetét gyűjtőfogalomnak tekintjük, amelybe – tértől és időtől függetlenül – beletartozik az egyetemes történelem során megvalósult valamennyi rendvédelmi modell. A különböző korok rendvédelmi modelljei és azok változásai alkotják az egyetemes rendvédelem-történetet.</p>
+        </div>
       </div>
 
-      <!-- ACCORDION SZEKCIÓK -->
-      <div class="space-y-4">
-        <!-- I. RENDVÉDELEM -->
-        <div class="border border-gray-200 rounded-lg overflow-hidden">
-          <button class="bemutatkozas-accordion-btn w-full text-left px-4 py-3 bg-gray-100 hover:bg-gray-200 font-semibold text-gray-800 flex justify-between items-center transition-colors" data-target="acc-rendvedelem">
-            <span>I. RENDVÉDELEM</span>
-            <i class="fas fa-chevron-down transition-transform duration-200"></i>
-          </button>
-          <div id="acc-rendvedelem" class="accordion-content hidden px-4 py-4 bg-white border-t border-gray-200 text-gray-700 leading-relaxed text-left md:text-justify">
-            <p>Álláspontunk szerint a rendvédelem tevékenységet jelöl, amelynek elméleti alapjait számos tudományterület eredményei alkotják. A rendvédelem-történetét gyűjtőfogalomnak tekintjük, amelybe – tértől és időtől függetlenül – beletartozik az egyetemes történelem során megvalósult valamennyi rendvédelmi modell. A különböző korok rendvédelmi modelljei és azok változásai alkotják az egyetemes rendvédelem-történetet.</p>
-          </div>
+      <!-- II. TAGJAINK -->
+      <div class="border border-gray-200 rounded-lg overflow-hidden">
+        <button class="bemutatkozas-accordion-btn w-full text-left px-4 py-3 bg-gray-100 hover:bg-gray-200 font-semibold text-gray-800 flex justify-between items-center transition-colors" data-target="acc-tagjaink">
+          <span>II. TAGJAINK</span>
+          <i class="fas fa-chevron-down transition-transform duration-200"></i>
+        </button>
+        <div id="acc-tagjaink" class="accordion-content hidden px-4 py-4 bg-white border-t border-gray-200 text-gray-700 leading-relaxed text-left md:text-justify">
+          <p>Tagjaink a magyar rendvédelem-történet, illetve azzal rokon fegyveres testületek történeti kutatásával és oktatásával foglalkoznak. Tagságunk döntően a rendvédelmi testületek személyi állománya, közgyűjtemények munkatársai, felsőoktatási intézmények oktatói köréből kerül ki. Vannak közöttünk olyanok is, akiknek a foglalkozása ugyan nem kapcsolódik a rendvédelem jelenéhez, vagy múltjához, azonban érdeklődnek a témakör iránt, illetve valamilyen formában művelik azt pld. gyűjtők. Mintegy negyven fő rendelkezik tudományos, illetve oktatói fokozattal, melynek skálája az akadémiai tagságtól a doktor univ., illetve a professzortól a tanársegéd fokozatig terjed. Többségük napjaink magyar tudományos életének és felsőoktatásunknak elismert szakembere.</p>
         </div>
+      </div>
 
-        <!-- II. TAGJAINK -->
-        <div class="border border-gray-200 rounded-lg overflow-hidden">
-          <button class="bemutatkozas-accordion-btn w-full text-left px-4 py-3 bg-gray-100 hover:bg-gray-200 font-semibold text-gray-800 flex justify-between items-center transition-colors" data-target="acc-tagjaink">
-            <span>II. TAGJAINK</span>
-            <i class="fas fa-chevron-down transition-transform duration-200"></i>
-          </button>
-          <div id="acc-tagjaink" class="accordion-content hidden px-4 py-4 bg-white border-t border-gray-200 text-gray-700 leading-relaxed text-left md:text-justify">
-            <p>Tagjaink a magyar rendvédelem-történet, illetve azzal rokon fegyveres testületek történeti kutatásával és oktatásával foglalkoznak. Tagságunk döntően a rendvédelmi testületek személyi állománya, közgyűjtemények munkatársai, felsőoktatási intézmények oktatói köréből kerül ki. Vannak közöttünk olyanok is, akiknek a foglalkozása ugyan nem kapcsolódik a rendvédelem jelenéhez, vagy múltjához, azonban érdeklődnek a témakör iránt, illetve valamilyen formában művelik azt pld. gyűjtők. Mintegy negyven fő rendelkezik tudományos, illetve oktatói fokozattal, melynek skálája az akadémiai tagságtól a doktor univ., illetve a professzortól a tanársegéd fokozatig terjed. Többségük napjaink magyar tudományos életének és felsőoktatásunknak elismert szakembere.</p>
-          </div>
+      <!-- III. CÉLUNK, TEVÉKENYSÉGEINK (3 bekezdés) -->
+      <div class="border border-gray-200 rounded-lg overflow-hidden">
+        <button class="bemutatkozas-accordion-btn w-full text-left px-4 py-3 bg-gray-100 hover:bg-gray-200 font-semibold text-gray-800 flex justify-between items-center transition-colors" data-target="acc-celjaink">
+          <span>III. CÉLUNK, TEVÉKENYSÉGEINK</span>
+          <i class="fas fa-chevron-down transition-transform duration-200"></i>
+        </button>
+        <div id="acc-celjaink" class="accordion-content hidden px-4 py-4 bg-white border-t border-gray-200 text-gray-700 leading-relaxed text-left md:text-justify space-y-4">
+          <p>Célunk, hogy a szakterület művelésével, az írásos források és tárgyi emlékek feldolgozásával hozzájáruljunk a magyar és az egyetemes történelem gyarapításához, rendvédelem-történeti múltunk feltárása, a tapasztalatok hasznosítása által pedig a rendvédelem fejlesztéséhez.</p>
+          <p>Egyesületünk úgy véli, hogy nemzeti rendvédelem-történeti tradíciónk – elsősorban a XIX. és XX. századi hagyományaink – közkinccsé tételével a tapasztalatok megismertetésével elősegítheti a magyar rendvédelem fejlesztését, a személyi állomány identitástudatát, ezen keresztül pedig az etikai viszonyok fejlődését, valamint a lakosság rendvédelmi testületekről kialakított elképzelésének a kedvezőbbé tételét. Tudományos társaságunk szakosztályai szellemi alkotóműhely jelleggel tevékenykednek</p>
+          <p>Társaságunk részt vesz a tudományos közéleti tevékenységben. Tagjainkat rendszeresen felkérik tudományos írásművek szaklektorálására, tudományos fokozatszerzések és oktatói habilitációk bírálóbizottságaiban történő feladatvállalásra. Akik a rendvédelem-történeti témakörben tudományos fokozatot elértek, szinte valamennyien tudományos társaságunk tagjainak segítségét élvezték. A magyar rendvédelmi szervek több ízben kikérték társaságunk szakvéleményét a hagyományok felújítására vonatkozó kérdésekben. Szakmai segítséget nyújtunk a rendvédelem-történeti tartalmú gyűjtemények és kiállítások létrehozásához és működtetéséhez.</p>
         </div>
+      </div>
 
-        <!-- III. CÉLUNK, TEVÉKENYSÉGEINK (3 bekezdés) -->
-        <div class="border border-gray-200 rounded-lg overflow-hidden">
-          <button class="bemutatkozas-accordion-btn w-full text-left px-4 py-3 bg-gray-100 hover:bg-gray-200 font-semibold text-gray-800 flex justify-between items-center transition-colors" data-target="acc-celjaink">
-            <span>III. CÉLUNK, TEVÉKENYSÉGEINK</span>
-            <i class="fas fa-chevron-down transition-transform duration-200"></i>
-          </button>
-          <div id="acc-celjaink" class="accordion-content hidden px-4 py-4 bg-white border-t border-gray-200 text-gray-700 leading-relaxed space-y-4 text-left md:text-justify">
-            <p>Célunk, hogy a szakterület művelésével, az írásos források és tárgyi emlékek feldolgozásával hozzájáruljunk a magyar és az egyetemes történelem gyarapításához, rendvédelem-történeti múltunk feltárása, a tapasztalatok hasznosítása által pedig a rendvédelem fejlesztéséhez.</p>
-            <p>Egyesületünk úgy véli, hogy nemzeti rendvédelem-történeti tradíciónk – elsősorban a XIX. és XX. századi hagyományaink – közkinccsé tételével a tapasztalatok megismertetésével elősegítheti a magyar rendvédelem fejlesztését, a személyi állomány identitástudatát, ezen keresztül pedig az etikai viszonyok fejlődését, valamint a lakosság rendvédelmi testületekről kialakított elképzelésének a kedvezőbbé tételét. Tudományos társaságunk szakosztályai szellemi alkotóműhely jelleggel tevékenykednek</p>
-            <p>Társaságunk részt vesz a tudományos közéleti tevékenységben. Tagjainkat rendszeresen felkérik tudományos írásművek szaklektorálására, tudományos fokozatszerzések és oktatói habilitációk bírálóbizottságaiban történő feladatvállalásra. Akik a rendvédelem-történeti témakörben tudományos fokozatot elértek, szinte valamennyien tudományos társaságunk tagjainak segítségét élvezték. A magyar rendvédelmi szervek több ízben kikérték társaságunk szakvéleményét a hagyományok felújítására vonatkozó kérdésekben. Szakmai segítséget nyújtunk a rendvédelem-történeti tartalmú gyűjtemények és kiállítások létrehozásához és működtetéséhez.</p>
-          </div>
+      <!-- IV. A TÁRSASÁG OKTATÓ MUNKÁJA (3 bekezdés) -->
+      <div class="border border-gray-200 rounded-lg overflow-hidden">
+        <button class="bemutatkozas-accordion-btn w-full text-left px-4 py-3 bg-gray-100 hover:bg-gray-200 font-semibold text-gray-800 flex justify-between items-center transition-colors" data-target="acc-oktatas">
+          <span>IV. A TÁRSASÁG OKTATÓ MUNKÁJA</span>
+          <i class="fas fa-chevron-down transition-transform duration-200"></i>
+        </button>
+        <div id="acc-oktatas" class="accordion-content hidden px-4 py-4 bg-white border-t border-gray-200 text-gray-700 leading-relaxed text-left md:text-justify space-y-4">
+          <p>Egyesületünk tagjai részt vettek a magyar rendvédelmi testületek személyi állományának történeti képzésében, a tananyag elkészítésében. A Tudományos Társaságunk által oktatott hallgatók számos esetben rendvédelem-történet témakörében készítették el diplomamunkájukat. A legtöbb rendvédelem-történeti diplomamunka a Rendőrtiszti Főiskolán — a Nemzeti Közszolgálati Egyetem Rendészettudományi Karának jogelőd intézményénél — készült.</p>
+          <p>A magyarországi rendszerváltás óta több száz rendvédelem-történeti témájú dolgozatot védtek meg a hallgatók. Az Országos Tudományos Diákköri konferenciákon számos esetben indultak rendvédelem-történeti témájú tudományos diákköri dolgozatok, közülük több alkotás országos szintű elismerésben is részesült. A Magyar Tudományos Akadémia Pro Scientia aranyérem elismerésében 1990. és 2000. között két rendvédelem-történeti tartalmú tudományos diákköri pályamű részesült. A rendvédelem-történeti témájú tudományos diákkörök legsikeresebb témavezetője, dr. Parádi József ezirányú tevékenységét mestertanári kitüntetéssel ismerték el 2003-ban.</p>
+          <p>A magyar felsőoktatás több tudományegyetemén, állam- és jogtudományi, illetve bölcsészettudományi karokon, valamint főiskolákon oktatják – részben társaságunk tagjainak közreműködésével – az egyesületünk által készített tananyag alapján, a magyar rendvédelem történetét közvetítő tárgyakat.</p>
         </div>
+      </div>
 
-        <!-- IV. A TÁRSASÁG OKTATÓ MUNKÁJA (3 bekezdés) -->
-        <div class="border border-gray-200 rounded-lg overflow-hidden">
-          <button class="bemutatkozas-accordion-btn w-full text-left px-4 py-3 bg-gray-100 hover:bg-gray-200 font-semibold text-gray-800 flex justify-between items-center transition-colors" data-target="acc-oktatas">
-            <span>IV. A TÁRSASÁG OKTATÓ MUNKÁJA</span>
-            <i class="fas fa-chevron-down transition-transform duration-200"></i>
-          </button>
-          <div id="acc-oktatas" class="accordion-content hidden px-4 py-4 bg-white border-t border-gray-200 text-gray-700 leading-relaxed space-y-4 text-left md:text-justify">
-            <p>Egyesületünk tagjai részt vettek a magyar rendvédelmi testületek személyi állományának történeti képzésében, a tananyag elkészítésében. A Tudományos Társaságunk által oktatott hallgatók számos esetben rendvédelem-történet témakörében készítették el diplomamunkájukat. A legtöbb rendvédelem-történeti diplomamunka a Rendőrtiszti Főiskolán — a Nemzeti Közszolgálati Egyetem Rendészettudományi Karának jogelőd intézményénél — készült.</p>
-            <p>A magyarországi rendszerváltás óta több száz rendvédelem-történeti témájú dolgozatot védtek meg a hallgatók. Az Országos Tudományos Diákköri konferenciákon számos esetben indultak rendvédelem-történeti témájú tudományos diákköri dolgozatok, közülük több alkotás országos szintű elismerésben is részesült. A Magyar Tudományos Akadémia Pro Scientia aranyérem elismerésében 1990. és 2000. között két rendvédelem-történeti tartalmú tudományos diákköri pályamű részesült. A rendvédelem-történeti témájú tudományos diákkörök legsikeresebb témavezetője, dr. Parádi József ezirányú tevékenységét mestertanári kitüntetéssel ismerték el 2003-ban.</p>
-            <p>A magyar felsőoktatás több tudományegyetemén, állam- és jogtudományi, illetve bölcsészettudományi karokon, valamint főiskolákon oktatják – részben társaságunk tagjainak közreműködésével – az egyesületünk által készített tananyag alapján, a magyar rendvédelem történetét közvetítő tárgyakat.</p>
-          </div>
-        </div>
-
-        <!-- V. KÜLDETÉSNYILATKOZAT (10 bekezdés gondolatjelekkel) -->
-        <div class="border border-gray-200 rounded-lg overflow-hidden">
-          <button class="bemutatkozas-accordion-btn w-full text-left px-4 py-3 bg-gray-100 hover:bg-gray-200 font-semibold text-gray-800 flex justify-between items-center transition-colors" data-target="acc-kuldetes">
-            <span>V. KÜLDETÉSNYILATKOZAT</span>
-            <i class="fas fa-chevron-down transition-transform duration-200"></i>
-          </button>
-          <div id="acc-kuldetes" class="accordion-content hidden px-4 py-4 bg-white border-t border-gray-200 text-gray-700 leading-relaxed space-y-2 text-left md:text-justify">
-            <p class="mb-2">– Tudományos társaságunk működésének alapszabályban rögzített célja a magyar rendvédelem történet művelése, a feltárt eredmények közkinccsé tétele. Tevékenységünk szellemiségének a lényegét kívánjuk küldetésnyilatkozatunkban közzétenni.</p>
-            <p class="mb-2">– A szakterületünknek tekintett témakör gondozása során a történelmi tényeken alapuló igazság feltárását és bemutatását részesítjük előnyben. Nem támogatjuk az ideológiai, vagy a csoportérdekek elvárásaihoz igazadó hipotéziseket, magyarázatokat, kutatásokat és értelmezéseket. Tevékenységünk során az objektív történelemszemléleten nyugvó kutatások, illetve azok eredményeinek közkinccsé tétele számára biztosítunk primátust.</p>
-            <p class="mb-2">– A történelmi hűség biztosítását munkánk vezérlő elvének tartjuk. Nem tekintjük elfogadhatónak a későbbi korok viszonyainak és elvárásainak a vizsgált időszakra való visszavetítését. Ugyanígy elfogadhatatlannak tekintjük a pontatlanságot, a bizonyítatlan álláspontok hangoztatását.</p>
-            <p class="mb-2">– A magyar rendvédelem történetét a történelemtudomány körébe tartozó területként határozzuk meg, melyet e tudomány metodikáival művelünk.</p>
-            <p class="mb-2">– Szakterületünk művelése során elengedhetetlennek tartjuk az etikai tisztaság primátusa elvének a követését. Az etikai tisztaságnak nem csupán a tudományos társaságunk tevékenységében, illetve a vonzáskörünkbe tartozó kutatók tekintetében, hanem a szakterületünk többi művelőit illetően is igyekszünk érvényt szerezni.</p>
-            <p class="mb-2">– Álláspontunk szerint a polgári nemzetállamok kialakulásának a részeként fejlődtek ki a mai értelemben vett fegyveres őrtestületek, melyeket nemzeti testületeknek értékelünk. Létüket és működésüket többre tartjuk, mint a szolgáltatást nyújtó szervezetekét. Ezen fegyveres őrtestületeket a nemzeti szuverenitás fontos és elengedhetetlen részének tekintjük.</p>
-            <p class="mb-2">– Értelemszerűen a valamilyen formában Magyarországon is működő idegen hatalmak irányítása alá tartozó szervezeteket nem tartjuk a magyar testületek közé tartozónak még akkor sem, ha hatásuk a korabeli magyar rendvédelemre egyértelmű. Ezen szervezetekkel való foglalkozástól ugyan nem lehet eltekinteni, azonban – mivel nem a nemzeti kultúránkból fejlődtek ki, illetve nem a nemzet érdekében tevékenykedtek – ezeket nem lehet nemzeti szervezetként értékelni.</p>
-            <p class="mb-2">– Természetesen a többé-kevésbé nemzeti rendvédelmünk perifériáján elhelyezkedő – nem őrtestületi struktúrában működő – állami, önkormányzati és magán fegyveres csoportosulásokat is nemzeti rendvédelem-történetünk részének tartjuk.</p>
-            <p class="mb-2">– Úgy gondoljuk, ahogyan a nyelvében él a nemzet, ahhoz hasonlóan a szakkifejezéseiben él a szakterület. Ezért káros jelenségnek tartjuk a magyar kultúrközegben kialakult szakterületi terminológia-rendszernek az idegen kultúrközegben létrejött szakkifejezésekkel való felváltására való törekvést, azonban üdvözöljük az új jelenségekhez kapcsolódó szakkifejezéseknek a magyar kultúrközegben kialakult szakterminológiai rendszerbe történő adaptációját.</p>
-            <p class="mb-0">– A küldetésnyilatkozatunkban foglaltakat vízválasztónak tekintjük. Mindenkit szívesen fogadunk, aki a vázolt szellemiség kereteit el tudja fogadni. Úgy gondoljuk, hogy értelmes vitát is ezen keretek között lehet folytatni.</p>
-          </div>
+      <!-- V. KÜLDETÉSNYILATKOZAT (10 bekezdés gondolatjelekkel) -->
+      <div class="border border-gray-200 rounded-lg overflow-hidden">
+        <button class="bemutatkozas-accordion-btn w-full text-left px-4 py-3 bg-gray-100 hover:bg-gray-200 font-semibold text-gray-800 flex justify-between items-center transition-colors" data-target="acc-kuldetes">
+          <span>V. KÜLDETÉSNYILATKOZAT</span>
+          <i class="fas fa-chevron-down transition-transform duration-200"></i>
+        </button>
+        <div id="acc-kuldetes" class="accordion-content hidden px-4 py-4 bg-white border-t border-gray-200 text-gray-700 leading-relaxed space-y-2">
+          <p class="mb-2">– Tudományos társaságunk működésének alapszabályban rögzített célja a magyar rendvédelem történet művelése, a feltárt eredmények közkinccsé tétele. Tevékenységünk szellemiségének a lényegét kívánjuk küldetésnyilatkozatunkban közzétenni.</p>
+          <p class="mb-2">– A szakterületünknek tekintett témakör gondozása során a történelmi tényeken alapuló igazság feltárását és bemutatását részesítjük előnyben. Nem támogatjuk az ideológiai, vagy a csoportérdekek elvárásaihoz igazadó hipotéziseket, magyarázatokat, kutatásokat és értelmezéseket. Tevékenységünk során az objektív történelemszemléleten nyugvó kutatások, illetve azok eredményeinek közkinccsé tétele számára biztosítunk primátust.</p>
+          <p class="mb-2">– A történelmi hűség biztosítását munkánk vezérlő elvének tartjuk. Nem tekintjük elfogadhatónak a későbbi korok viszonyainak és elvárásainak a vizsgált időszakra való visszavetítését. Ugyanígy elfogadhatatlannak tekintjük a pontatlanságot, a bizonyítatlan álláspontok hangoztatását.</p>
+          <p class="mb-2">– A magyar rendvédelem történetét a történelemtudomány körébe tartozó területként határozzuk meg, melyet e tudomány metodikáival művelünk.</p>
+          <p class="mb-2">– Szakterületünk művelése során elengedhetetlennek tartjuk az etikai tisztaság primátusa elvének a követését. Az etikai tisztaságnak nem csupán a tudományos társaságunk tevékenységében, illetve a vonzáskörünkbe tartozó kutatók tekintetében, hanem a szakterületünk többi művelőit illetően is igyekszünk érvényt szerezni.</p>
+          <p class="mb-2">– Álláspontunk szerint a polgári nemzetállamok kialakulásának a részeként fejlődtek ki a mai értelemben vett fegyveres őrtestületek, melyeket nemzeti testületeknek értékelünk. Létüket és működésüket többre tartjuk, mint a szolgáltatást nyújtó szervezetekét. Ezen fegyveres őrtestületeket a nemzeti szuverenitás fontos és elengedhetetlen részének tekintjük.</p>
+          <p class="mb-2">– Értelemszerűen a valamilyen formában Magyarországon is működő idegen hatalmak irányítása alá tartozó szervezeteket nem tartjuk a magyar testületek közé tartozónak még akkor sem, ha hatásuk a korabeli magyar rendvédelemre egyértelmű. Ezen szervezetekkel való foglalkozástól ugyan nem lehet eltekinteni, azonban – mivel nem a nemzeti kultúránkból fejlődtek ki, illetve nem a nemzet érdekében tevékenykedtek – ezeket nem lehet nemzeti szervezetként értékelni.</p>
+          <p class="mb-2">– Természetesen a többé-kevésbé nemzeti rendvédelmünk perifériáján elhelyezkedő – nem őrtestületi struktúrában működő – állami, önkormányzati és magán fegyveres csoportosulásokat is nemzeti rendvédelem-történetünk részének tartjuk.</p>
+          <p class="mb-2">– Úgy gondoljuk, ahogyan a nyelvében él a nemzet, ahhoz hasonlóan a szakkifejezéseiben él a szakterület. Ezért káros jelenségnek tartjuk a magyar kultúrközegben kialakult szakterületi terminológia-rendszernek az idegen kultúrközegben létrejött szakkifejezésekkel való felváltására való törekvést, azonban üdvözöljük az új jelenségekhez kapcsolódó szakkifejezéseknek a magyar kultúrközegben kialakult szakterminológiai rendszerbe történő adaptációját.</p>
+          <p class="mb-0">– A küldetésnyilatkozatunkban foglaltakat vízválasztónak tekintjük. Mindenkit szívesen fogadunk, aki a vázolt szellemiség kereteit el tudja fogadni. Úgy gondoljuk, hogy értelmes vitát is ezen keretek között lehet folytatni.</p>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- A DISZCIPLÍNA (szöveg, reszponzív igazítással) -->
+<script>
+  // Accordion funkcionalitás a Bemutatkozás szekcióhoz
+  document.querySelectorAll('.bemutatkozas-accordion-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const targetId = button.getAttribute('data-target');
+      const content = document.getElementById(targetId);
+      const icon = button.querySelector('i');
+      
+      if (content.classList.contains('hidden')) {
+        // Kinyitás
+        content.classList.remove('hidden');
+        icon.classList.add('rotate-180');
+      } else {
+        // Becsukás
+        content.classList.add('hidden');
+        icon.classList.remove('rotate-180');
+      }
+    });
+  });
+</script>
+
+  <!-- A DISZCIPLÍNA -->
   <section id="diszciplina" class="py-16 bg-gray-50 border-t scroll-mt-24">
     <div class="max-w-5xl mx-auto px-6">
       <h2 class="text-3xl font-bold text-blue-900 mb-8 border-b-2 border-blue-900 pb-2 inline-block uppercase">A diszciplína</h2>
@@ -314,7 +333,7 @@
         <p>A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság a magyar rendvédelem-történet gondozását tartja hivatásának. Ezen belül elsősorban a XIX-XX. századi – főként a polgári magyar állam időszakára kiterjedő – magyar rendvédelem-történetet tekinti a szakterületének. Azért fordítunk kitüntetett figyelmet a magyar rendvédelem-történet ezen időszakára, mert a XXI. századi modern rendvédelmi struktúrák gyökerei a polgári nemzetállamok kialakulásáig nyúlnak vissza. Tulajdonképpen a polgári nemzetállamok fejlődésének a részeként jött létre a nemzeti rendvédelmi fegyveres testületek azon rendszere, amely – több-kevesebb módosítással – napjainkban is fenntartja a rendet. Magyarországon ez a folyamat – leszámítva a korábbi birodalmi beavatkozási kísérleteket – lényegében a XIX–XX. században valósult meg, bár természetesen voltak előzményei is.</p>
         <p>Meggyőződésünk, hogy nemzeti rendvédelem-történetünk ezen időszakának tapasztalatai nyújthatják a legtöbb közvetlenül hasznosítható ismeretanyagot a XXI. századi polgári magyar állam rendvédelmének a fejlesztéséhez. Nyilvánvalóan súlyos hiba volna azonban csupán a rendvédelmi struktúrára szorítkozni a nemzeti rendvédelem-történetünk tapasztalatainak a forrásait illetően. A magyar rendvédelem-történeti hagyományok ennél jóval szerteágazóbbak és mélyebbek. A magyar nemzeti karakterünkből és nemzeti kultúránkból, illetve történelmünkből fakadóan pedig a magyar rendvédelem-történet rendelkezik a különböző korszakokon átívelő tapasztalattal is.</p>
         <p>E tapasztalat lényegének azt tekintjük, hogy nemzeti rendvédelmünk formálódása során előbb-utóbb mindig sikerült létrehozni azt a legoptimálisabb rendvédelmi felállást, amelyet a magyar állam nemzetiségei és az aktuális társadalmi berendezkedés osztályai, továbbá a vallási felekezetek összeegyeztethetőnek találtak a saját közösségük érdekeivel és erkölcsi elvárásaival. Ezt tekintjük a magyar rendvédelem-történet fejlődése egyik legfontosabb vonásának, függetlenül a korszakonként változó struktúráktól és szabályoktól.</p>
-        <p>Ezen tapasztalat szellemiségének a lényegéhez tartozik az is, hogy a magyar rendvédelem nem volt el a nemzeti szuverenitásunk gondolatkörétől, illetve a haderővel és a közigazgatással együttműködve látta el a feladatait. Ez a szellemiség jutott kifejezésre a polgári magyar állam rendvédelmében is.</p>
+        <p>Ezen tapasztalat szellemiségének a lényegéhez tartozik az is, hogy a magyar rendvédelem nem vált el a nemzeti szuverenitásunk gondolatkörétől, illetve a haderővel és a közigazgatással együttműködve látta el a feladatait. Ez a szellemiség jutott kifejezésre a polgári magyar állam rendvédelmében is.</p>
         <p>Ezen vezérlő gondolatok mentén közelíthető meg a magyar rendvédelem-történeti diszciplína lényege. Ez jut kifejezésre a tudományos társaságunk alapító tagjától és elnökétől dr. PARÁDI József (sk) nyá. főiskolai tanártól származó – rendvédelem-történet terminológia használatában. Álláspontunk szerint ugyanis más jellegű szakkifejezés használatával a rendvédelem terminológia lényege sikkadna el. Ezen terminológia atyjának a mondását idézve: „Ahogyan a nyelvben él a nemzet, ahhoz hasonlóan a szakkifejezéseiben él a szakterület.”</p>
         <p>Azt valljuk, hogy minden tudományág a saját metodikájával művelhető a legeredményesebben. Ebből fakadóan nemzeti rendvédelem-történetet a történelemtudomány módszertanával gondozzuk.</p>
         <p>Megítélésünk szerint a magyar rendvédelem-történet tapasztalatai túlmutatnak a magyarországi fejlesztési lehetőségeken, lényegében adaptálhatók a hasonló helyzetben lévő nemzetállamok számára is. A választóvonal lényegét pedig abban látjuk, hogy a nemzeti érdek primátusának a biztosítását megvalósító rendvédelmi rendszer kiépítésére törekszik-e az adott ország politikai vezetése, vagy pedig valamilyen más  jellegű politikai érdekek – esetleg ideológiai álcájába bújtatott – elvárásainak kíván megfelelni.</p>
@@ -324,7 +343,7 @@
     </div>
   </section>
 
-  <!-- ELNÖK SZEKCIÓ (életrajz) -->
+  <!-- ELNÖK SZEKCIÓ -->
   <section id="szervezet-elnok" class="py-20 bg-gray-50 border-t scroll-mt-24">
     <div class="max-w-5xl mx-auto px-6">
       <h2 class="text-3xl font-bold text-center mb-12 uppercase tracking-wide text-gray-800">A Társaság Vezetése – Elnök</h2>
@@ -401,7 +420,7 @@
     <div class="max-w-6xl mx-auto px-6">
       <h2 class="text-3xl font-bold text-center mb-12 uppercase tracking-wide text-gray-800">Tudományos grémiumok</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- Csendőrség-történet -->
+        <!-- 1. Csendőrség-történet -->
         <div id="csendorseg" class="bg-gray-50 rounded-2xl shadow-md p-6 gremium-card scroll-mt-24">
           <h3 class="text-xl font-bold text-blue-900 mb-4 border-b border-blue-200 pb-2">Csendőrség-történet</h3>
           <div class="flex items-center gap-3">
@@ -409,7 +428,7 @@
             <div><p class="font-semibold">Dr. Parádi József</p><p class="text-sm text-gray-600">Csc.</p></div>
           </div>
         </div>
-        <!-- Civil rendvédelem-történet -->
+        <!-- 2. Civil rendvédelem-történet -->
         <div id="civil" class="bg-gray-50 rounded-2xl shadow-md p-6 gremium-card scroll-mt-24">
           <h3 class="text-xl font-bold text-blue-900 mb-4 border-b border-blue-200 pb-2">Civil rendvédelem-történet, nem állami fegyveres testületként működő, fegyveres és fegyver nélküli rendvédelmi szervezetek története</h3>
           <div class="flex items-center gap-3">
@@ -417,7 +436,7 @@
             <div><p class="font-semibold">Parádi Ákos</p></div>
           </div>
         </div>
-        <!-- Fegyőrség-történet -->
+        <!-- 3. Fegyőrség-történet -->
         <div id="fegyors" class="bg-gray-50 rounded-2xl shadow-md p-6 gremium-card scroll-mt-24">
           <h3 class="text-xl font-bold text-blue-900 mb-4 border-b border-blue-200 pb-2">Fegyőrség-történet (mai szóhasználattal büntetés-végrehajtás)</h3>
           <div class="flex items-center gap-3">
@@ -425,7 +444,7 @@
             <div><p class="font-semibold">Dr. Mezey Barna</p><p class="text-sm text-gray-600">Dsc.</p></div>
           </div>
         </div>
-        <!-- Folyamőrség története -->
+        <!-- 4. Folyamőrség története -->
         <div id="folyamorseg" class="bg-gray-50 rounded-2xl shadow-md p-6 gremium-card scroll-mt-24">
           <h3 class="text-xl font-bold text-blue-900 mb-4 border-b border-blue-200 pb-2">Folyamőrség története</h3>
           <div class="flex items-center gap-3">
@@ -433,7 +452,7 @@
             <div><p class="font-semibold">Dr. Kaiser Ferenc</p><p class="text-sm text-gray-600">Ph.D.</p></div>
           </div>
         </div>
-        <!-- Határőrizet-történet -->
+        <!-- 5. Határőrizet-történet -->
         <div id="hatarorizet" class="bg-gray-50 rounded-2xl shadow-md p-6 gremium-card scroll-mt-24">
           <h3 class="text-xl font-bold text-blue-900 mb-4 border-b border-blue-200 pb-2">Határőrizet-történet</h3>
           <div class="flex items-center gap-3">
@@ -441,7 +460,7 @@
             <div><p class="font-semibold">Dr. Parádi József</p><p class="text-sm text-gray-600">Csc.</p></div>
           </div>
         </div>
-        <!-- Rendőrség-történet -->
+        <!-- 6. Rendőrség-történet -->
         <div id="rendorseg" class="bg-gray-50 rounded-2xl shadow-md p-6 gremium-card scroll-mt-24">
           <h3 class="text-xl font-bold text-blue-900 mb-4 border-b border-blue-200 pb-2">Rendőrség-történet</h3>
           <div class="flex items-center gap-3">
@@ -449,7 +468,7 @@
             <div><p class="font-semibold">Dr.jur. Ernyes Mihály</p></div>
           </div>
         </div>
-        <!-- Pénzügyőrség-történet -->
+        <!-- 7. Pénzügyőrség-történet -->
         <div id="penzugyorseg" class="bg-gray-50 rounded-2xl shadow-md p-6 gremium-card scroll-mt-24">
           <h3 class="text-xl font-bold text-blue-900 mb-4 border-b border-blue-200 pb-2">Pénzügyőrség-történet</h3>
           <div class="flex items-center gap-3">
@@ -457,7 +476,7 @@
             <div><p class="font-semibold">Dr. Parádi József</p><p class="text-sm text-gray-600">Csc.</p></div>
           </div>
         </div>
-        <!-- Testőrségek, koronaőrség, képviselőházi őrség -->
+        <!-- 8. Testőrségek, koronaőrség, képviselőházi őrség -->
         <div id="testorsegek" class="bg-gray-50 rounded-2xl shadow-md p-6 gremium-card scroll-mt-24">
           <h3 class="text-xl font-bold text-blue-900 mb-4 border-b border-blue-200 pb-2">A magyar testőrségek, koronaőrség és képviselőházi őrség története</h3>
           <div class="flex flex-col sm:flex-row sm:justify-between gap-4">
@@ -466,12 +485,12 @@
               <div><p class="font-semibold">Dr. Hegedűs Ernő</p><p class="text-sm text-gray-600">Ph.D.</p></div>
             </div>
             <div class="flex items-center gap-3">
-              <img src="hennel_sandor_jpg.jpg" alt="Dr. Hennel Sándor" class="w-12 h-12 rounded-full object-cover shadow-sm">
+              <img src="hennel_sándor_jpg.jpg" alt="Dr. Hennel Sándor" class="w-12 h-12 rounded-full object-cover shadow-sm">
               <div><p class="font-semibold">Dr. Hennel Sándor</p><p class="text-sm text-gray-600">Ph.D.</p></div>
             </div>
           </div>
         </div>
-        <!-- Történelmi segédtudományok -->
+        <!-- 9. Történelmi segédtudományok -->
         <div id="tortseged" class="bg-gray-50 rounded-2xl shadow-md p-6 gremium-card scroll-mt-24">
           <h3 class="text-xl font-bold text-blue-900 mb-4 border-b border-blue-200 pb-2">Az archontologia, fallerisztika, heraldika, insigniológia, vexillológia, numizmatika, ikonográfia történelmi segédtudományoknak a XIX-XX. századi magyar rendvédelemre alkalmazott változatát magába foglaló szellemi alkotóműhely</h3>
           <div class="flex items-center gap-3">
@@ -479,130 +498,6 @@
             <div><p class="font-semibold">Zeidler Sándor</p></div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- KIADVÁNYOK SZEKCIÓ (a korábban beillesztett, működő accordionnal) -->
-  <section id="kiadvanyok" class="py-16 bg-gray-50 scroll-mt-24">
-    <div class="max-w-5xl mx-auto px-6">
-      <h2 class="text-3xl font-bold text-blue-900 mb-8 border-l-4 border-blue-900 pl-4">Kiadványaink</h2>
-      <!-- Rendvédelem-történeti Füzetek -->
-      <div class="mb-16">
-        <h3 class="text-2xl font-bold text-gray-800 mb-2">Rendvédelem-történeti Füzetek <span class="text-lg font-normal italic">(Acta Historiae Praesidii Ordinis)</span></h3>
-        <div class="flex flex-wrap gap-4 text-sm text-gray-600 mb-4">
-          <span>HU-ISSN 1216-6774 (nyomtatott)</span>
-          <span>E-ISSN 2560-144X (online)</span>
-          <span>DOI prefix: 10.31627/RTF</span>
-        </div>
-        <div class="bg-white p-4 rounded-lg border border-gray-200 mb-6 text-sm">
-          <p class="font-semibold text-gray-700">Impresszum</p>
-          <p><strong>Kiadó:</strong> Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</p>
-          <p><strong>Székhely:</strong> 1121 Budapest, Farkasvölgyi út 12. | <strong>Levelezési cím:</strong> 1037 Budapest, Haránt utca 12.</p>
-          <p><strong>Tel.:</strong> (+36/06-1) 250-6199</p>
-          <p><strong>Kiadásért felelős:</strong> Dr. Parádi József | <strong>Szerkesztésért felelős:</strong> Dr. Parádi József</p>
-        </div>
-        <p class="mb-4 text-gray-700 text-left md:text-justify">A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság a rendvédelem-történet művelése során keletkezett eredményeket e periodika által teszi közzé a tudományos közlés igényeinek megfelelő tanulmányok formájában. A kiadványokat szerzői jog védi. A Rendvédelem-történeti Füzetek első 12 számának repertóriuma és az 1. számmal kezdődően az eddig megjelentek tartalomjegyzéke megtalálható e honlapon.</p>
-        <!-- Ars dictandi accordion -->
-        <div class="mb-4 border border-gray-200 rounded-lg">
-          <button class="accordion-btn w-full text-left px-4 py-3 bg-gray-100 hover:bg-gray-200 font-semibold text-gray-800 flex justify-between items-center" data-target="arsDictandi">
-            <span>Ars dictandi – A periodika célja és története</span>
-            <i class="fas fa-chevron-down transition-transform"></i>
-          </button>
-          <div id="arsDictandi" class="accordion-content hidden px-4 py-4 bg-white border-t border-gray-200 text-gray-700 space-y-3 text-left md:text-justify">
-            <p>A Rendvédelem-történeti Füzetek (Acta Historiae Praesidii Ordinis) periodikát a Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság alapítása évében hozta létre és 1991-től jelennek meg a folyóirat számai. A tudományos társaság által létrehozott sorozatok között e periodika volt az első. A periodika célja, hogy a magyar rendvédelem-történet körében keletkezett új kutatási eredmények számára bemutatási lehetőséget teremtsen. Az alapítók szándéka szerint: a periodika számaiban — évente két alkalommal — a tudományos közlés igényeinek megfelelő tanulmányok jelenhetnek meg; azokat az írásműveket fogadja be a lap, amelyek tartalma a magyar rendvédelem-történet körébe tartozik, vagy azzal összefüggésben áll. Mivel a lapalapítás óta eltelt huzamos idő után is az egyetlen magyar nyelvű periodika maradt, amely fő feladatának a nemzeti rendvédelem-történetünk művelési eredményeinek tudományos színvonalú közzétételét tekintette, ezért olyan indexrendszerrel erősítettük meg a folyóiratot, amelynek a használata segítséget jelenthet a téma iránt érdeklődőknek és az abban elmélyülni kívánók számára egyaránt. A folyóirat tudományos jellegéből fakadóan világnézeti prekoncepcióktól terhelt írások közlésétől tartózkodunk. A történelmi tényeket, a kutatási eredményeket ismertető, azokból egzakt következtetéseket levonó alkotásokat teszünk közzé. Összességében a szerkesztőség — az alapítók szellemiségének megfelelően — arra törekszik, hogy a folyóiratban a magyar rendvédelem-történet körébe tartozó azon írásművek jelenjenek meg, amelyek megfelelnek a tudományos közléssel szemben támasztott igényeknek.</p>
-          </div>
-        </div>
-        <!-- Kéziratkövetelmények accordion -->
-        <div class="mb-6 border border-gray-200 rounded-lg">
-          <button class="accordion-btn w-full text-left px-4 py-3 bg-gray-100 hover:bg-gray-200 font-semibold text-gray-800 flex justify-between items-center" data-target="keziratKovetelmenyek">
-            <span>Szerkesztőség kéziratokkal szemben támasztott igénye (Szerzői útmutató)</span>
-            <i class="fas fa-chevron-down transition-transform"></i>
-          </button>
-          <div id="keziratKovetelmenyek" class="accordion-content hidden px-4 py-4 bg-white border-t border-gray-200 text-gray-700 text-left md:text-justify">
-            <ol class="list-decimal pl-5 space-y-3">
-              <li>Olyan kéziratokat fogadunk el, ami megfelel az „első közlés” kívánalmainak.</li>
-              <li>A tudományos művekkel szembeni igénytámasztásnak megfelelő alkotásokat közlünk. Hivatkozási jegyzetek nélküli kéziratot és hiányos, illetve pontatlan hivatkozásokat általában nem közlünk!</li>
-              <li>Végleges szövegű kéziratra tartunk igényt, mert a leadott kéziratban szerzői korrekcióra már nem nyílik lehetőség. Konferencia-előadásokat, azok kivonatait stb. nem közölünk. A konferencia-előadás előzménnyel rendelkező tanulmányokat ugyanazon feltételekkel közöljük, mint az ilyen előzményekkel nem rendelkező alkotásokat. A szerkesztőség által a kiadói tervbe felvett teljes tanulmányokat (szöveg, jegyzetek, mellékletek, stb.) független lektor – szükség esetén lektorok – véleményezik. A lektori észrevételek elfogadásával, a szerző és a lektor közötti megállapodás alapján kerül sor az alkotások publikálására.</li>
-              <li>A kéziratokhoz 600 és 1000 karakter közötti terjedelmű rezümét is kérünk.</li>
-              <li>A szerkesztőség fenntartja magának a jogot arra, hogy a szövegben stiláris változtatásokat eszközöljön, illetve a hivatkozási jegyzeteket kiegészítse, továbbá véleményének helyt adjon az írásban, a szerkesztőség feltüntetésével. A szerkesztőség hozzá érkezett kéziratokat és tartozékait nem őrzi meg, és nem küldi vissza, de az elfogadásról, illetve elutasításukról értesíti a szerzőket. A közlésre elfogadott kéziratok szerzőinek a szerkesztőség tiszteletpéldányt küld.</li>
-              <li>Periodikánkban az évszázadokat – az idézetek, címek kivételével – római számmal jelöljük.</li>
-              <li>A szövegben előforduló neveket mindig teljességre törekvően kell feltüntetni akár személy, intézmény, vagy földrajzi névről van szó. Személyneveknél a vezetéknév és keresztnév mellett a kérdéses időpontban érvényes nemesi rangot, rendfokozatot, illetve beosztást is fel kell tüntetni együttesen a szerzett címekkel (pl. doktorátus). A helységneveknél mindig a magyar nevet kell feltüntetni. Ha más neve is van, és azt a közlendő érthetősége megkívánja, akkor az idegen nyelvű nevet zárójelben kell a magyar név mögött feltüntetni. Intézmények esetében a teljes hivatalos nevet kell használni, mögötte zárójelben a rövidített nevet.</li>
-              <li>
-                <strong>Technikai elvárások:</strong>
-                <ul class="list-disc pl-5 mt-1 space-y-1">
-                  <li>Margó: 2 cm, a kötésnél 3 cm. Bekezdések: bekezdés formátumban beállított bekezdés (nagy bekezdés 0,75 cm; kis bekezdés 0,32 cm); címek után tompa bekezdések; felsorolások kisbekezdésként, egységesen gondolatjellel; bekezdések között nem marad ki sor.</li>
-                  <li>Betűk: Times New Roman, méret 11-es (jegyzetekben, recenziónál 9-es).</li>
-                  <li>Címek: tanulmánycímek sorközépen, alattuk és felettük is sor kimarad; fejezetcímek balra zárva, számozás esetén a szám a cím előtt, csak felettük marad ki sor; címek vastagítva, mellékcímek döntve.</li>
-                  <li>Hivatkozások: végjegyzetként a tanulmányok szöveges részét követően; szövegben felsőindexben vastagítva; végjegyzetben felsorolásként; a tudományos közlés igényeinek megfelelően.</li>
-                  <li>Személynevek: családi név kapitälchen-ben.</li>
-                  <li>Jogszabályok: törvény = évszám / a törvény római száma tc. rövidítéssel és a cím; rendelet = rendeletszám / évszám a kiadó szervezet rövidítésével, majd a cím.</li>
-                  <li>Mellékletek: a jegyzetek után; minden mellékletnek címe és száma van (cím: sorközépen döntve és vastagítva, szám: jobb felső sarokban döntve, római számmal); a melléklet alján a forrás megjelenítése az egyszerűsített bibliográfiai leírás szabályai szerint; több melléklet esetén mellékletek jegyzéke szükséges.</li>
-                  <li>Ábrák, diagramok, táblázatok, képek nem helyezhetők el a szövegben, csak mellékletként.</li>
-                </ul>
-              </li>
-              <li>A hivatkozási jegyzetszámokat a szövegben felső indexben és vastagítva kérjük elhelyezni. A jegyzetekben a mű szerzője és címe mellett a kiadás helyét, idejét és a kiadót is kérjük feltüntetni. (Részletes minták a teljes útmutatóban.)</li>
-              <li>A kéziratokat Microsoft Word program szerint számítógéplemezen rögzítve, és egy printelt példányban, vagy az email címünkre küldve fogadjuk el.</li>
-              <li>Kiemelés vastagítással történik.</li>
-              <li>A szerzőkről szerzői jegyzék készül, amely az impresszum mellett kerül feltüntetésre. Ezért kérjük, hogy a szerzők a „szerzői űrlapot” értelemszerűen kitöltve juttassák el a szerkesztőség címére. A szerzőknek lehetőségük nyílik írói álnéven is publikálni.</li>
-              <li>A szerzőknek a szerkesztőség szerzői honoráriumot nem fizet. A szerzők alkotásuknak a szerkesztőséghez küldésével elfogadják, hogy művük a kiadványban megjelenjen.</li>
-            </ol>
-            <p class="mt-3 text-sm text-gray-500">A részletes hivatkozási minták (könyv, folyóiratcikk, gyűjteményes kötet, internetes forrás, újrahivatkozás stb.) a szerkesztőségtől kérhetők, illetve a nyomtatott útmutató tartalmazza.</p>
-          </div>
-        </div>
-        <!-- REAL-J linkek -->
-        <div class="mb-6">
-          <p class="text-sm text-gray-500 italic mb-2">A számok a Magyar Tudományos Akadémia adatbázisában (REAL-J) érhetők el.</p>
-          <ul class="space-y-1 text-sm">
-            <li>› XXX. évf. (2020) 59-60. sz. – <a href="https://real-j.mtak.hu/16772/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16772/</a></li>
-            <li>› XXIX. évf. (2019) 57-58. sz. – <a href="https://real-j.mtak.hu/13948/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/13948/</a></li>
-            <!-- további REAL-J linkek... a teljesség kedvéért itt folytatódhat, de a rövidség miatt kihagyom, a korábbi kódban szerepeltek -->
-            <li>› (2006) különszám, repertórium – <a href="https://real-j.mtak.hu/16392/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16392/</a></li>
-          </ul>
-        </div>
-        <!-- Nyomtatva megjelent számok -->
-        <div class="mt-6">
-          <p class="font-semibold text-gray-800">Nyomtatva megjelent számok, feltöltés alatt:</p>
-          <ul class="list-disc pl-5 text-gray-600 text-sm mt-1">
-            <li>I. évf. (1990) 1. sz.</li>
-            <li>I. évf. (1991) 2. sz.</li>
-            <!-- ... a többi ... -->
-          </ul>
-        </div>
-      </div>
-      <!-- Rendvédelem-történeti Hírlevél -->
-      <div>
-        <h3 class="text-2xl font-bold text-gray-800 mb-2">Rendvédelem-történeti Hírlevél <span class="text-lg font-normal italic">(Nuntiotones Historiae Praesidii Ordinis)</span></h3>
-        <div class="flex flex-wrap gap-4 text-sm text-gray-600 mb-4">
-          <span>ISSN 1785-3257 (nyomtatott)</span>
-          <span>ISSN 2560-0893 (online)</span>
-        </div>
-        <div class="bg-white p-4 rounded-lg border border-gray-200 mb-6 text-sm">
-          <p class="font-semibold text-gray-700">Impresszum</p>
-          <p><strong>Kiadó:</strong> Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</p>
-          <p><strong>Székhely:</strong> 1121 Budapest, Farkasvölgyi út 12. | <strong>Levelezési cím:</strong> 1037 Budapest, Haránt utca 12.</p>
-          <p><strong>Tel.:</strong> (+36/06-1) 250-6199</p>
-          <p><strong>Kiadásért felelős:</strong> Dr. Parádi József | <strong>Szerkesztésért felelős:</strong> Dr. Parádi József</p>
-        </div>
-        <p class="mb-4 text-gray-700 text-left md:text-justify">A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság a rendvédelem-történet művelésével kapcsolatos operatív eseményekről e periodika által nyújt tájékoztatást. A kiadványokat szerzői jog védi. A Rendvédelem-történeti Hírlevél 1995 óta évente kétszer jelenik meg, a 22. számmal kezdődően megtalálható a honlapon.</p>
-        <ul class="space-y-1 text-sm">
-          <li>› XIII-XV. évf. (2006) 22-26. sz. – <a href="RTH 22 26.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
-          <li>› XVI. évf. (2006) 27. sz. – <a href="RTH 27.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
-          <li>› XVII. évf. (2007) 28. sz. – <a href="RTH 28.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
-          <li>› XVII. évf. (2008) 29-30. sz. – <a href="RTH 29 30.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
-          <li>› XVIII. évf. (2009) 31-32. sz. – <a href="RTH 31 32.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
-          <li>› XIX. évf. (2010) 33-34. sz. – Feltöltés alatt</li>
-          <li>› XX. évf. (2011) 35-36. sz. – <a href="RTH 35 36.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
-          <li>› XXI. évf. (2012) 37-38. sz. – Feltöltés alatt</li>
-          <li>› XXII. évf. (2013) 39-40-41-42. sz. – Feltöltés alatt</li>
-          <li>› XXIII. évf. (2014) 43-44-45-46. sz. – <a href="RTH 43 46.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
-          <li>› XXIV-XXV. évf. (2015) 47-48-49-50. sz. – <a href="RTH 47 50.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
-          <li>› XXVI. évf. (2016) 51-52. sz. – <a href="RTH 51 52.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
-          <li>› XXVII. évf. (2017) 53-54. sz. – <a href="RTH 53 54.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
-          <li>› XXVIII. évf. (2018) 55-56. sz. – <a href="RTH 55 56.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
-          <li>› XXIX. évf. (2019) 57-58. sz. – <a href="RTH 57 58.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
-          <li>› XXX. évf. (2020) 59-60. sz. – <a href="RTH 59 60.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
-        </ul>
       </div>
     </div>
   </section>
@@ -631,17 +526,198 @@
     </div>
   </section>
 
+  <!-- ================= KIADVÁNYOK SZEKCIÓ ================= -->
+<section id="kiadvanyok" class="py-16 bg-gray-50 scroll-mt-24">
+  <div class="max-w-5xl mx-auto px-6">
+    <h2 class="text-3xl font-bold text-blue-900 mb-8 border-l-4 border-blue-900 pl-4">Kiadványaink</h2>
+
+    <!-- ========== 1. Rendvédelem-történeti Füzetek ========== -->
+    <div class="mb-16">
+      <h3 class="text-2xl font-bold text-gray-800 mb-2">Rendvédelem-történeti Füzetek <span class="text-lg font-normal italic">(Acta Historiae Praesidii Ordinis)</span></h3>
+      <div class="flex flex-wrap gap-4 text-sm text-gray-600 mb-4">
+        <span>HU-ISSN 1216-6774 (nyomtatott)</span>
+        <span>E-ISSN 2560-144X (online)</span>
+        <span>DOI prefix: 10.31627/RTF</span>
+      </div>
+      
+      <!-- Impresszum blokk -->
+      <div class="bg-white p-4 rounded-lg border border-gray-200 mb-6 text-sm">
+        <p class="font-semibold text-gray-700">Impresszum</p>
+        <p><strong>Kiadó:</strong> Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</p>
+        <p><strong>Székhely:</strong> 1121 Budapest, Farkasvölgyi út 12. | <strong>Levelezési cím:</strong> 1037 Budapest, Haránt utca 12.</p>
+        <p><strong>Tel.:</strong> (+36/06-1) 250-6199</p>
+        <p><strong>Kiadásért felelős:</strong> Dr. Parádi József | <strong>Szerkesztésért felelős:</strong> Dr. Parádi József</p>
+      </div>
+
+      <p class="mb-4 text-gray-700">A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság a rendvédelem-történet művelése során keletkezett eredményeket e periodika által teszi közzé a tudományos közlés igényeinek megfelelő tanulmányok formájában. A kiadványokat szerzői jog védi. A Rendvédelem-történeti Füzetek első 12 számának repertóriuma és az 1. számmal kezdődően az eddig megjelentek tartalomjegyzéke megtalálható e honlapon.</p>
+
+      <!-- Ars dictandi (lenyíló) -->
+      <div class="mb-4 border border-gray-200 rounded-lg">
+        <button class="accordion-btn w-full text-left px-4 py-3 bg-gray-100 hover:bg-gray-200 font-semibold text-gray-800 flex justify-between items-center" data-target="arsDictandi">
+          <span>Ars dictandi – A periodika célja és története</span>
+          <i class="fas fa-chevron-down transition-transform"></i>
+        </button>
+        <div id="arsDictandi" class="accordion-content hidden px-4 py-4 bg-white border-t border-gray-200 text-gray-700 space-y-3">
+          <p>A Rendvédelem-történeti Füzetek (Acta Historiae Praesidii Ordinis) periodikát a Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság alapítása évében hozta létre és 1991-től jelennek meg a folyóirat számai. A tudományos társaság által létrehozott sorozatok között e periodika volt az első. A periodika célja, hogy a magyar rendvédelem-történet körében keletkezett új kutatási eredmények számára bemutatási lehetőséget teremtsen. Az alapítók szándéka szerint: a periodika számaiban — évente két alkalommal — a tudományos közlés igényeinek megfelelő tanulmányok jelenhetnek meg; azokat az írásműveket fogadja be a lap, amelyek tartalma a magyar rendvédelem-történet körébe tartozik, vagy azzal összefüggésben áll. Mivel a lapalapítás óta eltelt huzamos idő után is az egyetlen magyar nyelvű periodika maradt, amely fő feladatának a nemzeti rendvédelem-történetünk művelési eredményeinek tudományos színvonalú közzétételét tekintette, ezért olyan indexrendszerrel erősítettük meg a folyóiratot, amelynek a használata segítséget jelenthet a téma iránt érdeklődőknek és az abban elmélyülni kívánók számára egyaránt. A folyóirat tudományos jellegéből fakadóan világnézeti prekoncepcióktól terhelt írások közlésétől tartózkodunk. A történelmi tényeket, a kutatási eredményeket ismertető, azokból egzakt következtetéseket levonó alkotásokat teszünk közzé. Összességében a szerkesztőség — az alapítók szellemiségének megfelelően — arra törekszik, hogy a folyóiratban a magyar rendvédelem-történet körébe tartozó azon írásművek jelenjenek meg, amelyek megfelelnek a tudományos közléssel szemben támasztott igényeknek.</p>
+        </div>
+      </div>
+
+      <!-- Kéziratkövetelmények (lenyíló) -->
+      <div class="mb-6 border border-gray-200 rounded-lg">
+        <button class="accordion-btn w-full text-left px-4 py-3 bg-gray-100 hover:bg-gray-200 font-semibold text-gray-800 flex justify-between items-center" data-target="keziratKovetelmenyek">
+          <span>Szerkesztőség kéziratokkal szemben támasztott igénye (Szerzői útmutató)</span>
+          <i class="fas fa-chevron-down transition-transform"></i>
+        </button>
+        <div id="keziratKovetelmenyek" class="accordion-content hidden px-4 py-4 bg-white border-t border-gray-200 text-gray-700">
+          <ol class="list-decimal pl-5 space-y-3">
+            <li>Olyan kéziratokat fogadunk el, ami megfelel az „első közlés” kívánalmainak.</li>
+            <li>A tudományos művekkel szembeni igénytámasztásnak megfelelő alkotásokat közlünk. Hivatkozási jegyzetek nélküli kéziratot és hiányos, illetve pontatlan hivatkozásokat általában nem közlünk!</li>
+            <li>Végleges szövegű kéziratra tartunk igényt, mert a leadott kéziratban szerzői korrekcióra már nem nyílik lehetőség. Konferencia-előadásokat, azok kivonatait stb. nem közölünk. A konferencia-előadás előzménnyel rendelkező tanulmányokat ugyanazon feltételekkel közöljük, mint az ilyen előzményekkel nem rendelkező alkotásokat. A szerkesztőség által a kiadói tervbe felvett teljes tanulmányokat (szöveg, jegyzetek, mellékletek, stb.) független lektor – szükség esetén lektorok – véleményezik. A lektori észrevételek elfogadásával, a szerző és a lektor közötti megállapodás alapján kerül sor az alkotások publikálására.</li>
+            <li>A kéziratokhoz 600 és 1000 karakter közötti terjedelmű rezümét is kérünk.</li>
+            <li>A szerkesztőség fenntartja magának a jogot arra, hogy a szövegben stiláris változtatásokat eszközöljön, illetve a hivatkozási jegyzeteket kiegészítse, továbbá véleményének helyt adjon az írásban, a szerkesztőség feltüntetésével. A szerkesztőség hozzá érkezett kéziratokat és tartozékait nem őrzi meg, és nem küldi vissza, de az elfogadásról, illetve elutasításukról értesíti a szerzőket. A közlésre elfogadott kéziratok szerzőinek a szerkesztőség tiszteletpéldányt küld.</li>
+            <li>Periodikánkban az évszázadokat – az idézetek, címek kivételével – római számmal jelöljük.</li>
+            <li>A szövegben előforduló neveket mindig teljességre törekvően kell feltüntetni akár személy, intézmény, vagy földrajzi névről van szó. Személyneveknél a vezetéknév és keresztnév mellett a kérdéses időpontban érvényes nemesi rangot, rendfokozatot, illetve beosztást is fel kell tüntetni együttesen a szerzett címekkel (pl. doktorátus). A helységneveknél mindig a magyar nevet kell feltüntetni. Ha más neve is van, és azt a közlendő érthetősége megkívánja, akkor az idegen nyelvű nevet zárójelben kell a magyar név mögött feltüntetni. Intézmények esetében a teljes hivatalos nevet kell használni, mögötte zárójelben a rövidített nevet.</li>
+            <li>
+              <strong>Technikai elvárások:</strong>
+              <ul class="list-disc pl-5 mt-1 space-y-1">
+                <li>Margó: 2 cm, a kötésnél 3 cm. Bekezdések: bekezdés formátumban beállított bekezdés (nagy bekezdés 0,75 cm; kis bekezdés 0,32 cm); címek után tompa bekezdések; felsorolások kisbekezdésként, egységesen gondolatjellel; bekezdések között nem marad ki sor.</li>
+                <li>Betűk: Times New Roman, méret 11-es (jegyzetekben, recenziónál 9-es).</li>
+                <li>Címek: tanulmánycímek sorközépen, alattuk és felettük is sor kimarad; fejezetcímek balra zárva, számozás esetén a szám a cím előtt, csak felettük marad ki sor; címek vastagítva, mellékcímek döntve.</li>
+                <li>Hivatkozások: végjegyzetként a tanulmányok szöveges részét követően; szövegben felsőindexben vastagítva; végjegyzetben felsorolásként; a tudományos közlés igényeinek megfelelően.</li>
+                <li>Személynevek: családi név kapitälchen-ben.</li>
+                <li>Jogszabályok: törvény = évszám / a törvény római száma tc. rövidítéssel és a cím; rendelet = rendeletszám / évszám a kiadó szervezet rövidítésével, majd a cím.</li>
+                <li>Mellékletek: a jegyzetek után; minden mellékletnek címe és száma van (cím: sorközépen döntve és vastagítva, szám: jobb felső sarokban döntve, római számmal); a melléklet alján a forrás megjelenítése az egyszerűsített bibliográfiai leírás szabályai szerint; több melléklet esetén mellékletek jegyzéke szükséges.</li>
+                <li>Ábrák, diagramok, táblázatok, képek nem helyezhetők el a szövegben, csak mellékletként.</li>
+              </ul>
+            </li>
+            <li>A hivatkozási jegyzetszámokat a szövegben felső indexben és vastagítva kérjük elhelyezni. A jegyzetekben a mű szerzője és címe mellett a kiadás helyét, idejét és a kiadót is kérjük feltüntetni. (Részletes minták a teljes útmutatóban.)</li>
+            <li>A kéziratokat Microsoft Word program szerint számítógéplemezen rögzítve, és egy printelt példányban, vagy az email címünkre küldve fogadjuk el.</li>
+            <li>Kiemelés vastagítással történik.</li>
+            <li>A szerzőkről szerzői jegyzék készül, amely az impresszum mellett kerül feltüntetésre. Ezért kérjük, hogy a szerzők a „szerzői űrlapot” értelemszerűen kitöltve juttassák el a szerkesztőség címére. A szerzőknek lehetőségük nyílik írói álnéven is publikálni.</li>
+            <li>A szerzőknek a szerkesztőség szerzői honoráriumot nem fizet. A szerzők alkotásuknak a szerkesztőséghez küldésével elfogadják, hogy művük a kiadványban megjelenjen.</li>
+          </ol>
+          <p class="mt-3 text-sm text-gray-500">A részletes hivatkozási minták (könyv, folyóiratcikk, gyűjteményes kötet, internetes forrás, újrahivatkozás stb.) a szerkesztőségtől kérhetők, illetve a nyomtatott útmutató tartalmazza.</p>
+        </div>
+      </div>
+
+      <!-- REAL-J elérhetőségek -->
+      <div class="mb-6">
+        <p class="text-sm text-gray-500 italic mb-2">A számok a Magyar Tudományos Akadémia adatbázisában (REAL-J) érhetők el.</p>
+        <ul class="space-y-1 text-sm">
+          <li>› XXX. évf. (2020) 59-60. sz. – <a href="https://real-j.mtak.hu/16772/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16772/</a></li>
+          <li>› XXIX. évf. (2019) 57-58. sz. – <a href="https://real-j.mtak.hu/13948/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/13948/</a></li>
+          <li>› XXVIII. évf. (2018) 55-56. sz. – <a href="https://real-j.mtak.hu/11955/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/11955/</a></li>
+          <li>› XXVII. évf. (2017) 53-54. sz. – <a href="https://real-j.mtak.hu/11954/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/11954/</a></li>
+          <li>› XXVI. évf. (2016) 51-52. sz. – <a href="https://real-j.mtak.hu/11953/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/11953/</a></li>
+          <li>› XXV. évf. (2015) 43-50. sz. – <a href="https://real-j.mtak.hu/12003/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/12003/</a></li>
+          <li>› XXIV. évf. (2014) 39-42. sz. – <a href="https://real-j.mtak.hu/16386/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16386/</a></li>
+          <li>› XXIV. évf. (2014) 35-38. sz. – <a href="https://real-j.mtak.hu/16385/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16385/</a></li>
+          <li>› XXIII. évf. (2013) 31-34. sz. – <a href="https://real-j.mtak.hu/16384/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16384/</a></li>
+          <li>› XXIII. évf. (2013) 27-30. sz. – <a href="https://real-j.mtak.hu/16383/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16383/</a></li>
+          <li>› XXII. évf. (2012) 26. sz. – <a href="https://real-j.mtak.hu/16382/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16382/</a></li>
+          <li>› XXII. évf. (2012) 25. sz. – <a href="https://real-j.mtak.hu/16381/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16381/</a></li>
+          <li>› XXI. évf. (2011) 24. sz. – <a href="https://real-j.mtak.hu/16380/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16380/</a></li>
+          <li>› XX. évf. (2011) 23. sz. – <a href="https://real-j.mtak.hu/16394/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16394/</a></li>
+          <li>› XIX. évf. (2010) 22. sz. – <a href="https://real-j.mtak.hu/16393/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16393/</a></li>
+          <li>› XVIII. évf. (2010) 21. sz. – <a href="https://real-j.mtak.hu/16391/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16391/</a></li>
+          <li>› XVII. évf. (2009) 20. sz. – <a href="https://real-j.mtak.hu/16390/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16390/</a></li>
+          <li>› XVI. évf. (2009) 19. sz. – <a href="https://real-j.mtak.hu/16389/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16389/</a></li>
+          <li>› XV. évf. (2008) 18. sz. – <a href="https://real-j.mtak.hu/16388/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16388/</a></li>
+          <li>› XIV. évf. (2008) 17. sz. – <a href="https://real-j.mtak.hu/16387/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16387/</a></li>
+          <li>› XIII. évf. (2007) 16. sz. – <a href="https://real-j.mtak.hu/16379/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16379/</a></li>
+          <li>› (2006) különszám, repertórium – <a href="https://real-j.mtak.hu/16392/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16392/</a></li>
+        </ul>
+      </div>
+
+      <!-- Nyomtatva megjelent számok, feltöltés alatt -->
+      <div class="mt-6">
+        <p class="font-semibold text-gray-800">Nyomtatva megjelent számok, feltöltés alatt:</p>
+        <ul class="list-disc pl-5 text-gray-600 text-sm mt-1">
+          <li>I. évf. (1990) 1. sz.</li>
+          <li>I. évf. (1991) 2. sz.</li>
+          <li>II. évf. (1992) 3. sz.</li>
+          <li>III. évf. (1993) 4. sz.</li>
+          <li>IV. évf. (1994) 5. sz.</li>
+          <li>V. évf. (1995) 6. sz.</li>
+          <li>VI. évf. (1996) 7. sz.</li>
+          <li>VII. évf. (1997) 8. sz.</li>
+          <li>VIII. évf. (1998) 9. sz.</li>
+          <li>IX. évf. (1999) 10. sz.</li>
+          <li>X. évf. (2000) 11. sz.</li>
+          <li>X. évf. (2000) 12. sz.</li>
+          <li>XI. évf. (2005) 13. sz.</li>
+          <li>XI. évf. (2005) 14. sz.</li>
+          <li>XII. évf. (2007) 15. sz.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ========== 2. Rendvédelem-történeti Hírlevél ========== -->
+    <div>
+      <h3 class="text-2xl font-bold text-gray-800 mb-2">Rendvédelem-történeti Hírlevél <span class="text-lg font-normal italic">(Nuntiotones Historiae Praesidii Ordinis)</span></h3>
+      <div class="flex flex-wrap gap-4 text-sm text-gray-600 mb-4">
+        <span>ISSN 1785-3257 (nyomtatott)</span>
+        <span>ISSN 2560-0893 (online)</span>
+      </div>
+
+      <!-- Impresszum blokk -->
+      <div class="bg-white p-4 rounded-lg border border-gray-200 mb-6 text-sm">
+        <p class="font-semibold text-gray-700">Impresszum</p>
+        <p><strong>Kiadó:</strong> Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</p>
+        <p><strong>Székhely:</strong> 1121 Budapest, Farkasvölgyi út 12. | <strong>Levelezési cím:</strong> 1037 Budapest, Haránt utca 12.</p>
+        <p><strong>Tel.:</strong> (+36/06-1) 250-6199</p>
+        <p><strong>Kiadásért felelős:</strong> Dr. Parádi József | <strong>Szerkesztésért felelős:</strong> Dr. Parádi József</p>
+      </div>
+
+      <p class="mb-4 text-gray-700">A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság a rendvédelem-történet művelésével kapcsolatos operatív eseményekről e periodika által nyújt tájékoztatást. A kiadványokat szerzői jog védi. A Rendvédelem-történeti Hírlevél 1995 óta évente kétszer jelenik meg, a 22. számmal kezdődően megtalálható a honlapon.</p>
+
+      <!-- Hírlevél számok listája PDF linkekkel -->
+      <ul class="space-y-1 text-sm">
+        <li>› XIII-XV. évf. (2006) 22-26. sz. – <a href="RTH 22 26.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
+        <li>› XVI. évf. (2006) 27. sz. – <a href="RTH 27.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
+        <li>› XVII. évf. (2007) 28. sz. – <a href="RTH 28.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
+        <li>› XVII. évf. (2008) 29-30. sz. – <a href="RTH 29 30.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
+        <li>› XVIII. évf. (2009) 31-32. sz. – <a href="RTH 31 32.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
+        <li>› XIX. évf. (2010) 33-34. sz. – Feltöltés alatt</li>
+        <li>› XX. évf. (2011) 35-36. sz. – <a href="RTH 35 36.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
+        <li>› XXI. évf. (2012) 37-38. sz. – Feltöltés alatt</li>
+        <li>› XXII. évf. (2013) 39-40-41-42. sz. – Feltöltés alatt</li>
+        <li>› XXIII. évf. (2014) 43-44-45-46. sz. – <a href="RTH 43 46.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
+        <li>› XXIV-XXV. évf. (2015) 47-48-49-50. sz. – <a href="RTH 47 50.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
+        <li>› XXVI. évf. (2016) 51-52. sz. – <a href="RTH 51 52.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
+        <li>› XXVII. évf. (2017) 53-54. sz. – <a href="RTH 53 54.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
+        <li>› XXVIII. évf. (2018) 55-56. sz. – <a href="RTH 55 56.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
+        <li>› XXIX. évf. (2019) 57-58. sz. – <a href="RTH 57 58.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
+        <li>› XXX. évf. (2020) 59-60. sz. – <a href="RTH 59 60.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Accordion funkcionalitás a lenyíló szakaszokhoz
+  document.querySelectorAll('.accordion-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const targetId = button.getAttribute('data-target');
+      const content = document.getElementById(targetId);
+      const icon = button.querySelector('i');
+      content.classList.toggle('hidden');
+      icon.classList.toggle('rotate-180');
+    });
+  });
+</script>
+
   <!-- KITÜNTETÉSI RENDSZER -->
-  <section id="kituntetesek" class="py-16 bg-white scroll-mt-24">
+  <section id="kituntetesek" class="py-16 bg-gray-50 scroll-mt-24">
     <div class="max-w-5xl mx-auto px-6">
       <h2 class="text-3xl font-bold text-blue-900 mb-8 border-l-4 border-blue-900 pl-4">Kitüntetési rendszerünk</h2>
-      <p class="mb-4 text-gray-700 text-left md:text-justify">A Társaság elismerései a rendvédelem-történeti kutatásokban nyújtott kiemelkedő teljesítményért. A „Szemere Bertalan-emlékérem” a legmagasabb kitüntetésünk, amelyet kiemelkedő tudományos munkásságért ítélünk oda. Emellett Pro Historia et Securitate díjjal ismerjük el a fiatal kutatókat és a közgyűjteményi együttműködéseket.</p>
+      <p class="mb-4 text-gray-700">A Társaság elismerései a rendvédelem-történeti kutatásokban nyújtott kiemelkedő teljesítményért. A „Szemere Bertalan-emlékérem” a legmagasabb kitüntetésünk, amelyet kiemelkedő tudományos munkásságért ítélünk oda. Emellett Pro Historia et Securitate díjjal ismerjük el a fiatal kutatókat és a közgyűjteményi együttműködéseket.</p>
       <div class="bg-blue-50 p-6 rounded-xl"><i class="fas fa-medal text-blue-900 text-3xl mr-3 float-left"></i><p class="italic">"A kitüntetettek névjegyzéke elérhető a társaság éves beszámolójában és honlapunk archívumában."</p></div>
     </div>
   </section>
 
   <!-- KAPCSOLAT -->
-  <section id="kapcsolat" class="py-16 bg-gray-50 scroll-mt-24">
+  <section id="kapcsolat" class="py-16 bg-white scroll-mt-24">
     <div class="max-w-5xl mx-auto px-6">
       <h2 class="text-3xl font-bold text-blue-900 mb-8 border-l-4 border-blue-900 pl-4">Kapcsolat</h2>
       <div class="grid md:grid-cols-2 gap-8">
@@ -651,7 +727,7 @@
           <p class="flex items-center gap-3 mb-4"><i class="fas fa-location-dot w-6 text-blue-800"></i> 1081 Budapest, Ödön utca 2. (Levelezési cím)</p>
           <p class="mt-6 text-sm text-gray-500">Kérjük, előzetes egyeztetés alapján keressék irodánkat.</p>
         </div>
-        <div class="bg-white p-6 rounded-xl shadow-sm">
+        <div class="bg-gray-50 p-6 rounded-xl">
           <p class="font-semibold mb-2">Sajtókapcsolat:</p><p>dr. Kovács Zoltán (sajtóreferens) – sajto@szbmrtt.hu</p>
           <p class="mt-4 font-semibold">Tagsági ügyek:</p><p>tagfelvetel@szbmrtt.hu</p>
         </div>
@@ -682,7 +758,7 @@
 </footer>
 
 <script>
-  // === MOBIL MENÜ ===
+  // Hamburger menü
   const hamburger = document.getElementById('hamburgerBtn');
   const mobileMenu = document.getElementById('mobileMenu');
   const overlay = document.getElementById('overlay');
@@ -692,14 +768,35 @@
   if (hamburger) hamburger.addEventListener('click', openMenu);
   if (closeBtn) closeBtn.addEventListener('click', closeMenu);
   if (overlay) overlay.addEventListener('click', closeMenu);
+  
+  // Mobil almenük
   const subBtn = document.getElementById('mobileSubmenuBtn');
   const subMenu = document.getElementById('mobileSubmenu');
   if (subBtn) subBtn.addEventListener('click', () => subMenu.classList.toggle('hidden'));
   const mediaBtn = document.getElementById('mobileMediaBtn');
   const mediaSub = document.getElementById('mobileMediaSub');
   if (mediaBtn) mediaBtn.addEventListener('click', () => mediaSub.classList.toggle('hidden'));
+  
+  // Mobil menü linkek kezelése: bezárás után ugrás
+  const mobileLinks = document.querySelectorAll('#mobileNavLinks a');
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();  // Megakadályozzuk az azonnali ugrást
+      const targetId = this.getAttribute('href'); // pl. "#bemutatkozas"
+      closeMenu(); // Bezárjuk a menüt
+      // Kis késleltetéssel ugrunk, hogy a menü bezárása befejeződjön
+      setTimeout(() => {
+        if (targetId && targetId !== '#') {
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      }, 150);
+    });
+  });
 
-  // === KERESŐ ===
+  // Kereső ikon (változatlan)
   const searchIcon = document.getElementById('searchIcon');
   if (searchIcon) {
     searchIcon.addEventListener('click', () => {
@@ -724,50 +821,20 @@
     });
   }
 
-  // === ACCORDIONOK (KIADVÁNYOK) ===
-  document.querySelectorAll('.accordion-btn').forEach(button => {
-    button.addEventListener('click', () => {
-      const targetId = button.getAttribute('data-target');
-      const content = document.getElementById(targetId);
-      const icon = button.querySelector('i');
-      content.classList.toggle('hidden');
-      icon.classList.toggle('rotate-180');
-    });
-  });
-
-  // === ACCORDIONOK (BEMUTATKOZÁS) ===
-  document.querySelectorAll('.bemutatkozas-accordion-btn').forEach(button => {
-    button.addEventListener('click', () => {
-      const targetId = button.getAttribute('data-target');
-      const content = document.getElementById(targetId);
-      const icon = button.querySelector('i');
-      content.classList.toggle('hidden');
-      icon.classList.toggle('rotate-180');
-    });
-  });
-
-  // === DINAMIKUS SCROLL-MARGIN (TAKARÁS MEGSZÜNTETÉSE) ===
-  function setScrollMargin() {
+  // Dinamikus sticky menü asztalra
+  function setStickyMenuTop() {
     const header = document.getElementById('mainHeader');
     const desktopNav = document.getElementById('desktopNav');
-    let totalHeight = 0;
-    if (header) totalHeight += header.offsetHeight;
-    if (desktopNav && window.innerWidth >= 1025) totalHeight += desktopNav.offsetHeight;
-    // Mobilban csak a header ragad, a desktopNav nem látszik, de a header magassága elegendő
-    const sections = document.querySelectorAll('section[id]');
-    sections.forEach(section => {
-      section.style.scrollMarginTop = totalHeight + 'px';
-    });
-    // A hero szekció (nem section) és más nem section elemek nem igényelnek beállítást
+    if (header && desktopNav) {
+      const headerHeight = header.offsetHeight;
+      desktopNav.style.top = headerHeight + 'px';
+    }
   }
-  window.addEventListener('load', setScrollMargin);
-  window.addEventListener('resize', setScrollMargin);
-  // Figyeljük a header és desktopNav méretváltozását
-  const resizeObserver = new ResizeObserver(() => setScrollMargin());
+  window.addEventListener('load', setStickyMenuTop);
+  window.addEventListener('resize', setStickyMenuTop);
+  const observer = new ResizeObserver(() => setStickyMenuTop());
   const headerElement = document.getElementById('mainHeader');
-  if (headerElement) resizeObserver.observe(headerElement);
-  const desktopNavElement = document.getElementById('desktopNav');
-  if (desktopNavElement) resizeObserver.observe(desktopNavElement);
+  if (headerElement) observer.observe(headerElement);
 </script>
 </body>
 </html>
