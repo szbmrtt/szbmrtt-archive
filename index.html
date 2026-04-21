@@ -102,16 +102,16 @@
     </div>
   </div>
 
-  <div class="max-w-7xl mx-auto px-4 pb-3 pt-1 border-t border-gray-100">
-    <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 text-left">
+<div class="max-w-7xl mx-auto px-4 pb-3 pt-1 border-t border-gray-100">
+    <div class="flex flex-row items-center gap-2 sm:gap-4 text-left">
       <img src="szemere-bertalan-rendvedelem-torteneti-tarsasag-szbmrtt-logo-official.png" 
-           alt="SzBMRTT logó" class="logo-img flex-shrink-0">
-      <div class="text-gray-500 font-light italic">
-        <p class="text-base md:text-lg">Cum historia pro securitate.</p>
-        <p class="text-sm md:text-base">Történelemmel a biztonságért.</p>
+           alt="SzBMRTT logó" class="w-8 h-8 md:w-10 md:h-10 object-contain flex-shrink-0">
+      <div class="text-gray-500 font-light italic text-xs sm:text-sm md:text-base">
+        <p>Cum historia pro securitate.</p>
+        <p>Történelemmel a biztonságért.</p>
       </div>
     </div>
-  </div>
+</div>
 </header>
 
 <!-- Mobil menü -->
@@ -821,20 +821,35 @@
     });
   }
 
-  // Dinamikus sticky menü asztalra
-  function setStickyMenuTop() {
+  // Dinamikus sticky menü asztalra és scroll-margin beállítás
+  function setStickyAndScrollMargin() {
     const header = document.getElementById('mainHeader');
     const desktopNav = document.getElementById('desktopNav');
-    if (header && desktopNav) {
-      const headerHeight = header.offsetHeight;
+    let headerHeight = header ? header.offsetHeight : 0;
+    let totalStickyHeight = headerHeight;
+    
+    // Asztali nézetben a menü is ragad
+    if (desktopNav && window.innerWidth >= 1025) {
       desktopNav.style.top = headerHeight + 'px';
+      totalStickyHeight += desktopNav.offsetHeight;
     }
+    
+    // Beállítjuk az összes szekció scroll-margin-top értékét
+    const sections = document.querySelectorAll('section[id]');
+    sections.forEach(section => {
+      section.style.scrollMarginTop = totalStickyHeight + 'px';
+    });
   }
-  window.addEventListener('load', setStickyMenuTop);
-  window.addEventListener('resize', setStickyMenuTop);
-  const observer = new ResizeObserver(() => setStickyMenuTop());
+  
+  window.addEventListener('load', setStickyAndScrollMargin);
+  window.addEventListener('resize', setStickyAndScrollMargin);
+  
+  // Figyeljük a méretváltozásokat
+  const resizeObserver = new ResizeObserver(() => setStickyAndScrollMargin());
   const headerElement = document.getElementById('mainHeader');
-  if (headerElement) observer.observe(headerElement);
+  if (headerElement) resizeObserver.observe(headerElement);
+  const desktopNavElement = document.getElementById('desktopNav');
+  if (desktopNavElement) resizeObserver.observe(desktopNavElement);
 </script>
 </body>
 </html>
