@@ -778,13 +778,12 @@
   if (mediaBtn) mediaBtn.addEventListener('click', () => mediaSub.classList.toggle('hidden'));
   
   // Mobil menü linkek kezelése: bezárás után ugrás
-  const mobileLinks = document.querySelectorAll('#mobileNavLinks a');
+  const mobileLinks = document.querySelectorAll('#mobileNavLinks a, #mobileMediaSub a');
   mobileLinks.forEach(link => {
     link.addEventListener('click', function(e) {
-      e.preventDefault();  // Megakadályozzuk az azonnali ugrást
-      const targetId = this.getAttribute('href'); // pl. "#bemutatkozas"
-      closeMenu(); // Bezárjuk a menüt
-      // Kis késleltetéssel ugrunk, hogy a menü bezárása befejeződjön
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      closeMenu();
       setTimeout(() => {
         if (targetId && targetId !== '#') {
           const targetElement = document.querySelector(targetId);
@@ -828,16 +827,24 @@
     let headerHeight = header ? header.offsetHeight : 0;
     let totalStickyHeight = headerHeight;
     
-    // Asztali nézetben a menü is ragad
     if (desktopNav && window.innerWidth >= 1025) {
       desktopNav.style.top = headerHeight + 'px';
       totalStickyHeight += desktopNav.offsetHeight;
     }
     
-    // Beállítjuk az összes szekció scroll-margin-top értékét
+    // Szekciók beállítása
     const sections = document.querySelectorAll('section[id]');
     sections.forEach(section => {
       section.style.scrollMarginTop = totalStickyHeight + 'px';
+    });
+    
+    // Média almenü pontjainak (div-ek) beállítása
+    const mediaTargets = ['#korlevelek', '#rolunkirtak', '#videotar'];
+    mediaTargets.forEach(selector => {
+      const element = document.querySelector(selector);
+      if (element) {
+        element.style.scrollMarginTop = totalStickyHeight + 'px';
+      }
     });
   }
   
