@@ -6,30 +6,40 @@
   <title>SzBMRTT - Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</title>
   <meta name="description" content="A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság hivatalos honlapja. Bemutatkozás, rendvédelem-történeti diszciplína, szervezet, rendezvények, kiadványok.">
   
-  <!-- Google Fonts: Inter -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+  <!-- Google Fonts: Inter + Cormorant Garamond -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   
   <style>
+    /* Alap beállítások */
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; }
-/* Címsorok – szerif, elegáns */
-h1, h2, h3, h4, .serif-heading {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-/* Teal accent line (a címsorok alatti csík) */
-.accent-line {
-  width: 70px;
-  height: 3px;
-  background-color: #0d9488; /* teal-600 */
-  margin-top: 0.5rem;
-  margin-bottom: 1.5rem;
-}
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background-color: #f9f9f6; /* törtfehér */
+    }
+    /* Címsorok – szerif, elegáns */
+    h1, h2, h3, h4, .serif-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    /* Teal akcentus csík */
+    .accent-line {
+      width: 80px;
+      height: 2px;
+      background-color: #0d9488; /* teal-600 */
+      margin-top: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    /* Középre igazított címeknél a csík középre kerül */
+    .accent-line.mx-auto {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    /* Menü és almenük */
     .group:hover .submenu,
     .group:focus-within .submenu { display: block; }
     .group:hover i, .group:focus-within i { transform: rotate(180deg); }
@@ -41,6 +51,7 @@ h1, h2, h3, h4, .serif-heading {
       background: linear-gradient(to right, #ce1126 33.3%, #ffffff 33.3%, #ffffff 66.6%, #006847 66.6%);
       margin-bottom: 4px;
     }
+    /* Mobil menü */
     .mobile-menu {
       position: fixed;
       top: 0;
@@ -77,12 +88,16 @@ h1, h2, h3, h4, .serif-heading {
     }
     .logo-img { width: 2.5rem; height: 2.5rem; object-fit: contain; }
     .portrait-img { width: 100%; height: auto; border-radius: 1rem; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+    /* Grémium kártyák – prémium stílus */
     .gremium-card {
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: all 0.25s ease;
+      border: 1px solid #f1f1f1;
+      background-color: white;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02);
     }
     .gremium-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.01);
+      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.1);
       border-color: #14b8a6; /* teal-500 */
     }
     .desktop-nav {
@@ -141,7 +156,7 @@ h1, h2, h3, h4, .serif-heading {
   <meta name="twitter:description" content="Független NGO a magyar rendvédelem-történeti örökség gondozásáért.">
   <meta name="twitter:image" content="https://szbmrtt.github.io/szbmrtt-archive/szemere-bertalan-rendvedelem-torteneti-tarsasag-szbmrtt-logo-official.png">
 </head>
-<body class="bg-white font-sans text-gray-900">
+<body class="font-sans text-gray-900">
 
 <!-- STICKY FEJLÉC -->
 <header id="mainHeader" class="sticky top-0 z-50 w-full border-b border-gray-200 bg-white shadow-sm">
@@ -221,15 +236,15 @@ h1, h2, h3, h4, .serif-heading {
 </div>
 <div id="overlay" class="menu-overlay"></div>
 
-<!-- Asztali navigáció (változatlan) -->
+<!-- Asztali navigáció -->
 <div id="desktopNav" class="desktop-nav border-t border-gray-200 bg-white shadow-sm">
   <div class="max-w-7xl mx-auto px-4">
     <div class="flex items-center gap-1 text-sm">
       <div class="p-2 border-r border-gray-200 flex-shrink-0">
         <img src="szemere-bertalan-rendvedelem-torteneti-tarsasag-szbmrtt-logo-official.png" alt="logó" class="h-8 w-8 object-contain">
       </div>
-      <a href="#bemutatkozas" class="menu-item px-3 py-4 hover:bg-slate-50">Bemutatkozás</a>
-      <a href="#diszciplina" class="menu-item px-3 py-4 hover:bg-slate-50">A diszciplína</a>
+      <a href="#bemutatkozas" class="menu-item px-3 py-4 hover:bg-gray-50">Bemutatkozás</a>
+      <a href="#diszciplina" class="menu-item px-3 py-4 hover:bg-gray-50">A diszciplína</a>
       <div class="group relative">
         <button class="menu-item px-3 py-4 flex items-center gap-1">Szervezet <i class="fas fa-chevron-down text-[10px]"></i></button>
         <div class="submenu absolute left-0 top-full w-80 bg-white shadow-2xl border-t-2 border-blue-900 z-[100] py-2">
@@ -250,8 +265,8 @@ h1, h2, h3, h4, .serif-heading {
       <a href="#kiadvanyok" class="menu-item px-3 py-4">Kiadványaink</a>
       <div class="group relative">
         <div class="flex items-center">
-          <a href="#media" class="menu-item px-3 py-4 hover:bg-slate-50">Média</a>
-          <button class="menu-item px-2 py-4 hover:bg-slate-50">
+          <a href="#media" class="menu-item px-3 py-4 hover:bg-gray-50">Média</a>
+          <button class="menu-item px-2 py-4 hover:bg-gray-50">
             <i class="fas fa-chevron-down text-[10px] transition-transform duration-200"></i>
           </button>
         </div>
@@ -267,12 +282,12 @@ h1, h2, h3, h4, .serif-heading {
   </div>
 </div>
 
-<!-- Hero szekció (modern, háttérképes) -->
+<!-- Hero szekció (sötét overlay + vízjel + teal akcentus) -->
 <section class="relative h-[500px] md:h-[600px] flex items-center justify-center text-center text-white overflow-hidden">
+  <!-- Vízjel háttér (SVG) -->
+  <div class="absolute inset-0 z-0 opacity-10 pointer-events-none" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 800 600\" fill=\"white\"><text x=\"30\" y=\"50\" font-family=\"Georgia, serif\" font-size=\"36\">SzBMRTT</text><text x=\"30\" y=\"100\" font-family=\"Georgia, serif\" font-size=\"18\">veritas nunquam perit</text><text x=\"30\" y=\"140\" font-family=\"Georgia, serif\" font-size=\"16\">Cum historia pro securitate</text></svg>'); background-repeat: repeat; background-position: 0 0; background-size: 250px auto;"></div>
   <div class="absolute inset-0 z-0">
     <div class="absolute inset-0 bg-blue-900/70 mix-blend-multiply"></div>
-    <!-- Ha van háttérkép, tedd be az URL-t a következő sorba, és töröld a kommentet -->
-    <!-- <img src="szbmrtt-hero-bg.jpg" alt="Background" class="w-full h-full object-cover"> -->
   </div>
   <div class="absolute inset-0 bg-gradient-to-b from-blue-900/60 via-slate-900/60 to-slate-900/80 z-10"></div>
   <div class="relative z-20 px-4 max-w-4xl">
@@ -290,30 +305,31 @@ h1, h2, h3, h4, .serif-heading {
     </div>
     <!-- Asztali verzió (2 sor) -->
     <div class="hidden md:block">
-      <p class="text-4xl md:text-5xl font-extrabold drop-shadow-lg leading-tight">
+      <h1 class="text-4xl md:text-5xl font-extrabold drop-shadow-lg leading-tight">
         Üdvözöljük a Szemere Bertalan<br>
-        <span class="text-sky-300">Magyar Rendvédelem-történeti Tudományos Társaság</span>
-      </p>
+        <span class="text-teal-400">Magyar Rendvédelem-történeti Tudományos Társaság</span>
+      </h1>
       <p class="text-2xl font-light italic text-slate-200 mt-4">hivatalos honlapján</p>
     </div>
     <div class="flex flex-wrap justify-center gap-5 mt-10">
-      <a href="#bemutatkozas" class="px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-bold transition shadow-xl uppercase text-sm tracking-widest">Bemutatkozás</a>
-      <a href="#kiadvanyok" class="px-8 py-3 bg-white/10 hover:bg-white/20 text-white border border-white/30 rounded-full font-bold transition backdrop-blur-sm uppercase text-sm tracking-widest">Kiadványaink</a>
+      <a href="#bemutatkozas" class="px-8 py-3 border-2 border-teal-600 bg-transparent text-teal-600 rounded-full font-semibold hover:bg-teal-600 hover:text-white transition shadow-md uppercase text-sm tracking-widest">Bemutatkozás</a>
+      <a href="#kiadvanyok" class="px-8 py-3 border-2 border-white/30 bg-white/10 text-white rounded-full font-semibold hover:bg-white/20 transition uppercase text-sm tracking-widest">Kiadványaink</a>
     </div>
   </div>
 </section>
 
 <main>
-<!-- ================= BEMUTATKOZÁS SZEKCIÓ (accordionos, kiemelt blokk) ================= -->
-<section id="bemutatkozas" class="py-16 bg-white scroll-mt-24">
+<!-- ================= BEMUTATKOZÁS SZEKCIÓ ================= -->
+<section id="bemutatkozas" class="py-24 bg-white scroll-mt-24">
   <div class="max-w-5xl mx-auto px-6">
-    <h2 class="text-3xl font-bold text-blue-900 mb-8 border-b-2 border-blue-900 pb-2 inline-block uppercase tracking-wide">Bemutatkozás</h2>
+    <h2 class="text-3xl font-bold text-blue-900 inline-block uppercase tracking-wide">Bemutatkozás</h2>
+    <div class="accent-line"></div>
 
     <!-- ÁLLANDÓAN LÁTHATÓ, KIEMELT BLOKK (kisebb, halványabb betű) -->
-    <div class="bg-slate-50 border-l-4 border-teal-700 rounded-lg p-5 mb-8 shadow-sm text-gray-600 text-sm leading-relaxed">
-  <p class="mb-2 font-semibold text-blue-900">Társaságunk hiánypótló, közhasznú tevékenységet folytató, független nem kormányzati szervezet (NGO), amely elsődlegesen a magyar rendvédelem-történeti örökség gondozását, kutatását és közkinccsé tételét végzi.</p>
+    <div class="bg-[#f9f9f6] border-l-4 border-teal-700 rounded-lg p-5 mb-8 shadow-sm text-gray-600 text-sm leading-relaxed">
+      <p class="mb-2 font-semibold text-blue-900">Társaságunk hiánypótló, közhasznú tevékenységet folytató, független nem kormányzati szervezet (NGO), amely elsődlegesen a magyar rendvédelem-történeti örökség gondozását, kutatását és közkinccsé tételét végzi.</p>
       <p class="mb-2">Az 1990-ben alapított, majd a Fővárosi Bíróság által 1991. február 6.-án a Pk.64.728/1990/1. számú határozattal, 3324. sorszámon nyilvántartásba vett Társaságunk a magyar rendvédelem története iránt érdeklődő szakemberek társadalmi egyesülése.</p>
-      <p class="mb-2">A Magyar Tudományos Akadémia Könyvtár és Információs Központja (MTA KIK) által működtetett nemzeti tudományos bibliográfiai adatbázis, a Magyar Tudományos Művek Tárában (MTMT) tudományos műveink kiadójaként a 23079-es nyilvántartási számon (<a href="https://m2.mtmt.hu/api/institute/23079" target="_blank" class="text-blue-700 hover:underline break-all">https://m2.mtmt.hu/api/institute/23079</a> <i class="fas fa-external-link-alt text-xs ml-1"></i>) szerepel tudományos társaságunk.</p>
+      <p class="mb-2">A Magyar Tudományos Akadémia Könyvtár és Információs Központja (MTA KIK) által működtetett nemzeti tudományos bibliográfiai adatbázis, a Magyar Tudományos Művek Tárában (MTMT) tudományos műveink kiadójaként a 23079-es nyilvántartási számon (<a href="https://m2.mtmt.hu/api/institute/23079" target="_blank" class="text-teal-600 hover:underline break-all">https://m2.mtmt.hu/api/institute/23079</a> <i class="fas fa-external-link-alt text-xs ml-1"></i>) szerepel tudományos társaságunk.</p>
       <p class="mb-0">Társaságunk adószáma: <span class="font-mono">19662706-1-41</span></p>
     </div>
 
@@ -399,11 +415,9 @@ h1, h2, h3, h4, .serif-heading {
       const icon = button.querySelector('i');
       
       if (content.classList.contains('hidden')) {
-        // Kinyitás
         content.classList.remove('hidden');
         icon.classList.add('rotate-180');
       } else {
-        // Becsukás
         content.classList.add('hidden');
         icon.classList.remove('rotate-180');
       }
@@ -412,9 +426,10 @@ h1, h2, h3, h4, .serif-heading {
 </script>
 
   <!-- A DISZCIPLÍNA -->
-  <section id="diszciplina" class="py-16 bg-slate-50 border-t scroll-mt-24">
+  <section id="diszciplina" class="py-24 bg-[#f9f9f6] border-t scroll-mt-24">
     <div class="max-w-5xl mx-auto px-6">
-      <h2 class="text-3xl font-bold text-blue-900 mb-8 border-b-2 border-blue-900 pb-2 inline-block uppercase">A diszciplína</h2>
+      <h2 class="text-3xl font-bold text-blue-900 inline-block uppercase">A diszciplína</h2>
+      <div class="accent-line"></div>
       <div class="space-y-6 text-gray-700 leading-relaxed text-left md:text-justify">
         <p>A rendvédelem fogalmát e bemutatkozás keretében tüzetesen ugyan nem kívánjuk definiálni, a lényeg azonban néhány mondatban is összefoglalható. A rendvédelemhez tartozónak tekintjük valamennyi állami és önkormányzati, a rendfenntartásra specializálódott fegyveres szervezetet. E testületek struktúráját, díszlokációját, feladataikat, működésüket, jogi meghatározottságukat, felszereltségüket, személyi állo­mányuk képzési, szociális, gazdasági és erkölcsi helyzetét is a fogalom részének tartjuk. A fogalomkör integráns részének tekintjük továbbá ezen testületek vezetését, irányítását, szolgálati metodikáját, az együttműködést, továbbá a szimbólumrendszereiket. A rendvédelem-történetét gyűjtőfogalomnak tekintjük, amelybe – tértől és időtől függetlenül – beletartozik az egyetemes történelem során megvalósult valamennyi rendvédelmi modell. A különböző korok rendvédelmi modelljei és azok változásai alkotják a rendvédelem-történetet.</p>
         <p>A rendvédelem fogalma a Tudományos Társaság elnökétől dr. Parádi József Csc.-től származik, melyet szervezetünk szisztematikusan használt. Így vált közismertté a magyar közéletben. A rendszerváltás után keletkezett és a magyar rendvédelem egyes szakterületeit szabályozó valamennyi – összességében több száz – jogszabály tartalmazza a rendvédelem kifejezést. A törvényhozásban is polgárjogot nyert a rendvédelem fogalom.</p>
@@ -433,7 +448,7 @@ h1, h2, h3, h4, .serif-heading {
   </section>
 
   <!-- ELNÖK SZEKCIÓ -->
-  <section id="szervezet-elnok" class="py-20 bg-slate-50 border-t scroll-mt-24">
+  <section id="szervezet-elnok" class="py-24 bg-white border-t scroll-mt-24">
     <div class="max-w-5xl mx-auto px-6">
       <h2 class="text-3xl font-bold text-center mb-12 uppercase tracking-wide text-gray-800">A Társaság Vezetése – Elnök</h2>
       <div class="grid md:grid-cols-2 gap-12 items-start bg-white p-8 md:p-10 rounded-3xl shadow-lg">
@@ -505,12 +520,13 @@ h1, h2, h3, h4, .serif-heading {
   </section>
 
   <!-- GRÉMIUMOK SZEKCIÓ -->
-  <section id="gremiumok" class="py-20 bg-white scroll-mt-24">
+  <section id="gremiumok" class="py-24 bg-[#f9f9f6] scroll-mt-24">
     <div class="max-w-6xl mx-auto px-6">
       <h2 class="text-3xl font-bold text-center mb-12 uppercase tracking-wide text-gray-800">Tudományos grémiumok</h2>
+      <div class="accent-line mx-auto"></div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <!-- 1. Csendőrség-történet -->
-        <article id="csendorseg" class="bg-slate-50 rounded-2xl shadow-md p-6 gremium-card scroll-mt-24">
+        <article id="csendorseg" class="gremium-card rounded-2xl p-6 scroll-mt-24">
           <h3 class="text-xl font-bold text-blue-900 mb-4 border-b border-blue-200 pb-2">Csendőrség-történet</h3>
           <div class="flex items-center gap-3">
             <img src="paradi_jozsef_jpg.jpg" alt="Dr. Parádi József" class="w-12 h-12 rounded-full object-cover shadow-sm">
@@ -518,7 +534,7 @@ h1, h2, h3, h4, .serif-heading {
           </div>
         </article>
         <!-- 2. Civil rendvédelem-történet -->
-        <article id="civil" class="bg-slate-50 rounded-2xl shadow-md p-6 gremium-card scroll-mt-24">
+        <article id="civil" class="gremium-card rounded-2xl p-6 scroll-mt-24">
           <h3 class="text-xl font-bold text-blue-900 mb-4 border-b border-blue-200 pb-2">Civil rendvédelem-történet, nem állami fegyveres testületként működő, fegyveres és fegyver nélküli rendvédelmi szervezetek története</h3>
           <div class="flex items-center gap-3">
             <img src="paradi_akos_jpg.jpg" alt="Parádi Ákos" class="w-12 h-12 rounded-full object-cover shadow-sm">
@@ -526,7 +542,7 @@ h1, h2, h3, h4, .serif-heading {
           </div>
         </article>
         <!-- 3. Fegyőrség-történet -->
-        <article id="fegyors" class="bg-slate-50 rounded-2xl shadow-md p-6 gremium-card scroll-mt-24">
+        <article id="fegyors" class="gremium-card rounded-2xl p-6 scroll-mt-24">
           <h3 class="text-xl font-bold text-blue-900 mb-4 border-b border-blue-200 pb-2">Fegyőrség-történet (mai szóhasználattal büntetés-végrehajtás)</h3>
           <div class="flex items-center gap-3">
             <img src="mezey_barna_jpg.jpg" alt="Dr. Mezey Barna" class="w-12 h-12 rounded-full object-cover shadow-sm">
@@ -534,7 +550,7 @@ h1, h2, h3, h4, .serif-heading {
           </div>
         </article>
         <!-- 4. Folyamőrség története -->
-        <article id="folyamorseg" class="bg-slate-50 rounded-2xl shadow-md p-6 gremium-card scroll-mt-24">
+        <article id="folyamorseg" class="gremium-card rounded-2xl p-6 scroll-mt-24">
           <h3 class="text-xl font-bold text-blue-900 mb-4 border-b border-blue-200 pb-2">Folyamőrség története</h3>
           <div class="flex items-center gap-3">
             <img src="kaiser_ferenc_jpg.jpg" alt="Dr. Kaiser Ferenc" class="w-12 h-12 rounded-full object-cover shadow-sm">
@@ -542,7 +558,7 @@ h1, h2, h3, h4, .serif-heading {
           </div>
         </article>
         <!-- 5. Határőrizet-történet -->
-        <article id="hatarorizet" class="bg-slate-50 rounded-2xl shadow-md p-6 gremium-card scroll-mt-24">
+        <article id="hatarorizet" class="gremium-card rounded-2xl p-6 scroll-mt-24">
           <h3 class="text-xl font-bold text-blue-900 mb-4 border-b border-blue-200 pb-2">Határőrizet-történet</h3>
           <div class="flex items-center gap-3">
             <img src="paradi_jozsef_jpg.jpg" alt="Dr. Parádi József" class="w-12 h-12 rounded-full object-cover shadow-sm">
@@ -550,7 +566,7 @@ h1, h2, h3, h4, .serif-heading {
           </div>
         </article>
         <!-- 6. Rendőrség-történet -->
-        <article id="rendorseg" class="bg-slate-50 rounded-2xl shadow-md p-6 gremium-card scroll-mt-24">
+        <article id="rendorseg" class="gremium-card rounded-2xl p-6 scroll-mt-24">
           <h3 class="text-xl font-bold text-blue-900 mb-4 border-b border-blue-200 pb-2">Rendőrség-történet</h3>
           <div class="flex items-center gap-3">
             <img src="ernyes_mihaly_jpg.jpg" alt="Dr.jur. Ernyes Mihály" class="w-12 h-12 rounded-full object-cover shadow-sm">
@@ -558,7 +574,7 @@ h1, h2, h3, h4, .serif-heading {
           </div>
         </article>
         <!-- 7. Pénzügyőrség-történet -->
-        <article id="penzugyorseg" class="bg-slate-50 rounded-2xl shadow-md p-6 gremium-card scroll-mt-24">
+        <article id="penzugyorseg" class="gremium-card rounded-2xl p-6 scroll-mt-24">
           <h3 class="text-xl font-bold text-blue-900 mb-4 border-b border-blue-200 pb-2">Pénzügyőrség-történet</h3>
           <div class="flex items-center gap-3">
             <img src="paradi_jozsef_jpg.jpg" alt="Dr. Parádi József" class="w-12 h-12 rounded-full object-cover shadow-sm">
@@ -566,7 +582,7 @@ h1, h2, h3, h4, .serif-heading {
           </div>
         </article>
         <!-- 8. Testőrségek, koronaőrség, képviselőházi őrség -->
-        <article id="testorsegek" class="bg-slate-50 rounded-2xl shadow-md p-6 gremium-card scroll-mt-24">
+        <article id="testorsegek" class="gremium-card rounded-2xl p-6 scroll-mt-24">
           <h3 class="text-xl font-bold text-blue-900 mb-4 border-b border-blue-200 pb-2">A magyar testőrségek, koronaőrség és képviselőházi őrség története</h3>
           <div class="flex flex-col sm:flex-row sm:justify-between gap-4">
             <div class="flex items-center gap-3">
@@ -580,7 +596,7 @@ h1, h2, h3, h4, .serif-heading {
           </div>
         </article>
         <!-- 9. Történelmi segédtudományok -->
-        <article id="tortseged" class="bg-slate-50 rounded-2xl shadow-md p-6 gremium-card scroll-mt-24">
+        <article id="tortseged" class="gremium-card rounded-2xl p-6 scroll-mt-24">
           <h3 class="text-xl font-bold text-blue-900 mb-4 border-b border-blue-200 pb-2">Az archontologia, fallerisztika, heraldika, insigniológia, vexillológia, numizmatika, ikonográfia történelmi segédtudományoknak a XIX-XX. századi magyar rendvédelemre alkalmazott változatát magába foglaló szellemi alkotóműhely</h3>
           <div class="flex items-center gap-3">
             <img src="zeidler_sandor_jpg.jpg" alt="Zeidler Sándor" class="w-12 h-12 rounded-full object-cover shadow-sm">
@@ -592,7 +608,7 @@ h1, h2, h3, h4, .serif-heading {
   </section>
 
   <!-- MÉDIA SZEKCIÓ -->
-  <section id="media" class="py-16 bg-white scroll-mt-24">
+  <section id="media" class="py-24 bg-white scroll-mt-24">
     <div class="max-w-5xl mx-auto px-6">
       <h2 class="text-3xl font-bold text-blue-900 mb-8 border-l-4 border-blue-900 pl-4">Média</h2>
       <div class="grid md:grid-cols-3 gap-6">
@@ -604,19 +620,19 @@ h1, h2, h3, h4, .serif-heading {
   </section>
 
   <!-- RENDEZVÉNYEK -->
-  <section id="rendezvenyek" class="py-16 bg-slate-50 scroll-mt-24">
+  <section id="rendezvenyek" class="py-24 bg-[#f9f9f6] scroll-mt-24">
     <div class="max-w-5xl mx-auto px-6">
       <h2 class="text-3xl font-bold text-blue-900 mb-8 border-l-4 border-blue-900 pl-4">Rendezvényeink</h2>
       <div class="grid md:grid-cols-2 gap-6">
-        <div class="bg-slate-50 p-6 rounded-xl shadow-sm"><i class="fas fa-chalkboard-user text-blue-800 text-2xl mb-3"></i><h3 class="font-bold text-xl">Éves tudományos konferencia</h3><p class="text-gray-600">Minden év novemberében, a rendvédelem-történet aktuális kérdéseiről.</p></div>
-        <div class="bg-slate-50 p-6 rounded-xl shadow-sm"><i class="fas fa-users text-blue-800 text-2xl mb-3"></i><h3 class="font-bold text-xl">Műhelybeszélgetések</h3><p class="text-gray-600">Havonta szervezett szakmai fórumok egy-egy részterületre fókuszálva.</p></div>
-        <div class="bg-slate-50 p-6 rounded-xl shadow-sm"><i class="fas fa-landmark text-blue-800 text-2xl mb-3"></i><h3 class="font-bold text-xl">Levéltári napok</h3><p class="text-gray-600">Közös forráskutatási programok a Magyar Nemzeti Levéltárral.</p></div>
+        <div class="bg-white p-6 rounded-xl shadow-lg border border-slate-100"><i class="fas fa-chalkboard-user text-blue-800 text-2xl mb-3"></i><h3 class="font-bold text-xl">Éves tudományos konferencia</h3><p class="text-gray-600">Minden év novemberében, a rendvédelem-történet aktuális kérdéseiről.</p></div>
+        <div class="bg-white p-6 rounded-xl shadow-lg border border-slate-100"><i class="fas fa-users text-blue-800 text-2xl mb-3"></i><h3 class="font-bold text-xl">Műhelybeszélgetések</h3><p class="text-gray-600">Havonta szervezett szakmai fórumok egy-egy részterületre fókuszálva.</p></div>
+        <div class="bg-white p-6 rounded-xl shadow-lg border border-slate-100"><i class="fas fa-landmark text-blue-800 text-2xl mb-3"></i><h3 class="font-bold text-xl">Levéltári napok</h3><p class="text-gray-600">Közös forráskutatási programok a Magyar Nemzeti Levéltárral.</p></div>
       </div>
     </div>
   </section>
 
   <!-- ================= KIADVÁNYOK SZEKCIÓ ================= -->
-<section id="kiadvanyok" class="py-16 bg-slate-50 scroll-mt-24">
+<section id="kiadvanyok" class="py-24 bg-white scroll-mt-24">
   <div class="max-w-5xl mx-auto px-6">
     <h2 class="text-3xl font-bold text-blue-900 mb-8 border-l-4 border-blue-900 pl-4">Kiadványaink</h2>
 
@@ -630,7 +646,7 @@ h1, h2, h3, h4, .serif-heading {
       </div>
       
       <!-- Impresszum blokk -->
-      <div class="bg-white p-4 rounded-lg border border-gray-200 mb-6 text-sm">
+      <div class="bg-[#f9f9f6] p-4 rounded-lg border border-gray-200 mb-6 text-sm">
         <p class="font-semibold text-gray-700">Impresszum</p>
         <p><strong>Kiadó:</strong> Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</p>
         <p><strong>Székhely:</strong> 1121 Budapest, Farkasvölgyi út 12. | <strong>Levelezési cím:</strong> 1034 Budapest, Szomolnok utca 20.</p>
@@ -693,28 +709,28 @@ h1, h2, h3, h4, .serif-heading {
       <div class="mb-6">
         <p class="text-sm text-gray-500 italic mb-2">A számok a Magyar Tudományos Akadémia adatbázisában (REAL-J) érhetők el.</p>
         <ul class="space-y-1 text-sm">
-          <li>› XXX. évf. (2020) 59-60. sz. – <a href="https://real-j.mtak.hu/16772/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16772/</a></li>
-          <li>› XXIX. évf. (2019) 57-58. sz. – <a href="https://real-j.mtak.hu/13948/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/13948/</a></li>
-          <li>› XXVIII. évf. (2018) 55-56. sz. – <a href="https://real-j.mtak.hu/11955/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/11955/</a></li>
-          <li>› XXVII. évf. (2017) 53-54. sz. – <a href="https://real-j.mtak.hu/11954/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/11954/</a></li>
-          <li>› XXVI. évf. (2016) 51-52. sz. – <a href="https://real-j.mtak.hu/11953/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/11953/</a></li>
-          <li>› XXV. évf. (2015) 43-50. sz. – <a href="https://real-j.mtak.hu/12003/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/12003/</a></li>
-          <li>› XXIV. évf. (2014) 39-42. sz. – <a href="https://real-j.mtak.hu/16386/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16386/</a></li>
-          <li>› XXIV. évf. (2014) 35-38. sz. – <a href="https://real-j.mtak.hu/16385/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16385/</a></li>
-          <li>› XXIII. évf. (2013) 31-34. sz. – <a href="https://real-j.mtak.hu/16384/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16384/</a></li>
-          <li>› XXIII. évf. (2013) 27-30. sz. – <a href="https://real-j.mtak.hu/16383/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16383/</a></li>
-          <li>› XXII. évf. (2012) 26. sz. – <a href="https://real-j.mtak.hu/16382/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16382/</a></li>
-          <li>› XXII. évf. (2012) 25. sz. – <a href="https://real-j.mtak.hu/16381/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16381/</a></li>
-          <li>› XXI. évf. (2011) 24. sz. – <a href="https://real-j.mtak.hu/16380/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16380/</a></li>
-          <li>› XX. évf. (2011) 23. sz. – <a href="https://real-j.mtak.hu/16394/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16394/</a></li>
-          <li>› XIX. évf. (2010) 22. sz. – <a href="https://real-j.mtak.hu/16393/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16393/</a></li>
-          <li>› XVIII. évf. (2010) 21. sz. – <a href="https://real-j.mtak.hu/16391/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16391/</a></li>
-          <li>› XVII. évf. (2009) 20. sz. – <a href="https://real-j.mtak.hu/16390/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16390/</a></li>
-          <li>› XVI. évf. (2009) 19. sz. – <a href="https://real-j.mtak.hu/16389/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16389/</a></li>
-          <li>› XV. évf. (2008) 18. sz. – <a href="https://real-j.mtak.hu/16388/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16388/</a></li>
-          <li>› XIV. évf. (2008) 17. sz. – <a href="https://real-j.mtak.hu/16387/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16387/</a></li>
-          <li>› XIII. évf. (2007) 16. sz. – <a href="https://real-j.mtak.hu/16379/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16379/</a></li>
-          <li>› (2006) különszám, repertórium – <a href="https://real-j.mtak.hu/16392/" target="_blank" class="text-blue-700 hover:underline break-all">https://real-j.mtak.hu/16392/</a></li>
+          <li>› XXX. évf. (2020) 59-60. sz. – <a href="https://real-j.mtak.hu/16772/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16772/</a></li>
+          <li>› XXIX. évf. (2019) 57-58. sz. – <a href="https://real-j.mtak.hu/13948/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/13948/</a></li>
+          <li>› XXVIII. évf. (2018) 55-56. sz. – <a href="https://real-j.mtak.hu/11955/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/11955/</a></li>
+          <li>› XXVII. évf. (2017) 53-54. sz. – <a href="https://real-j.mtak.hu/11954/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/11954/</a></li>
+          <li>› XXVI. évf. (2016) 51-52. sz. – <a href="https://real-j.mtak.hu/11953/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/11953/</a></li>
+          <li>› XXV. évf. (2015) 43-50. sz. – <a href="https://real-j.mtak.hu/12003/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/12003/</a></li>
+          <li>› XXIV. évf. (2014) 39-42. sz. – <a href="https://real-j.mtak.hu/16386/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16386/</a></li>
+          <li>› XXIV. évf. (2014) 35-38. sz. – <a href="https://real-j.mtak.hu/16385/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16385/</a></li>
+          <li>› XXIII. évf. (2013) 31-34. sz. – <a href="https://real-j.mtak.hu/16384/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16384/</a></li>
+          <li>› XXIII. évf. (2013) 27-30. sz. – <a href="https://real-j.mtak.hu/16383/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16383/</a></li>
+          <li>› XXII. évf. (2012) 26. sz. – <a href="https://real-j.mtak.hu/16382/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16382/</a></li>
+          <li>› XXII. évf. (2012) 25. sz. – <a href="https://real-j.mtak.hu/16381/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16381/</a></li>
+          <li>› XXI. évf. (2011) 24. sz. – <a href="https://real-j.mtak.hu/16380/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16380/</a></li>
+          <li>› XX. évf. (2011) 23. sz. – <a href="https://real-j.mtak.hu/16394/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16394/</a></li>
+          <li>› XIX. évf. (2010) 22. sz. – <a href="https://real-j.mtak.hu/16393/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16393/</a></li>
+          <li>› XVIII. évf. (2010) 21. sz. – <a href="https://real-j.mtak.hu/16391/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16391/</a></li>
+          <li>› XVII. évf. (2009) 20. sz. – <a href="https://real-j.mtak.hu/16390/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16390/</a></li>
+          <li>› XVI. évf. (2009) 19. sz. – <a href="https://real-j.mtak.hu/16389/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16389/</a></li>
+          <li>› XV. évf. (2008) 18. sz. – <a href="https://real-j.mtak.hu/16388/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16388/</a></li>
+          <li>› XIV. évf. (2008) 17. sz. – <a href="https://real-j.mtak.hu/16387/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16387/</a></li>
+          <li>› XIII. évf. (2007) 16. sz. – <a href="https://real-j.mtak.hu/16379/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16379/</a></li>
+          <li>› (2006) különszám, repertórium – <a href="https://real-j.mtak.hu/16392/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16392/</a></li>
         </ul>
       </div>
 
@@ -750,7 +766,7 @@ h1, h2, h3, h4, .serif-heading {
       </div>
 
       <!-- Impresszum blokk -->
-      <div class="bg-white p-4 rounded-lg border border-gray-200 mb-6 text-sm">
+      <div class="bg-[#f9f9f6] p-4 rounded-lg border border-gray-200 mb-6 text-sm">
         <p class="font-semibold text-gray-700">Impresszum</p>
         <p><strong>Kiadó:</strong> Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</p>
         <p><strong>Székhely:</strong> 1121 Budapest, Farkasvölgyi út 12. | <strong>Levelezési cím:</strong> 1034 Budapest, Szomolnok utca 20.</p>
@@ -762,22 +778,22 @@ h1, h2, h3, h4, .serif-heading {
 
       <!-- Hírlevél számok listája PDF linkekkel -->
       <ul class="space-y-1 text-sm">
-        <li>› XIII-XV. évf. (2006) 22-26. sz. – <a href="RTH 22 26.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
-        <li>› XVI. évf. (2006) 27. sz. – <a href="RTH 27.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
-        <li>› XVII. évf. (2007) 28. sz. – <a href="RTH 28.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
-        <li>› XVII. évf. (2008) 29-30. sz. – <a href="RTH 29 30.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
-        <li>› XVIII. évf. (2009) 31-32. sz. – <a href="RTH 31 32.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
+        <li>› XIII-XV. évf. (2006) 22-26. sz. – <a href="RTH 22 26.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
+        <li>› XVI. évf. (2006) 27. sz. – <a href="RTH 27.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
+        <li>› XVII. évf. (2007) 28. sz. – <a href="RTH 28.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
+        <li>› XVII. évf. (2008) 29-30. sz. – <a href="RTH 29 30.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
+        <li>› XVIII. évf. (2009) 31-32. sz. – <a href="RTH 31 32.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
         <li>› XIX. évf. (2010) 33-34. sz. – Feltöltés alatt</li>
-        <li>› XX. évf. (2011) 35-36. sz. – <a href="RTH 35 36.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
+        <li>› XX. évf. (2011) 35-36. sz. – <a href="RTH 35 36.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
         <li>› XXI. évf. (2012) 37-38. sz. – Feltöltés alatt</li>
         <li>› XXII. évf. (2013) 39-40-41-42. sz. – Feltöltés alatt</li>
-        <li>› XXIII. évf. (2014) 43-44-45-46. sz. – <a href="RTH 43 46.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
-        <li>› XXIV-XXV. évf. (2015) 47-48-49-50. sz. – <a href="RTH 47 50.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
-        <li>› XXVI. évf. (2016) 51-52. sz. – <a href="RTH 51 52.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
-        <li>› XXVII. évf. (2017) 53-54. sz. – <a href="RTH 53 54.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
-        <li>› XXVIII. évf. (2018) 55-56. sz. – <a href="RTH 55 56.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
-        <li>› XXIX. évf. (2019) 57-58. sz. – <a href="RTH 57 58.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
-        <li>› XXX. évf. (2020) 59-60. sz. – <a href="RTH 59 60.pdf" target="_blank" class="text-blue-700 hover:underline">PDF letöltés</a></li>
+        <li>› XXIII. évf. (2014) 43-44-45-46. sz. – <a href="RTH 43 46.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
+        <li>› XXIV-XXV. évf. (2015) 47-48-49-50. sz. – <a href="RTH 47 50.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
+        <li>› XXVI. évf. (2016) 51-52. sz. – <a href="RTH 51 52.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
+        <li>› XXVII. évf. (2017) 53-54. sz. – <a href="RTH 53 54.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
+        <li>› XXVIII. évf. (2018) 55-56. sz. – <a href="RTH 55 56.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
+        <li>› XXIX. évf. (2019) 57-58. sz. – <a href="RTH 57 58.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
+        <li>› XXX. évf. (2020) 59-60. sz. – <a href="RTH 59 60.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
       </ul>
     </div>
   </div>
@@ -797,7 +813,7 @@ h1, h2, h3, h4, .serif-heading {
 </script>
 
   <!-- KITÜNTETÉSI RENDSZER -->
-  <section id="kituntetesek" class="py-16 bg-slate-50 scroll-mt-24">
+  <section id="kituntetesek" class="py-24 bg-[#f9f9f6] scroll-mt-24">
     <div class="max-w-5xl mx-auto px-6">
       <h2 class="text-3xl font-bold text-blue-900 mb-8 border-l-4 border-blue-900 pl-4">Kitüntetési rendszerünk</h2>
       <p class="mb-4 text-gray-700">A Társaság elismerései a rendvédelem-történeti kutatásokban nyújtott kiemelkedő teljesítményért. A „Szemere Bertalan-emlékérem” a legmagasabb kitüntetésünk, amelyet kiemelkedő tudományos munkásságért ítélünk oda. Emellett Pro Historia et Securitate díjjal ismerjük el a fiatal kutatókat és a közgyűjteményi együttműködéseket.</p>
@@ -806,17 +822,17 @@ h1, h2, h3, h4, .serif-heading {
   </section>
 
   <!-- KAPCSOLAT -->
-  <section id="kapcsolat" class="py-16 bg-white scroll-mt-24">
+  <section id="kapcsolat" class="py-24 bg-white scroll-mt-24">
     <div class="max-w-5xl mx-auto px-6">
       <h2 class="text-3xl font-bold text-blue-900 mb-8 border-l-4 border-blue-900 pl-4">Kapcsolat</h2>
       <div class="grid md:grid-cols-2 gap-8">
         <div>
-          <p class="flex items-center gap-3 mb-4"><i class="fas fa-envelope w-6 text-blue-800"></i> titkarsag@szbmrtt.hu</p>
-          <p class="flex items-center gap-3 mb-4"><i class="fas fa-phone w-6 text-blue-800"></i> +36 1 250 6199</p>
-          <p class="flex items-center gap-3 mb-4"><i class="fas fa-location-dot w-6 text-blue-800"></i> 1034 Budapest, Szomolnok utca 20. (Levelezési cím)</p>
+          <p class="flex items-center gap-3 mb-4"><i class="fas fa-envelope w-6 text-teal-600"></i> titkarsag@szbmrtt.hu</p>
+          <p class="flex items-center gap-3 mb-4"><i class="fas fa-phone w-6 text-teal-600"></i> +36 1 250 6199</p>
+          <p class="flex items-center gap-3 mb-4"><i class="fas fa-location-dot w-6 text-teal-600"></i> 1034 Budapest, Szomolnok utca 20. (Levelezési cím)</p>
           <p class="mt-6 text-sm text-gray-500">Kérjük, előzetes egyeztetés alapján keressék irodánkat.</p>
         </div>
-        <div class="bg-slate-50 p-6 rounded-xl">
+        <div class="bg-[#f9f9f6] p-6 rounded-xl">
           <p class="font-semibold mb-2">Sajtókapcsolat:</p><p>mag. Simon F. Nándor (sajtóreferens) – sajto@szbmrtt.hu</p>
           <p class="mt-4 font-semibold">Tagsági ügyek:</p><p>tagfelvetel@szbmrtt.hu</p>
         </div>
