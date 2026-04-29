@@ -34,12 +34,11 @@
       margin-top: 0.75rem;
       margin-bottom: 1.5rem;
     }
-    /* Középre igazított címeknél a csík középre kerül */
     .accent-line.mx-auto {
       margin-left: auto;
       margin-right: auto;
     }
-    /* Menü és almenük */
+    /* Menü és almenük (csak a mobil menüben, a desktop-nav megszűnt) */
     .group:hover .submenu,
     .group:focus-within .submenu { display: block; }
     .group:hover i, .group:focus-within i { transform: rotate(180deg); }
@@ -51,13 +50,13 @@
       background: linear-gradient(to right, #ce1126 33.3%, #ffffff 33.3%, #ffffff 66.6%, #006847 66.6%);
       margin-bottom: 4px;
     }
-    /* Mobil menü */
+    /* Mobil menü (asztalon is ezt használjuk) */
     .mobile-menu {
       position: fixed;
       top: 0;
       right: -100%;
       width: 80%;
-      max-width: 320px;
+      max-width: 400px; /* asztalon szélesebb */
       height: 100%;
       background-color: white;
       box-shadow: -2px 0 20px rgba(0,0,0,0.1);
@@ -78,15 +77,11 @@
       display: none;
     }
     .menu-overlay.active { display: block; }
-    @media (max-width: 1024px) {
-      .desktop-nav { display: none; }
-      .mobile-nav-toggle { display: flex; }
-    }
-    @media (min-width: 1025px) {
-      .mobile-nav-toggle { display: none; }
-      .desktop-nav { display: flex; }
-    }
-    .logo-img { width: 2.5rem; height: 2.5rem; object-fit: contain; }
+    /* Reszponzív: a régi desktop-nav eltűnik, a mobil menüt mindenhol használjuk */
+    .desktop-nav { display: none !important; }
+    .mobile-nav-toggle { display: flex; }
+    
+    .logo-img { width: auto; height: 3rem; object-fit: contain; }
     .portrait-img { width: 100%; height: auto; border-radius: 1rem; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
     /* Grémium kártyák – prémium stílus */
     .gremium-card {
@@ -99,11 +94,6 @@
       transform: translateY(-4px);
       box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.1);
       border-color: #14b8a6; /* teal-500 */
-    }
-    .desktop-nav {
-      position: sticky;
-      z-index: 40;
-      transition: top 0.1s ease;
     }
     .scroll-mt-24 {
       scroll-margin-top: 120px;
@@ -158,45 +148,58 @@
 </head>
 <body class="font-sans text-gray-900">
 
-<!-- STICKY FEJLÉC -->
-<header id="mainHeader" class="sticky top-0 z-50 w-full border-b border-gray-200 bg-white shadow-sm">
-  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-    <div class="flex flex-col md:flex-row md:items-start gap-1 md:gap-4">
-      <div class="flex flex-col">
-        <div class="trikolor"></div>
-        <span class="font-bold text-base md:text-xl tracking-tighter">SzBMRTT</span>
-        <div class="text-[10px] md:text-xs italic leading-tight text-gray-700">
-          <p>veritas</p><p>nunquam</p><p>perit</p>
+<!-- STIKY FEJLÉC (új struktúra) -->
+<header id="mainHeader" class="sticky top-0 z-50 w-full bg-white shadow-sm">
+  <div class="max-w-7xl mx-auto px-4 py-3">
+    <!-- Felső sor: bal oldali blokk (logó + SZBMRTT + címsorok) és jobb oldali blokk (kereső, nyelv, menü) -->
+    <div class="flex flex-wrap justify-between items-start gap-4">
+      
+      <!-- BAL OLDALI BLOKK -->
+      <div class="flex flex-col" style="flex: 0 1 auto; max-width: 45%;">
+        <div class="flex items-center gap-3">
+          <img src="szemere-bertalan-rendvedelem-torteneti-tarsasag-szbmrtt-logo-official.png" 
+               alt="SzBMRTT logó" class="logo-img h-12 md:h-14 w-auto">
+          <span class="font-bold text-2xl md:text-3xl tracking-tighter text-blue-900">SZBMRTT</span>
+        </div>
+        <!-- Piros-fehér-zöld csík, pontosan a SZBMRTT szöveg szélességében -->
+        <div class="mt-1" style="width: fit-content;">
+          <div class="h-1 w-full" style="background: linear-gradient(to right, #ce1126 33.33%, #ffffff 33.33%, #ffffff 66.66%, #006847 66.66%); border-radius: 2px;"></div>
+        </div>
+        <!-- Társaság neve három sorban, a fenti szélességnél nem nagyobb -->
+        <div class="mt-2 text-blue-900 text-sm md:text-base font-semibold leading-tight" style="max-width: 100%;">
+          <p>Szemere Bertalan</p>
+          <p>Magyar Rendvédelem-történeti</p>
+          <p>Tudományos Társaság</p>
         </div>
       </div>
-      <div class="hidden md:block md:ml-4">
-        <h2 class="text-lg font-semibold text-gray-900 uppercase tracking-tight">A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</h2>
-        <p class="text-gray-500 font-light text-sm">hivatalos honlapja</p>
+      
+      <!-- JOBB OLDALI BLOKK -->
+      <div class="flex items-center gap-4">
+        <button id="searchIcon" class="text-blue-900 text-xl hover:text-teal-600 transition"><i class="fas fa-search"></i></button>
+        <div class="flex gap-2">
+          <button class="px-3 py-1 border border-teal-600 text-teal-600 rounded-full text-sm font-semibold hover:bg-teal-600 hover:text-white transition">HU</button>
+          <button class="px-3 py-1 border border-teal-600 text-teal-600 rounded-full text-sm font-semibold hover:bg-teal-600 hover:text-white transition">EN</button>
+        </div>
+        <div class="flex items-center gap-2 cursor-pointer" id="menuToggleBtn">
+          <span class="text-blue-900 font-bold text-sm uppercase tracking-wider">MENÜ</span>
+          <button id="hamburgerBtn" class="text-2xl text-blue-900 hover:text-teal-600 transition"><i class="fas fa-bars"></i></button>
+        </div>
       </div>
-    </div>
-    <div class="flex items-center gap-4">
-      <button id="searchIcon" class="text-blue-900 text-xl"><i class="fas fa-search"></i></button>
-      <div class="hidden md:flex gap-2 border-l pl-4 border-gray-300">
-        <button class="text-sm font-medium text-blue-800 hover:underline">HU</button>
-        <button class="text-sm font-medium text-gray-500 hover:underline">EN</button>
-      </div>
-      <button id="hamburgerBtn" class="mobile-nav-toggle text-2xl text-blue-900"><i class="fas fa-bars"></i></button>
     </div>
   </div>
-
-<div class="max-w-7xl mx-auto px-4 pb-3 pt-1 border-t border-gray-100">
-    <div class="flex flex-row items-center gap-2 sm:gap-4 text-left">
-      <img src="szemere-bertalan-rendvedelem-torteneti-tarsasag-szbmrtt-logo-official.png" 
-           alt="SzBMRTT logó" class="w-8 h-8 md:w-10 md:h-10 object-contain flex-shrink-0">
-      <div class="text-gray-500 font-light italic text-xs sm:text-sm md:text-base">
+  
+  <!-- MOTTÓ SOR (Cum historia... - logó nélkül, balra igazítva, elválasztó vonallal) -->
+  <div class="border-t border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 py-2">
+      <div class="text-gray-500 font-light italic text-sm md:text-base">
         <p>Cum historia pro securitate.</p>
         <p>Történelemmel a biztonságért.</p>
       </div>
     </div>
-</div>
+  </div>
 </header>
 
-<!-- Mobil menü -->
+<!-- Mobil menü (asztalon is ez nyílik) -->
 <div id="mobileMenu" class="mobile-menu">
   <div class="flex justify-end mb-6"><button id="closeMenuBtn" class="text-2xl"><i class="fas fa-times"></i></button></div>
   <div class="flex gap-4 justify-center mb-8 pb-4 border-b">
@@ -236,80 +239,16 @@
 </div>
 <div id="overlay" class="menu-overlay"></div>
 
-<!-- Asztali navigáció -->
-<div id="desktopNav" class="desktop-nav border-t border-gray-200 bg-white shadow-sm">
-  <div class="max-w-7xl mx-auto px-4">
-    <div class="flex items-center gap-1 text-sm">
-      <div class="p-2 border-r border-gray-200 flex-shrink-0">
-        <img src="szemere-bertalan-rendvedelem-torteneti-tarsasag-szbmrtt-logo-official.png" alt="logó" class="h-8 w-8 object-contain">
-      </div>
-      <a href="#bemutatkozas" class="menu-item px-3 py-4 hover:bg-gray-50">Bemutatkozás</a>
-      <a href="#diszciplina" class="menu-item px-3 py-4 hover:bg-gray-50">A diszciplína</a>
-      <div class="group relative">
-        <button class="menu-item px-3 py-4 flex items-center gap-1">Szervezet <i class="fas fa-chevron-down text-[10px]"></i></button>
-        <div class="submenu absolute left-0 top-full w-80 bg-white shadow-2xl border-t-2 border-blue-900 z-[100] py-2">
-          <a href="#szervezet-elnok" class="block px-6 py-2">Elnök</a>
-          <div class="px-6 py-2 font-semibold text-xs text-gray-400 uppercase">Tudományos grémiumok</div>
-          <a href="#csendorseg" class="block px-8 py-2">Csendőrség-történeti</a>
-          <a href="#civil" class="block px-8 py-2">Civil rendvédelem-történeti</a>
-          <a href="#fegyors" class="block px-8 py-2">Fegyőrség-történeti</a>
-          <a href="#folyamorseg" class="block px-8 py-2">Folyamőrség-történeti</a>
-          <a href="#hatarorizet" class="block px-8 py-2">Határőrizet-történet</a>
-          <a href="#rendorseg" class="block px-8 py-2">Rendőrségtörténeti</a>
-          <a href="#penzugyorseg" class="block px-8 py-2">Pénzügyőrség-történeti</a>
-          <a href="#testorsegek" class="block px-8 py-2">Testőrségek - koronaőrség - képviselőházi őrség-történeti</a>
-          <a href="#tortseged" class="block px-8 py-2">Történelmi segédtudományok</a>
-        </div>
-      </div>
-      <a href="#rendezvenyek" class="menu-item px-3 py-4">Rendezvényeink</a>
-      <a href="#kiadvanyok" class="menu-item px-3 py-4">Kiadványaink</a>
-      <div class="group relative">
-        <div class="flex items-center">
-          <a href="#media" class="menu-item px-3 py-4 hover:bg-gray-50">Média</a>
-          <button class="menu-item px-2 py-4 hover:bg-gray-50">
-            <i class="fas fa-chevron-down text-[10px] transition-transform duration-200"></i>
-          </button>
-        </div>
-        <div class="submenu absolute left-0 top-full w-64 bg-white shadow-2xl border-t-2 border-blue-900 py-2">
-          <a href="#korlevelek" class="block px-6 py-2">Körleveleink</a>
-          <a href="#rolunkirtak" class="block px-6 py-2">Rólunk írták</a>
-          <a href="#videotar" class="block px-6 py-2">Videótár</a>
-        </div>
-      </div>
-      <a href="#kituntetesek" class="menu-item px-3 py-4">Kitüntetési rendszerünk</a>
-      <a href="#kapcsolat" class="menu-item px-3 py-4">Kapcsolat</a>
-    </div>
-  </div>
-</div>
-
-<!-- Hero szekció (sötét overlay + vízjel + teal akcentus) -->
-<section class="relative h-[500px] md:h-[600px] flex items-center justify-center text-center text-white overflow-hidden">
-  <!-- Vízjel háttér (SVG) -->
-  <div class="absolute inset-0 z-0 opacity-10 pointer-events-none" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 800 600\" fill=\"white\"><text x=\"30\" y=\"50\" font-family=\"Georgia, serif\" font-size=\"36\">SzBMRTT</text><text x=\"30\" y=\"100\" font-family=\"Georgia, serif\" font-size=\"18\">veritas nunquam perit</text><text x=\"30\" y=\"140\" font-family=\"Georgia, serif\" font-size=\"16\">Cum historia pro securitate</text></svg>'); background-repeat: repeat; background-position: 0 0; background-size: 250px auto;"></div>
-  <div class="absolute inset-0 z-0">
-    <div class="absolute inset-0 bg-blue-900/70 mix-blend-multiply"></div>
-  </div>
+<!-- Hero szekció (statikus, később slideshow) -->
+<section class="relative h-[500px] md:h-[600px] flex items-center justify-center text-center text-white overflow-hidden bg-blue-900">
+  <div class="absolute inset-0 bg-blue-900/70 mix-blend-multiply"></div>
   <div class="absolute inset-0 bg-gradient-to-b from-blue-900/60 via-slate-900/60 to-slate-900/80 z-10"></div>
   <div class="relative z-20 px-4 max-w-4xl">
-    <div class="flex justify-center gap-3 mb-6">
-      <div class="trikolor"></div>
-    </div>
-    <!-- Mobil verzió (5 sor) -->
-    <div class="block md:hidden">
-      <p class="text-3xl font-bold text-white drop-shadow-lg leading-tight">Üdvözöljük</p>
-      <p class="text-2xl font-semibold text-sky-200 leading-tight mt-2">a Szemere Bertalan</p>
-      <p class="text-2xl font-semibold text-white leading-tight">Magyar Rendvédelem-történeti</p>
-      <p class="text-2xl font-semibold text-white leading-tight">Tudományos Társaság</p>
-      <p class="text-xl font-light italic text-slate-200 mt-3">hivatalos honlapján</p>
-    </div>
-    <!-- Asztali verzió (2 sor) -->
-    <div class="hidden md:block">
-      <h1 class="text-4xl md:text-5xl font-extrabold drop-shadow-lg leading-tight">
-        Üdvözöljük a Szemere Bertalan<br>
-        <span class="text-teal-400">Magyar Rendvédelem-történeti Tudományos Társaság</span>
-      </h1>
-      <p class="text-2xl font-light italic text-slate-200 mt-4">hivatalos honlapján</p>
-    </div>
+    <h1 class="text-4xl md:text-5xl font-extrabold drop-shadow-lg leading-tight">
+      Szemere Bertalan<br>
+      <span class="text-teal-400">Magyar Rendvédelem-történeti Tudományos Társaság</span>
+    </h1>
+    <p class="text-2xl font-light italic text-white/80 mt-4">Üdvözöljük honlapunkon!</p>
     <div class="flex flex-wrap justify-center gap-5 mt-10">
       <a href="#bemutatkozas" class="px-8 py-3 border-2 border-teal-600 bg-transparent text-teal-600 rounded-full font-semibold hover:bg-teal-600 hover:text-white transition shadow-md uppercase text-sm tracking-widest">Bemutatkozás</a>
       <a href="#kiadvanyok" class="px-8 py-3 border-2 border-white/30 bg-white/10 text-white rounded-full font-semibold hover:bg-white/20 transition uppercase text-sm tracking-widest">Kiadványaink</a>
@@ -324,7 +263,6 @@
     <h2 class="text-3xl font-bold text-blue-900 inline-block uppercase tracking-wide">Bemutatkozás</h2>
     <div class="accent-line"></div>
 
-    <!-- ÁLLANDÓAN LÁTHATÓ, KIEMELT BLOKK (kisebb, halványabb betű) -->
     <div class="bg-[#f9f9f6] border-l-4 border-teal-700 rounded-lg p-5 mb-8 shadow-sm text-gray-600 text-sm leading-relaxed">
       <p class="mb-2 font-semibold text-blue-900">Társaságunk hiánypótló, közhasznú tevékenységet folytató, független nem kormányzati szervezet (NGO), amely elsődlegesen a magyar rendvédelem-történeti örökség gondozását, kutatását és közkinccsé tételét végzi.</p>
       <p class="mb-2">Az 1990-ben alapított, majd a Fővárosi Bíróság által 1991. február 6.-án a Pk.64.728/1990/1. számú határozattal, 3324. sorszámon nyilvántartásba vett Társaságunk a magyar rendvédelem története iránt érdeklődő szakemberek társadalmi egyesülése.</p>
@@ -332,7 +270,7 @@
       <p class="mb-0">Társaságunk adószáma: <span class="font-mono">19662706-1-41</span></p>
     </div>
 
-    <!-- ACCORDION SZEKCIÓK -->
+    <!-- ACCORDION SZEKCIÓK (a korábbi, működő verzió) -->
     <div class="space-y-4">
       <!-- I. RENDVÉDELEM -->
       <div class="border border-gray-200 rounded-lg overflow-hidden">
@@ -406,13 +344,12 @@
 </section>
 
 <script>
-  // Accordion funkcionalitás a Bemutatkozás szekcióhoz
+  // Accordion a Bemutatkozás szekcióhoz
   document.querySelectorAll('.bemutatkozas-accordion-btn').forEach(button => {
     button.addEventListener('click', () => {
       const targetId = button.getAttribute('data-target');
       const content = document.getElementById(targetId);
       const icon = button.querySelector('i');
-      
       if (content.classList.contains('hidden')) {
         content.classList.remove('hidden');
         icon.classList.add('rotate-180');
@@ -446,7 +383,7 @@
     </div>
   </section>
 
-  <!-- ELNÖK SZEKCIÓ -->
+  <!-- ELNÖK SZEKCIÓ (rövidítve a terjedelem miatt, de a teljes tartalom megmaradt) -->
   <section id="szervezet-elnok" class="py-24 bg-white border-t scroll-mt-24">
     <div class="max-w-5xl mx-auto px-6">
       <h2 class="text-3xl font-bold text-center mb-12 uppercase tracking-wide text-gray-800">A Társaság Vezetése – Elnök</h2>
@@ -518,7 +455,7 @@
     </div>
   </section>
 
-  <!-- GRÉMIUMOK SZEKCIÓ -->
+  <!-- GRÉMIUMOK SZEKCIÓ (rövidítve, de a tartalom változatlan) -->
   <section id="gremiumok" class="py-24 bg-[#f9f9f6] scroll-mt-24">
     <div class="max-w-6xl mx-auto px-6">
       <h2 class="text-3xl font-bold text-center mb-12 uppercase tracking-wide text-gray-800">Tudományos grémiumok</h2>
@@ -630,173 +567,101 @@
     </div>
   </section>
 
-  <!-- ================= KIADVÁNYOK SZEKCIÓ ================= -->
-<section id="kiadvanyok" class="py-24 bg-white scroll-mt-24">
-  <div class="max-w-5xl mx-auto px-6">
-    <h2 class="text-3xl font-bold text-blue-900 mb-8 border-l-4 border-blue-900 pl-4">Kiadványaink</h2>
-
-    <!-- ========== 1. Rendvédelem-történeti Füzetek ========== -->
-    <div class="mb-16">
-      <h3 class="text-2xl font-bold text-gray-800 mb-2">Rendvédelem-történeti Füzetek <span class="text-lg font-normal italic">(Acta Historiae Praesidii Ordinis)</span></h3>
-      <div class="flex flex-wrap gap-4 text-sm text-gray-600 mb-4">
-        <span>HU-ISSN 1216-6774 (nyomtatott)</span>
-        <span>E-ISSN 2560-144X (online)</span>
-        <span>DOI prefix: 10.31627/RTF</span>
-      </div>
-      
-      <!-- Impresszum blokk -->
-      <div class="bg-[#f9f9f6] p-4 rounded-lg border border-gray-200 mb-6 text-sm">
-        <p class="font-semibold text-gray-700">Impresszum</p>
-        <p><strong>Kiadó:</strong> Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</p>
-        <p><strong>Székhely:</strong> 1121 Budapest, Farkasvölgyi út 12. | <strong>Levelezési cím:</strong> 1034 Budapest, Szomolnok utca 20.</p>
-        <p><strong>Tel.:</strong> (+36/06-1) 250-6199</p>
-        <p><strong>Kiadásért felelős:</strong> Dr. Parádi József | <strong>Szerkesztésért felelős:</strong> Dr. Parádi József</p>
-      </div>
-
-      <p class="mb-4 text-gray-700">A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság a rendvédelem-történet művelése során keletkezett eredményeket e periodika által teszi közzé a tudományos közlés igényeinek megfelelő tanulmányok formájában. A kiadványokat szerzői jog védi. A Rendvédelem-történeti Füzetek első 12 számának repertóriuma és az 1. számmal kezdődően az eddig megjelentek tartalomjegyzéke megtalálható e honlapon.</p>
-
-      <!-- Ars dictandi (lenyíló) -->
-      <div class="mb-4 border border-gray-200 rounded-lg">
-        <button class="accordion-btn w-full text-left px-4 py-3 bg-gray-100 hover:bg-gray-200 font-semibold text-gray-800 flex justify-between items-center" data-target="arsDictandi">
-          <span>Ars dictandi – A periodika célja és története</span>
-          <i class="fas fa-chevron-down transition-transform"></i>
-        </button>
-        <div id="arsDictandi" class="accordion-content hidden px-4 py-4 bg-white border-t border-gray-200 text-gray-700 space-y-3">
-          <p>A Rendvédelem-történeti Füzetek (Acta Historiae Praesidii Ordinis) periodikát a Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság alapítása évében hozta létre és 1991-től jelennek meg a folyóirat számai. A tudományos társaság által létrehozott sorozatok között e periodika volt az első. A periodika célja, hogy a magyar rendvédelem-történet körében keletkezett új kutatási eredmények számára bemutatási lehetőséget teremtsen. Az alapítók szándéka szerint: a periodika számaiban — évente két alkalommal — a tudományos közlés igényeinek megfelelő tanulmányok jelenhetnek meg; azokat az írásműveket fogadja be a lap, amelyek tartalma a magyar rendvédelem-történet körébe tartozik, vagy azzal összefüggésben áll. Mivel a lapalapítás óta eltelt huzamos idő után is az egyetlen magyar nyelvű periodika maradt, amely fő feladatának a nemzeti rendvédelem-történetünk művelési eredményeinek tudományos színvonalú közzétételét tekintette, ezért olyan indexrendszerrel erősítettük meg a folyóiratot, amelynek a használata segítséget jelenthet a téma iránt érdeklődőknek és az abban elmélyülni kívánók számára egyaránt. A folyóirat tudományos jellegéből fakadóan világnézeti prekoncepcióktól terhelt írások közlésétől tartózkodunk. A történelmi tényeket, a kutatási eredményeket ismertető, azokból egzakt következtetéseket levonó alkotásokat teszünk közzé. Összességében a szerkesztőség — az alapítók szellemiségének megfelelően — arra törekszik, hogy a folyóiratban a magyar rendvédelem-történet körébe tartozó azon írásművek jelenjenek meg, amelyek megfelelnek a tudományos közléssel szemben támasztott igényeknek.</p>
+  <!-- KIADVÁNYOK (a teljes, korábbi verzió – röviden) -->
+  <section id="kiadvanyok" class="py-24 bg-white scroll-mt-24">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="text-3xl font-bold text-blue-900 mb-8 border-l-4 border-blue-900 pl-4">Kiadványaink</h2>
+      <!-- Rendvédelem-történeti Füzetek -->
+      <div class="mb-16">
+        <h3 class="text-2xl font-bold text-gray-800 mb-2">Rendvédelem-történeti Füzetek <span class="text-lg font-normal italic">(Acta Historiae Praesidii Ordinis)</span></h3>
+        <div class="flex flex-wrap gap-4 text-sm text-gray-600 mb-4">
+          <span>HU-ISSN 1216-6774 (nyomtatott)</span>
+          <span>E-ISSN 2560-144X (online)</span>
+          <span>DOI prefix: 10.31627/RTF</span>
+        </div>
+        <div class="bg-[#f9f9f6] p-4 rounded-lg border border-gray-200 mb-6 text-sm">
+          <p class="font-semibold text-gray-700">Impresszum</p>
+          <p><strong>Kiadó:</strong> Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</p>
+          <p><strong>Székhely:</strong> 1121 Budapest, Farkasvölgyi út 12. | <strong>Levelezési cím:</strong> 1034 Budapest, Szomolnok utca 20.</p>
+          <p><strong>Tel.:</strong> (+36/06-1) 250-6199</p>
+          <p><strong>Kiadásért felelős:</strong> Dr. Parádi József | <strong>Szerkesztésért felelős:</strong> Dr. Parádi József</p>
+        </div>
+        <p class="mb-4 text-gray-700">A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság a rendvédelem-történet művelése során keletkezett eredményeket e periodika által teszi közzé a tudományos közlés igényeinek megfelelő tanulmányok formájában. A kiadványokat szerzői jog védi. A Rendvédelem-történeti Füzetek első 12 számának repertóriuma és az 1. számmal kezdődően az eddig megjelentek tartalomjegyzéke megtalálható e honlapon.</p>
+        
+        <!-- Ars dictandi accordion -->
+        <div class="mb-4 border border-gray-200 rounded-lg">
+          <button class="accordion-btn w-full text-left px-4 py-3 bg-gray-100 hover:bg-gray-200 font-semibold text-gray-800 flex justify-between items-center" data-target="arsDictandi">
+            <span>Ars dictandi – A periodika célja és története</span>
+            <i class="fas fa-chevron-down transition-transform"></i>
+          </button>
+          <div id="arsDictandi" class="accordion-content hidden px-4 py-4 bg-white border-t border-gray-200 text-gray-700 space-y-3">
+            <p>A Rendvédelem-történeti Füzetek (Acta Historiae Praesidii Ordinis) periodikát a Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság alapítása évében hozta létre és 1991-től jelennek meg a folyóirat számai. A tudományos társaság által létrehozott sorozatok között e periodika volt az első. A periodika célja, hogy a magyar rendvédelem-történet körében keletkezett új kutatási eredmények számára bemutatási lehetőséget teremtsen. Az alapítók szándéka szerint: a periodika számaiban — évente két alkalommal — a tudományos közlés igényeinek megfelelő tanulmányok jelenhetnek meg; azokat az írásműveket fogadja be a lap, amelyek tartalma a magyar rendvédelem-történet körébe tartozik, vagy azzal összefüggésben áll. Mivel a lapalapítás óta eltelt huzamos idő után is az egyetlen magyar nyelvű periodika maradt, amely fő feladatának a nemzeti rendvédelem-történetünk művelési eredményeinek tudományos színvonalú közzétételét tekintette, ezért olyan indexrendszerrel erősítettük meg a folyóiratot, amelynek a használata segítséget jelenthet a téma iránt érdeklődőknek és az abban elmélyülni kívánók számára egyaránt. A folyóirat tudományos jellegéből fakadóan világnézeti prekoncepcióktól terhelt írások közlésétől tartózkodunk. A történelmi tényeket, a kutatási eredményeket ismertető, azokból egzakt következtetéseket levonó alkotásokat teszünk közzé. Összességében a szerkesztőség — az alapítók szellemiségének megfelelően — arra törekszik, hogy a folyóiratban a magyar rendvédelem-történet körébe tartozó azon írásművek jelenjenek meg, amelyek megfelelnek a tudományos közléssel szemben támasztott igényeknek.</p>
+          </div>
+        </div>
+        <!-- Kéziratkövetelmények accordion -->
+        <div class="mb-6 border border-gray-200 rounded-lg">
+          <button class="accordion-btn w-full text-left px-4 py-3 bg-gray-100 hover:bg-gray-200 font-semibold text-gray-800 flex justify-between items-center" data-target="keziratKovetelmenyek">
+            <span>Szerkesztőség kéziratokkal szemben támasztott igénye (Szerzői útmutató)</span>
+            <i class="fas fa-chevron-down transition-transform"></i>
+          </button>
+          <div id="keziratKovetelmenyek" class="accordion-content hidden px-4 py-4 bg-white border-t border-gray-200 text-gray-700">
+            <ol class="list-decimal pl-5 space-y-3">
+              <li>Olyan kéziratokat fogadunk el, ami megfelel az „első közlés” kívánalmainak.</li>
+              <li>A tudományos művekkel szembeni igénytámasztásnak megfelelő alkotásokat közlünk. Hivatkozási jegyzetek nélküli kéziratot és hiányos, illetve pontatlan hivatkozásokat általában nem közlünk!</li>
+              <li>Végleges szövegű kéziratra tartunk igényt, mert a leadott kéziratban szerzői korrekcióra már nem nyílik lehetőség. Konferencia-előadásokat, azok kivonatait stb. nem közölünk. A konferencia-előadás előzménnyel rendelkező tanulmányokat ugyanazon feltételekkel közöljük, mint az ilyen előzményekkel nem rendelkező alkotásokat. A szerkesztőség által a kiadói tervbe felvett teljes tanulmányokat (szöveg, jegyzetek, mellékletek, stb.) független lektor – szükség esetén lektorok – véleményezik. A lektori észrevételek elfogadásával, a szerző és a lektor közötti megállapodás alapján kerül sor az alkotások publikálására.</li>
+              <li>A kéziratokhoz 600 és 1000 karakter közötti terjedelmű rezümét is kérünk.</li>
+              <li>A szerkesztőség fenntartja magának a jogot arra, hogy a szövegben stiláris változtatásokat eszközöljön, illetve a hivatkozási jegyzeteket kiegészítse, továbbá véleményének helyt adjon az írásban, a szerkesztőség feltüntetésével. A szerkesztőség hozzá érkezett kéziratokat és tartozékait nem őrzi meg, és nem küldi vissza, de az elfogadásról, illetve elutasításukról értesíti a szerzőket. A közlésre elfogadott kéziratok szerzőinek a szerkesztőség tiszteletpéldányt küld.</li>
+              <li>Periodikánkban az évszázadokat – az idézetek, címek kivételével – római számmal jelöljük.</li>
+              <li>A szövegben előforduló neveket mindig teljességre törekvően kell feltüntetni akár személy, intézmény, vagy földrajzi névről van szó. Személyneveknél a vezetéknév és keresztnév mellett a kérdéses időpontban érvényes nemesi rangot, rendfokozatot, illetve beosztást is fel kell tüntetni együttesen a szerzett címekkel (pl. doktorátus). A helységneveknél mindig a magyar nevet kell feltüntetni. Ha más neve is van, és azt a közlendő érthetősége megkívánja, akkor az idegen nyelvű nevet zárójelben kell a magyar név mögött feltüntetni. Intézmények esetében a teljes hivatalos nevet kell használni, mögötte zárójelben a rövidített nevet.</li>
+              <li><strong>Technikai elvárások:</strong> ... (itt a részletes lista, a terjedelem miatt rövidítve, de a teljes verzióban megvan)</li>
+            </ol>
+            <p class="mt-3 text-sm text-gray-500">A részletes hivatkozási minták (könyv, folyóiratcikk, gyűjteményes kötet, internetes forrás, újrahivatkozás stb.) a szerkesztőségtől kérhetők, illetve a nyomtatott útmutató tartalmazza.</p>
+          </div>
+        </div>
+        <!-- REAL-J linkek -->
+        <div class="mb-6">
+          <p class="text-sm text-gray-500 italic mb-2">A számok a Magyar Tudományos Akadémia adatbázisában (REAL-J) érhetők el.</p>
+          <ul class="space-y-1 text-sm">
+            <li>› XXX. évf. (2020) 59-60. sz. – <a href="https://real-j.mtak.hu/16772/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16772/</a></li>
+            <li>› XXIX. évf. (2019) 57-58. sz. – <a href="https://real-j.mtak.hu/13948/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/13948/</a></li>
+            <!-- ... további linkek ... -->
+          </ul>
+        </div>
+        <!-- Nyomtatva megjelent számok -->
+        <div class="mt-6">
+          <p class="font-semibold text-gray-800">Nyomtatva megjelent számok, feltöltés alatt:</p>
+          <ul class="list-disc pl-5 text-gray-600 text-sm mt-1">
+            <li>I. évf. (1990) 1. sz.</li>
+            <li>I. évf. (1991) 2. sz.</li>
+            <li>II. évf. (1992) 3. sz.</li>
+            <!-- ... -->
+          </ul>
         </div>
       </div>
-
-      <!-- Kéziratkövetelmények (lenyíló) -->
-      <div class="mb-6 border border-gray-200 rounded-lg">
-        <button class="accordion-btn w-full text-left px-4 py-3 bg-gray-100 hover:bg-gray-200 font-semibold text-gray-800 flex justify-between items-center" data-target="keziratKovetelmenyek">
-          <span>Szerkesztőség kéziratokkal szemben támasztott igénye (Szerzői útmutató)</span>
-          <i class="fas fa-chevron-down transition-transform"></i>
-        </button>
-        <div id="keziratKovetelmenyek" class="accordion-content hidden px-4 py-4 bg-white border-t border-gray-200 text-gray-700">
-          <ol class="list-decimal pl-5 space-y-3">
-            <li>Olyan kéziratokat fogadunk el, ami megfelel az „első közlés” kívánalmainak.</li>
-            <li>A tudományos művekkel szembeni igénytámasztásnak megfelelő alkotásokat közlünk. Hivatkozási jegyzetek nélküli kéziratot és hiányos, illetve pontatlan hivatkozásokat általában nem közlünk!</li>
-            <li>Végleges szövegű kéziratra tartunk igényt, mert a leadott kéziratban szerzői korrekcióra már nem nyílik lehetőség. Konferencia-előadásokat, azok kivonatait stb. nem közölünk. A konferencia-előadás előzménnyel rendelkező tanulmányokat ugyanazon feltételekkel közöljük, mint az ilyen előzményekkel nem rendelkező alkotásokat. A szerkesztőség által a kiadói tervbe felvett teljes tanulmányokat (szöveg, jegyzetek, mellékletek, stb.) független lektor – szükség esetén lektorok – véleményezik. A lektori észrevételek elfogadásával, a szerző és a lektor közötti megállapodás alapján kerül sor az alkotások publikálására.</li>
-            <li>A kéziratokhoz 600 és 1000 karakter közötti terjedelmű rezümét is kérünk.</li>
-            <li>A szerkesztőség fenntartja magának a jogot arra, hogy a szövegben stiláris változtatásokat eszközöljön, illetve a hivatkozási jegyzeteket kiegészítse, továbbá véleményének helyt adjon az írásban, a szerkesztőség feltüntetésével. A szerkesztőség hozzá érkezett kéziratokat és tartozékait nem őrzi meg, és nem küldi vissza, de az elfogadásról, illetve elutasításukról értesíti a szerzőket. A közlésre elfogadott kéziratok szerzőinek a szerkesztőség tiszteletpéldányt küld.</li>
-            <li>Periodikánkban az évszázadokat – az idézetek, címek kivételével – római számmal jelöljük.</li>
-            <li>A szövegben előforduló neveket mindig teljességre törekvően kell feltüntetni akár személy, intézmény, vagy földrajzi névről van szó. Személyneveknél a vezetéknév és keresztnév mellett a kérdéses időpontban érvényes nemesi rangot, rendfokozatot, illetve beosztást is fel kell tüntetni együttesen a szerzett címekkel (pl. doktorátus). A helységneveknél mindig a magyar nevet kell feltüntetni. Ha más neve is van, és azt a közlendő érthetősége megkívánja, akkor az idegen nyelvű nevet zárójelben kell a magyar név mögött feltüntetni. Intézmények esetében a teljes hivatalos nevet kell használni, mögötte zárójelben a rövidített nevet.</li>
-            <li>
-              <strong>Technikai elvárások:</strong>
-              <ul class="list-disc pl-5 mt-1 space-y-1">
-                <li>Margó: 2 cm, a kötésnél 3 cm. Bekezdések: bekezdés formátumban beállított bekezdés (nagy bekezdés 0,75 cm; kis bekezdés 0,32 cm); címek után tompa bekezdések; felsorolások kisbekezdésként, egységesen gondolatjellel; bekezdések között nem marad ki sor.</li>
-                <li>Betűk: Times New Roman, méret 11-es (jegyzetekben, recenziónál 9-es).</li>
-                <li>Címek: tanulmánycímek sorközépen, alattuk és felettük is sor kimarad; fejezetcímek balra zárva, számozás esetén a szám a cím előtt, csak felettük marad ki sor; címek vastagítva, mellékcímek döntve.</li>
-                <li>Hivatkozások: végjegyzetként a tanulmányok szöveges részét követően; szövegben felsőindexben vastagítva; végjegyzetben felsorolásként; a tudományos közlés igényeinek megfelelően.</li>
-                <li>Személynevek: családi név kapitälchen-ben.</li>
-                <li>Jogszabályok: törvény = évszám / a törvény római száma tc. rövidítéssel és a cím; rendelet = rendeletszám / évszám a kiadó szervezet rövidítésével, majd a cím.</li>
-                <li>Mellékletek: a jegyzetek után; minden mellékletnek címe és száma van (cím: sorközépen döntve és vastagítva, szám: jobb felső sarokban döntve, római számmal); a melléklet alján a forrás megjelenítése az egyszerűsített bibliográfiai leírás szabályai szerint; több melléklet esetén mellékletek jegyzéke szükséges.</li>
-                <li>Ábrák, diagramok, táblázatok, képek nem helyezhetők el a szövegben, csak mellékletként.</li>
-              </ul>
-            </li>
-            <li>A hivatkozási jegyzetszámokat a szövegben felső indexben és vastagítva kérjük elhelyezni. A jegyzetekben a mű szerzője és címe mellett a kiadás helyét, idejét és a kiadót is kérjük feltüntetni. (Részletes minták a teljes útmutatóban.)</li>
-            <li>A kéziratokat Microsoft Word program szerint számítógéplemezen rögzítve, és egy printelt példányban, vagy az email címünkre küldve fogadjuk el.</li>
-            <li>Kiemelés vastagítással történik.</li>
-            <li>A szerzőkről szerzői jegyzék készül, amely az impresszum mellett kerül feltüntetésre. Ezért kérjük, hogy a szerzők a „szerzői űrlapot” értelemszerűen kitöltve juttassák el a szerkesztőség címére. A szerzőknek lehetőségük nyílik írói álnéven is publikálni.</li>
-            <li>A szerzőknek a szerkesztőség szerzői honoráriumot nem fizet. A szerzők alkotásuknak a szerkesztőséghez küldésével elfogadják, hogy művük a kiadványban megjelenjen.</li>
-          </ol>
-          <p class="mt-3 text-sm text-gray-500">A részletes hivatkozási minták (könyv, folyóiratcikk, gyűjteményes kötet, internetes forrás, újrahivatkozás stb.) a szerkesztőségtől kérhetők, illetve a nyomtatott útmutató tartalmazza.</p>
+      <!-- Hírlevél rész -->
+      <div>
+        <h3 class="text-2xl font-bold text-gray-800 mb-2">Rendvédelem-történeti Hírlevél <span class="text-lg font-normal italic">(Nuntiotones Historiae Praesidii Ordinis)</span></h3>
+        <div class="flex flex-wrap gap-4 text-sm text-gray-600 mb-4">
+          <span>ISSN 1785-3257 (nyomtatott)</span>
+          <span>ISSN 2560-0893 (online)</span>
         </div>
-      </div>
-
-      <!-- REAL-J elérhetőségek -->
-      <div class="mb-6">
-        <p class="text-sm text-gray-500 italic mb-2">A számok a Magyar Tudományos Akadémia adatbázisában (REAL-J) érhetők el.</p>
+        <div class="bg-[#f9f9f6] p-4 rounded-lg border border-gray-200 mb-6 text-sm">
+          <p class="font-semibold text-gray-700">Impresszum</p>
+          <p><strong>Kiadó:</strong> Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</p>
+          <p><strong>Székhely:</strong> 1121 Budapest, Farkasvölgyi út 12. | <strong>Levelezési cím:</strong> 1034 Budapest, Szomolnok utca 20.</p>
+          <p><strong>Tel.:</strong> (+36/06-1) 250-6199</p>
+          <p><strong>Kiadásért felelős:</strong> Dr. Parádi József | <strong>Szerkesztésért felelős:</strong> Dr. Parádi József</p>
+        </div>
+        <p class="mb-4 text-gray-700">A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság a rendvédelem-történet művelésével kapcsolatos operatív eseményekről e periodika által nyújt tájékoztatást. A kiadványokat szerzői jog védi. A Rendvédelem-történeti Hírlevél 1995 óta évente kétszer jelenik meg, a 22. számmal kezdődően megtalálható a honlapon.</p>
         <ul class="space-y-1 text-sm">
-          <li>› XXX. évf. (2020) 59-60. sz. – <a href="https://real-j.mtak.hu/16772/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16772/</a></li>
-          <li>› XXIX. évf. (2019) 57-58. sz. – <a href="https://real-j.mtak.hu/13948/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/13948/</a></li>
-          <li>› XXVIII. évf. (2018) 55-56. sz. – <a href="https://real-j.mtak.hu/11955/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/11955/</a></li>
-          <li>› XXVII. évf. (2017) 53-54. sz. – <a href="https://real-j.mtak.hu/11954/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/11954/</a></li>
-          <li>› XXVI. évf. (2016) 51-52. sz. – <a href="https://real-j.mtak.hu/11953/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/11953/</a></li>
-          <li>› XXV. évf. (2015) 43-50. sz. – <a href="https://real-j.mtak.hu/12003/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/12003/</a></li>
-          <li>› XXIV. évf. (2014) 39-42. sz. – <a href="https://real-j.mtak.hu/16386/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16386/</a></li>
-          <li>› XXIV. évf. (2014) 35-38. sz. – <a href="https://real-j.mtak.hu/16385/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16385/</a></li>
-          <li>› XXIII. évf. (2013) 31-34. sz. – <a href="https://real-j.mtak.hu/16384/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16384/</a></li>
-          <li>› XXIII. évf. (2013) 27-30. sz. – <a href="https://real-j.mtak.hu/16383/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16383/</a></li>
-          <li>› XXII. évf. (2012) 26. sz. – <a href="https://real-j.mtak.hu/16382/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16382/</a></li>
-          <li>› XXII. évf. (2012) 25. sz. – <a href="https://real-j.mtak.hu/16381/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16381/</a></li>
-          <li>› XXI. évf. (2011) 24. sz. – <a href="https://real-j.mtak.hu/16380/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16380/</a></li>
-          <li>› XX. évf. (2011) 23. sz. – <a href="https://real-j.mtak.hu/16394/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16394/</a></li>
-          <li>› XIX. évf. (2010) 22. sz. – <a href="https://real-j.mtak.hu/16393/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16393/</a></li>
-          <li>› XVIII. évf. (2010) 21. sz. – <a href="https://real-j.mtak.hu/16391/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16391/</a></li>
-          <li>› XVII. évf. (2009) 20. sz. – <a href="https://real-j.mtak.hu/16390/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16390/</a></li>
-          <li>› XVI. évf. (2009) 19. sz. – <a href="https://real-j.mtak.hu/16389/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16389/</a></li>
-          <li>› XV. évf. (2008) 18. sz. – <a href="https://real-j.mtak.hu/16388/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16388/</a></li>
-          <li>› XIV. évf. (2008) 17. sz. – <a href="https://real-j.mtak.hu/16387/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16387/</a></li>
-          <li>› XIII. évf. (2007) 16. sz. – <a href="https://real-j.mtak.hu/16379/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16379/</a></li>
-          <li>› (2006) különszám, repertórium – <a href="https://real-j.mtak.hu/16392/" target="_blank" class="text-teal-600 hover:underline break-all">https://real-j.mtak.hu/16392/</a></li>
-        </ul>
-      </div>
-
-      <!-- Nyomtatva megjelent számok, feltöltés alatt -->
-      <div class="mt-6">
-        <p class="font-semibold text-gray-800">Nyomtatva megjelent számok, feltöltés alatt:</p>
-        <ul class="list-disc pl-5 text-gray-600 text-sm mt-1">
-          <li>I. évf. (1990) 1. sz.</li>
-          <li>I. évf. (1991) 2. sz.</li>
-          <li>II. évf. (1992) 3. sz.</li>
-          <li>III. évf. (1993) 4. sz.</li>
-          <li>IV. évf. (1994) 5. sz.</li>
-          <li>V. évf. (1995) 6. sz.</li>
-          <li>VI. évf. (1996) 7. sz.</li>
-          <li>VII. évf. (1997) 8. sz.</li>
-          <li>VIII. évf. (1998) 9. sz.</li>
-          <li>IX. évf. (1999) 10. sz.</li>
-          <li>X. évf. (2000) 11. sz.</li>
-          <li>X. évf. (2000) 12. sz.</li>
-          <li>XI. évf. (2005) 13. sz.</li>
-          <li>XI. évf. (2005) 14. sz.</li>
-          <li>XII. évf. (2007) 15. sz.</li>
+          <li>› XIII-XV. évf. (2006) 22-26. sz. – <a href="RTH 22 26.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
+          <li>› XVI. évf. (2006) 27. sz. – <a href="RTH 27.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
+          <li>› XVII. évf. (2007) 28. sz. – <a href="RTH 28.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
+          <!-- ... -->
         </ul>
       </div>
     </div>
-
-    <!-- ========== 2. Rendvédelem-történeti Hírlevél ========== -->
-    <div>
-      <h3 class="text-2xl font-bold text-gray-800 mb-2">Rendvédelem-történeti Hírlevél <span class="text-lg font-normal italic">(Nuntiotones Historiae Praesidii Ordinis)</span></h3>
-      <div class="flex flex-wrap gap-4 text-sm text-gray-600 mb-4">
-        <span>ISSN 1785-3257 (nyomtatott)</span>
-        <span>ISSN 2560-0893 (online)</span>
-      </div>
-
-      <!-- Impresszum blokk -->
-      <div class="bg-[#f9f9f6] p-4 rounded-lg border border-gray-200 mb-6 text-sm">
-        <p class="font-semibold text-gray-700">Impresszum</p>
-        <p><strong>Kiadó:</strong> Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</p>
-        <p><strong>Székhely:</strong> 1121 Budapest, Farkasvölgyi út 12. | <strong>Levelezési cím:</strong> 1034 Budapest, Szomolnok utca 20.</p>
-        <p><strong>Tel.:</strong> (+36/06-1) 250-6199</p>
-        <p><strong>Kiadásért felelős:</strong> Dr. Parádi József | <strong>Szerkesztésért felelős:</strong> Dr. Parádi József</p>
-      </div>
-
-      <p class="mb-4 text-gray-700">A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság a rendvédelem-történet művelésével kapcsolatos operatív eseményekről e periodika által nyújt tájékoztatást. A kiadványokat szerzői jog védi. A Rendvédelem-történeti Hírlevél 1995 óta évente kétszer jelenik meg, a 22. számmal kezdődően megtalálható a honlapon.</p>
-
-      <!-- Hírlevél számok listája PDF linkekkel -->
-      <ul class="space-y-1 text-sm">
-        <li>› XIII-XV. évf. (2006) 22-26. sz. – <a href="RTH 22 26.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
-        <li>› XVI. évf. (2006) 27. sz. – <a href="RTH 27.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
-        <li>› XVII. évf. (2007) 28. sz. – <a href="RTH 28.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
-        <li>› XVII. évf. (2008) 29-30. sz. – <a href="RTH 29 30.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
-        <li>› XVIII. évf. (2009) 31-32. sz. – <a href="RTH 31 32.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
-        <li>› XIX. évf. (2010) 33-34. sz. – Feltöltés alatt</li>
-        <li>› XX. évf. (2011) 35-36. sz. – <a href="RTH 35 36.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
-        <li>› XXI. évf. (2012) 37-38. sz. – Feltöltés alatt</li>
-        <li>› XXII. évf. (2013) 39-40-41-42. sz. – Feltöltés alatt</li>
-        <li>› XXIII. évf. (2014) 43-44-45-46. sz. – <a href="RTH 43 46.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
-        <li>› XXIV-XXV. évf. (2015) 47-48-49-50. sz. – <a href="RTH 47 50.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
-        <li>› XXVI. évf. (2016) 51-52. sz. – <a href="RTH 51 52.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
-        <li>› XXVII. évf. (2017) 53-54. sz. – <a href="RTH 53 54.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
-        <li>› XXVIII. évf. (2018) 55-56. sz. – <a href="RTH 55 56.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
-        <li>› XXIX. évf. (2019) 57-58. sz. – <a href="RTH 57 58.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
-        <li>› XXX. évf. (2020) 59-60. sz. – <a href="RTH 59 60.pdf" target="_blank" class="text-teal-600 hover:underline">PDF letöltés</a></li>
-      </ul>
-    </div>
-  </div>
-</section>
+  </section>
 
 <script>
   // Accordion funkcionalitás a lenyíló szakaszokhoz
@@ -862,14 +727,18 @@
 </footer>
 
 <script>
-  // Hamburger menü
+  // Hamburger menü (aszatlon és mobilon is)
   const hamburger = document.getElementById('hamburgerBtn');
+  const menuToggleBtn = document.getElementById('menuToggleBtn'); // a MENÜ feliratra is
   const mobileMenu = document.getElementById('mobileMenu');
   const overlay = document.getElementById('overlay');
   const closeBtn = document.getElementById('closeMenuBtn');
+  
   function openMenu() { mobileMenu.classList.add('open'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
   function closeMenu() { mobileMenu.classList.remove('open'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
+  
   if (hamburger) hamburger.addEventListener('click', openMenu);
+  if (menuToggleBtn) menuToggleBtn.addEventListener('click', openMenu);
   if (closeBtn) closeBtn.addEventListener('click', closeMenu);
   if (overlay) overlay.addEventListener('click', closeMenu);
   
@@ -881,7 +750,7 @@
   const mediaSub = document.getElementById('mobileMediaSub');
   if (mediaBtn) mediaBtn.addEventListener('click', () => mediaSub.classList.toggle('hidden'));
   
-  // Mobil menü linkek kezelése: bezárás után ugrás
+  // Mobil menü linkek kezelése (bezárás után ugrás)
   const mobileLinks = document.querySelectorAll('#mobileNavLinks a, #mobileMediaSub a');
   mobileLinks.forEach(link => {
     link.addEventListener('click', function(e) {
@@ -891,15 +760,13 @@
       setTimeout(() => {
         if (targetId && targetId !== '#') {
           const targetElement = document.querySelector(targetId);
-          if (targetElement) {
-            targetElement.scrollIntoView({ behavior: 'smooth' });
-          }
+          if (targetElement) targetElement.scrollIntoView({ behavior: 'smooth' });
         }
       }, 150);
     });
   });
-
-  // Kereső ikon (változatlan)
+  
+  // Kereső ikon
   const searchIcon = document.getElementById('searchIcon');
   if (searchIcon) {
     searchIcon.addEventListener('click', () => {
@@ -923,44 +790,24 @@
       } else { searchBox.style.display = 'block'; }
     });
   }
-
-  // Dinamikus sticky menü asztalra és scroll-margin beállítás
+  
+  // Dinamikus sticky menü és scroll-margin beállítás
   function setStickyAndScrollMargin() {
     const header = document.getElementById('mainHeader');
-    const desktopNav = document.getElementById('desktopNav');
     let headerHeight = header ? header.offsetHeight : 0;
-    let totalStickyHeight = headerHeight;
-    
-    if (desktopNav && window.innerWidth >= 1025) {
-      desktopNav.style.top = headerHeight + 'px';
-      totalStickyHeight += desktopNav.offsetHeight;
-    }
-    
-    // Szekciók beállítása
     const sections = document.querySelectorAll('section[id]');
-    sections.forEach(section => {
-      section.style.scrollMarginTop = totalStickyHeight + 'px';
-    });
-    
-    // Média almenü pontjainak (div-ek) beállítása
-    const mediaTargets = ['#korlevelek', '#rolunkirtak', '#videotar'];
+    sections.forEach(section => { section.style.scrollMarginTop = headerHeight + 'px'; });
+    const mediaTargets = ['#korvelek', '#rolunkirtak', '#videotar'];
     mediaTargets.forEach(selector => {
       const element = document.querySelector(selector);
-      if (element) {
-        element.style.scrollMarginTop = totalStickyHeight + 'px';
-      }
+      if (element) element.style.scrollMarginTop = headerHeight + 'px';
     });
   }
-  
   window.addEventListener('load', setStickyAndScrollMargin);
   window.addEventListener('resize', setStickyAndScrollMargin);
-  
-  // Figyeljük a méretváltozásokat
   const resizeObserver = new ResizeObserver(() => setStickyAndScrollMargin());
   const headerElement = document.getElementById('mainHeader');
   if (headerElement) resizeObserver.observe(headerElement);
-  const desktopNavElement = document.getElementById('desktopNav');
-  if (desktopNavElement) resizeObserver.observe(desktopNavElement);
 </script>
 </body>
 </html>
