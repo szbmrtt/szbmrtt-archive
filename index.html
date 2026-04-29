@@ -38,25 +38,19 @@
       margin-left: auto;
       margin-right: auto;
     }
-    /* Menü és almenük (csak a mobil menüben, a desktop-nav megszűnt) */
+    /* Menü és almenük (csak a mobil menüben) */
     .group:hover .submenu,
     .group:focus-within .submenu { display: block; }
     .group:hover i, .group:focus-within i { transform: rotate(180deg); }
     .submenu { display: none; transition: all 0.1s ease; }
     .menu-item:focus { background-color: #e2e8f0; outline: none; }
-    .trikolor {
-      height: 4px;
-      width: 60px;
-      background: linear-gradient(to right, #ce1126 33.3%, #ffffff 33.3%, #ffffff 66.6%, #006847 66.6%);
-      margin-bottom: 4px;
-    }
     /* Mobil menü (asztalon is ezt használjuk) */
     .mobile-menu {
       position: fixed;
       top: 0;
       right: -100%;
       width: 80%;
-      max-width: 400px; /* asztalon szélesebb */
+      max-width: 400px;
       height: 100%;
       background-color: white;
       box-shadow: -2px 0 20px rgba(0,0,0,0.1);
@@ -82,6 +76,9 @@
     .mobile-nav-toggle { display: flex; }
     
     .logo-img { width: auto; height: 3rem; object-fit: contain; }
+    @media (min-width: 768px) {
+      .logo-img { height: 4rem; }
+    }
     .portrait-img { width: 100%; height: auto; border-radius: 1rem; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
     /* Grémium kártyák – prémium stílus */
     .gremium-card {
@@ -151,38 +148,41 @@
 <!-- STIKY FEJLÉC (új struktúra) -->
 <header id="mainHeader" class="sticky top-0 z-50 w-full bg-white shadow-sm">
   <div class="max-w-7xl mx-auto px-4 py-3">
-    <!-- Felső sor: bal oldali blokk (logó + SZBMRTT + címsorok) és jobb oldali blokk (kereső, nyelv, menü) -->
-    <div class="flex flex-wrap justify-between items-start gap-4">
+    <!-- Felső sor: bal oldali blokk (logó + szöveges rész) és jobb oldali blokk -->
+    <div class="flex flex-wrap justify-between items-center gap-4">
       
-      <!-- BAL OLDALI BLOKK -->
-      <div class="flex flex-col" style="flex: 0 1 auto; max-width: 45%;">
-        <div class="flex items-center gap-3">
-          <img src="szemere-bertalan-rendvedelem-torteneti-tarsasag-szbmrtt-logo-official.png" 
-               alt="SzBMRTT logó" class="logo-img h-12 md:h-14 w-auto">
-          <span class="font-bold text-2xl md:text-3xl tracking-tighter text-blue-900">SZBMRTT</span>
-        </div>
-        <!-- Piros-fehér-zöld csík, pontosan a SZBMRTT szöveg szélességében -->
-        <div class="mt-1" style="width: fit-content;">
-          <div class="h-1 w-full" style="background: linear-gradient(to right, #ce1126 33.33%, #ffffff 33.33%, #ffffff 66.66%, #006847 66.66%); border-radius: 2px;"></div>
-        </div>
-        <!-- Társaság neve három sorban, a fenti szélességnél nem nagyobb -->
-        <div class="mt-2 text-blue-900 text-sm md:text-base font-semibold leading-tight" style="max-width: 100%;">
-          <p>Szemere Bertalan</p>
-          <p>Magyar Rendvédelem-történeti</p>
-          <p>Tudományos Társaság</p>
+      <!-- BAL OLDALI BLOKK: logó + (SZBMRTT + csík + 3 sor) egymás mellett, középre igazítva -->
+      <div class="flex items-center gap-4">
+        <!-- Logó kép -->
+        <img src="szemere-bertalan-rendvedelem-torteneti-tarsasag-szbmrtt-logo-official.png" 
+             alt="SzBMRTT logó" class="logo-img">
+        
+        <!-- Szöveges blokk (SZBMRTT, csík, 3 sor) -->
+        <div class="flex flex-col items-start">
+          <span class="font-bold text-2xl md:text-3xl tracking-tighter text-gray-900" style="font-family: 'Cormorant Garamond', serif;">SZBMRTT</span>
+          <!-- Piros-fehér-zöld csík, pontosan a szöveg szélességében -->
+          <div class="mt-1" style="width: fit-content;">
+            <div class="h-0.5 w-full" style="background: linear-gradient(to right, #ce1126 33.33%, #ffffff 33.33%, #ffffff 66.66%, #006847 66.66%); background-size: 100% 100%;"></div>
+          </div>
+          <!-- Társaság neve három sorban, nagyon kicsi betűkkel, a fenti szélességhez igazodva -->
+          <div class="mt-1 text-gray-900 leading-tight" style="font-family: 'Cormorant Garamond', serif; font-size: 10px; font-weight: 500; max-width: fit-content;">
+            <p>Szemere Bertalan</p>
+            <p>Magyar Rendvédelem-történeti</p>
+            <p>Tudományos Társaság</p>
+          </div>
         </div>
       </div>
       
       <!-- JOBB OLDALI BLOKK -->
       <div class="flex items-center gap-4">
-        <button id="searchIcon" class="text-blue-900 text-xl hover:text-teal-600 transition"><i class="fas fa-search"></i></button>
+        <button id="searchIcon" class="text-gray-900 text-xl hover:text-teal-600 transition"><i class="fas fa-search"></i></button>
         <div class="flex gap-2">
           <button class="px-3 py-1 border border-teal-600 text-teal-600 rounded-full text-sm font-semibold hover:bg-teal-600 hover:text-white transition">HU</button>
           <button class="px-3 py-1 border border-teal-600 text-teal-600 rounded-full text-sm font-semibold hover:bg-teal-600 hover:text-white transition">EN</button>
         </div>
         <div class="flex items-center gap-2 cursor-pointer" id="menuToggleBtn">
-          <span class="text-blue-900 font-bold text-sm uppercase tracking-wider">MENÜ</span>
-          <button id="hamburgerBtn" class="text-2xl text-blue-900 hover:text-teal-600 transition"><i class="fas fa-bars"></i></button>
+          <span class="text-gray-900 font-bold text-sm uppercase tracking-wider">MENÜ</span>
+          <button id="hamburgerBtn" class="text-2xl text-gray-900 hover:text-teal-600 transition"><i class="fas fa-bars"></i></button>
         </div>
       </div>
     </div>
@@ -613,7 +613,7 @@
               <li>A szerkesztőség fenntartja magának a jogot arra, hogy a szövegben stiláris változtatásokat eszközöljön, illetve a hivatkozási jegyzeteket kiegészítse, továbbá véleményének helyt adjon az írásban, a szerkesztőség feltüntetésével. A szerkesztőség hozzá érkezett kéziratokat és tartozékait nem őrzi meg, és nem küldi vissza, de az elfogadásról, illetve elutasításukról értesíti a szerzőket. A közlésre elfogadott kéziratok szerzőinek a szerkesztőség tiszteletpéldányt küld.</li>
               <li>Periodikánkban az évszázadokat – az idézetek, címek kivételével – római számmal jelöljük.</li>
               <li>A szövegben előforduló neveket mindig teljességre törekvően kell feltüntetni akár személy, intézmény, vagy földrajzi névről van szó. Személyneveknél a vezetéknév és keresztnév mellett a kérdéses időpontban érvényes nemesi rangot, rendfokozatot, illetve beosztást is fel kell tüntetni együttesen a szerzett címekkel (pl. doktorátus). A helységneveknél mindig a magyar nevet kell feltüntetni. Ha más neve is van, és azt a közlendő érthetősége megkívánja, akkor az idegen nyelvű nevet zárójelben kell a magyar név mögött feltüntetni. Intézmények esetében a teljes hivatalos nevet kell használni, mögötte zárójelben a rövidített nevet.</li>
-              <li><strong>Technikai elvárások:</strong> ... (itt a részletes lista, a terjedelem miatt rövidítve, de a teljes verzióban megvan)</li>
+              <li><strong>Technikai elvárások:</strong> ... (a teljes lista a korábbi verzióban)</li>
             </ol>
             <p class="mt-3 text-sm text-gray-500">A részletes hivatkozási minták (könyv, folyóiratcikk, gyűjteményes kötet, internetes forrás, újrahivatkozás stb.) a szerkesztőségtől kérhetők, illetve a nyomtatott útmutató tartalmazza.</p>
           </div>
@@ -727,9 +727,9 @@
 </footer>
 
 <script>
-  // Hamburger menü (aszatlon és mobilon is)
+  // Hamburger menü (asztalon és mobilon is)
   const hamburger = document.getElementById('hamburgerBtn');
-  const menuToggleBtn = document.getElementById('menuToggleBtn'); // a MENÜ feliratra is
+  const menuToggleBtn = document.getElementById('menuToggleBtn');
   const mobileMenu = document.getElementById('mobileMenu');
   const overlay = document.getElementById('overlay');
   const closeBtn = document.getElementById('closeMenuBtn');
@@ -797,7 +797,7 @@
     let headerHeight = header ? header.offsetHeight : 0;
     const sections = document.querySelectorAll('section[id]');
     sections.forEach(section => { section.style.scrollMarginTop = headerHeight + 'px'; });
-    const mediaTargets = ['#korvelek', '#rolunkirtak', '#videotar'];
+    const mediaTargets = ['#korlevelek', '#rolunkirtak', '#videotar'];
     mediaTargets.forEach(selector => {
       const element = document.querySelector(selector);
       if (element) element.style.scrollMarginTop = headerHeight + 'px';
