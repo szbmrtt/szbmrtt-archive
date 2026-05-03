@@ -96,7 +96,30 @@
     .scroll-mt-24 {
       scroll-margin-top: 120px;
     }
-  </style>
+
+    /* Mobil fejléc finomítások */
+    @media (max-width: 768px) {
+      .logo-img-mobile {
+        height: 3rem !important;
+      }
+      .hide-on-mobile {
+        display: none;
+      }
+      .motto-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+        font-size: 0.7rem;
+      }
+      .motto-wrapper span {
+        white-space: nowrap;
+      }
+      .motto-wrapper .separator {
+        display: none;
+      }
+    }
+    </style>
 
   <!-- JSON-LD (ScholarlyOrganization) -->
   <script type="application/ld+json">
@@ -152,12 +175,12 @@
     <div class="flex flex-wrap justify-between items-center gap-4">
       <!-- BAL OLDALI BLOKK -->
       <div class="flex items-center gap-4">
-        <img src="szbmrtt_logo_head001.png" alt="SzBMRTT logó" class="h-24 md:h-28 w-auto">
+        <img src="szbmrtt_logo_head001.png" alt="SzBMRTT logó" class="logo-img-mobile h-24 md:h-28 w-auto">
         <div class="flex flex-col">
           <span class="font-normal text-white tracking-tight" style="font-family: 'Gill Sans', 'Gill Sans MT', 'Tw Cen MT', 'Montserrat', sans-serif; font-size: 20pt; line-height: 1.2;">SZBMRTT</span>
-          <span class="font-light text-white text-lg leading-tight mt-2">Szemere Bertalan</span>
-          <span class="font-light text-white text-lg leading-tight">Magyar Rendvédelem-történeti</span>
-          <span class="font-light text-white text-lg leading-tight">Tudományos Társaság</span>
+          <span class="font-light text-white text-lg leading-tight mt-2 hide-on-mobile">Szemere Bertalan</span>
+          <span class="font-light text-white text-lg leading-tight hide-on-mobile">Magyar Rendvédelem-történeti</span>
+          <span class="font-light text-white text-lg leading-tight hide-on-mobile">Tudományos Társaság</span>
         </div>
       </div>
       <!-- JOBB OLDALI BLOKK -->
@@ -177,11 +200,10 @@
     </div>
   </div>
     <!-- Mottó sáv (áttetsző, a kék fejléc folytatásaként) -->
-<div class="w-full bg-white/20 border-t border-white/30 py-2 text-sm text-white">
-  <div class="max-w-7xl mx-auto px-4 flex flex-wrap justify-center items-center gap-3 md:gap-6">
-    <span class="italic">Cum historia pro securitate! – Történelemmel a biztonságért.</span>
-    <span class="text-white/40 hidden md:inline">|</span>
-    <span class="italic">Veritas nunquam perit. – Az igazság soha nem vész el.</span>
+<div class="w-full bg-white/20 border-t border-white/30 py-1 md:py-2 text-white">
+  <div class="max-w-7xl mx-auto px-4 motto-wrapper">
+    <span class="italic text-xs md:text-sm">Cum historia pro securitate! – Történelemmel a biztonságért.</span>
+    <span class="italic text-xs md:text-sm">Veritas nunquam perit. – Az igazság soha nem vész el.</span>
   </div>
 </div>
 </header>
