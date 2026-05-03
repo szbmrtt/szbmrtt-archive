@@ -226,22 +226,107 @@
 </div>
 <div id="overlay" class="menu-overlay"></div>
 
-<!-- Hero szekció (statikus, később slideshow) -->
-<section class="relative h-[500px] md:h-[600px] flex items-center justify-center text-center text-white overflow-hidden bg-blue-900">
-  <div class="absolute inset-0 bg-blue-900/70 mix-blend-multiply"></div>
-  <div class="absolute inset-0 bg-gradient-to-b from-blue-900/60 via-slate-900/60 to-slate-900/80 z-10"></div>
+<!-- Hero szekció – slideshow háttérképekkel, automatikus és manuális váltással -->
+<section class="relative h-[500px] md:h-[600px] flex items-center justify-center text-center text-white overflow-hidden">
+  <!-- Slideshow képek konténere -->
+  <div class="absolute inset-0 z-0">
+    <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" style="background-image: url('szakmatorteneti-kiallitas-vitrin.jpg'); opacity: 1;"></div>
+    <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" style="background-image: url('dr-paradi-jozsef-szekfoglalo-rtf.jpg'); opacity: 0;"></div>
+    <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" style="background-image: url('szakmatorteneti-kiallitas-sandor-vilmossal.jpg'); opacity: 0;"></div>
+    <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" style="background-image: url('szakmatorteneti-kiallitas-konf.jpg'); opacity: 0;"></div>
+    <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" style="background-image: url('kitunteteseink.jpg'); opacity: 0;"></div>
+    
+    <!-- Alap overlay (50% fekete) minden képen -->
+    <div class="absolute inset-0 bg-black/50 z-10"></div>
+    <!-- Extra overlay a kitüntetéses képhez (összesen 70% fekete) – ezt JS-sel kapcsoljuk be/ki, a hatáshoz -->
+    <div id="extraOverlay" class="absolute inset-0 bg-black/20 z-10 opacity-0 transition-opacity duration-500"></div>
+  </div>
+  
+  <!-- Navigációs gombok (balra/jobbra nyilak) -->
+  <button id="prevSlide" class="absolute left-4 md:left-8 z-30 text-white text-3xl md:text-4xl opacity-50 hover:opacity-100 transition bg-black/30 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center backdrop-blur-sm">‹</button>
+  <button id="nextSlide" class="absolute right-4 md:right-8 z-30 text-white text-3xl md:text-4xl opacity-50 hover:opacity-100 transition bg-black/30 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center backdrop-blur-sm">›</button>
+  
   <div class="relative z-20 px-4 max-w-4xl">
-    <h1 class="text-5xl md:text-6xl font-extrabold drop-shadow-lg leading-tight">
+    <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold drop-shadow-lg leading-tight" style="font-family: 'Open Sans', 'Segoe UI', 'Helvetica Neue', sans-serif; text-shadow: 2px 2px 4px rgba(0,0,0,0.6);">
       Szemere Bertalan<br>
       <span class="text-teal-400">Magyar Rendvédelem-történeti Tudományos Társaság</span>
     </h1>
-    <p class="text-2xl font-light italic text-white/80 mt-4">Üdvözöljük honlapunkon!</p>
+    <p class="text-xl sm:text-2xl font-light italic mt-4 drop-shadow-md" style="font-family: 'Open Sans', 'Segoe UI', 'Helvetica Neue', sans-serif; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">
+      üdvözöljük honlapunkon!
+    </p>
     <div class="flex flex-wrap justify-center gap-5 mt-10">
-      <a href="#bemutatkozas" class="px-8 py-3 border-2 border-teal-600 bg-transparent text-teal-600 rounded-full font-semibold hover:bg-teal-600 hover:text-white transition shadow-md uppercase text-sm tracking-widest">Bemutatkozás</a>
-      <a href="#kiadvanyok" class="px-8 py-3 border-2 border-white/30 bg-white/10 text-white rounded-full font-semibold hover:bg-white/20 transition uppercase text-sm tracking-widest">Kiadványaink</a>
+      <a href="#bemutatkozas" class="px-6 py-2 md:px-8 md:py-3 border-2 border-teal-600 bg-transparent text-teal-600 rounded-full font-semibold hover:bg-teal-600 hover:text-white transition shadow-md uppercase text-sm tracking-widest">Bemutatkozás</a>
+      <a href="#kiadvanyok" class="px-6 py-2 md:px-8 md:py-3 border-2 border-white/30 bg-white/10 text-white rounded-full font-semibold hover:bg-white/20 transition uppercase text-sm tracking-widest">Kiadványaink</a>
     </div>
   </div>
 </section>
+
+<script>
+  (function() {
+    // Slideshow adatok
+    const slides = document.querySelectorAll('.slide-image');
+    if (!slides.length) return;
+    let current = 0;
+    const total = slides.length;
+    const intervalTime = 5000; // 5 másodperc
+    const extraOverlay = document.getElementById('extraOverlay');
+    
+    // Az extra overlay csak a kitüntetéses képen (utolsó) legyen aktív
+    function updateExtraOverlay(index) {
+      if (!extraOverlay) return;
+      // Az utolsó kép indexe: total-1 (kitunteteseink.jpg)
+      if (index === total - 1) {
+        extraOverlay.classList.remove('opacity-0');
+        extraOverlay.classList.add('opacity-100');
+      } else {
+        extraOverlay.classList.remove('opacity-100');
+        extraOverlay.classList.add('opacity-0');
+      }
+    }
+    
+    // Képváltás funkció
+    function setSlide(index) {
+      if (index < 0) index = total - 1;
+      if (index >= total) index = 0;
+      // Az összes kép opacitása 0
+      slides.forEach(slide => slide.style.opacity = '0');
+      slides[index].style.opacity = '1';
+      current = index;
+      updateExtraOverlay(current);
+    }
+    
+    // Következő kép
+    function nextSlide() {
+      setSlide(current + 1);
+    }
+    
+    // Előző kép
+    function prevSlide() {
+      setSlide(current - 1);
+    }
+    
+    // Automatikus váltás indítása
+    let interval = setInterval(nextSlide, intervalTime);
+    
+    // Navigációs gombok eseménykezelői
+    const prevBtn = document.getElementById('prevSlide');
+    const nextBtn = document.getElementById('nextSlide');
+    if (prevBtn) prevBtn.addEventListener('click', () => {
+      prevSlide();
+      // Az automatikus időzítő újraindítása (hogy ne zavarja a manuális váltás utáni ütemezést)
+      clearInterval(interval);
+      interval = setInterval(nextSlide, intervalTime);
+    });
+    if (nextBtn) nextBtn.addEventListener('click', () => {
+      nextSlide();
+      clearInterval(interval);
+      interval = setInterval(nextSlide, intervalTime);
+    });
+    
+    // Inicializálás (az első kép és az overlay beállítása)
+    setSlide(0);
+  })();
+</script>
 
 <main>
 <!-- ================= BEMUTATKOZÁS SZEKCIÓ ================= -->
