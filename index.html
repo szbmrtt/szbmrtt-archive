@@ -6,9 +6,10 @@
   <title>SzBMRTT - Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</title>
   <meta name="description" content="A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság hivatalos honlapja. Bemutatkozás, rendvédelem-történeti diszciplína, szervezet, rendezvények, kiadványok.">
   
-  <!-- Google Fonts: Inter + Cormorant Garamond -->
+  <!-- Google Fonts: Inter + Cormorant Garamond + Montserrat (a Gill Sans alternatívájaként) -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -77,7 +78,7 @@
     
     .logo-img { width: auto; height: 3rem; object-fit: contain; }
     @media (min-width: 768px) {
-      .logo-img { height: 4rem; }
+      .logo-img { height: auto; max-height: 4rem; width: auto; }
     }
     .portrait-img { width: 100%; height: auto; border-radius: 1rem; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
     /* Grémium kártyák – prémium stílus */
@@ -145,58 +146,36 @@
 </head>
 <body class="font-sans text-gray-900">
 
-<!-- STIKY FEJLÉC (új struktúra) -->
-<header id="mainHeader" class="sticky top-0 z-50 w-full bg-white shadow-sm">
+<!-- STIKY FEJLÉC (új struktúra, kék háttér, Gill Sans, logó + SzBMRTT) -->
+<header id="mainHeader" class="sticky top-0 z-50 w-full shadow-sm" style="background-color: #004E82;">
   <div class="max-w-7xl mx-auto px-4 py-3">
-    <!-- Felső sor: bal oldali blokk (logó + szöveges rész) és jobb oldali blokk -->
+    <!-- Felső sor: bal oldali blokk (logó + SzBMRTT) és jobb oldali blokk -->
     <div class="flex flex-wrap justify-between items-center gap-4">
       
-      <!-- BAL OLDALI BLOKK: logó + (SZBMRTT + csík + 3 sor) egymás mellett, középre igazítva -->
-      <div class="flex items-center gap-4">
-        <!-- Logó kép -->
-        <img src="szemere-bertalan-rendvedelem-torteneti-tarsasag-szbmrtt-logo-official.png" 
-             alt="SzBMRTT logó" class="logo-img">
-        
-        <!-- Szöveges blokk (SZBMRTT, csík, 3 sor) -->
-        <div class="flex flex-col items-start">
-          <span class="font-bold text-2xl md:text-3xl tracking-tighter text-gray-900" style="font-family: 'Cormorant Garamond', serif;">SZBMRTT</span>
-          <!-- Piros-fehér-zöld csík, pontosan a szöveg szélességében -->
-          <div class="mt-1" style="width: fit-content;">
-            <div class="h-0.5 w-full" style="background: linear-gradient(to right, #ce1126 33.33%, #ffffff 33.33%, #ffffff 66.66%, #006847 66.66%); background-size: 100% 100%;"></div>
-          </div>
-          <!-- Társaság neve három sorban, nagyon kicsi betűkkel, a fenti szélességhez igazodva -->
-          <div class="mt-1 text-gray-900 leading-tight" style="font-family: 'Cormorant Garamond', serif; font-size: 10px; font-weight: 500; max-width: fit-content;">
-            <p>Szemere Bertalan</p>
-            <p>Magyar Rendvédelem-történeti</p>
-            <p>Tudományos Társaság</p>
-          </div>
-        </div>
+      <!-- BAL OLDALI BLOKK -->
+      <div class="flex items-center gap-3">
+        <!-- Logó kép (új fájl) -->
+        <img src="szbmrtt_logo_head001.jpg" 
+             alt="SzBMRTT logó" class="logo-img" style="max-height: 60px; width: auto;">
+        <!-- SzBMRTT felirat: Gill Sans, 20pt, sorköz 20.5pt, fehér -->
+        <span class="font-bold tracking-tighter text-white" style="font-family: 'Gill Sans', 'Gill Sans MT', 'Tw Cen MT', 'Montserrat', sans-serif; font-size: 20pt; line-height: 20.5pt;">SzBMRTT</span>
       </div>
       
       <!-- JOBB OLDALI BLOKK -->
       <div class="flex items-center gap-4">
-        <button id="searchIcon" class="text-gray-900 text-xl hover:text-teal-600 transition"><i class="fas fa-search"></i></button>
+        <button id="searchIcon" class="text-white text-xl hover:text-gray-300 transition"><i class="fas fa-search"></i></button>
         <div class="flex gap-2">
-          <button class="px-3 py-1 border border-teal-600 text-teal-600 rounded-full text-sm font-semibold hover:bg-teal-600 hover:text-white transition">HU</button>
-          <button class="px-3 py-1 border border-teal-600 text-teal-600 rounded-full text-sm font-semibold hover:bg-teal-600 hover:text-white transition">EN</button>
+          <button class="px-3 py-1 border border-white text-white rounded-full text-sm font-semibold hover:bg-white hover:text-[#004E82] transition">HU</button>
+          <button class="px-3 py-1 border border-white text-white rounded-full text-sm font-semibold hover:bg-white hover:text-[#004E82] transition">EN</button>
         </div>
         <div class="flex items-center gap-2 cursor-pointer" id="menuToggleBtn">
-          <span class="text-gray-900 font-bold text-sm uppercase tracking-wider">MENÜ</span>
-          <button id="hamburgerBtn" class="text-2xl text-gray-900 hover:text-teal-600 transition"><i class="fas fa-bars"></i></button>
+          <span class="text-white font-bold text-sm uppercase tracking-wider">MENÜ</span>
+          <button id="hamburgerBtn" class="text-2xl text-white hover:text-gray-300 transition"><i class="fas fa-bars"></i></button>
         </div>
       </div>
     </div>
   </div>
-  
-  <!-- MOTTÓ SOR (Cum historia... - logó nélkül, balra igazítva, elválasztó vonallal) -->
-  <div class="border-t border-gray-100">
-    <div class="max-w-7xl mx-auto px-4 py-2">
-      <div class="text-gray-500 font-light italic text-sm md:text-base">
-        <p>Cum historia pro securitate.</p>
-        <p>Történelemmel a biztonságért.</p>
-      </div>
-    </div>
-  </div>
+  <!-- Mottó sor eltávolítva (a hero-ban lesz) -->
 </header>
 
 <!-- Mobil menü (asztalon is ez nyílik) -->
@@ -797,7 +776,7 @@
     let headerHeight = header ? header.offsetHeight : 0;
     const sections = document.querySelectorAll('section[id]');
     sections.forEach(section => { section.style.scrollMarginTop = headerHeight + 'px'; });
-    const mediaTargets = ['#korlevelek', '#rolunkirtak', '#videotar'];
+    const mediaTargets = ['#korvelelek', '#rolunkirtak', '#videotar'];
     mediaTargets.forEach(selector => {
       const element = document.querySelector(selector);
       if (element) element.style.scrollMarginTop = headerHeight + 'px';
