@@ -146,36 +146,34 @@
 </head>
 <body class="font-sans text-gray-900">
 
-<!-- STIKY FEJLÉC (új struktúra, kék háttér, Gill Sans, logó + SzBMRTT) -->
+<!-- STIKY FEJLÉC (új, kék háttér, Gill Sans, jobb oldali blokk) -->
 <header id="mainHeader" class="sticky top-0 z-50 w-full shadow-sm" style="background-color: #004E82;">
   <div class="max-w-7xl mx-auto px-4 py-3">
-    <!-- Felső sor: bal oldali blokk (logó + SzBMRTT) és jobb oldali blokk -->
     <div class="flex flex-wrap justify-between items-center gap-4">
       
-      <!-- BAL OLDALI BLOKK -->
+      <!-- BAL OLDALI BLOKK: logó + SzBMRTT felirat -->
       <div class="flex items-center gap-3">
-        <!-- Logó kép (új fájl) -->
-        <img src="szbmrtt_logo_head001.jpg" 
-             alt="SzBMRTT logó" class="logo-img" style="max-height: 60px; width: auto;">
-        <!-- SzBMRTT felirat: Gill Sans, 20pt, sorköz 20.5pt, fehér -->
-        <span class="font-bold tracking-tighter text-white" style="font-family: 'Gill Sans', 'Gill Sans MT', 'Tw Cen MT', 'Montserrat', sans-serif; font-size: 20pt; line-height: 20.5pt;">SzBMRTT</span>
+        <img src="szbmrtt_logo_head001.png" alt="SzBMRTT logó" class="h-12 md:h-14 w-auto">
+        <span class="font-bold text-white tracking-tight" style="font-family: 'Gill Sans', 'Gill Sans MT', 'Tw Cen MT', 'Montserrat', sans-serif; font-size: 20pt; line-height: 20.5pt;">SzBMRTT</span>
       </div>
       
       <!-- JOBB OLDALI BLOKK -->
       <div class="flex items-center gap-4">
-        <button id="searchIcon" class="text-white text-xl hover:text-gray-300 transition"><i class="fas fa-search"></i></button>
+        <!-- Kereső ikon -->
+        <button id="searchIcon" class="text-white text-xl hover:text-gray-200 transition"><i class="fas fa-search"></i></button>
+        <!-- Nyelvválasztó (fehér keret) -->
         <div class="flex gap-2">
           <button class="px-3 py-1 border border-white text-white rounded-full text-sm font-semibold hover:bg-white hover:text-[#004E82] transition">HU</button>
           <button class="px-3 py-1 border border-white text-white rounded-full text-sm font-semibold hover:bg-white hover:text-[#004E82] transition">EN</button>
         </div>
+        <!-- MENÜ felirat + hamburger -->
         <div class="flex items-center gap-2 cursor-pointer" id="menuToggleBtn">
           <span class="text-white font-bold text-sm uppercase tracking-wider">MENÜ</span>
-          <button id="hamburgerBtn" class="text-2xl text-white hover:text-gray-300 transition"><i class="fas fa-bars"></i></button>
+          <button id="hamburgerBtn" class="text-2xl text-white hover:text-gray-200 transition"><i class="fas fa-bars"></i></button>
         </div>
       </div>
     </div>
   </div>
-  <!-- Mottó sor eltávolítva (a hero-ban lesz) -->
 </header>
 
 <!-- Mobil menü (asztalon is ez nyílik) -->
