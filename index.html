@@ -14,12 +14,13 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   
-  <style>
+<style>
     /* Alap beállítások */
     html { scroll-behavior: smooth; }
     body { 
       font-family: 'Inter', sans-serif; 
-      background-color: #f9f9f6; /* törtfehér */
+      background-color: #f9f9f6;
+      overflow-x: hidden;
     }
     /* Címsorok – szerif, elegáns */
     h1, h2, h3, h4, .serif-heading {
@@ -31,7 +32,7 @@
     .accent-line {
       width: 80px;
       height: 2px;
-      background-color: #0d9488; /* teal-600 */
+      background-color: #0d9488;
       margin-top: 0.75rem;
       margin-bottom: 1.5rem;
     }
@@ -91,13 +92,20 @@
     .gremium-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.1);
-      border-color: #14b8a6; /* teal-500 */
+      border-color: #14b8a6;
     }
     .scroll-mt-24 {
       scroll-margin-top: 120px;
     }
 
-    /* Mobil fejléc finomítások */
+    /* HEADER STICKY – BIZTOSÍTÁS */
+    #mainHeader {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    /* MOBIL FINOMÍTÁSOK (logó mérete, elemek elrejtése, mottók) */
     @media (max-width: 768px) {
       .logo-img-mobile {
         height: 3rem !important;
@@ -119,7 +127,7 @@
         display: none;
       }
     }
-    </style>
+</style>
 
   <!-- JSON-LD (ScholarlyOrganization) -->
   <script type="application/ld+json">
