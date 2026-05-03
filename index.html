@@ -163,9 +163,11 @@
       <!-- JOBB OLDALI BLOKK -->
       <div class="flex items-center gap-4">
         <button id="searchIcon" class="text-white text-xl hover:text-gray-200 transition"><i class="fas fa-search"></i></button>
-        <div class="flex gap-2">
-          <button class="px-3 py-1 border border-white text-white rounded-full text-sm font-semibold hover:bg-white hover:text-[#004E82] transition">HU</button>
-          <button class="px-3 py-1 border border-white text-white rounded-full text-sm font-semibold hover:bg-white hover:text-[#004E82] transition">EN</button>
+        <div class="flex items-center gap-2">
+          <!-- HU gomb (aktív) -->
+          <button class="px-3 py-1 bg-white text-blue-900 rounded-md text-sm font-semibold shadow-sm cursor-default">HU</button>
+          <!-- EN gomb (inaktív, az angol oldalra mutat) -->
+          <a href="en/index.html" class="px-3 py-1 bg-gray-500 text-white rounded-md text-sm font-semibold hover:bg-gray-600 transition shadow-sm">EN</a>
         </div>
         <div class="flex items-center gap-2 cursor-pointer" id="menuToggleBtn">
           <span class="text-white font-bold text-sm uppercase tracking-wider">MENÜ</span>
