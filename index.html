@@ -6,7 +6,7 @@
   <title>SzBMRTT - Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</title>
   <meta name="description" content="A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság hivatalos honlapja. Bemutatkozás, rendvédelem-történeti diszciplína, szervezet, rendezvények, kiadványok.">
   
-  <!-- Google Fonts: Inter + Cormorant Garamond + Montserrat (a Gill Sans alternatívájaként) -->
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -20,7 +20,7 @@
     body { 
       font-family: 'Inter', sans-serif; 
       background-color: #f9f9f6;
-      overflow-x: hidden;
+      overflow-x: clip;   /* hidden helyett clip – nem töri meg a sticky-t */
     }
     /* Címsorok – szerif, elegáns */
     h1, h2, h3, h4, .serif-heading {
@@ -98,14 +98,16 @@
       scroll-margin-top: 120px;
     }
 
-    /* HEADER STICKY – BIZTOSÍTÁS */
+    /* HEADER STICKY – BIZTOSÍTÁS (erősebb) */
     #mainHeader {
-      position: sticky;
-      top: 0;
-      z-index: 50;
+      position: -webkit-sticky; /* Safari */
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 50 !important;
+      background-color: #004E82; /* biztosítsuk a hátteret */
     }
 
-    /* MOBIL FINOMÍTÁSOK (logó mérete, elemek elrejtése, mottók) */
+    /* MOBIL FINOMÍTÁSOK (logó mérete, elemek elrejtése) */
     @media (max-width: 768px) {
       .logo-img-mobile {
         height: 3rem !important;
