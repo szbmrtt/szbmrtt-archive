@@ -201,32 +201,36 @@
 </div>
 <div id="overlay" class="menu-overlay"></div>
 
-<!-- Hero slideshow -->
-<section id="hero" class="relative w-full aspect-[16/9] flex items-center justify-center text-center text-white overflow-hidden scroll-mt-24">
+<!-- Hero slideshow (overlay nélkül) + külön szöveges sáv -->
+<section id="hero" class="relative w-full aspect-[16/9] overflow-hidden scroll-mt-24">
   <div class="absolute inset-0 z-0">
     <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" style="background-image: url('szakmatorteneti-kiallitas-vitrin.jpg'); opacity: 1;"></div>
     <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" style="background-image: url('dr-paradi-jozsef-szekfoglalo-rtf.jpg'); opacity: 0;"></div>
     <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" style="background-image: url('szakmatorteneti-kiallitas-sandor-vilmossal.jpg'); opacity: 0;"></div>
     <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" style="background-image: url('szakmatorteneti-kiallitas-konf.jpg'); opacity: 0;"></div>
     <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" style="background-image: url('kitunteteseink.jpg'); opacity: 0;"></div>
-    <div class="absolute inset-0 bg-black/50 z-10"></div>
-    <div id="extraOverlay" class="absolute inset-0 bg-black/20 z-10 opacity-0 transition-opacity duration-500"></div>
+    <!-- Overlay teljesen eltávolítva -->
   </div>
   <button id="prevSlide" class="absolute left-4 md:left-8 z-30 text-white text-3xl md:text-4xl opacity-50 hover:opacity-100 transition bg-black/30 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center backdrop-blur-sm">‹</button>
   <button id="nextSlide" class="absolute right-4 md:right-8 z-30 text-white text-3xl md:text-4xl opacity-50 hover:opacity-100 transition bg-black/30 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center backdrop-blur-sm">›</button>
-  <div class="relative z-20 px-4 max-w-4xl">
-    <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold drop-shadow-lg leading-tight" style="font-family: 'Open Sans', 'Segoe UI', sans-serif; text-shadow: 2px 2px 4px rgba(0,0,0,0.6);">
+</section>
+
+<!-- Szöveges sáv (a slideshow alatt) -->
+<div class="w-full bg-gray-100 py-6 md:py-8 px-4">
+  <div class="max-w-7xl mx-auto">
+    <h1 class="hero-title text-xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight mb-2" style="font-family: 'Inter', 'Segoe UI', sans-serif;">
       Szemere Bertalan<br>
-      <span class="text-teal-400">Magyar Rendvédelem-történeti Tudományos Társaság</span>
+      <span class="text-teal-600">Magyar Rendvédelem-történeti Tudományos Társaság</span>
     </h1>
-    <p class="text-xl sm:text-2xl font-light italic mt-4 drop-shadow-md" style="font-family: 'Open Sans', 'Segoe UI', sans-serif; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">
+    <p class="hero-subtitle text-base md:text-xl font-light italic text-gray-600 mb-4 md:mb-5">
       üdvözöljük honlapunkon!
     </p>
-    <div class="flex flex-wrap justify-center gap-5 mt-10">
-      <a href="#bemutatkozas" class="px-6 py-2 md:px-8 md:py-3 border-2 border-teal-600 bg-transparent text-teal-600 rounded-full font-semibold hover:bg-teal-600 hover:text-white transition shadow-md uppercase text-sm tracking-widest">Bemutatkozás</a>
-      <a href="#kiadvanyok" class="px-6 py-2 md:px-8 md:py-3 border-2 border-white/30 bg-white/10 text-white rounded-full font-semibold hover:bg-white/20 transition uppercase text-sm tracking-widest">Kiadványaink</a>
+    <div class="flex flex-wrap gap-3">
+      <a href="#bemutatkozas" class="px-4 py-2 md:px-6 md:py-2 border-2 border-teal-600 bg-transparent text-teal-600 rounded-full font-semibold hover:bg-teal-600 hover:text-white transition shadow-sm uppercase text-xs md:text-sm tracking-widest">Bemutatkozás</a>
+      <a href="#kiadvanyok" class="px-4 py-2 md:px-6 md:py-2 border-2 border-gray-400 bg-transparent text-gray-700 rounded-full font-semibold hover:bg-gray-400 hover:text-white transition uppercase text-xs md:text-sm tracking-widest">Kiadványaink</a>
     </div>
   </div>
+</div>
 </section>
 
 <main>
