@@ -192,57 +192,39 @@
 </div>
 <div id="overlay" class="menu-overlay"></div>
 
-<!-- Hero slideshow szekció -->
-<section class="relative h-[500px] md:h-[700px] flex items-center justify-center text-center text-white overflow-hidden bg-slate-900">
+<!-- Hero szekció – hibrid reszponzív (aspect-ratio 16/9, tipográfiai hierarchia) -->
+<section class="relative w-full overflow-hidden" style="aspect-ratio: 16 / 9; max-height: 85vh;">
+  <!-- Slideshow képek réteg (z-0) -->
   <div class="absolute inset-0 z-0">
-    <!-- 1. Szakmatörténeti kiállítás vitrin (Színes) -->
-    <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" 
-         style="background-image: url('szakmatorteneti-kiallitas-vitrin.jpg'); opacity: 1;"></div>
-    
-    <!-- 2. Dr. Parádi József (Fekete-fehér technikai javaslat szerint) -->
-    <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out grayscale" 
-         style="background-image: url('dr-paradi-jozsef-szekfoglalo-rtf.jpg'); opacity: 0;"></div>
-    
-    <!-- 3. Szakmatörténeti kiállítás Sándor Vilmossal -->
-    <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" 
-         style="background-image: url('szakmatorteneti-kiallitas-sandor-vilmossal.jpg'); opacity: 0;"></div>
-    
-    <!-- 4. Konferencia kép -->
-    <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" 
-         style="background-image: url('szakmatorteneti-kiallitas-konf.jpg'); opacity: 0;"></div>
-    
-    <!-- 5. Kitüntetéseink (Erősebb overlay technikai javaslat szerint) -->
-    <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" 
-         style="background-image: url('kitunteteseink.jpg'); opacity: 0;"></div>
-    
-    <!-- Általános sötétítő réteg a láthatóságért -->
-    <div class="absolute inset-0 bg-black/45 z-10"></div>
+    <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" style="background-image: url('szakmatorteneti-kiallitas-vitrin.jpg'); opacity: 1;"></div>
+    <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" style="background-image: url('dr-paradi-jozsef-szekfoglalo-rtf.jpg'); opacity: 0;"></div>
+    <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" style="background-image: url('szakmatorteneti-kiallitas-sandor-vilmossal.jpg'); opacity: 0;"></div>
+    <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" style="background-image: url('szakmatorteneti-kiallitas-konf.jpg'); opacity: 0;"></div>
+    <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" style="background-image: url('kitunteteseink.jpg'); opacity: 0;"></div>
+    <!-- Sötét overlay (z-10) -->
+    <div class="absolute inset-0 bg-black/50 z-10"></div>
+    <!-- Extra overlay a kitüntetéses képhez (összesen 70%) -->
+    <div id="extraOverlay" class="absolute inset-0 bg-black/20 z-10 opacity-0 transition-opacity duration-500"></div>
   </div>
 
-  <!-- Vezérlő gombok -->
-  <button id="prevSlide" class="absolute left-4 z-30 text-white/50 hover:text-white transition-all bg-black/20 hover:bg-black/40 rounded-full w-12 h-12 flex items-center justify-center backdrop-blur-sm text-2xl">‹</button>
-  <button id="nextSlide" class="absolute right-4 z-30 text-white/50 hover:text-white transition-all bg-black/20 hover:bg-black/40 rounded-full w-12 h-12 flex items-center justify-center backdrop-blur-sm text-2xl">›</button>
+  <!-- Navigációs nyilak (z-30) -->
+  <button id="prevSlide" class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-30 text-white text-2xl md:text-3xl opacity-60 hover:opacity-100 transition bg-black/30 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center backdrop-blur-sm">‹</button>
+  <button id="nextSlide" class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-30 text-white text-2xl md:text-3xl opacity-60 hover:opacity-100 transition bg-black/30 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center backdrop-blur-sm">›</button>
 
-  <!-- Szöveges tartalom -->
-  <div class="relative z-20 px-6 max-w-5xl">
-    <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold leading-tight tracking-tight mb-4" 
-        style="font-family: 'Open Sans', sans-serif; text-shadow: 3px 3px 6px rgba(0,0,0,0.8);">
+  <!-- Tartalom réteg (z-20) – függőleges/vízszintes középre igazítva -->
+  <div class="relative z-20 flex flex-col items-center justify-center w-full h-full px-4 text-center">
+    <h1 class="hero-title text-[1.5rem] sm:text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-2 md:mb-4" 
+        style="font-family: 'Open Sans', 'Segoe UI', sans-serif; color: #ffffff !important; text-shadow: 2px 2px 8px rgba(0,0,0,0.9);">
       Szemere Bertalan<br>
       <span class="text-teal-400">Magyar Rendvédelem-történeti Tudományos Társaság</span>
     </h1>
-    
-    <p class="text-xl md:text-2xl font-light italic mb-10 opacity-90" 
-       style="font-family: 'Open Sans', sans-serif; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
+    <p class="hero-subtitle text-base sm:text-lg md:text-2xl font-light italic mt-1 md:mt-2" 
+       style="font-family: 'Open Sans', 'Segoe UI', sans-serif; color: #ffffff !important; text-shadow: 1px 1px 4px rgba(0,0,0,0.8);">
       üdvözöljük honlapunkon!
     </p>
-
-    <div class="flex flex-wrap justify-center gap-4 mt-6">
-      <a href="#bemutatkozas" class="px-8 py-3 bg-teal-600 hover:bg-teal-700 text-white rounded-full font-semibold transition-all shadow-lg uppercase text-sm tracking-widest">
-        Bemutatkozás
-      </a>
-      <a href="#kiadvanyok" class="px-8 py-3 border-2 border-white/50 bg-white/5 hover:bg-white/20 text-white rounded-full font-semibold transition-all backdrop-blur-sm uppercase text-sm tracking-widest">
-        Kiadványaink
-      </a>
+    <div class="flex flex-wrap justify-center gap-3 md:gap-5 mt-4 md:mt-8">
+      <a href="#bemutatkozas" class="px-4 py-2 md:px-6 md:py-3 border-2 border-teal-600 bg-transparent text-teal-600 rounded-full font-semibold hover:bg-teal-600 hover:text-white transition shadow-md uppercase text-xs md:text-sm tracking-widest">Bemutatkozás</a>
+      <a href="#kiadvanyok" class="px-4 py-2 md:px-6 md:py-3 border-2 border-white/30 bg-white/10 text-white rounded-full font-semibold hover:bg-white/20 transition uppercase text-xs md:text-sm tracking-widest">Kiadványaink</a>
     </div>
   </div>
 </section>
