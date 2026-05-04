@@ -201,18 +201,18 @@
 </div>
 <div id="overlay" class="menu-overlay"></div>
 
-<!-- Hero slideshow (overlay nélkül) + külön szöveges sáv -->
-<section id="hero" class="relative w-full aspect-[16/9] overflow-hidden scroll-mt-24">
-  <div class="absolute inset-0 z-0">
+<!-- Hero slideshow (16:9 – padding-bottom trükk) -->
+<section id="hero" class="relative w-full overflow-hidden scroll-mt-24" style="padding-bottom: 56.25%;">
+  <div class="absolute inset-0">
     <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" style="background-image: url('szakmatorteneti-kiallitas-vitrin.jpg'); opacity: 1;"></div>
     <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" style="background-image: url('dr-paradi-jozsef-szekfoglalo-rtf.jpg'); opacity: 0;"></div>
     <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" style="background-image: url('szakmatorteneti-kiallitas-sandor-vilmossal.jpg'); opacity: 0;"></div>
     <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" style="background-image: url('szakmatorteneti-kiallitas-konf.jpg'); opacity: 0;"></div>
     <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" style="background-image: url('kitunteteseink.jpg'); opacity: 0;"></div>
-    <!-- Overlay teljesen eltávolítva -->
+    <!-- NAVIGÁCIÓS NYILAK (a képek fölé kell pozícionálni) -->
+    <button id="prevSlide" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-30 text-white text-3xl md:text-4xl opacity-50 hover:opacity-100 transition bg-black/30 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center backdrop-blur-sm">‹</button>
+    <button id="nextSlide" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-30 text-white text-3xl md:text-4xl opacity-50 hover:opacity-100 transition bg-black/30 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center backdrop-blur-sm">›</button>
   </div>
-  <button id="prevSlide" class="absolute left-4 md:left-8 z-30 text-white text-3xl md:text-4xl opacity-50 hover:opacity-100 transition bg-black/30 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center backdrop-blur-sm">‹</button>
-  <button id="nextSlide" class="absolute right-4 md:right-8 z-30 text-white text-3xl md:text-4xl opacity-50 hover:opacity-100 transition bg-black/30 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center backdrop-blur-sm">›</button>
 </section>
 
 <!-- Szöveges sáv (a slideshow alatt) -->
