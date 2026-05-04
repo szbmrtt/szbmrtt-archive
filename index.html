@@ -75,6 +75,33 @@
       z-index: 50 !important;
       background-color: #004E82;
     }
+    
+    /* ========== SLIDESHOW MÓDOSÍTÁSOK: nincs vágás, contain ========== */
+    #hero {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;  /* 16:9 arány megtartva */
+      background-color: #111; /* sötét háttér a kitöltetlen részekhez (sávok) */
+      overflow: hidden;
+    }
+    .slide-image {
+      background-size: contain !important;  /* teljes kép látszik, nem vág */
+      background-repeat: no-repeat;
+      background-position: center;
+      transition: opacity 2s ease-in-out;
+    }
+    
+    /* Asztali nézetben méretkorlátozás, hogy ne kelljen görgetni a hero alá */
+    @media (min-width: 1025px) {
+      #hero {
+        max-width: min(90vw, 1200px);   /* szélesség max. 1200px vagy 90vw */
+        max-height: 70vh;               /* magasság max. a viewport 70%-a */
+        margin: 2rem auto;              /* középre igazítás, felül-alul hely */
+      }
+      /* A max-height felülírja a szélességet az arány miatt – ez jó */
+    }
+    
+    /* Mobil nézetben a szöveges sáv módosításai */
     @media (max-width: 768px) {
       .logo-img-mobile { height: 3rem !important; }
       .hide-on-mobile { display: none; }
@@ -84,21 +111,19 @@
       .mobile-header-right {
         gap: 0.5rem !important;
       }
-
-      /* Mobil nézetben a hero alatti szöveges sáv módosításai */
       .hero-text-mobile .hero-title {
-        font-size: 1.125rem !important; /* 18px */
+        font-size: 1.125rem !important;
         font-family: 'Inter', sans-serif !important;
       }
       .hero-text-mobile .hero-subtitle {
-        font-size: 0.875rem !important; /* 14px */
+        font-size: 0.875rem !important;
         font-family: 'Inter', sans-serif !important;
       }
       .hero-text-mobile .btn-group {
         display: none !important;
       }
       .hero-text-mobile {
-        padding: 1rem 1rem !important; /* kisebb padding */
+        padding: 1rem 1rem !important;
       }
     }
   </style>
@@ -214,8 +239,8 @@
 </div>
 <div id="overlay" class="menu-overlay"></div>
 
-<!-- Hero slideshow (16:9 – padding-bottom trükk) -->
-<section id="hero" class="relative w-full overflow-hidden scroll-mt-24" style="padding-bottom: 56.25%;">
+<!-- Hero slideshow (16:9, contain, asztali nézetben méretkorlát) -->
+<section id="hero" class="relative w-full overflow-hidden scroll-mt-24">
   <div class="absolute inset-0">
     <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" style="background-image: url('szakmatorteneti-kiallitas-vitrin.jpg'); opacity: 1;"></div>
     <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" style="background-image: url('dr-paradi-jozsef-szekfoglalo-rtf.jpg'); opacity: 0;"></div>
