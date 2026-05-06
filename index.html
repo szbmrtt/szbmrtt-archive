@@ -239,14 +239,18 @@
 </div>
 <div id="overlay" class="menu-overlay"></div>
 
-<!-- Hero slideshow (16:9, contain, asztali nézetben méretkorlát) -->
+<!-- Hero slideshow (16:9, contain, 4 kép a megadott fájlnevekkel) -->
 <section id="hero" class="relative w-full overflow-hidden scroll-mt-24">
   <div class="absolute inset-0">
-    <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" style="background-image: url('szakmatorteneti-kiallitas-vitrin.jpg'); opacity: 1;"></div>
-    <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" style="background-image: url('dr-paradi-jozsef-szekfoglalo-rtf.jpg'); opacity: 0;"></div>
-    <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" style="background-image: url('szakmatorteneti-kiallitas-sandor-vilmossal.jpg'); opacity: 0;"></div>
-    <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" style="background-image: url('szakmatorteneti-kiallitas-konf.jpg'); opacity: 0;"></div>
-    <div class="slide-image absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ease-in-out" style="background-image: url('kitunteteseink.jpg'); opacity: 0;"></div>
+    <!-- 1. kép -->
+    <div class="slide-image absolute inset-0 transition-opacity duration-2000 ease-in-out" style="background-image: url('szbmrtt-president-dr-jozsef-paradi-inauguration-law-enforcement.jpg'); background-size: contain; background-position: center; background-repeat: no-repeat; opacity: 1;"></div>
+    <!-- 2. kép -->
+    <div class="slide-image absolute inset-0 transition-opacity duration-2000 ease-in-out" style="background-image: url('szbmrtt-nbsz-national-security-service-conference-budapest.jpg'); background-size: contain; background-position: center; background-repeat: no-repeat; opacity: 0;"></div>
+    <!-- 3. kép -->
+    <div class="slide-image absolute inset-0 transition-opacity duration-2000 ease-in-out" style="background-image: url('reconnaissance-service-manual-1872-book-launch-szbmrtt-intelligence.jpg'); background-size: contain; background-position: center; background-repeat: no-repeat; opacity: 0;"></div>
+    <!-- 4. kép -->
+    <div class="slide-image absolute inset-0 transition-opacity duration-2000 ease-in-out" style="background-image: url('szbmrtt-honorary-awards-sandor-zeidler-design-medals.jpg'); background-size: contain; background-position: center; background-repeat: no-repeat; opacity: 0;"></div>
+    
     <button id="prevSlide" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-30 text-white text-3xl md:text-4xl opacity-50 hover:opacity-100 transition bg-black/30 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center backdrop-blur-sm">‹</button>
     <button id="nextSlide" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-30 text-white text-3xl md:text-4xl opacity-50 hover:opacity-100 transition bg-black/30 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center backdrop-blur-sm">›</button>
   </div>
