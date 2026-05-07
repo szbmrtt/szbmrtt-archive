@@ -3,649 +3,429 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>SzBMRTT - Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</title>
-  <meta name="description" content="A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság hivatalos honlapja. Bemutatkozás, rendvédelem-történeti diszciplína, szervezet, rendezvények, kiadványok.">
-  
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
-  
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  
+  <title>SzBMRTT - Hero Slideshow</title>
   <style>
-    html { scroll-behavior: smooth; }
-    body { 
-      font-family: 'Inter', sans-serif; 
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
       background-color: #f9f9f6;
-      overflow-x: clip;
     }
-    h1, h2, h3, h4, .serif-heading {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-    }
-    .accent-line {
-      width: 80px;
-      height: 2px;
-      background-color: #0d9488;
-      margin-top: 0.75rem;
-      margin-bottom: 1.5rem;
-    }
-    .accent-line.mx-auto { margin-left: auto; margin-right: auto; }
-    .group:hover .submenu, .group:focus-within .submenu { display: block; }
-    .group:hover i, .group:focus-within i { transform: rotate(180deg); }
-    .submenu { display: none; transition: all 0.1s ease; }
-    .menu-item:focus { background-color: #e2e8f0; outline: none; }
-    .mobile-menu {
-      position: fixed; top: 0; right: -100%; width: 80%; max-width: 400px; height: 100%;
-      background-color: white; box-shadow: -2px 0 20px rgba(0,0,0,0.1); z-index: 1000;
-      transition: right 0.3s ease; overflow-y: auto; padding: 1.5rem;
-    }
-    .mobile-menu.open { right: 0; }
-    .menu-overlay {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5); z-index: 999; display: none;
-    }
-    .menu-overlay.active { display: block; }
-    @media (max-width: 1024px) { .desktop-nav { display: none; } .mobile-nav-toggle { display: flex; } }
-    @media (min-width: 1025px) { .mobile-nav-toggle { display: none; } .desktop-nav { display: flex; } }
-    .desktop-nav { display: none !important; }
-    .mobile-nav-toggle { display: flex; }
-    .logo-img { width: auto; height: 3rem; object-fit: contain; }
-    @media (min-width: 768px) { .logo-img { height: auto; max-height: 4rem; width: auto; } }
-    .portrait-img { width: 100%; height: auto; border-radius: 1rem; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
-    .gremium-card {
-      transition: all 0.25s ease;
-      border: 1px solid #f1f1f1;
-      background-color: white;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02);
-    }
-    .gremium-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.1);
-      border-color: #14b8a6;
-    }
-    .scroll-mt-24 { scroll-margin-top: 120px; }
-    #mainHeader {
-      position: -webkit-sticky;
-      position: sticky !important;
-      top: 0 !important;
-      z-index: 50 !important;
-      background-color: #004E82;
-    }
-    
-    /* ========== SLIDESHOW: mobil 16:9, asztal 3:1, contain ========== */
-    #hero {
+
+    /* Slideshow konténer */
+    .hero-slideshow {
       position: relative;
       width: 100%;
-      aspect-ratio: 16 / 9;  /* alapértelmezett (mobil) */
-      background-color: #111;
       overflow: hidden;
     }
-    /* Asztali nézetben 3:1 arány (1500x500) a képekhez, teljes szélesség */
-    @media (min-width: 1025px) {
-      #hero {
-        aspect-ratio: 3 / 1;  /* 1500/500 = 3 */
-        max-width: none;
-        max-height: none;
-        margin: 0;
+
+    /* Asztali nézet: 1500:500 arány (3:1) */
+    @media (min-width: 1024px) {
+      .hero-slideshow {
+        aspect-ratio: 1500 / 500; /* 3:1 */
       }
     }
-    .slide-image {
-      background-size: contain !important;
-      background-repeat: no-repeat;
-      background-position: center;
-      transition: opacity 2s ease-in-out;
+
+    /* Mobil nézet: 1180:829 arány */
+    @media (max-width: 1023px) {
+      .hero-slideshow {
+        aspect-ratio: 1180 / 829;
+      }
     }
-    
-    /* Mobil nézetben a szöveges sáv módosításai */
-    @media (max-width: 768px) {
-      .logo-img-mobile { height: 3rem !important; }
-      .hide-on-mobile { display: none; }
-      .szbmrtt-mobile {
-        font-size: 1.2rem !important;
+
+    /* Slide-ok konténere */
+    .slides-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      z-index: 1;
+    }
+
+    /* Kép stílus */
+    .slide picture,
+    .slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .slide img {
+      object-fit: fill; /* a kép pont kitölti a konténert a megadott arány miatt, nem torzít */
+      object-position: center;
+    }
+
+    /* Overlay (csak asztali bal oldali lineáris átmenet nincs megadva, de a leírás overlay-jel az sötétítés, itt a bal oldali fehér mező alapból a képen van) */
+    /* A szövegdobozok közös stílusai */
+    .text-container {
+      position: absolute;
+      z-index: 2;
+      pointer-events: none; /* hogy ne zavarja a kattintást a nyilakon */
+    }
+
+    /* Asztali nézet: a bal oldali fehér mezőben, jobbra igazítva a felezővonalhoz */
+    @media (min-width: 1024px) {
+      .text-container {
+        top: 0;
+        left: 0;
+        width: 50%; /* a bal oldali fehér mező szélessége */
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* függőlegesen középre, de a mottó felül, leírás alul? A spec szerint mottó felső doboz, leírás alsó doboz. Jobb a flex segítségével elválasztani */
       }
-      .mobile-header-right {
-        gap: 0.5rem !important;
+      .motto-box {
+        position: absolute;
+        top: 30%;
+        right: 20px; /* jobbra igazítás, a jobb széle a konténer jobb szélénél (a felezővonalnál) */
+        transform: translateY(-50%);
+        text-align: right;
+        width: calc(100% - 40px);
       }
-      .hero-text-mobile .hero-title {
-        font-size: 1.125rem !important;
-        font-family: 'Inter', sans-serif !important;
+      .desc-box {
+        position: absolute;
+        bottom: 30px;
+        right: 20px;
+        text-align: right;
+        width: calc(100% - 40px);
       }
-      .hero-text-mobile .hero-subtitle {
-        font-size: 0.875rem !important;
-        font-family: 'Inter', sans-serif !important;
+    }
+
+    /* Mobil nézet: szöveg a kép felett, balra igazítva, overlay sötétítéssel */
+    @media (max-width: 1023px) {
+      .text-container {
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.3));
+        padding: 15px;
+        border-radius: 8px;
       }
-      .hero-text-mobile .btn-group {
-        display: none !important;
+      .motto-box {
+        text-align: left;
+        margin-bottom: 10px;
       }
-      .hero-text-mobile {
-        padding: 1rem 1rem !important;
+      .desc-box {
+        text-align: left;
       }
+    }
+
+    /* Mottó stílusok */
+    .latin-motto {
+      font-weight: bold;
+      white-space: nowrap;
+      color: #000000; /* asztali fekete */
+      font-size: 24px;
+      line-height: 1.2;
+    }
+    .hungarian-motto {
+      font-weight: normal;
+      white-space: nowrap;
+      color: #000000; /* asztali fekete */
+      font-size: 18px;
+      line-height: 1.2;
+    }
+    .desc-text {
+      white-space: normal;
+      font-weight: normal;
+      color: #ffffff;
+      opacity: 0.85;
+      font-size: 15px;
+      line-height: 1.4;
+    }
+
+    /* Mobil nézetben a mottó és leírás színe fehér, plusz overlay miatt */
+    @media (max-width: 1023px) {
+      .latin-motto,
+      .hungarian-motto {
+        color: #ffffff;
+      }
+      .desc-text {
+        opacity: 0.9;
+      }
+      .latin-motto {
+        font-size: 4vw;
+      }
+      .hungarian-motto {
+        font-size: 3vw;
+      }
+      .desc-text {
+        font-size: 11px;
+      }
+    }
+
+    /* Asztali nézetben a betűméretek fixek, de reszponzívvá tehetők */
+    @media (min-width: 1024px) {
+      .latin-motto {
+        font-size: 24px;
+      }
+      .hungarian-motto {
+        font-size: 18px;
+      }
+      .desc-text {
+        font-size: 15px;
+      }
+    }
+
+    /* Animációk */
+    @keyframes slideInFromRight {
+      0% {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 0.85;
+      }
+    }
+
+    /* Asztali mottó animáció: slide-in jobbról */
+    .slide.active .motto-box {
+      animation: slideInFromRight 0.6s ease-out forwards;
+    }
+    /* Asztali leírás animáció: fade-in */
+    .slide.active .desc-box {
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+
+    /* Mobil animáció: mottó slide-in, leírás fade-in */
+    @media (max-width: 1023px) {
+      .slide.active .motto-box {
+        animation: slideInFromRight 0.5s ease-out forwards;
+      }
+      .slide.active .desc-box {
+        animation: fadeIn 0.6s ease-out forwards;
+      }
+    }
+
+    /* Navigációs nyilak */
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+    .nav-btn:hover {
+      background: rgba(0,0,0,0.8);
+    }
+    .prev {
+      left: 20px;
+    }
+    .next {
+      right: 20px;
+    }
+
+    /* Dots (opcionális) */
+    .dots {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      z-index: 10;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .dot.active {
+      background: white;
+      transform: scale(1.2);
     }
   </style>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ScholarlyOrganization",
-    "name": "Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság",
-    "alternateName": "SzBMRTT",
-    "description": "Független, nem kormányzati tudományos társaság a rendvédelem-történeti kutatás és az egyetemes rendvédelem-történeti diszciplína európai központja.",
-    "url": "https://szbmrtt.github.io/szbmrtt-archive/",
-    "sameAs": [
-      "https://m2.mtmt.hu/api/institute/23079",
-      "https://www.gendarmerie.interieur.gouv.fr/",
-      "https://www.wienmuseum.at/kriminalmuseum",
-      "https://www.uni-nke.hu/",
-      "https://www.csendoeregylethu.hu/"
-    ],
-    "taxID": "19662706-1-41",
-    "foundingDate": "1990",
-    "knowsAbout": ["Law Enforcement History", "Gendarmerie History", "Rendvédelem-történet", "Historical Sciences", "Security History"],
-    "issn": ["1216-6774", "2560-144X", "1785-3257", "2560-0893"],
-    "identifier": { "@type": "PropertyValue", "propertyID": "MTMT", "value": "23079" },
-    "address": { "@type": "PostalAddress", "addressLocality": "Budapest", "addressCountry": "HU" }
-  }
-  </script>
-
-  <link rel="canonical" href="https://szbmrtt.github.io/szbmrtt-archive/">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://szbmrtt.github.io/szbmrtt-archive/">
-  <meta property="og:title" content="SzBMRTT – Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság">
-  <meta property="og:description" content="Független NGO a magyar és az egyetemes rendvédelem-történeti kutatás szolgálatában.">
-  <meta property="og:image" content="https://szbmrtt.github.io/szbmrtt-archive/szemere-bertalan-rendvedelem-torteneti-tarsasag-szbmrtt-logo-official.png">
-  <meta property="og:image:alt" content="SzBMRTT logó">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SzBMRTT – Tudományos rendvédelem-történeti társaság">
-  <meta name="twitter:description" content="Független NGO a magyar rendvédelem-történeti örökség gondozásáért.">
-  <meta name="twitter:image" content="https://szbmrtt.github.io/szbmrtt-archive/szemere-bertalan-rendvedelem-torteneti-tarsasag-szbmrtt-logo-official.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,700&display=swap" rel="stylesheet">
 </head>
-<body class="font-sans text-gray-900">
-
-<header id="mainHeader" class="sticky top-0 z-50 w-full shadow-sm" style="background-color: #004E82;">
-  <div class="max-w-7xl mx-auto px-4 py-6">
-    <div class="flex flex-wrap justify-between items-center gap-4">
-      <div class="flex items-center gap-4">
-        <img src="szbmrtt_logo_head001.png" alt="SzBMRTT logó" class="logo-img-mobile h-24 md:h-28 w-auto hide-on-mobile">
-        <div class="flex flex-col">
-          <span class="font-normal text-white tracking-tight szbmrtt-mobile" style="font-family: 'Gill Sans', 'Gill Sans MT', 'Tw Cen MT', 'Montserrat', sans-serif; font-size: 20pt; line-height: 1.2;">SZBMRTT</span>
-          <span class="font-light text-white text-lg leading-tight mt-2 hide-on-mobile">Szemere Bertalan</span>
-          <span class="font-light text-white text-lg leading-tight hide-on-mobile">Magyar Rendvédelem-történeti</span>
-          <span class="font-light text-white text-lg leading-tight hide-on-mobile">Tudományos Társaság</span>
+<body>
+<div class="hero-slideshow">
+  <div class="slides-container">
+    <!-- 1. dia -->
+    <div class="slide" data-index="0">
+      <picture>
+        <source media="(max-width: 1023px)" srcset="szbmrtt-president-dr-jozsef-paradi-inauguration-1984-mobile.jpg">
+        <img src="szbmrtt-elnok-dr-paradi-jozsef-szekfoglalo-rendortiszti-foiskola1984-desktop.jpg" alt="Dr. Parádi József székfoglaló">
+      </picture>
+      <div class="text-container">
+        <div class="motto-box">
+          <div class="latin-motto">Cum historia pro securitate.</div>
+          <div class="hungarian-motto">Történelemmel a biztonságért.</div>
+        </div>
+        <div class="desc-box">
+          <div class="desc-text">Társaságunk elnöke, dr. Parádi József székfoglalója a Rendőrtiszti Főiskolán 1984.</div>
         </div>
       </div>
-      <div class="flex items-center gap-4 mobile-header-right">
-        <button id="searchIcon" class="text-white text-xl hover:text-gray-200 transition"><i class="fas fa-search"></i></button>
-        <div class="flex items-center gap-2">
-          <button class="px-3 py-1 bg-white text-blue-900 rounded-md text-sm font-semibold shadow-sm cursor-default">HU</button>
-          <a href="en/index.html" class="px-3 py-1 bg-gray-500 text-white rounded-md text-sm font-semibold hover:bg-gray-600 transition shadow-sm">EN</a>
+    </div>
+    <!-- 2. dia -->
+    <div class="slide" data-index="1">
+      <picture>
+        <source media="(max-width: 1023px)" srcset="national-security-service-conference-budapest-intelligence-mobile.jpg">
+        <img src="szbmrtt-nbsz-nemzetbiztonsagi-szakszolgalat-szakmatorteneti-konferencia-desktop.jpg" alt="NBSZ konferencia">
+      </picture>
+      <div class="text-container">
+        <div class="motto-box">
+          <div class="latin-motto">Condita decrescit vulgata scientia crescit.</div>
+          <div class="hungarian-motto">Az elrejtett tudás elsorvad, a másokkal megosztott gyarapszik.</div>
         </div>
-        <div class="flex items-center gap-2 cursor-pointer" id="menuToggleBtn">
-          <span class="text-white font-bold text-sm uppercase tracking-wider hide-on-mobile">MENÜ</span>
-          <button id="hamburgerBtn" class="text-2xl text-white hover:text-gray-200 transition"><i class="fas fa-bars"></i></button>
+        <div class="desc-box">
+          <div class="desc-text">Tudományos párbeszéd: Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság – Nemzetbiztonsági Szakszolgálat szakmatörténeti konferencia.</div>
+        </div>
+      </div>
+    </div>
+    <!-- 3. dia -->
+    <div class="slide" data-index="2">
+      <picture>
+        <source media="(max-width: 1023px)" srcset="intelligence-reconnaissance-service-manual-1872-guide-mobile.jpg">
+        <img src="anleitung-zum-kundschaftsdienste-1872-felderitoszolgalati-utasitas-szbmrtt-desktop.jpg" alt="1872-es utasítás">
+      </picture>
+      <div class="text-container">
+        <div class="motto-box">
+          <div class="latin-motto">Veritas nunquam perit.</div>
+          <div class="hungarian-motto">Az igazság sosem vész el.</div>
+        </div>
+        <div class="desc-box">
+          <div class="desc-text">Dr. Parádi József és dr. Sándor Vilmos &dagger; az 1872-es Felderítőszolgálati utasítás (Anleitung zum Kundschaftsdienste) c. háromnyelvű társasági kiadványunk könyvbemutatóján.</div>
+        </div>
+      </div>
+    </div>
+    <!-- 4. dia -->
+    <div class="slide" data-index="3">
+      <picture>
+        <source media="(max-width: 1023px)" srcset="szbmrtt-honorary-medals-zeidler-sandor-design-mobile.jpg">
+        <img src="szbmrtt-kituntetesek-zeidler-sandor-falerisztika-merit-awards-desktop.jpg" alt="Kitüntetések">
+      </picture>
+      <div class="text-container">
+        <div class="motto-box">
+          <div class="latin-motto">Honos honestum decorat, inhonestum notat.</div>
+          <div class="hungarian-motto">A kitüntetés a méltót ékesíti, a méltatlant bélyegezi.</div>
+        </div>
+        <div class="desc-box">
+          <div class="desc-text">Érdem és elismerés. Társaságunk mag. Zeidler Sándor által tervezett kitüntetései.</div>
         </div>
       </div>
     </div>
   </div>
-  <!-- A jelmondatos csík ELTÁVOLÍTVA -->
-</header>
-
-<div id="mobileMenu" class="mobile-menu">
-  <div class="flex justify-end mb-6"><button id="closeMenuBtn" class="text-2xl"><i class="fas fa-times"></i></button></div>
-  <div class="flex gap-4 justify-center mb-8 pb-4 border-b">
-    <button class="text-lg font-bold text-blue-800">HU</button>
-    <button class="text-lg font-bold text-gray-400">EN</button>
-  </div>
-  <nav class="flex flex-col gap-4" id="mobileNavLinks">
-    <a href="#bemutatkozas" class="text-lg font-medium py-2 border-b">Bemutatkozás</a>
-    <a href="#diszciplina" class="text-lg font-medium py-2 border-b">A diszciplína</a>
-    <div><button class="w-full text-left text-lg font-medium py-2 border-b flex justify-between items-center" id="mobileSubmenuBtn">Szervezet <i class="fas fa-chevron-down text-xs"></i></button>
-      <div id="mobileSubmenu" class="hidden pl-4 mt-1 space-y-2">
-        <a href="#szervezet-elnok" class="block py-1">Elnök</a>
-        <div class="text-xs font-semibold text-gray-400 mt-2">Tudományos grémiumok</div>
-        <a href="#csendorseg" class="block py-1">Csendőrség-történeti</a>
-        <a href="#civil" class="block py-1">Civil rendvédelem-történeti</a>
-        <a href="#fegyors" class="block py-1">Fegyőrség-történeti</a>
-        <a href="#folyamorseg" class="block py-1">Folyamőrség-történeti</a>
-        <a href="#hatarorizet" class="block py-1">Határőrizet-történet</a>
-        <a href="#rendorseg" class="block py-1">Rendőrségtörténeti</a>
-        <a href="#penzugyorseg" class="block py-1">Pénzügyőrség-történeti</a>
-        <a href="#testorsegek" class="block py-1">Testőrségek - koronaőrség - képviselőházi őrség-történeti</a>
-        <a href="#tortseged" class="block py-1">Történelmi segédtudományok</a>
-      </div>
-    </div>
-    <a href="#rendezvenyek" class="text-lg font-medium py-2 border-b">Rendezvényeink</a>
-    <a href="#kiadvanyok" class="text-lg font-medium py-2 border-b">Kiadványaink</a>
-    <div><button class="w-full text-left text-lg font-medium py-2 border-b flex justify-between items-center" id="mobileMediaBtn">Média <i class="fas fa-chevron-down text-xs"></i></button>
-      <div id="mobileMediaSub" class="hidden pl-4 mt-1 space-y-2">
-        <a href="#korlevelek" class="block py-1">Körleveleink</a>
-        <a href="#rolunkirtak" class="block py-1">Rólunk írták</a>
-        <a href="#videotar" class="block py-1">Videótár</a>
-      </div>
-    </div>
-    <a href="#kituntetesek" class="text-lg font-medium py-2 border-b">Kitüntetési rendszerünk</a>
-    <a href="#kapcsolat" class="text-lg font-medium py-2 border-b">Kapcsolat</a>
-  </nav>
+  <button class="nav-btn prev" aria-label="Előző">‹</button>
+  <button class="nav-btn next" aria-label="Következő">›</button>
+  <div class="dots"></div>
 </div>
-<div id="overlay" class="menu-overlay"></div>
-
-<!-- Hero slideshow (konténer arány: mobil 16:9, asztal 3:1) -->
-<section id="hero" class="relative w-full overflow-hidden scroll-mt-24">
-  <div class="absolute inset-0">
-    <!-- 1. kép -->
-    <div class="slide-image absolute inset-0 transition-opacity duration-2000 ease-in-out" style="background-image: url('szbmrtt-president-dr-jozsef-paradi-inauguration-law-enforcement.jpg'); opacity: 1;"></div>
-    <!-- 2. kép -->
-    <div class="slide-image absolute inset-0 transition-opacity duration-2000 ease-in-out" style="background-image: url('szbmrtt-nbsz-national-security-service-conference-budapest.jpg'); opacity: 0;"></div>
-    <!-- 3. kép -->
-    <div class="slide-image absolute inset-0 transition-opacity duration-2000 ease-in-out" style="background-image: url('reconnaissance-service-manual-1872-book-launch-szbmrtt-intelligence.jpg'); opacity: 0;"></div>
-    <!-- 4. kép -->
-    <div class="slide-image absolute inset-0 transition-opacity duration-2000 ease-in-out" style="background-image: url('szbmrtt-honorary-awards-sandor-zeidler-design-medals.jpg'); opacity: 0;"></div>
-    
-    <button id="prevSlide" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-30 text-white text-3xl md:text-4xl opacity-50 hover:opacity-100 transition bg-black/30 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center backdrop-blur-sm">‹</button>
-    <button id="nextSlide" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-30 text-white text-3xl md:text-4xl opacity-50 hover:opacity-100 transition bg-black/30 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center backdrop-blur-sm">›</button>
-  </div>
-</section>
-
-<!-- Szöveges sáv a slideshow alatt – mobilban módosítva (gombok elrejtve) -->
-<div class="w-full bg-gray-100 py-6 md:py-8 px-4 hero-text-mobile">
-  <div class="max-w-7xl mx-auto">
-    <h1 class="hero-title text-xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight mb-2">
-      Szemere Bertalan<br>
-      <span class="text-teal-600">Magyar Rendvédelem-történeti Tudományos Társaság</span>
-    </h1>
-    <p class="hero-subtitle text-base md:text-xl font-light italic text-gray-600 mb-4 md:mb-5">
-      üdvözöljük honlapunkon!
-    </p>
-    <div class="btn-group flex flex-wrap gap-3">
-      <a href="#bemutatkozas" class="px-4 py-2 md:px-6 md:py-2 border-2 border-teal-600 bg-transparent text-teal-600 rounded-full font-semibold hover:bg-teal-600 hover:text-white transition shadow-sm uppercase text-xs md:text-sm tracking-widest">Bemutatkozás</a>
-      <a href="#kiadvanyok" class="px-4 py-2 md:px-6 md:py-2 border-2 border-gray-400 bg-transparent text-gray-700 rounded-full font-semibold hover:bg-gray-400 hover:text-white transition uppercase text-xs md:text-sm tracking-widest">Kiadványaink</a>
-    </div>
-  </div>
-</div>
-
-<main>
-  <!-- ==================== BEMUTATKOZÁS ==================== -->
-  <section id="bemutatkozas" class="py-24 bg-white scroll-mt-24">
-    <div class="max-w-5xl mx-auto px-6">
-      <h2 class="text-3xl font-bold text-blue-900 inline-block uppercase tracking-wide">Bemutatkozás</h2>
-      <div class="accent-line"></div>
-      <div class="bg-[#f9f9f6] border-l-4 border-teal-700 rounded-lg p-5 mb-8 shadow-sm text-gray-600 text-sm leading-relaxed">
-        <p class="mb-2 font-semibold text-blue-900">Társaságunk hiánypótló, közhasznú tevékenységet folytató, független nem kormányzati szervezet (NGO), amely elsődlegesen a magyar rendvédelem-történeti örökség gondozását, kutatását és közkinccsé tételét végzi.</p>
-        <p class="mb-2">Az 1990-ben alapított, majd a Fővárosi Bíróság által 1991. február 6.-án a Pk.64.728/1990/1. számú határozattal, 3324. sorszámon nyilvántartásba vett Társaságunk a magyar rendvédelem története iránt érdeklődő szakemberek társadalmi egyesülése.</p>
-        <p class="mb-2">A Magyar Tudományos Akadémia Könyvtár és Információs Központja (MTA KIK) által működtetett nemzeti tudományos bibliográfiai adatbázis, a Magyar Tudományos Művek Tárában (MTMT) tudományos műveink kiadójaként a 23079-es nyilvántartási számon (<a href="https://m2.mtmt.hu/api/institute/23079" target="_blank" class="text-teal-600 hover:underline break-all">https://m2.mtmt.hu/api/institute/23079</a> <i class="fas fa-external-link-alt text-xs ml-1"></i>) szerepel tudományos társaságunk.</p>
-        <p class="mb-0">Társaságunk adószáma: <span class="font-mono">19662706-1-41</span></p>
-      </div>
-      <div class="space-y-4">
-        <div class="border border-gray-200 rounded-lg overflow-hidden">
-          <button class="bemutatkozas-accordion-btn w-full text-left px-4 py-3 bg-gray-100 hover:bg-gray-200 font-semibold text-gray-800 flex justify-between items-center transition-colors" data-target="acc-rendvedelem"><span>I. RENDVÉDELEM</span><i class="fas fa-chevron-down transition-transform duration-200"></i></button>
-          <div id="acc-rendvedelem" class="accordion-content hidden px-4 py-4 bg-white border-t border-gray-200 text-gray-700 leading-relaxed text-left md:text-justify"><p>Álláspontunk szerint a rendvédelem tevékenységet jelöl, amelynek elméleti alapjait számos tudományterület eredményei alkotják. A rendvédelem-történetét gyűjtőfogalomnak tekintjük, amelybe – tértől és időtől függetlenül – beletartozik az egyetemes történelem során megvalósult valamennyi rendvédelmi modell. A különböző korok rendvédelmi modelljei és azok változásai alkotják az egyetemes rendvédelem-történetet.</p></div>
-        </div>
-        <div class="border border-gray-200 rounded-lg overflow-hidden">
-          <button class="bemutatkozas-accordion-btn w-full text-left px-4 py-3 bg-gray-100 hover:bg-gray-200 font-semibold text-gray-800 flex justify-between items-center transition-colors" data-target="acc-tagjaink"><span>II. TAGJAINK</span><i class="fas fa-chevron-down transition-transform duration-200"></i></button>
-          <div id="acc-tagjaink" class="accordion-content hidden px-4 py-4 bg-white border-t border-gray-200 text-gray-700 leading-relaxed text-left md:text-justify"><p>Tagjaink a magyar rendvédelem-történet, illetve azzal rokon fegyveres testületek történeti kutatásával és oktatásával foglalkoznak. Tagságunk döntően a rendvédelmi testületek személyi állománya, közgyűjtemények munkatársai, felsőoktatási intézmények oktatói köréből kerül ki. Vannak közöttünk olyanok is, akiknek a foglalkozása ugyan nem kapcsolódik a rendvédelem jelenéhez, vagy múltjához, azonban érdeklődnek a témakör iránt, illetve valamilyen formában művelik azt pld. gyűjtők. Mintegy negyven fő rendelkezik tudományos, illetve oktatói fokozattal, melynek skálája az akadémiai tagságtól a doktor univ., illetve a professzortól a tanársegéd fokozatig terjed. Többségük napjaink magyar tudományos életének és felsőoktatásunknak elismert szakembere.</p></div>
-        </div>
-        <div class="border border-gray-200 rounded-lg overflow-hidden">
-          <button class="bemutatkozas-accordion-btn w-full text-left px-4 py-3 bg-gray-100 hover:bg-gray-200 font-semibold text-gray-800 flex justify-between items-center transition-colors" data-target="acc-celjaink"><span>III. CÉLUNK, TEVÉKENYSÉGEINK</span><i class="fas fa-chevron-down transition-transform duration-200"></i></button>
-          <div id="acc-celjaink" class="accordion-content hidden px-4 py-4 bg-white border-t border-gray-200 text-gray-700 leading-relaxed text-left md:text-justify space-y-4"><p>Célunk, hogy a szakterület művelésével, az írásos források és tárgyi emlékek feldolgozásával hozzájáruljunk a magyar és az egyetemes történelem gyarapításához, rendvédelem-történeti múltunk feltárása, a tapasztalatok hasznosítása által pedig a rendvédelem fejlesztéséhez.</p><p>Egyesületünk úgy véli, hogy nemzeti rendvédelem-történeti tradíciónk – elsősorban a XIX. és XX. századi hagyományaink – közkinccsé tételével a tapasztalatok megismertetésével elősegítheti a magyar rendvédelem fejlesztését, a személyi állomány identitástudatát, ezen keresztül pedig az etikai viszonyok fejlődését, valamint a lakosság rendvédelmi testületekről kialakított elképzelésének a kedvezőbbé tételét. Tudományos társaságunk szakosztályai szellemi alkotóműhely jelleggel tevékenykednek</p><p>Társaságunk részt vesz a tudományos közéleti tevékenységben. Tagjainkat rendszeresen felkérik tudományos írásművek szaklektorálására, tudományos fokozatszerzések és oktatói habilitációk bírálóbizottságaiban történő feladatvállalásra. Akik a rendvédelem-történeti témakörben tudományos fokozatot elértek, szinte valamennyien tudományos társaságunk tagjainak segítségét élvezték. A magyar rendvédelmi szervek több ízben kikérték társaságunk szakvéleményét a hagyományok felújítására vonatkozó kérdésekben. Szakmai segítséget nyújtunk a rendvédelem-történeti tartalmú gyűjtemények és kiállítások létrehozásához és működtetéséhez.</p></div>
-        </div>
-        <div class="border border-gray-200 rounded-lg overflow-hidden">
-          <button class="bemutatkozas-accordion-btn w-full text-left px-4 py-3 bg-gray-100 hover:bg-gray-200 font-semibold text-gray-800 flex justify-between items-center transition-colors" data-target="acc-oktatas"><span>IV. A TÁRSASÁG OKTATÓ MUNKÁJA</span><i class="fas fa-chevron-down transition-transform duration-200"></i></button>
-          <div id="acc-oktatas" class="accordion-content hidden px-4 py-4 bg-white border-t border-gray-200 text-gray-700 leading-relaxed text-left md:text-justify space-y-4"><p>Egyesületünk tagjai részt vettek a magyar rendvédelmi testületek személyi állományának történeti képzésében, a tananyag elkészítésében. A Tudományos Társaságunk által oktatott hallgatók számos esetben rendvédelem-történet témakörében készítették el diplomamunkájukat. A legtöbb rendvédelem-történeti diplomamunka a Rendőrtiszti Főiskolán — a Nemzeti Közszolgálati Egyetem Rendészettudományi Karának jogelőd intézményénél — készült.</p><p>A magyarországi rendszerváltás óta több száz rendvédelem-történeti témájú dolgozatot védtek meg a hallgatók. Az Országos Tudományos Diákköri konferenciákon számos esetben indultak rendvédelem-történeti témájú tudományos diákköri dolgozatok, közülük több alkotás országos szintű elismerésben is részesült. A Magyar Tudományos Akadémia Pro Scientia aranyérem elismerésében 1990. és 2000. között két rendvédelem-történeti tartalmú tudományos diákköri pályamű részesült. A rendvédelem-történeti témájú tudományos diákkörök legsikeresebb témavezetője, dr. Parádi József ezirányú tevékenységét mestertanári kitüntetéssel ismerték el 2003-ban.</p><p>A magyar felsőoktatás több tudományegyetemén, állam- és jogtudományi, illetve bölcsészettudományi karokon, valamint főiskolákon oktatják – részben társaságunk tagjainak közreműködésével – az egyesületünk által készített tananyag alapján, a magyar rendvédelem történetét közvetítő tárgyakat.</p></div>
-        </div>
-        <div class="border border-gray-200 rounded-lg overflow-hidden">
-          <button class="bemutatkozas-accordion-btn w-full text-left px-4 py-3 bg-gray-100 hover:bg-gray-200 font-semibold text-gray-800 flex justify-between items-center transition-colors" data-target="acc-kuldetes"><span>V. KÜLDETÉSNYILATKOZAT</span><i class="fas fa-chevron-down transition-transform duration-200"></i></button>
-          <div id="acc-kuldetes" class="accordion-content hidden px-4 py-4 bg-white border-t border-gray-200 text-gray-700 leading-relaxed space-y-2"><p class="mb-2">– Tudományos társaságunk működésének alapszabályban rögzített célja a magyar rendvédelem történet művelése, a feltárt eredmények közkinccsé tétele. Tevékenységünk szellemiségének a lényegét kívánjuk küldetésnyilatkozatunkban közzétenni.</p><p class="mb-2">– A szakterületünknek tekintett témakör gondozása során a történelmi tényeken alapuló igazság feltárását és bemutatását részesítjük előnyben. Nem támogatjuk az ideológiai, vagy a csoportérdekek elvárásaihoz igazadó hipotéziseket, magyarázatokat, kutatásokat és értelmezéseket. Tevékenységünk során az objektív történelemszemléleten nyugvó kutatások, illetve azok eredményeinek közkinccsé tétele számára biztosítunk primátust.</p><p class="mb-2">– A történelmi hűség biztosítását munkánk vezérlő elvének tartjuk. Nem tekintjük elfogadhatónak a későbbi korok viszonyainak és elvárásainak a vizsgált időszakra való visszavetítését. Ugyanígy elfogadhatatlannak tekintjük a pontatlanságot, a bizonyítatlan álláspontok hangoztatását.</p><p class="mb-2">– A magyar rendvédelem történetét a történelemtudomány körébe tartozó területként határozzuk meg, melyet e tudomány metodikáival művelünk.</p><p class="mb-2">– Szakterületünk művelése során elengedhetetlennek tartjuk az etikai tisztaság primátusa elvének a követését. Az etikai tisztaságnak nem csupán a tudományos társaságunk tevékenységében, illetve a vonzáskörünkbe tartozó kutatók tekintetében, hanem a szakterületünk többi művelőit illetően is igyekszünk érvényt szerezni.</p><p class="mb-2">– Álláspontunk szerint a polgári nemzetállamok kialakulásának a részeként fejlődtek ki a mai értelemben vett fegyveres őrtestületek, melyeket nemzeti testületeknek értékelünk. Létüket és működésüket többre tartjuk, mint a szolgáltatást nyújtó szervezetekét. Ezen fegyveres őrtestületeket a nemzeti szuverenitás fontos és elengedhetetlen részének tekintjük.</p><p class="mb-2">– Értelemszerűen a valamilyen formában Magyarországon is működő idegen hatalmak irányítása alá tartozó szervezeteket nem tartjuk a magyar testületek közé tartozónak még akkor sem, ha hatásuk a korabeli magyar rendvédelemre egyértelmű. Ezen szervezetekkel való foglalkozástól ugyan nem lehet eltekinteni, azonban – mivel nem a nemzeti kultúránkból fejlődtek ki, illetve nem a nemzet érdekében tevékenykedtek – ezeket nem lehet nemzeti szervezetként értékelni.</p><p class="mb-2">– Természetesen a többé-kevésbé nemzeti rendvédelmünk perifériáján elhelyezkedő – nem őrtestületi struktúrában működő – állami, önkormányzati és magán fegyveres csoportosulásokat is nemzeti rendvédelem-történetünk részének tartjuk.</p><p class="mb-2">– Úgy gondoljuk, ahogyan a nyelvében él a nemzet, ahhoz hasonlóan a szakkifejezéseiben él a szakterület. Ezért káros jelenségnek tartjuk a magyar kultúrközegben kialakult szakterületi terminológia-rendszernek az idegen kultúrközegben létrejött szakkifejezésekkel való felváltására való törekvést, azonban üdvözöljük az új jelenségekhez kapcsolódó szakkifejezéseknek a magyar kultúrközegben kialakult szakterminológiai rendszerbe történő adaptációját.</p><p class="mb-0">– A küldetésnyilatkozatunkban foglaltakat vízválasztónak tekintjük. Mindenkit szívesen fogadunk, aki a vázolt szellemiség kereteit el tudja fogadni. Úgy gondoljuk, hogy értelmes vitát is ezen keretek között lehet folytatni.</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== A DISZCIPLÍNA ==================== -->
-  <section id="diszciplina" class="py-20 bg-gray-50 scroll-mt-24">
-    <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-3xl font-bold text-blue-900 inline-block uppercase tracking-wide">A rendvédelem-történeti diszciplína</h2>
-      <div class="accent-line"></div>
-      <div class="grid md:grid-cols-2 gap-12 items-start">
-        <div class="space-y-4 text-gray-700 leading-relaxed">
-          <p>A rendvédelem-történet a történelemtudomány részeként a rendvédelem múltját, annak társadalmi, jogi és intézményi fejlődését vizsgálja. Társaságunk elkötelezett amellett, hogy a kutatások a lehető legmagasabb tudományos színvonalon, forráskritikával és nemzetközi összehasonlításban készüljenek.</p>
-          <p>Az egyetemes rendvédelem-történet magában foglalja a különböző korok és régiók modelljeit – a csendőrségtől a modern rendőri szerveken át a határvédelemig. Magyarországon különös jelentősége van a dualizmus kori csendőrség, a két világháború közötti rendőrség, valamint a második világháborút követő állambiztonsági szervek történeti feldolgozásának.</p>
-          <p>Társaságunk szakmai folyóiratokat, konferenciákat és forráskiadványokat gondoz, elősegítve a hazai rendvédelem-történeti iskola megerősödését és nemzetközi beágyazódását.</p>
-        </div>
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-          <h3 class="text-xl font-bold text-teal-700 mb-3">Kiemelt kutatási területek</h3>
-          <ul class="space-y-2 text-gray-700">
-            <li><i class="fas fa-check-circle text-teal-500 mr-2"></i> Magyar királyi csendőrség története (1867–1945)</li>
-            <li><i class="fas fa-check-circle text-teal-500 mr-2"></i> Polgári rendőrség kialakulása és fejlődése</li>
-            <li><i class="fas fa-check-circle text-teal-500 mr-2"></i> Fegyőrség, pénzügyőrség, folyamőrség, határőrizet</li>
-            <li><i class="fas fa-check-circle text-teal-500 mr-2"></i> Testőrségek és koronaőrség története</li>
-            <li><i class="fas fa-check-circle text-teal-500 mr-2"></i> Rendvédelem-történeti forráspublikációk</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== SZERVEZET – ELNÖK ==================== -->
-  <section id="szervezet-elnok" class="py-20 bg-white scroll-mt-24">
-    <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-3xl font-bold text-blue-900 inline-block uppercase tracking-wide">Elnök</h2>
-      <div class="accent-line"></div>
-      <div class="flex flex-col md:flex-row gap-10 items-start">
-        <div class="md:w-1/3">
-          <img src="dr-paradi-jozsef-elnok.jpg" alt="Dr. Parádi József" class="portrait-img w-full shadow-md" onerror="this.src='https://via.placeholder.com/400x500?text=Dr.+Parádi+József'">
-        </div>
-        <div class="md:w-2/3 space-y-4 text-gray-700">
-          <h3 class="text-2xl font-bold text-teal-700">Dr. Parádi József</h3>
-          <p class="text-lg italic">alapító elnök, professor emeritus</p>
-          <p>Dr. Parádi József a magyar rendvédelem-történeti kutatások meghatározó személyisége. Az 1990-es alapítástól kezdve vezeti Társaságunkat, számtalan tudományos mű, tanulmány és konferencia kötődik a nevéhez. Mestertanári kitüntetéssel ismerték el oktatói munkáját, számos hallgató szerzett tudományos fokozatot az ő irányításával.</p>
-          <p>Főbb kutatási területe: a magyar királyi csendőrség szervezete, működése és hagyományai, valamint a rendvédelmi szakmatörténet módszertana.</p>
-          <div class="pt-4">
-            <a href="#" class="text-teal-600 hover:underline">Részletes életrajz <i class="fas fa-arrow-right ml-1"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== TUDOMÁNYOS GRÉMIUMOK ==================== -->
-  <section class="py-20 bg-gray-50 scroll-mt-24">
-    <div class="max-w-7xl mx-auto px-6">
-      <h2 class="text-3xl font-bold text-blue-900 inline-block uppercase tracking-wide">Tudományos grémiumok</h2>
-      <div class="accent-line"></div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div id="csendorseg" class="gremium-card p-6 rounded-xl scroll-mt-24">
-          <i class="fas fa-shield-alt text-3xl text-teal-600 mb-3"></i>
-          <h3 class="text-xl font-bold mb-2">Csendőrség-történeti</h3>
-          <p class="text-gray-600">A magyar királyi csendőrség szervezet-, működés- és hagyománytörténete.</p>
-        </div>
-        <div id="civil" class="gremium-card p-6 rounded-xl scroll-mt-24">
-          <i class="fas fa-balance-scale text-3xl text-teal-600 mb-3"></i>
-          <h3 class="text-xl font-bold mb-2">Civil rendvédelem-történeti</h3>
-          <p class="text-gray-600">A polgári jellegű rendvédelmi testületek múltja.</p>
-        </div>
-        <div id="fegyors" class="gremium-card p-6 rounded-xl scroll-mt-24">
-          <i class="fas fa-lock text-3xl text-teal-600 mb-3"></i>
-          <h3 class="text-xl font-bold mb-2">Fegyőrség-történeti</h3>
-          <p class="text-gray-600">Börtönügy, fegyőri szolgálat, igazságügyi őrizet története.</p>
-        </div>
-        <div id="folyamorseg" class="gremium-card p-6 rounded-xl scroll-mt-24">
-          <i class="fas fa-water text-3xl text-teal-600 mb-3"></i>
-          <h3 class="text-xl font-bold mb-2">Folyamőrség-történeti</h3>
-          <p class="text-gray-600">A magyar folyam- és dunai rendészet múltja.</p>
-        </div>
-        <div id="hatarorizet" class="gremium-card p-6 rounded-xl scroll-mt-24">
-          <i class="fas fa-border-all text-3xl text-teal-600 mb-3"></i>
-          <h3 class="text-xl font-bold mb-2">Határőrizet-történet</h3>
-          <p class="text-gray-600">Határvédelmi szervek, vám- és határrendészet története.</p>
-        </div>
-        <div id="rendorseg" class="gremium-card p-6 rounded-xl scroll-mt-24">
-          <i class="fas fa-car text-3xl text-teal-600 mb-3"></i>
-          <h3 class="text-xl font-bold mb-2">Rendőrségtörténeti</h3>
-          <p class="text-gray-600">A magyar rendőrség szervezetfejlődése és működése.</p>
-        </div>
-        <div id="penzugyorseg" class="gremium-card p-6 rounded-xl scroll-mt-24">
-          <i class="fas fa-coins text-3xl text-teal-600 mb-3"></i>
-          <h3 class="text-xl font-bold mb-2">Pénzügyőrség-történeti</h3>
-          <p class="text-gray-600">Pénzügyőri testületek, vámvédelem története.</p>
-        </div>
-        <div id="testorsegek" class="gremium-card p-6 rounded-xl scroll-mt-24">
-          <i class="fas fa-crown text-3xl text-teal-600 mb-3"></i>
-          <h3 class="text-xl font-bold mb-2">Testőrségek – koronaőrség – képviselőházi őrség</h3>
-          <p class="text-gray-600">A legmagasabb állami méltóságok védelmét ellátó testületek története.</p>
-        </div>
-        <div id="tortseged" class="gremium-card p-6 rounded-xl scroll-mt-24">
-          <i class="fas fa-book text-3xl text-teal-600 mb-3"></i>
-          <h3 class="text-xl font-bold mb-2">Történelmi segédtudományok</h3>
-          <p class="text-gray-600">Levéltári források, heraldika, genealógia, jelvénytan a rendvédelem-történet szolgálatában.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== RENDEZVÉNYEINK ==================== -->
-  <section id="rendezvenyek" class="py-20 bg-white scroll-mt-24">
-    <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-3xl font-bold text-blue-900 inline-block uppercase tracking-wide">Rendezvényeink</h2>
-      <div class="accent-line"></div>
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="border-l-4 border-teal-500 pl-5 py-2">
-          <h3 class="text-xl font-bold">Tudományos konferenciák</h3>
-          <p class="text-gray-600 mt-2">Évente megrendezésre kerülő országos és nemzetközi tanácskozások a rendvédelem-történet aktuális kérdéseiről.</p>
-        </div>
-        <div class="border-l-4 border-teal-500 pl-5 py-2">
-          <h3 class="text-xl font-bold">Műhelybeszélgetések</h3>
-          <p class="text-gray-600 mt-2">Kisebb körben, szakmai vitafórumok fiatal kutatóknak és tapasztalt történészeknek.</p>
-        </div>
-        <div class="border-l-4 border-teal-500 pl-5 py-2">
-          <h3 class="text-xl font-bold">Kiállítások</h3>
-          <p class="text-gray-600 mt-2">Rendvédelem-történeti tárgyi emlékek, dokumentumok és uniformisok bemutatása.</p>
-        </div>
-        <div class="border-l-4 border-teal-500 pl-5 py-2">
-          <h3 class="text-xl font-bold">Emlékünnepségek</h3>
-          <p class="text-gray-600 mt-2">Jeles évfordulók megemlékezései, a rendvédelem hőseinek tisztelete.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== KIADVANYAINK ==================== -->
-  <section id="kiadvanyok" class="py-20 bg-gray-50 scroll-mt-24">
-    <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-3xl font-bold text-blue-900 inline-block uppercase tracking-wide">Kiadványaink</h2>
-      <div class="accent-line"></div>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-white p-5 rounded-xl shadow-sm">
-          <i class="fas fa-newspaper text-3xl text-teal-600 mb-3"></i>
-          <h3 class="font-bold text-lg">Rendvédelem-történeti füzetek</h3>
-          <p class="text-sm text-gray-600 mt-2">ISSN 1216-6774 – időszakos kiadvány, friss kutatási eredményekkel.</p>
-        </div>
-        <div class="bg-white p-5 rounded-xl shadow-sm">
-          <i class="fas fa-book text-3xl text-teal-600 mb-3"></i>
-          <h3 class="font-bold text-lg">Pro Scientia Arma</h3>
-          <p class="text-sm text-gray-600 mt-2">ISSN 2560-144X – tudományos folyóirat a rendvédelem-történet tárgykörében.</p>
-        </div>
-        <div class="bg-white p-5 rounded-xl shadow-sm">
-          <i class="fas fa-archive text-3xl text-teal-600 mb-3"></i>
-          <h3 class="font-bold text-lg">Forráskiadványok</h3>
-          <p class="text-sm text-gray-600 mt-2">Levéltári dokumentumok, rendeletek, személyi anyagok közreadása.</p>
-        </div>
-      </div>
-      <div class="mt-8 text-center">
-        <a href="#" class="inline-block px-6 py-2 border-2 border-teal-600 text-teal-600 rounded-full font-semibold hover:bg-teal-600 hover:text-white transition">Összes kiadvány <i class="fas fa-arrow-right ml-1"></i></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== MÉDIA ==================== -->
-  <section id="media" class="py-20 bg-white scroll-mt-24">
-    <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-3xl font-bold text-blue-900 inline-block uppercase tracking-wide">Média</h2>
-      <div class="accent-line"></div>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div id="korlevelek" class="scroll-mt-24">
-          <h3 class="text-xl font-bold text-teal-700 mb-3"><i class="fas fa-envelope mr-2"></i> Körleveleink</h3>
-          <ul class="space-y-2 text-gray-600 list-disc pl-5">
-            <li><a href="#" class="hover:text-teal-600">2024. decemberi körlevél</a></li>
-            <li><a href="#" class="hover:text-teal-600">2024. szeptemberi körlevél</a></li>
-            <li><a href="#" class="hover:text-teal-600">2024. júniusi körlevél</a></li>
-          </ul>
-        </div>
-        <div id="rolunkirtak" class="scroll-mt-24">
-          <h3 class="text-xl font-bold text-teal-700 mb-3"><i class="fas fa-pen-alt mr-2"></i> Rólunk írták</h3>
-          <ul class="space-y-2 text-gray-600 list-disc pl-5">
-            <li><a href="#" class="hover:text-teal-600">Interjú dr. Parádi Józseffel (Rendvédelem-történeti Szemle)</a></li>
-            <li><a href="#" class="hover:text-teal-600">A magyar csendőrségkutatás új eredményei (Múlt-kor)</a></li>
-          </ul>
-        </div>
-        <div id="videotar" class="scroll-mt-24">
-          <h3 class="text-xl font-bold text-teal-700 mb-3"><i class="fas fa-video mr-2"></i> Videótár</h3>
-          <ul class="space-y-2 text-gray-600 list-disc pl-5">
-            <li><a href="#" class="hover:text-teal-600">2023. évi konferencia előadások</a></li>
-            <li><a href="#" class="hover:text-teal-600">Kiállításmegnyitó – Rendvédelem a XX. században</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== KITÜNTETÉSI RENDSZERÜNK ==================== -->
-  <section id="kituntetesek" class="py-20 bg-gray-50 scroll-mt-24">
-    <div class="max-w-5xl mx-auto px-6">
-      <h2 class="text-3xl font-bold text-blue-900 inline-block uppercase tracking-wide">Kitüntetési rendszerünk</h2>
-      <div class="accent-line"></div>
-      <div class="grid md:grid-cols-2 gap-6">
-        <div class="bg-white p-5 rounded-xl shadow-sm">
-          <h3 class="font-bold text-xl text-teal-700">Pro Virtute Militari</h3>
-          <p class="text-gray-600 mt-2">Legmagasabb elismerés, kiemelkedő tudományos életmű vagy a rendvédelem-történet terén végzett példaértékű szolgálatért.</p>
-        </div>
-        <div class="bg-white p-5 rounded-xl shadow-sm">
-          <h3 class="font-bold text-xl text-teal-700">Szemere Bertalan Emlékérem</h3>
-          <p class="text-gray-600 mt-2">A társaság névadójának tiszteletére alapított kitüntetés, kiemelkedő publikációs tevékenységért.</p>
-        </div>
-        <div class="bg-white p-5 rounded-xl shadow-sm">
-          <h3 class="font-bold text-xl text-teal-700">Ifjúsági Díj</h3>
-          <p class="text-gray-600 mt-2">Fiatal kutatóknak, doktoranduszoknak a legígéretesebb rendvédelem-történeti dolgozatért.</p>
-        </div>
-        <div class="bg-white p-5 rounded-xl shadow-sm">
-          <h3 class="font-bold text-xl text-teal-700">Tiszteletbeli tagság</h3>
-          <p class="text-gray-600 mt-2">A társaság munkáját huzamosabb ideig támogató, külföldi vagy hazai szakemberek részére adományozható.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== KAPCSOLAT ==================== -->
-  <section id="kapcsolat" class="py-20 bg-white scroll-mt-24">
-    <div class="max-w-5xl mx-auto px-6">
-      <h2 class="text-3xl font-bold text-blue-900 inline-block uppercase tracking-wide">Kapcsolat</h2>
-      <div class="accent-line"></div>
-      <div class="grid md:grid-cols-2 gap-10">
-        <div>
-          <h3 class="text-xl font-bold mb-4">SzBMRTT titkárság</h3>
-          <p class="flex items-start gap-3 mb-3"><i class="fas fa-map-marker-alt text-teal-600 mt-1"></i> 1081 Budapest, Népszínház utca 22.</p>
-          <p class="flex items-start gap-3 mb-3"><i class="fas fa-envelope text-teal-600 mt-1"></i> <a href="mailto:info@szbmrtt.hu" class="hover:text-teal-600">info@szbmrtt.hu</a></p>
-          <p class="flex items-start gap-3 mb-3"><i class="fas fa-phone-alt text-teal-600 mt-1"></i> +36 1 123 4567</p>
-        </div>
-        <div>
-          <h3 class="text-xl font-bold mb-4">Sajtókapcsolat</h3>
-          <p class="flex items-start gap-3 mb-3"><i class="fas fa-user-edit text-teal-600 mt-1"></i> Dr. Kovács Péter (sajtóreferens)</p>
-          <p class="flex items-start gap-3 mb-3"><i class="fas fa-envelope text-teal-600 mt-1"></i> <a href="mailto:sajto@szbmrtt.hu" class="hover:text-teal-600">sajto@szbmrtt.hu</a></p>
-        </div>
-      </div>
-      <div class="mt-8 p-5 bg-gray-100 rounded-lg text-center text-gray-500 text-sm">
-        <p>Adatvédelmi tájékoztató | Impresszum | © 1990-2025 Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</p>
-      </div>
-    </div>
-  </section>
-</main>
 
 <script>
   (function() {
-    // Slideshow
-    const slides = document.querySelectorAll('.slide-image');
-    if (slides.length) {
-      let current = 0;
-      const total = slides.length;
-      const intervalTime = 8000;
-      function setSlide(index) {
-        if (index < 0) index = total - 1;
-        if (index >= total) index = 0;
-        slides.forEach(slide => slide.style.opacity = '0');
-        slides[index].style.opacity = '1';
-        current = index;
-      }
-      function nextSlide() { setSlide(current + 1); }
-      function prevSlide() { setSlide(current - 1); }
-      let interval = setInterval(nextSlide, intervalTime);
-      const prevBtn = document.getElementById('prevSlide');
-      const nextBtn = document.getElementById('nextSlide');
-      if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); clearInterval(interval); interval = setInterval(nextSlide, intervalTime); });
-      if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); clearInterval(interval); interval = setInterval(nextSlide, intervalTime); });
-      setSlide(0);
-    }
-    // Hamburger menü
-    const hamburger = document.getElementById('hamburgerBtn');
-    const menuToggleBtn = document.getElementById('menuToggleBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const overlay = document.getElementById('overlay');
-    const closeBtn = document.getElementById('closeMenuBtn');
-    function openMenu() { mobileMenu.classList.add('open'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
-    function closeMenu() { mobileMenu.classList.remove('open'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
-    if (hamburger) hamburger.addEventListener('click', openMenu);
-    if (menuToggleBtn) menuToggleBtn.addEventListener('click', openMenu);
-    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
-    if (overlay) overlay.addEventListener('click', closeMenu);
-    // Mobil almenük
-    const subBtn = document.getElementById('mobileSubmenuBtn');
-    const subMenu = document.getElementById('mobileSubmenu');
-    if (subBtn) subBtn.addEventListener('click', () => subMenu.classList.toggle('hidden'));
-    const mediaBtn = document.getElementById('mobileMediaBtn');
-    const mediaSub = document.getElementById('mobileMediaSub');
-    if (mediaBtn) mediaBtn.addEventListener('click', () => mediaSub.classList.toggle('hidden'));
-    // Mobil menü linkek (ugrás)
-    const mobileLinks = document.querySelectorAll('#mobileNavLinks a, #mobileMediaSub a');
-    mobileLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        closeMenu();
-        setTimeout(() => {
-          if (targetId && targetId !== '#') {
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) targetElement.scrollIntoView({ behavior: 'smooth' });
-          }
-        }, 150);
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+    const dotsContainer = document.querySelector('.dots');
+    let currentIndex = 0;
+    let interval;
+    const intervalTime = 8000;
+
+    // Dots létrehozása
+    function createDots() {
+      dotsContainer.innerHTML = '';
+      slides.forEach((_, idx) => {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        if (idx === currentIndex) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(idx));
+        dotsContainer.appendChild(dot);
       });
+    }
+
+    function updateDots() {
+      const dots = document.querySelectorAll('.dot');
+      dots.forEach((dot, idx) => {
+        if (idx === currentIndex) dot.classList.add('active');
+        else dot.classList.remove('active');
+      });
+    }
+
+    function goToSlide(index) {
+      if (index < 0) index = slides.length - 1;
+      if (index >= slides.length) index = 0;
+      // Eltávolítjuk az active osztályt minden slide-ról
+      slides.forEach(slide => slide.classList.remove('active'));
+      slides[index].classList.add('active');
+      currentIndex = index;
+      updateDots();
+      resetInterval();
+    }
+
+    function nextSlide() {
+      goToSlide(currentIndex + 1);
+    }
+
+    function prevSlide() {
+      goToSlide(currentIndex - 1);
+    }
+
+    function resetInterval() {
+      if (interval) clearInterval(interval);
+      interval = setInterval(nextSlide, intervalTime);
+    }
+
+    // Eseménykezelők
+    prevBtn.addEventListener('click', () => {
+      prevSlide();
+      resetInterval();
     });
-    // Kereső ikon
-    const searchIcon = document.getElementById('searchIcon');
-    if (searchIcon) {
-      searchIcon.addEventListener('click', () => {
-        let searchBox = document.getElementById('dynamicSearchBox');
-        if (!searchBox) {
-          searchBox = document.createElement('div');
-          searchBox.id = 'dynamicSearchBox';
-          searchBox.innerHTML = `<div class="fixed top-20 left-1/2 transform -translate-x-1/2 bg-white shadow-2xl rounded-xl p-4 z-[200] w-11/12 max-w-md border border-gray-300"><input type="text" id="searchInput" placeholder="Keresés a honlapon..." class="w-full border-b-2 border-blue-900 py-2 px-3 focus:outline-none"><button id="closeSearch" class="absolute top-2 right-2 text-gray-500"><i class="fas fa-times"></i></button><div id="searchResults" class="mt-2 text-sm text-gray-600 max-h-60 overflow-y-auto"></div></div>`;
-          document.body.appendChild(searchBox);
-          const searchInput = document.getElementById('searchInput');
-          const resultsDiv = document.getElementById('searchResults');
-          searchInput.addEventListener('input', (e) => {
-            const term = e.target.value.toLowerCase().trim();
-            if (!term) { resultsDiv.innerHTML = ''; return; }
-            const sections = document.querySelectorAll('section, div[id]');
-            let found = [];
-            sections.forEach(section => { if (section.id && section.innerText.toLowerCase().includes(term)) { found.push(`<a href="#${section.id}" class="block py-1 hover:bg-gray-100">${section.id.replace(/-/g,' ')}</a>`); } });
-            resultsDiv.innerHTML = found.length ? found.join('') : 'Nincs találat';
-          });
-          document.getElementById('closeSearch').addEventListener('click', () => searchBox.remove());
-        } else { searchBox.style.display = 'block'; }
-      });
-    }
-    // Dinamikus scroll-margin
-    function setStickyAndScrollMargin() {
-      const header = document.getElementById('mainHeader');
-      let headerHeight = header ? header.offsetHeight : 0;
-      document.querySelectorAll('section[id]').forEach(section => { section.style.scrollMarginTop = headerHeight + 'px'; });
-      ['#korlevelek', '#rolunkirtak', '#videotar'].forEach(selector => { const el = document.querySelector(selector); if (el) el.style.scrollMarginTop = headerHeight + 'px'; });
-    }
-    window.addEventListener('load', setStickyAndScrollMargin);
-    window.addEventListener('resize', setStickyAndScrollMargin);
-    new ResizeObserver(() => setStickyAndScrollMargin()).observe(document.getElementById('mainHeader'));
-    // Bemutatkozás akkordionok
-    document.querySelectorAll('.bemutatkozas-accordion-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const targetId = btn.getAttribute('data-target');
-        const targetDiv = document.getElementById(targetId);
-        if (targetDiv) {
-          targetDiv.classList.toggle('hidden');
-          const icon = btn.querySelector('i');
-          if (icon) icon.style.transform = targetDiv.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
-        }
-      });
+    nextBtn.addEventListener('click', () => {
+      nextSlide();
+      resetInterval();
     });
+
+    // Kezdeti állapot
+    slides[0].classList.add('active');
+    createDots();
+    resetInterval();
+
+    // Reszponzív betűméretek miatt semmi extra, a CSS már kezeli
+    // Az animációk a slide aktifizálásakor a CSS által futnak (az új slide kapja az active osztályt, így az animációk elindulnak)
+    // Kis kiegészítés: annak érdekében, hogy az animáció minden váltáskor lefusson, az active osztály hozzáadása triggereli a CSS-t. Ez így jó.
   })();
 </script>
 </body>
