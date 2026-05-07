@@ -102,10 +102,11 @@
         right: 20px;
         text-align: right;
         width: calc(100% - 40px);
-        /* Sötét overlay a leírás mögött, hogy a fehér szöveg olvasható legyen a fehér háttéren */
-        background: linear-gradient(to left, rgba(0,0,0,0.7), rgba(0,0,0,0.3));
+        /* Módosítás: szilárd fekete háttér, kék jobb oldali vonal */
+        background-color: rgba(0, 0, 0, 0.8);
+        border-right: 4px solid #0082D1;
         padding: 12px 20px;
-        border-radius: 8px;
+        border-radius: 0; /* nincs lekerekítés, hogy a vonal éles legyen */
       }
       .latin-motto {
         font-size: 24px;
@@ -185,7 +186,7 @@
         opacity: 0;
       }
       100% {
-        opacity: 0.95; /* asztali */
+        opacity: 0.95;
       }
     }
 
@@ -196,7 +197,6 @@
       animation: fadeIn 0.8s ease-out forwards;
     }
 
-    /* Mobilban a fadeIn végső opacitása 0.9 */
     @media (max-width: 1023px) {
       .slide.active .motto-box {
         animation: slideInFromRight 0.5s ease-out forwards;
@@ -388,5 +388,4 @@
   })();
 </script>
 </body>
-</html>
 </html>
