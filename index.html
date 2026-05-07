@@ -1,412 +1,188 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>SzBMRTT - Hero Slideshow</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <style>
+        /* 1. ALAPOK ÉS KONZISZTENS ARCULAT */
+        .hero-slideshow {
+            position: relative;
+            width: 100%;
+            background-color: #000;
+            overflow: hidden;
+            font-family: sans-serif; /* Itt add meg a honlapod betűtípusát */
+        }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f9f9f6;
-    }
+        /* Desktop arány 3:1 (1500:500) */
+        @media (min-width: 1024px) {
+            .hero-slideshow { aspect-ratio: 3 / 1; }
+        }
+        /* Mobil arány (1180:829) */
+        @media (max-width: 1023px) {
+            .hero-slideshow { aspect-ratio: 1180 / 829; }
+        }
 
-    /* Slideshow konténer */
-    .hero-slideshow {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-    }
+        .slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            display: flex;
+            align-items: center;
+        }
 
-    /* Asztali nézet: 1500:500 arány (3:1) */
-    @media (min-width: 1024px) {
-      .hero-slideshow {
-        aspect-ratio: 1500 / 500;
-      }
-    }
+        .slide.active { opacity: 1; z-index: 1; }
 
-    /* Mobil nézet: 1180:829 arány */
-    @media (max-width: 1023px) {
-      .hero-slideshow {
-        aspect-ratio: 1180 / 829;
-      }
-    }
+        .slide picture, .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* VÁGÁSMENTES MEGJELENÍTÉS */
+        }
 
-    /* Slide-ok konténere */
-    .slides-container {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
+        /* 2. SZÖVEGDOBOZOK POZICIONÁLÁSA */
+        .text-overlay {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 50%; /* A bal oldali fehér mező területe */
+            height: 100%;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 40px; /* Margó */
+            box-sizing: border-box;
+        }
 
-    .slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
-    }
+        /* Jobbra igazítás a felezővonalhoz */
+        .motto-box, .desc-box {
+            width: 100%;
+            text-align: right;
+            padding-right: 10px; /* Egy kis távolság a fotótól */
+        }
 
-    .slide.active {
-      opacity: 1;
-      visibility: visible;
-      z-index: 1;
-    }
+        /* 3. TIPOGRÁFIA ÉS SZÍNEK (DESKTOP) */
+        .latin-motto { font-size: 24px; font-weight: bold; color: #000; white-space: nowrap; }
+        .hungarian-motto { font-size: 18px; color: #000; white-space: nowrap; margin-top: 5px; }
+        
+        /* Alsó doboz overlay-jel */
+        .desc-box {
+            background: linear-gradient(to right, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .desc-text { font-size: 15px; color: #fff; opacity: 0.9; line-height: 1.4; }
 
-    /* Kép stílus */
-    .slide picture,
-    .slide img {
-      display: block;
-      width: 100%;
-      height: 100%;
-    }
+        /* 4. ANIMÁCIÓK */
+        .slide.active .motto-box {
+            animation: slideIn 0.8s ease-out forwards;
+        }
+        .slide.active .desc-box {
+            animation: fadeIn 1.2s ease-out forwards;
+        }
 
-    .slide img {
-      object-fit: fill; /* a kép pont kitölti a konténert a megadott arány miatt, nem torzít */
-      object-position: center;
-    }
+        @keyframes slideIn {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
 
-    /* ========== SZÖVEGDOBOZOK ========== */
-    .text-container {
-      position: absolute;
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    /* ASZTALI NÉZET */
-    @media (min-width: 1024px) {
-      .text-container {
-        top: 0;
-        left: 0;
-        width: 50%; /* a bal oldali fehér mező szélessége */
-        height: 100%;
-      }
-      .motto-box {
-        position: absolute;
-        top: 30%;
-        right: 20px;
-        transform: translateY(-50%);
-        text-align: right;
-        width: calc(100% - 40px);
-      }
-      .desc-box {
-        position: absolute;
-        bottom: 30px;
-        right: 20px;
-        text-align: right;
-        width: calc(100% - 40px);
-      }
-      /* Betűméretek */
-      .latin-motto {
-        font-size: 24px;
-        font-weight: bold;
-        color: #000000;
-        white-space: nowrap;
-      }
-      .hungarian-motto {
-        font-size: 18px;
-        font-weight: normal;
-        color: #000000;
-        white-space: nowrap;
-      }
-      .desc-text {
-        font-size: 15px;
-        font-weight: normal;
-        color: #ffffff;
-        opacity: 0.85;
-        white-space: normal;
-      }
-    }
-
-    /* MOBIL NÉZET */
-    @media (max-width: 1023px) {
-      .text-container {
-        position: absolute;
-        bottom: 20px;
-        left: 20px;
-        right: 20px;
-        background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.3));
-        padding: 15px;
-        border-radius: 8px;
-      }
-      /* Fontos: visszaállítjuk a relative pozíciót, mert asztali absolutot felül kell írni */
-      .motto-box {
-        position: relative;
-        text-align: left;
-        margin-bottom: 10px;
-      }
-      .desc-box {
-        position: relative;
-        text-align: left;
-      }
-      /* Betűméretek és színek */
-      .latin-motto {
-        font-size: 4vw;
-        font-weight: bold;
-        color: #ffffff;
-        white-space: nowrap;
-      }
-      .hungarian-motto {
-        font-size: 3vw;
-        font-weight: normal;
-        color: #ffffff;
-        white-space: nowrap;
-      }
-      .desc-text {
-        font-size: 11px;
-        font-weight: normal;
-        color: #ffffff;
-        opacity: 0.9;
-        white-space: normal;
-      }
-    }
-
-    /* ========== ANIMÁCIÓK ========== */
-    @keyframes slideInFromRight {
-      0% {
-        opacity: 0;
-        transform: translateX(50px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 0.85;
-      }
-    }
-
-    /* Asztali mottó animáció: slide-in */
-    .slide.active .motto-box {
-      animation: slideInFromRight 0.6s ease-out forwards;
-    }
-    /* Asztali leírás animáció: fade-in */
-    .slide.active .desc-box {
-      animation: fadeIn 0.8s ease-out forwards;
-    }
-
-    /* Mobilban a leírás fade-in, mottó slide-in (a fadeIn alfa értéke mobilban 0.9 lesz) */
-    @media (max-width: 1023px) {
-      .slide.active .motto-box {
-        animation: slideInFromRight 0.5s ease-out forwards;
-      }
-      .slide.active .desc-box {
-        animation: fadeIn 0.6s ease-out forwards;
-      }
-      /* A mobil fadeIn végső opacitását felülírjuk, mert a .desc-text alapból 0.9-es */
-      @keyframes fadeIn {
-        0% { opacity: 0; }
-        100% { opacity: 0.9; }
-      }
-    }
-
-    /* ========== NAVIGÁCIÓ ========== */
-    .nav-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0,0,0,0.5);
-      color: white;
-      border: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      cursor: pointer;
-      z-index: 10;
-      font-size: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.3s;
-    }
-    .nav-btn:hover {
-      background: rgba(0,0,0,0.8);
-    }
-    .prev {
-      left: 20px;
-    }
-    .next {
-      right: 20px;
-    }
-
-    .dots {
-      position: absolute;
-      bottom: 20px;
-      left: 0;
-      right: 0;
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      z-index: 10;
-    }
-    .dot {
-      width: 10px;
-      height: 10px;
-      background: rgba(255,255,255,0.5);
-      border-radius: 50%;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    .dot.active {
-      background: white;
-      transform: scale(1.2);
-    }
-  </style>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,700&display=swap" rel="stylesheet">
+        /* 5. MOBIL NÉZET SPECIFIKÁCIÓ */
+        @media (max-width: 1023px) {
+            .text-overlay { width: 100%; padding: 20px; justify-content: center; background: rgba(0,0,0,0.4); }
+            .motto-box, .desc-box { text-align: left; background: none; }
+            .latin-motto, .hungarian-motto { color: #fff; font-size: 4.5vw; }
+            .desc-text { font-size: 12px; color: #fff; }
+        }
+    </style>
 </head>
 <body>
+
 <div class="hero-slideshow">
-  <div class="slides-container">
-    <!-- 1. dia -->
-    <div class="slide" data-index="0">
-      <picture>
-        <source media="(max-width: 1023px)" srcset="szbmrtt-president-dr-jozsef-paradi-inauguration-1984-mobile.jpg">
-        <img src="szbmrtt-elnok-dr-paradi-jozsef-szekfoglalo-rendortiszti-foiskola1984-desktop.jpg" alt="Dr. Parádi József székfoglaló">
-      </picture>
-      <div class="text-container">
-        <div class="motto-box">
-          <div class="latin-motto">Cum historia pro securitate.</div>
-          <div class="hungarian-motto">Történelemmel a biztonságért.</div>
+    <!-- 1. DIA -->
+    <div class="slide active">
+        <picture>
+            <source media="(max-width: 1023px)" srcset="szbmrtt-president-dr-jozsef-paradi-inauguration-1984-mobile.jpg">
+            <img src="szbmrtt-elnok-dr-paradi-jozsef-szekfoglalo-rendortiszti-foiskola1984-desktop.jpg" alt="Elnöki székfoglaló">
+        </picture>
+        <div class="text-overlay">
+            <div class="motto-box">
+                <div class="latin-motto">Cum historia pro securitate.</div>
+                <div class="hungarian-motto">Történelemmel a biztonságért.</div>
+            </div>
+            <div class="desc-box">
+                <div class="desc-text">Társaságunk elnöke, dr. Parádi József székfoglalója a Rendőrtiszti Főiskolán 1984.</div>
+            </div>
         </div>
-        <div class="desc-box">
-          <div class="desc-text">Társaságunk elnöke, dr. Parádi József székfoglalója a Rendőrtiszti Főiskolán 1984.</div>
-        </div>
-      </div>
     </div>
-    <!-- 2. dia -->
-    <div class="slide" data-index="1">
-      <picture>
-        <source media="(max-width: 1023px)" srcset="national-security-service-conference-budapest-intelligence-mobile.jpg">
-        <img src="szbmrtt-nbsz-nemzetbiztonsagi-szakszolgalat-szakmatorteneti-konferencia-desktop.jpg" alt="NBSZ konferencia">
-      </picture>
-      <div class="text-container">
-        <div class="motto-box">
-          <div class="latin-motto">Condita decrescit vulgata scientia crescit.</div>
-          <div class="hungarian-motto">Az elrejtett tudás elsorvad, a másokkal megosztott gyarapszik.</div>
+
+    <!-- 2. DIA -->
+    <div class="slide">
+        <picture>
+            <source media="(max-width: 1023px)" srcset="national-security-service-conference-budapest-intelligence-mobile.jpg">
+            <img src="szbmrtt-nbsz-nemzetbiztonsagi-szakszolgalat-szakmatorteneti-konferencia-desktop.jpg" alt="NBSZ konferencia">
+        </picture>
+        <div class="text-overlay">
+            <div class="motto-box">
+                <div class="latin-motto">Condita decrescit vulgata scientia crescit.</div>
+                <div class="hungarian-motto">Az elrejtett tudás elsorvad, a másokkal megosztott gyarapszik.</div>
+            </div>
+            <div class="desc-box">
+                <div class="desc-text">Tudományos párbeszéd: Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság – Nemzetbiztonsági Szakszolgálat szakmatörténeti konferencia.</div>
+            </div>
         </div>
-        <div class="desc-box">
-          <div class="desc-text">Tudományos párbeszéd: Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság – Nemzetbiztonsági Szakszolgálat szakmatörténeti konferencia.</div>
-        </div>
-      </div>
     </div>
-    <!-- 3. dia -->
-    <div class="slide" data-index="2">
-      <picture>
-        <source media="(max-width: 1023px)" srcset="intelligence-reconnaissance-service-manual-1872-guide-mobile.jpg">
-        <img src="anleitung-zum-kundschaftsdienste-1872-felderitoszolgalati-utasitas-szbmrtt-desktop.jpg" alt="1872-es utasítás">
-      </picture>
-      <div class="text-container">
-        <div class="motto-box">
-          <div class="latin-motto">Veritas nunquam perit.</div>
-          <div class="hungarian-motto">Az igazság sosem vész el.</div>
+
+    <!-- 3. DIA -->
+    <div class="slide">
+        <picture>
+            <source media="(max-width: 1023px)" srcset="intelligence-reconnaissance-service-manual-1872-guide-mobile.jpg">
+            <img src="anleitung-zum-kundschaftsdienste-1872-felderitoszolgalati-utasitas-szbmrtt-desktop.jpg" alt="Könyvbemutató">
+        </picture>
+        <div class="text-overlay">
+            <div class="motto-box">
+                <div class="latin-motto">Veritas nunquam perit.</div>
+                <div class="hungarian-motto">Az igazság sosem vész el.</div>
+            </div>
+            <div class="desc-box">
+                <div class="desc-text">Dr. Parádi József és dr. Sándor Vilmos &dagger; az 1872-es Felderítőszolgálati utasítás (Anleitung zum Kundschaftsdienste) c. háromnyelvű társasági kiadványunk könyvbemutatóján.</div>
+            </div>
         </div>
-        <div class="desc-box">
-          <div class="desc-text">Dr. Parádi József és dr. Sándor Vilmos &dagger; az 1872-es Felderítőszolgálati utasítás (Anleitung zum Kundschaftsdienste) c. háromnyelvű társasági kiadványunk könyvbemutatóján.</div>
-        </div>
-      </div>
     </div>
-    <!-- 4. dia -->
-    <div class="slide" data-index="3">
-      <picture>
-        <source media="(max-width: 1023px)" srcset="szbmrtt-honorary-medals-zeidler-sandor-design-mobile.jpg">
-        <img src="szbmrtt-kituntetesek-zeidler-sandor-falerisztika-merit-awards-desktop.jpg" alt="Kitüntetések">
-      </picture>
-      <div class="text-container">
-        <div class="motto-box">
-          <div class="latin-motto">Honos honestum decorat, inhonestum notat.</div>
-          <div class="hungarian-motto">A kitüntetés a méltót ékesíti, a méltatlant bélyegezi.</div>
+
+    <!-- 4. DIA -->
+    <div class="slide">
+        <picture>
+            <source media="(max-width: 1023px)" srcset="szbmrtt-honorary-medals-zeidler-sandor-design-mobile.jpg">
+            <img src="szbmrtt-kituntetesek-zeidler-sandor-falerisztika-merit-awards-desktop.jpg" alt="Kitüntetések">
+        </picture>
+        <div class="text-overlay">
+            <div class="motto-box">
+                <div class="latin-motto">Honos honestum decorat, inhonestum notat.</div>
+                <div class="hungarian-motto">A kitüntetés a méltót ékesíti, a méltatlant bélyegezi.</div>
+            </div>
+            <div class="desc-box">
+                <div class="desc-text">Érdem és elismerés. Társaságunk mag. Zeidler Sándor által tervezett kitüntetései.</div>
+            </div>
         </div>
-        <div class="desc-box">
-          <div class="desc-text">Érdem és elismerés. Társaságunk mag. Zeidler Sándor által tervezett kitüntetései.</div>
-        </div>
-      </div>
     </div>
-  </div>
-  <button class="nav-btn prev" aria-label="Előző">‹</button>
-  <button class="nav-btn next" aria-label="Következő">›</button>
-  <div class="dots"></div>
 </div>
 
 <script>
-  (function() {
+    // Automatikus váltás 6 másodpercenként
+    let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');
-    const prevBtn = document.querySelector('.prev');
-    const nextBtn = document.querySelector('.next');
-    const dotsContainer = document.querySelector('.dots');
-    let currentIndex = 0;
-    let interval;
-    const intervalTime = 8000;
-
-    function createDots() {
-      dotsContainer.innerHTML = '';
-      slides.forEach((_, idx) => {
-        const dot = document.createElement('div');
-        dot.classList.add('dot');
-        if (idx === currentIndex) dot.classList.add('active');
-        dot.addEventListener('click', () => goToSlide(idx));
-        dotsContainer.appendChild(dot);
-      });
-    }
-
-    function updateDots() {
-      const dots = document.querySelectorAll('.dot');
-      dots.forEach((dot, idx) => {
-        if (idx === currentIndex) dot.classList.add('active');
-        else dot.classList.remove('active');
-      });
-    }
-
-    function goToSlide(index) {
-      if (index < 0) index = slides.length - 1;
-      if (index >= slides.length) index = 0;
-      slides.forEach(slide => slide.classList.remove('active'));
-      slides[index].classList.add('active');
-      currentIndex = index;
-      updateDots();
-      resetInterval();
-    }
-
+    
     function nextSlide() {
-      goToSlide(currentIndex + 1);
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
     }
-
-    function prevSlide() {
-      goToSlide(currentIndex - 1);
-    }
-
-    function resetInterval() {
-      if (interval) clearInterval(interval);
-      interval = setInterval(nextSlide, intervalTime);
-    }
-
-    prevBtn.addEventListener('click', () => {
-      prevSlide();
-      resetInterval();
-    });
-    nextBtn.addEventListener('click', () => {
-      nextSlide();
-      resetInterval();
-    });
-
-    // Kezdeti aktív slide
-    slides[0].classList.add('active');
-    createDots();
-    resetInterval();
-  })();
+    
+    setInterval(nextSlide, 6000);
 </script>
+
 </body>
 </html>
