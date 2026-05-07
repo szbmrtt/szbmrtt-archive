@@ -98,18 +98,20 @@
       }
 
       /* Mottó szövegek: fekete, vastagabb, reszponzív méret */
-      .desktop-motto .latin-motto {
-        font-size: clamp(32px, 5vw, 48px);
-        font-weight: bold;
-        color: #000000;
-        white-space: nowrap;
-      }
-      .desktop-motto .hungarian-motto {
-        font-size: clamp(24px, 4vw, 36px);
-        font-weight: normal;
-        color: #000000;
-        white-space: nowrap;
-      }
+.desktop-motto .latin-motto {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: bold;
+  color: #000000;
+  white-space: normal;
+  word-break: break-word;
+}
+.desktop-motto .hungarian-motto {
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: normal;
+  color: #000000;
+  white-space: normal;
+  word-break: break-word;
+}
 
       /* Leírás doboz: alsó rész, balra 0, jobbra 10px rés, automatikus szélesség */
       .desktop-desc {
