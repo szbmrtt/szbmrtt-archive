@@ -79,7 +79,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: 50%;
+        width: 50%;          /* a bal oldali fehér mező */
         height: 100%;
         z-index: 2;
         pointer-events: none;
@@ -90,17 +90,19 @@
         right: 20px;
         transform: translateY(-50%);
         text-align: right;
+        opacity: 0; /* alapból láthatatlan, animáció teszi láthatóvá */
       }
       .desktop-desc {
         position: absolute;
         bottom: 30px;
         right: 20px;
         text-align: right;
-        width: auto;               /* szélesség a szöveghez igazodik */
+        width: auto;
         background-color: rgba(0, 0, 0, 0.8);
         border-right: 4px solid #0082D1;
         padding: 12px 20px;
         border-radius: 0;
+        opacity: 0;
       }
       .latin-motto {
         font-size: 24px;
@@ -120,6 +122,13 @@
         color: #ffffff;
         opacity: 0.95;
         white-space: normal;
+      }
+      /* Animációk asztali szöveghez */
+      .desktop-motto.animate {
+        animation: slideInFromRight 0.6s ease-out forwards;
+      }
+      .desktop-desc.animate {
+        animation: fadeIn 0.8s ease-out forwards;
       }
     }
 
@@ -156,16 +165,16 @@
         opacity: 0.9;
         white-space: normal;
       }
-      /* Animációk mobil szöveghez */
+      /* Mobil animációk */
       .mobile-text-container.animate {
         animation: slideInFromRight 0.5s ease-out forwards;
       }
-      .mobile-text-container .mobile-desc {
+      .mobile-desc .desc-text.animate {
         animation: fadeIn 0.6s ease-out forwards;
       }
     }
 
-    /* ========== ANIMÁCIÓK ========== */
+    /* ========== KÖZÖS ANIMÁCIÓK ========== */
     @keyframes slideInFromRight {
       0% {
         opacity: 0;
@@ -180,14 +189,6 @@
     @keyframes fadeIn {
       0% { opacity: 0; }
       100% { opacity: 0.95; }
-    }
-
-    /* Asztali animációk */
-    .slide.active .desktop-motto {
-      animation: slideInFromRight 0.6s ease-out forwards;
-    }
-    .slide.active .desktop-desc {
-      animation: fadeIn 0.8s ease-out forwards;
     }
 
     /* Navigáció */
@@ -269,16 +270,33 @@
       </picture>
     </div>
   </div>
+
+  <!-- ASZTALI SZÖVEG (a képen belül, bal oldali fehér mezőben) -->
+  <div class="desktop-text">
+    <div class="desktop-motto">
+      <div class="latin-motto"></div>
+      <div class="hungarian-motto"></div>
+    </div>
+    <div class="desktop-desc">
+      <div class="desc-text"></div>
+    </div>
+  </div>
+
   <button class="nav-btn prev" aria-label="Előző">‹</button>
   <button class="nav-btn next" aria-label="Következő">›</button>
   <div class="dots"></div>
 </div>
 
-<!-- ASZTALI SZÖVEG (a képen belül, JS tölti fel) -->
-<div class="desktop-text" style="display: none;"></div>
-
 <!-- MOBIL SZÖVEG (a kép alatt) -->
-<div class="mobile-text-container" style="display: none;"></div>
+<div class="mobile-text-container">
+  <div class="mobile-motto">
+    <div class="latin-motto"></div>
+    <div class="hungarian-motto"></div>
+  </div>
+  <div class="mobile-desc">
+    <div class="desc-text"></div>
+  </div>
+</div>
 
 <script>
   (function() {
@@ -314,68 +332,55 @@
     let interval;
     const intervalTime = 8000;
 
-    // Asztali szövegdobozok elemei
-    const desktopTextContainer = document.querySelector('.desktop-text');
-    const mobileTextContainer = document.querySelector('.mobile-text-container');
+    // Asztali szövegelemek
+    const desktopMotto = document.querySelector('.desktop-motto');
+    const desktopDesc = document.querySelector('.desktop-desc');
+    const desktopLatin = document.querySelector('.desktop-motto .latin-motto');
+    const desktopHungarian = document.querySelector('.desktop-motto .hungarian-motto');
+    const desktopDescText = document.querySelector('.desktop-desc .desc-text');
 
-    // Asztali szöveg struktúra létrehozása (csak egyszer)
-    function createDesktopTextElements() {
-      desktopTextContainer.innerHTML = `
-        <div class="desktop-motto">
-          <div class="latin-motto"></div>
-          <div class="hungarian-motto"></div>
-        </div>
-        <div class="desktop-desc">
-          <div class="desc-text"></div>
-        </div>
-      `;
-      desktopTextContainer.style.display = 'block';
-    }
+    // Mobil szövegelemek
+    const mobileContainer = document.querySelector('.mobile-text-container');
+    const mobileLatin = document.querySelector('.mobile-motto .latin-motto');
+    const mobileHungarian = document.querySelector('.mobile-motto .hungarian-motto');
+    const mobileDescText = document.querySelector('.mobile-desc .desc-text');
 
-    // Mobil szöveg struktúra létrehozása
-    function createMobileTextElements() {
-      mobileTextContainer.innerHTML = `
-        <div class="mobile-motto">
-          <div class="latin-motto"></div>
-          <div class="hungarian-motto"></div>
-        </div>
-        <div class="mobile-desc">
-          <div class="desc-text"></div>
-        </div>
-      `;
-      mobileTextContainer.style.display = 'block';
-    }
-
-    // Szöveg frissítése az aktuális dia alapján
+    // Szöveg frissítése és animációk indítása
     function updateText(index) {
       const data = slidesData[index];
-      // Asztali frissítés
-      if (desktopTextContainer) {
-        const latinElem = desktopTextContainer.querySelector('.latin-motto');
-        const hungarianElem = desktopTextContainer.querySelector('.hungarian-motto');
-        const descElem = desktopTextContainer.querySelector('.desc-text');
-        if (latinElem) latinElem.textContent = data.latin;
-        if (hungarianElem) hungarianElem.textContent = data.hungarian;
-        if (descElem) descElem.textContent = data.desc;
-        // Animáció újraindítása: eltávolítjuk és újra hozzáadjuk az active-t?
-        // Mivel a .slide.active-hoz kötött az animáció, a szöveg a képpel együtt animálódik (a .slide.active .desktop-motto stb. kiváltja)
-        // De ha nincs aktív slide? A képváltáskor a .slide.active változik, a desktop szöveg animációja automatikusan megtörténik a CSS-ben.
+
+      // Asztali szöveg frissítése
+      if (desktopLatin) desktopLatin.textContent = data.latin;
+      if (desktopHungarian) desktopHungarian.textContent = data.hungarian;
+      if (desktopDescText) desktopDescText.textContent = data.desc;
+
+      // Asztali animációk újraindítása
+      if (desktopMotto) {
+        desktopMotto.classList.remove('animate');
+        desktopDesc.classList.remove('animate');
+        // Kényszerített reflow
+        void desktopMotto.offsetWidth;
+        void desktopDesc.offsetWidth;
+        desktopMotto.classList.add('animate');
+        desktopDesc.classList.add('animate');
       }
-      // Mobil frissítés
-      if (mobileTextContainer) {
-        const latinElem = mobileTextContainer.querySelector('.latin-motto');
-        const hungarianElem = mobileTextContainer.querySelector('.hungarian-motto');
-        const descElem = mobileTextContainer.querySelector('.desc-text');
-        if (latinElem) latinElem.textContent = data.latin;
-        if (hungarianElem) hungarianElem.textContent = data.hungarian;
-        if (descElem) descElem.textContent = data.desc;
-        // Animáció indítása: először eltávolítjuk az animációs osztályt, majd kis késleltetéssel újra hozzáadjuk
-        mobileTextContainer.classList.remove('animate');
-        // Kényszerített reflow a trükkös, de így is jó: setTimeout
-        setTimeout(() => {
-          mobileTextContainer.classList.add('animate');
-        }, 10);
-        // A leírás fade animációjához külön osztály? A .mobile-desc fadeIn már a CSS-ben definiálva van, de az minden alkalommal lefut, ha újra hozzáadjuk. Most egyszerűen a container animációja elég.
+
+      // Mobil szöveg frissítése
+      if (mobileLatin) mobileLatin.textContent = data.latin;
+      if (mobileHungarian) mobileHungarian.textContent = data.hungarian;
+      if (mobileDescText) mobileDescText.textContent = data.desc;
+
+      // Mobil animációk újraindítása
+      if (mobileContainer) {
+        mobileContainer.classList.remove('animate');
+        void mobileContainer.offsetWidth;
+        mobileContainer.classList.add('animate');
+      }
+      // Mobil leírás fade animáció
+      if (mobileDescText) {
+        mobileDescText.classList.remove('animate');
+        void mobileDescText.offsetWidth;
+        mobileDescText.classList.add('animate');
       }
     }
 
@@ -422,11 +427,9 @@
     nextBtn.addEventListener('click', () => { nextSlide(); resetInterval(); });
 
     // Inicializálás
-    createDesktopTextElements();
-    createMobileTextElements();
     slides[0].classList.add('active');
-    updateText(0);
     createDots();
+    updateText(0);
     resetInterval();
   })();
 </script>
