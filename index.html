@@ -79,13 +79,13 @@
         pointer-events: none;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        padding: 40px 20px 40px 0;
+        justify-content: flex-end;   /* elemek alulról felfelé */
+        padding: 0 20px 40px 0;      /* jobb oldali padding, alul padding a leírás alá (opcionális) */
       }
 
       .desktop-motto {
         text-align: right;
-        margin-top: 0;
+        margin-bottom: 40px;         /* távolság a mottó alja és a leírás teteje között */
         opacity: 0;
       }
       .desktop-motto .latin-motto {
@@ -108,7 +108,7 @@
         background-color: rgba(0, 0, 0, 0.85);
         border-right: 8px solid #0082D1;
         padding: 12px 20px;
-        margin-bottom: 40px;
+        /* nincs bottom, mert a flex konténer alján van */
         opacity: 0;
         display: inline-block;
         align-self: flex-end;
@@ -292,6 +292,7 @@
 
 <script>
   (function() {
+    // Dia adatok – a második dia mottóiban <br> a kért sortörésekhez
     const slidesData = [
       {
         latin: "Cum historia pro securitate.",
@@ -299,8 +300,8 @@
         desc: "Társaságunk elnöke, dr. Parádi József székfoglalója a Rendőrtiszti Főiskolán 1984."
       },
       {
-        latin: "Condita decrescit vulgata scientia crescit.",
-        hungarian: "Az elrejtett tudás elsorvad, a másokkal megosztott gyarapszik.",
+        latin: "Condita decrescit<br>vulgata scientia crescit.",
+        hungarian: "Az elrejtett tudás elsorvad,<br>a másokkal megosztott gyarapszik.",
         desc: "Tudományos párbeszéd: Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság – Nemzetbiztonsági Szakszolgálat szakmatörténeti konferencia."
       },
       {
@@ -323,12 +324,14 @@
     let interval;
     const intervalTime = 8000;
 
+    // Asztali elemek
     const desktopMotto = document.querySelector('.desktop-motto');
     const desktopDesc = document.querySelector('.desktop-desc');
     const desktopLatin = document.querySelector('.desktop-motto .latin-motto');
     const desktopHungarian = document.querySelector('.desktop-motto .hungarian-motto');
     const desktopDescText = document.querySelector('.desktop-desc .desc-text');
 
+    // Mobil elemek
     const mobileContainer = document.querySelector('.mobile-text-container');
     const mobileLatin = document.querySelector('.mobile-motto .latin-motto');
     const mobileHungarian = document.querySelector('.mobile-motto .hungarian-motto');
@@ -337,20 +340,22 @@
     function restartAnimation(element, className) {
       if (!element) return;
       element.classList.remove(className);
-      void element.offsetWidth;
+      void element.offsetWidth; // reflow
       element.classList.add(className);
     }
 
     function updateText(index) {
       const data = slidesData[index];
-      if (desktopLatin) desktopLatin.textContent = data.latin;
-      if (desktopHungarian) desktopHungarian.textContent = data.hungarian;
+      // Asztali: innerHTML használata, hogy a <br> érvényesüljön
+      if (desktopLatin) desktopLatin.innerHTML = data.latin;
+      if (desktopHungarian) desktopHungarian.innerHTML = data.hungarian;
       if (desktopDescText) desktopDescText.textContent = data.desc;
       restartAnimation(desktopMotto, 'animate');
       restartAnimation(desktopDesc, 'animate');
 
-      if (mobileLatin) mobileLatin.textContent = data.latin;
-      if (mobileHungarian) mobileHungarian.textContent = data.hungarian;
+      // Mobil: szintén innerHTML a konzisztencia miatt (a mobil nézetben nincs <br> a többi diánál, de így is jó)
+      if (mobileLatin) mobileLatin.innerHTML = data.latin;
+      if (mobileHungarian) mobileHungarian.innerHTML = data.hungarian;
       if (mobileDescText) mobileDescText.textContent = data.desc;
       restartAnimation(mobileContainer, 'animate');
       restartAnimation(mobileDescText, 'animate');
