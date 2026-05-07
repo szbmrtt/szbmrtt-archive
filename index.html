@@ -26,7 +26,7 @@
     /* Asztali nézet: 1500:500 arány (3:1) */
     @media (min-width: 1024px) {
       .hero-slideshow {
-        aspect-ratio: 1500 / 500; /* 3:1 */
+        aspect-ratio: 1500 / 500;
       }
     }
 
@@ -74,29 +74,25 @@
       object-position: center;
     }
 
-    /* Overlay (csak asztali bal oldali lineáris átmenet nincs megadva, de a leírás overlay-jel az sötétítés, itt a bal oldali fehér mező alapból a képen van) */
-    /* A szövegdobozok közös stílusai */
+    /* ========== SZÖVEGDOBOZOK ========== */
     .text-container {
       position: absolute;
       z-index: 2;
-      pointer-events: none; /* hogy ne zavarja a kattintást a nyilakon */
+      pointer-events: none;
     }
 
-    /* Asztali nézet: a bal oldali fehér mezőben, jobbra igazítva a felezővonalhoz */
+    /* ASZTALI NÉZET */
     @media (min-width: 1024px) {
       .text-container {
         top: 0;
         left: 0;
         width: 50%; /* a bal oldali fehér mező szélessége */
         height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center; /* függőlegesen középre, de a mottó felül, leírás alul? A spec szerint mottó felső doboz, leírás alsó doboz. Jobb a flex segítségével elválasztani */
       }
       .motto-box {
         position: absolute;
         top: 30%;
-        right: 20px; /* jobbra igazítás, a jobb széle a konténer jobb szélénél (a felezővonalnál) */
+        right: 20px;
         transform: translateY(-50%);
         text-align: right;
         width: calc(100% - 40px);
@@ -108,11 +104,32 @@
         text-align: right;
         width: calc(100% - 40px);
       }
+      /* Betűméretek */
+      .latin-motto {
+        font-size: 24px;
+        font-weight: bold;
+        color: #000000;
+        white-space: nowrap;
+      }
+      .hungarian-motto {
+        font-size: 18px;
+        font-weight: normal;
+        color: #000000;
+        white-space: nowrap;
+      }
+      .desc-text {
+        font-size: 15px;
+        font-weight: normal;
+        color: #ffffff;
+        opacity: 0.85;
+        white-space: normal;
+      }
     }
 
-    /* Mobil nézet: szöveg a kép felett, balra igazítva, overlay sötétítéssel */
+    /* MOBIL NÉZET */
     @media (max-width: 1023px) {
       .text-container {
+        position: absolute;
         bottom: 20px;
         left: 20px;
         right: 20px;
@@ -120,73 +137,39 @@
         padding: 15px;
         border-radius: 8px;
       }
+      /* Fontos: visszaállítjuk a relative pozíciót, mert asztali absolutot felül kell írni */
       .motto-box {
+        position: relative;
         text-align: left;
         margin-bottom: 10px;
       }
       .desc-box {
+        position: relative;
         text-align: left;
       }
-    }
-
-    /* Mottó stílusok */
-    .latin-motto {
-      font-weight: bold;
-      white-space: nowrap;
-      color: #000000; /* asztali fekete */
-      font-size: 24px;
-      line-height: 1.2;
-    }
-    .hungarian-motto {
-      font-weight: normal;
-      white-space: nowrap;
-      color: #000000; /* asztali fekete */
-      font-size: 18px;
-      line-height: 1.2;
-    }
-    .desc-text {
-      white-space: normal;
-      font-weight: normal;
-      color: #ffffff;
-      opacity: 0.85;
-      font-size: 15px;
-      line-height: 1.4;
-    }
-
-    /* Mobil nézetben a mottó és leírás színe fehér, plusz overlay miatt */
-    @media (max-width: 1023px) {
-      .latin-motto,
-      .hungarian-motto {
-        color: #ffffff;
-      }
-      .desc-text {
-        opacity: 0.9;
-      }
+      /* Betűméretek és színek */
       .latin-motto {
         font-size: 4vw;
+        font-weight: bold;
+        color: #ffffff;
+        white-space: nowrap;
       }
       .hungarian-motto {
         font-size: 3vw;
+        font-weight: normal;
+        color: #ffffff;
+        white-space: nowrap;
       }
       .desc-text {
         font-size: 11px;
+        font-weight: normal;
+        color: #ffffff;
+        opacity: 0.9;
+        white-space: normal;
       }
     }
 
-    /* Asztali nézetben a betűméretek fixek, de reszponzívvá tehetők */
-    @media (min-width: 1024px) {
-      .latin-motto {
-        font-size: 24px;
-      }
-      .hungarian-motto {
-        font-size: 18px;
-      }
-      .desc-text {
-        font-size: 15px;
-      }
-    }
-
-    /* Animációk */
+    /* ========== ANIMÁCIÓK ========== */
     @keyframes slideInFromRight {
       0% {
         opacity: 0;
@@ -207,7 +190,7 @@
       }
     }
 
-    /* Asztali mottó animáció: slide-in jobbról */
+    /* Asztali mottó animáció: slide-in */
     .slide.active .motto-box {
       animation: slideInFromRight 0.6s ease-out forwards;
     }
@@ -216,7 +199,7 @@
       animation: fadeIn 0.8s ease-out forwards;
     }
 
-    /* Mobil animáció: mottó slide-in, leírás fade-in */
+    /* Mobilban a leírás fade-in, mottó slide-in (a fadeIn alfa értéke mobilban 0.9 lesz) */
     @media (max-width: 1023px) {
       .slide.active .motto-box {
         animation: slideInFromRight 0.5s ease-out forwards;
@@ -224,9 +207,14 @@
       .slide.active .desc-box {
         animation: fadeIn 0.6s ease-out forwards;
       }
+      /* A mobil fadeIn végső opacitását felülírjuk, mert a .desc-text alapból 0.9-es */
+      @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 0.9; }
+      }
     }
 
-    /* Navigációs nyilak */
+    /* ========== NAVIGÁCIÓ ========== */
     .nav-btn {
       position: absolute;
       top: 50%;
@@ -255,7 +243,6 @@
       right: 20px;
     }
 
-    /* Dots (opcionális) */
     .dots {
       position: absolute;
       bottom: 20px;
@@ -364,7 +351,6 @@
     let interval;
     const intervalTime = 8000;
 
-    // Dots létrehozása
     function createDots() {
       dotsContainer.innerHTML = '';
       slides.forEach((_, idx) => {
@@ -387,7 +373,6 @@
     function goToSlide(index) {
       if (index < 0) index = slides.length - 1;
       if (index >= slides.length) index = 0;
-      // Eltávolítjuk az active osztályt minden slide-ról
       slides.forEach(slide => slide.classList.remove('active'));
       slides[index].classList.add('active');
       currentIndex = index;
@@ -408,7 +393,6 @@
       interval = setInterval(nextSlide, intervalTime);
     }
 
-    // Eseménykezelők
     prevBtn.addEventListener('click', () => {
       prevSlide();
       resetInterval();
@@ -418,14 +402,10 @@
       resetInterval();
     });
 
-    // Kezdeti állapot
+    // Kezdeti aktív slide
     slides[0].classList.add('active');
     createDots();
     resetInterval();
-
-    // Reszponzív betűméretek miatt semmi extra, a CSS már kezeli
-    // Az animációk a slide aktifizálásakor a CSS által futnak (az új slide kapja az active osztályt, így az animációk elindulnak)
-    // Kis kiegészítés: annak érdekében, hogy az animáció minden váltáskor lefusson, az active osztály hozzáadása triggereli a CSS-t. Ez így jó.
   })();
 </script>
 </body>
