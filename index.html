@@ -16,21 +16,17 @@
       background-color: #f9f9f6;
     }
 
-    /* Slideshow konténer (csak a kép) */
     .hero-slideshow {
       position: relative;
       width: 100%;
       overflow: hidden;
     }
 
-    /* Asztali nézet: 1500:500 arány (3:1) */
     @media (min-width: 1024px) {
       .hero-slideshow {
         aspect-ratio: 1500 / 500;
       }
     }
-
-    /* Mobil nézet: 1180:829 arány */
     @media (max-width: 1023px) {
       .hero-slideshow {
         aspect-ratio: 1180 / 829;
@@ -60,14 +56,12 @@
       z-index: 1;
     }
 
-    /* Kép stílus */
     .slide picture,
     .slide img {
       display: block;
       width: 100%;
       height: 100%;
     }
-
     .slide img {
       object-fit: fill;
       object-position: center;
@@ -75,8 +69,6 @@
 
     /* ========== ASZTALI NÉZET ========== */
     @media (min-width: 1024px) {
-
-      /* Asztali szöveg konténer (a bal oldali 50%-ban) */
       .desktop-text {
         position: absolute;
         top: 0;
@@ -85,49 +77,42 @@
         height: 100%;
         z-index: 2;
         pointer-events: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 40px 20px 40px 0;
       }
 
-      /* Mottó doboz: függőlegesen középre, jobbra igazítva */
       .desktop-motto {
-        position: absolute;
-        top: 50%;
-        right: 20px;
-        transform: translateY(-50%);
         text-align: right;
+        margin-top: 0;
         opacity: 0;
       }
+      .desktop-motto .latin-motto {
+        font-size: clamp(32px, 5vw, 48px);
+        font-weight: bold;
+        color: #000000;
+        white-space: normal;
+        word-break: break-word;
+      }
+      .desktop-motto .hungarian-motto {
+        font-size: clamp(24px, 4vw, 36px);
+        font-weight: normal;
+        color: #000000;
+        white-space: normal;
+        word-break: break-word;
+      }
 
-      /* Mottó szövegek: fekete, vastagabb, reszponzív méret */
-.desktop-motto .latin-motto {
-  font-size: clamp(32px, 5vw, 48px);
-  font-weight: bold;
-  color: #000000;
-  white-space: normal;
-  word-break: break-word;
-}
-.desktop-motto .hungarian-motto {
-  font-size: clamp(24px, 4vw, 36px);
-  font-weight: normal;
-  color: #000000;
-  white-space: normal;
-  word-break: break-word;
-}
-
-      /* Leírás doboz: alsó rész, balra 0, jobbra 10px rés, automatikus szélesség */
       .desktop-desc {
-        position: absolute;
-        bottom: 40px;
-        left: 0;
-        right: 10px;
-        width: auto;
+        text-align: right;
         background-color: rgba(0, 0, 0, 0.85);
         border-right: 8px solid #0082D1;
         padding: 12px 20px;
-        text-align: right;
+        margin-bottom: 40px;
         opacity: 0;
+        display: inline-block;
+        align-self: flex-end;
       }
-
-      /* Leírás szövege: fehér, normál méret */
       .desktop-desc .desc-text {
         font-size: 15px;
         font-weight: normal;
@@ -136,7 +121,6 @@
         white-space: normal;
       }
 
-      /* Animációk asztali szöveghez */
       .desktop-motto.animate {
         animation: slideInFromRight 0.6s ease-out forwards;
       }
@@ -144,13 +128,12 @@
         animation: fadeIn 0.8s ease-out forwards;
       }
 
-      /* Mobil szöveget elrejtjük asztali nézetben */
       .mobile-text-container {
         display: none;
       }
     }
 
-    /* ========== MOBIL NÉZET (változatlan) ========== */
+    /* ========== MOBIL NÉZET ========== */
     @media (max-width: 1023px) {
       .desktop-text {
         display: none;
@@ -187,7 +170,6 @@
         opacity: 0.9;
         white-space: normal;
       }
-      /* Mobil animációk */
       .mobile-text-container.animate {
         animation: slideInFromRight 0.5s ease-out forwards;
       }
@@ -196,7 +178,6 @@
       }
     }
 
-    /* ========== KÖZÖS ANIMÁCIÓK ========== */
     @keyframes slideInFromRight {
       0% { opacity: 0; transform: translateX(50px); }
       100% { opacity: 1; transform: translateX(0); }
@@ -206,7 +187,6 @@
       100% { opacity: 0.95; }
     }
 
-    /* Navigáció */
     .nav-btn {
       position: absolute;
       top: 50%;
@@ -259,28 +239,24 @@
 <body>
 <div class="hero-slideshow">
   <div class="slides-container">
-    <!-- 1. dia -->
     <div class="slide" data-index="0">
       <picture>
         <source media="(max-width: 1023px)" srcset="szbmrtt-president-dr-jozsef-paradi-inauguration-1984-mobile.jpg">
         <img src="szbmrtt-elnok-dr-paradi-jozsef-szekfoglalo-rendortiszti-foiskola1984-desktop.jpg" alt="Dr. Parádi József székfoglaló">
       </picture>
     </div>
-    <!-- 2. dia -->
     <div class="slide" data-index="1">
       <picture>
         <source media="(max-width: 1023px)" srcset="national-security-service-conference-budapest-intelligence-mobile.jpg">
         <img src="szbmrtt-nbsz-nemzetbiztonsagi-szakszolgalat-szakmatorteneti-konferencia-desktop.jpg" alt="NBSZ konferencia">
       </picture>
     </div>
-    <!-- 3. dia -->
     <div class="slide" data-index="2">
       <picture>
         <source media="(max-width: 1023px)" srcset="intelligence-reconnaissance-service-manual-1872-guide-mobile.jpg">
         <img src="anleitung-zum-kundschaftsdienste-1872-felderitoszolgalati-utasitas-szbmrtt-desktop.jpg" alt="1872-es utasítás">
       </picture>
     </div>
-    <!-- 4. dia -->
     <div class="slide" data-index="3">
       <picture>
         <source media="(max-width: 1023px)" srcset="szbmrtt-honorary-medals-zeidler-sandor-design-mobile.jpg">
@@ -289,7 +265,6 @@
     </div>
   </div>
 
-  <!-- ASZTALI SZÖVEG (a képen belül, bal oldali fehér mezőben) -->
   <div class="desktop-text">
     <div class="desktop-motto">
       <div class="latin-motto"></div>
@@ -305,7 +280,6 @@
   <div class="dots"></div>
 </div>
 
-<!-- MOBIL SZÖVEG (a kép alatt) -->
 <div class="mobile-text-container">
   <div class="mobile-motto">
     <div class="latin-motto"></div>
@@ -318,7 +292,6 @@
 
 <script>
   (function() {
-    // Dia adatok
     const slidesData = [
       {
         latin: "Cum historia pro securitate.",
@@ -350,14 +323,12 @@
     let interval;
     const intervalTime = 8000;
 
-    // Asztali szövegelemek
     const desktopMotto = document.querySelector('.desktop-motto');
     const desktopDesc = document.querySelector('.desktop-desc');
     const desktopLatin = document.querySelector('.desktop-motto .latin-motto');
     const desktopHungarian = document.querySelector('.desktop-motto .hungarian-motto');
     const desktopDescText = document.querySelector('.desktop-desc .desc-text');
 
-    // Mobil szövegelemek
     const mobileContainer = document.querySelector('.mobile-text-container');
     const mobileLatin = document.querySelector('.mobile-motto .latin-motto');
     const mobileHungarian = document.querySelector('.mobile-motto .hungarian-motto');
@@ -366,21 +337,18 @@
     function restartAnimation(element, className) {
       if (!element) return;
       element.classList.remove(className);
-      void element.offsetWidth; // reflow
+      void element.offsetWidth;
       element.classList.add(className);
     }
 
     function updateText(index) {
       const data = slidesData[index];
-
-      // Asztali
       if (desktopLatin) desktopLatin.textContent = data.latin;
       if (desktopHungarian) desktopHungarian.textContent = data.hungarian;
       if (desktopDescText) desktopDescText.textContent = data.desc;
       restartAnimation(desktopMotto, 'animate');
       restartAnimation(desktopDesc, 'animate');
 
-      // Mobil
       if (mobileLatin) mobileLatin.textContent = data.latin;
       if (mobileHungarian) mobileHungarian.textContent = data.hungarian;
       if (mobileDescText) mobileDescText.textContent = data.desc;
@@ -426,7 +394,6 @@
     prevBtn.addEventListener('click', () => { prevSlide(); resetInterval(); });
     nextBtn.addEventListener('click', () => { nextSlide(); resetInterval(); });
 
-    // Inicializálás
     slides[0].classList.add('active');
     createDots();
     updateText(0);
