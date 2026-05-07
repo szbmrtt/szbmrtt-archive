@@ -98,14 +98,16 @@
       width: 100%;
       overflow: hidden;
     }
+    /* Asztali nézet: 1500:500 */
     @media (min-width: 1024px) {
       .hero-slideshow {
         aspect-ratio: 1500 / 500;
       }
     }
+    /* Mobil nézet: 1180:829 (a mobil képek eredeti aránya) */
     @media (max-width: 1023px) {
       .hero-slideshow {
-        aspect-ratio: 16 / 9;   /* JAVÍTVA: 1180/829 helyett 16:9 */
+        aspect-ratio: 1180 / 829;
       }
     }
     .slides-container {
