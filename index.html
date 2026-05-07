@@ -16,7 +16,7 @@
       background-color: #f9f9f6;
     }
 
-    /* Slideshow konténer */
+    /* Slideshow konténer (csak a kép) */
     .hero-slideshow {
       position: relative;
       width: 100%;
@@ -73,40 +73,34 @@
       object-position: center;
     }
 
-    /* ========== SZÖVEGDOBOZOK ========== */
-    .text-container {
-      position: absolute;
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    /* ASZTALI NÉZET */
+    /* ========== ASZTALI NÉZET: szöveg a képen belül (bal fehér mezőben) ========== */
     @media (min-width: 1024px) {
-      .text-container {
+      .desktop-text {
+        position: absolute;
         top: 0;
         left: 0;
-        width: 50%; /* a bal oldali fehér mező szélessége */
+        width: 50%;
         height: 100%;
+        z-index: 2;
+        pointer-events: none;
       }
-      .motto-box {
+      .desktop-motto {
         position: absolute;
         top: 30%;
         right: 20px;
         transform: translateY(-50%);
         text-align: right;
-        width: calc(100% - 40px);
       }
-      .desc-box {
+      .desktop-desc {
         position: absolute;
         bottom: 30px;
         right: 20px;
         text-align: right;
-        width: calc(100% - 40px);
-        /* Módosítás: szilárd fekete háttér, kék jobb oldali vonal */
+        width: auto;               /* szélesség a szöveghez igazodik */
         background-color: rgba(0, 0, 0, 0.8);
         border-right: 4px solid #0082D1;
         padding: 12px 20px;
-        border-radius: 0; /* nincs lekerekítés, hogy a vonal éles legyen */
+        border-radius: 0;
       }
       .latin-motto {
         font-size: 24px;
@@ -129,43 +123,45 @@
       }
     }
 
-    /* MOBIL NÉZET */
+    /* ========== MOBIL NÉZET: szöveg a kép ALATT ========== */
     @media (max-width: 1023px) {
-      .text-container {
-        left: 20px;
-        right: 20px;
-        bottom: 20px;
-        background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.3));
-        padding: 15px;
-        border-radius: 8px;
+      .mobile-text-container {
+        background: linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.6));
+        padding: 15px 20px;
+        margin-top: 0; /* közvetlenül a kép alá kerül */
       }
-      .motto-box {
-        position: relative;
+      .mobile-motto {
         text-align: left;
         margin-bottom: 10px;
       }
-      .desc-box {
-        position: relative;
+      .mobile-desc {
         text-align: left;
       }
-      .latin-motto {
+      .mobile-text-container .latin-motto {
         font-size: 4vw;
         font-weight: bold;
         color: #ffffff;
         white-space: nowrap;
       }
-      .hungarian-motto {
+      .mobile-text-container .hungarian-motto {
         font-size: 3vw;
         font-weight: normal;
         color: #ffffff;
         white-space: nowrap;
       }
-      .desc-text {
+      .mobile-text-container .desc-text {
         font-size: 11px;
         font-weight: normal;
         color: #ffffff;
         opacity: 0.9;
         white-space: normal;
+      }
+      /* Animációk mobil szöveghez */
+      .mobile-text-container.animate {
+        animation: slideInFromRight 0.5s ease-out forwards;
+      }
+      .mobile-text-container .mobile-desc {
+        animation: fadeIn 0.6s ease-out forwards;
       }
     }
 
@@ -182,32 +178,16 @@
     }
 
     @keyframes fadeIn {
-      0% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 0.95;
-      }
+      0% { opacity: 0; }
+      100% { opacity: 0.95; }
     }
 
-    .slide.active .motto-box {
+    /* Asztali animációk */
+    .slide.active .desktop-motto {
       animation: slideInFromRight 0.6s ease-out forwards;
     }
-    .slide.active .desc-box {
+    .slide.active .desktop-desc {
       animation: fadeIn 0.8s ease-out forwards;
-    }
-
-    @media (max-width: 1023px) {
-      .slide.active .motto-box {
-        animation: slideInFromRight 0.5s ease-out forwards;
-      }
-      .slide.active .desc-box {
-        animation: fadeIn 0.6s ease-out forwards;
-      }
-      @keyframes fadeIn {
-        0% { opacity: 0; }
-        100% { opacity: 0.9; }
-      }
     }
 
     /* Navigáció */
@@ -263,69 +243,30 @@
 <body>
 <div class="hero-slideshow">
   <div class="slides-container">
-    <!-- 1. dia -->
+    <!-- dia-k: csak a képek -->
     <div class="slide" data-index="0">
       <picture>
         <source media="(max-width: 1023px)" srcset="szbmrtt-president-dr-jozsef-paradi-inauguration-1984-mobile.jpg">
         <img src="szbmrtt-elnok-dr-paradi-jozsef-szekfoglalo-rendortiszti-foiskola1984-desktop.jpg" alt="Dr. Parádi József székfoglaló">
       </picture>
-      <div class="text-container">
-        <div class="motto-box">
-          <div class="latin-motto">Cum historia pro securitate.</div>
-          <div class="hungarian-motto">Történelemmel a biztonságért.</div>
-        </div>
-        <div class="desc-box">
-          <div class="desc-text">Társaságunk elnöke, dr. Parádi József székfoglalója a Rendőrtiszti Főiskolán 1984.</div>
-        </div>
-      </div>
     </div>
-    <!-- 2. dia -->
     <div class="slide" data-index="1">
       <picture>
         <source media="(max-width: 1023px)" srcset="national-security-service-conference-budapest-intelligence-mobile.jpg">
         <img src="szbmrtt-nbsz-nemzetbiztonsagi-szakszolgalat-szakmatorteneti-konferencia-desktop.jpg" alt="NBSZ konferencia">
       </picture>
-      <div class="text-container">
-        <div class="motto-box">
-          <div class="latin-motto">Condita decrescit vulgata scientia crescit.</div>
-          <div class="hungarian-motto">Az elrejtett tudás elsorvad, a másokkal megosztott gyarapszik.</div>
-        </div>
-        <div class="desc-box">
-          <div class="desc-text">Tudományos párbeszéd: Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság – Nemzetbiztonsági Szakszolgálat szakmatörténeti konferencia.</div>
-        </div>
-      </div>
     </div>
-    <!-- 3. dia -->
     <div class="slide" data-index="2">
       <picture>
         <source media="(max-width: 1023px)" srcset="intelligence-reconnaissance-service-manual-1872-guide-mobile.jpg">
         <img src="anleitung-zum-kundschaftsdienste-1872-felderitoszolgalati-utasitas-szbmrtt-desktop.jpg" alt="1872-es utasítás">
       </picture>
-      <div class="text-container">
-        <div class="motto-box">
-          <div class="latin-motto">Veritas nunquam perit.</div>
-          <div class="hungarian-motto">Az igazság sosem vész el.</div>
-        </div>
-        <div class="desc-box">
-          <div class="desc-text">Dr. Parádi József és dr. Sándor Vilmos &dagger; az 1872-es Felderítőszolgálati utasítás (Anleitung zum Kundschaftsdienste) c. háromnyelvű társasági kiadványunk könyvbemutatóján.</div>
-        </div>
-      </div>
     </div>
-    <!-- 4. dia -->
     <div class="slide" data-index="3">
       <picture>
         <source media="(max-width: 1023px)" srcset="szbmrtt-honorary-medals-zeidler-sandor-design-mobile.jpg">
         <img src="szbmrtt-kituntetesek-zeidler-sandor-falerisztika-merit-awards-desktop.jpg" alt="Kitüntetések">
       </picture>
-      <div class="text-container">
-        <div class="motto-box">
-          <div class="latin-motto">Honos honestum decorat, inhonestum notat.</div>
-          <div class="hungarian-motto">A kitüntetés a méltót ékesíti, a méltatlant bélyegezi.</div>
-        </div>
-        <div class="desc-box">
-          <div class="desc-text">Érdem és elismerés. Társaságunk mag. Zeidler Sándor által tervezett kitüntetései.</div>
-        </div>
-      </div>
     </div>
   </div>
   <button class="nav-btn prev" aria-label="Előző">‹</button>
@@ -333,8 +274,38 @@
   <div class="dots"></div>
 </div>
 
+<!-- ASZTALI SZÖVEG (a képen belül, JS tölti fel) -->
+<div class="desktop-text" style="display: none;"></div>
+
+<!-- MOBIL SZÖVEG (a kép alatt) -->
+<div class="mobile-text-container" style="display: none;"></div>
+
 <script>
   (function() {
+    // Dia adatok
+    const slidesData = [
+      {
+        latin: "Cum historia pro securitate.",
+        hungarian: "Történelemmel a biztonságért.",
+        desc: "Társaságunk elnöke, dr. Parádi József székfoglalója a Rendőrtiszti Főiskolán 1984."
+      },
+      {
+        latin: "Condita decrescit vulgata scientia crescit.",
+        hungarian: "Az elrejtett tudás elsorvad, a másokkal megosztott gyarapszik.",
+        desc: "Tudományos párbeszéd: Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság – Nemzetbiztonsági Szakszolgálat szakmatörténeti konferencia."
+      },
+      {
+        latin: "Veritas nunquam perit.",
+        hungarian: "Az igazság sosem vész el.",
+        desc: "Dr. Parádi József és dr. Sándor Vilmos † az 1872-es Felderítőszolgálati utasítás (Anleitung zum Kundschaftsdienste) c. háromnyelvű társasági kiadványunk könyvbemutatóján."
+      },
+      {
+        latin: "Honos honestum decorat, inhonestum notat.",
+        hungarian: "A kitüntetés a méltót ékesíti, a méltatlant bélyegezi.",
+        desc: "Érdem és elismerés. Társaságunk mag. Zeidler Sándor által tervezett kitüntetései."
+      }
+    ];
+
     const slides = document.querySelectorAll('.slide');
     const prevBtn = document.querySelector('.prev');
     const nextBtn = document.querySelector('.next');
@@ -343,6 +314,72 @@
     let interval;
     const intervalTime = 8000;
 
+    // Asztali szövegdobozok elemei
+    const desktopTextContainer = document.querySelector('.desktop-text');
+    const mobileTextContainer = document.querySelector('.mobile-text-container');
+
+    // Asztali szöveg struktúra létrehozása (csak egyszer)
+    function createDesktopTextElements() {
+      desktopTextContainer.innerHTML = `
+        <div class="desktop-motto">
+          <div class="latin-motto"></div>
+          <div class="hungarian-motto"></div>
+        </div>
+        <div class="desktop-desc">
+          <div class="desc-text"></div>
+        </div>
+      `;
+      desktopTextContainer.style.display = 'block';
+    }
+
+    // Mobil szöveg struktúra létrehozása
+    function createMobileTextElements() {
+      mobileTextContainer.innerHTML = `
+        <div class="mobile-motto">
+          <div class="latin-motto"></div>
+          <div class="hungarian-motto"></div>
+        </div>
+        <div class="mobile-desc">
+          <div class="desc-text"></div>
+        </div>
+      `;
+      mobileTextContainer.style.display = 'block';
+    }
+
+    // Szöveg frissítése az aktuális dia alapján
+    function updateText(index) {
+      const data = slidesData[index];
+      // Asztali frissítés
+      if (desktopTextContainer) {
+        const latinElem = desktopTextContainer.querySelector('.latin-motto');
+        const hungarianElem = desktopTextContainer.querySelector('.hungarian-motto');
+        const descElem = desktopTextContainer.querySelector('.desc-text');
+        if (latinElem) latinElem.textContent = data.latin;
+        if (hungarianElem) hungarianElem.textContent = data.hungarian;
+        if (descElem) descElem.textContent = data.desc;
+        // Animáció újraindítása: eltávolítjuk és újra hozzáadjuk az active-t?
+        // Mivel a .slide.active-hoz kötött az animáció, a szöveg a képpel együtt animálódik (a .slide.active .desktop-motto stb. kiváltja)
+        // De ha nincs aktív slide? A képváltáskor a .slide.active változik, a desktop szöveg animációja automatikusan megtörténik a CSS-ben.
+      }
+      // Mobil frissítés
+      if (mobileTextContainer) {
+        const latinElem = mobileTextContainer.querySelector('.latin-motto');
+        const hungarianElem = mobileTextContainer.querySelector('.hungarian-motto');
+        const descElem = mobileTextContainer.querySelector('.desc-text');
+        if (latinElem) latinElem.textContent = data.latin;
+        if (hungarianElem) hungarianElem.textContent = data.hungarian;
+        if (descElem) descElem.textContent = data.desc;
+        // Animáció indítása: először eltávolítjuk az animációs osztályt, majd kis késleltetéssel újra hozzáadjuk
+        mobileTextContainer.classList.remove('animate');
+        // Kényszerített reflow a trükkös, de így is jó: setTimeout
+        setTimeout(() => {
+          mobileTextContainer.classList.add('animate');
+        }, 10);
+        // A leírás fade animációjához külön osztály? A .mobile-desc fadeIn már a CSS-ben definiálva van, de az minden alkalommal lefut, ha újra hozzáadjuk. Most egyszerűen a container animációja elég.
+      }
+    }
+
+    // Dots-ok létrehozása
     function createDots() {
       dotsContainer.innerHTML = '';
       slides.forEach((_, idx) => {
@@ -369,6 +406,7 @@
       slides[index].classList.add('active');
       currentIndex = index;
       updateDots();
+      updateText(currentIndex);
       resetInterval();
     }
 
@@ -379,10 +417,15 @@
       interval = setInterval(nextSlide, intervalTime);
     }
 
+    // Eseménykezelők
     prevBtn.addEventListener('click', () => { prevSlide(); resetInterval(); });
     nextBtn.addEventListener('click', () => { nextSlide(); resetInterval(); });
 
+    // Inicializálás
+    createDesktopTextElements();
+    createMobileTextElements();
     slides[0].classList.add('active');
+    updateText(0);
     createDots();
     resetInterval();
   })();
