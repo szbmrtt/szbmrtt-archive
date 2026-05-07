@@ -425,115 +425,107 @@
   </div>
 </div>
 
-<!-- 4x4-es rács (asztali nézet) gap-2 (8px) -->
+<!-- 4 oszlopos rács (desktop: grid-cols-4, mobil: grid-cols-1) gap-6 (24px) -->
 <main class="py-12 md:py-16 px-4 md:px-8 bg-gray-50">
   <div class="max-w-7xl mx-auto">
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
       
-      <!-- 1. BEMUTATKOZÁS -->
+      <!-- BEMUTATKOZÁS -->
       <a href="#bemutatkozas" class="group relative block aspect-square bg-[#004E82] overflow-hidden transition-transform duration-300 hover:scale-[1.02] focus:outline-none">
         <div class="absolute inset-0 bg-[#004E82] bg-cover bg-center transition-all duration-500 group-hover:scale-105"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-        <div class="relative z-10 flex flex-col items-start p-6 md:p-8 h-full">
-          <div class="border-l-4 border-teal-400 pl-3 md:pl-4">
+        <!-- NINCS OVERLAY (gradiens vagy sötétítés) -->
+        <div class="relative z-10 flex flex-col items-start p-10 h-full">
+          <div class="border-l-3 border-white pl-4"> <!-- 3px fehér vonal -->
             <h3 class="text-white font-bold uppercase text-sm md:text-base lg:text-lg tracking-wide">BEMUTATKOZÁS</h3>
-            <p class="text-white/80 italic text-xs md:text-sm mt-1">Múltunk és jelenünk</p>
+            <p class="text-white italic text-xs md:text-sm mt-1">Múltunk és jelenünk</p>
           </div>
         </div>
       </a>
 
-      <!-- 2. DISZCIPLÍNA -->
+      <!-- DISZCIPLÍNA -->
       <a href="#diszciplina" class="group relative block aspect-square bg-[#004E82] overflow-hidden transition-transform duration-300 hover:scale-[1.02] focus:outline-none">
         <div class="absolute inset-0 bg-[#004E82] bg-cover bg-center transition-all duration-500 group-hover:scale-105"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-        <div class="relative z-10 flex flex-col items-start p-6 md:p-8 h-full">
-          <div class="border-l-4 border-teal-400 pl-3 md:pl-4">
+        <div class="relative z-10 flex flex-col items-start p-10 h-full">
+          <div class="border-l-3 border-white pl-4">
             <h3 class="text-white font-bold uppercase text-sm md:text-base lg:text-lg tracking-wide">DISZCIPLÍNA</h3>
-            <p class="text-white/80 italic text-xs md:text-sm mt-1">A rendvédelem-történet elmélete</p>
+            <p class="text-white italic text-xs md:text-sm mt-1">A rendvédelem-történet elmélete</p>
           </div>
         </div>
       </a>
 
-      <!-- 3. SZERVEZET -->
+      <!-- SZERVEZET -->
       <a href="#szervezet-elnok" class="group relative block aspect-square bg-[#004E82] overflow-hidden transition-transform duration-300 hover:scale-[1.02] focus:outline-none">
         <div class="absolute inset-0 bg-[#004E82] bg-cover bg-center transition-all duration-500 group-hover:scale-105"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-        <div class="relative z-10 flex flex-col items-start p-6 md:p-8 h-full">
-          <div class="border-l-4 border-teal-400 pl-3 md:pl-4">
+        <div class="relative z-10 flex flex-col items-start p-10 h-full">
+          <div class="border-l-3 border-white pl-4">
             <h3 class="text-white font-bold uppercase text-sm md:text-base lg:text-lg tracking-wide">SZERVEZET</h3>
-            <p class="text-white/80 italic text-xs md:text-sm mt-1">Tisztségviselők és grémiumok</p>
+            <p class="text-white italic text-xs md:text-sm mt-1">Tisztségviselők és grémiumok</p>
           </div>
         </div>
       </a>
 
-      <!-- 4. RENDEZVÉNYEINK -->
+      <!-- RENDEZVÉNYEINK -->
       <a href="#rendezvenyek" class="group relative block aspect-square bg-[#004E82] overflow-hidden transition-transform duration-300 hover:scale-[1.02] focus:outline-none">
         <div class="absolute inset-0 bg-[#004E82] bg-cover bg-center transition-all duration-500 group-hover:scale-105"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-        <div class="relative z-10 flex flex-col items-start p-6 md:p-8 h-full">
-          <div class="border-l-4 border-teal-400 pl-3 md:pl-4">
+        <div class="relative z-10 flex flex-col items-start p-10 h-full">
+          <div class="border-l-3 border-white pl-4">
             <h3 class="text-white font-bold uppercase text-sm md:text-base lg:text-lg tracking-wide">RENDEZVÉNYEINK</h3>
-            <p class="text-white/80 italic text-xs md:text-sm mt-1">Konferenciák és ülések</p>
+            <p class="text-white italic text-xs md:text-sm mt-1">Konferenciák és ülések</p>
           </div>
         </div>
       </a>
 
-      <!-- 5. KIADVÁNYAINK -->
+      <!-- KIADVÁNYAINK -->
       <a href="#kiadvanyok" class="group relative block aspect-square bg-[#004E82] overflow-hidden transition-transform duration-300 hover:scale-[1.02] focus:outline-none">
         <div class="absolute inset-0 bg-[#004E82] bg-cover bg-center transition-all duration-500 group-hover:scale-105"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-        <div class="relative z-10 flex flex-col items-start p-6 md:p-8 h-full">
-          <div class="border-l-4 border-teal-400 pl-3 md:pl-4">
+        <div class="relative z-10 flex flex-col items-start p-10 h-full">
+          <div class="border-l-3 border-white pl-4">
             <h3 class="text-white font-bold uppercase text-sm md:text-base lg:text-lg tracking-wide">KIADVÁNYAINK</h3>
-            <p class="text-white/80 italic text-xs md:text-sm mt-1">RTH és tanulmánykötetek</p>
+            <p class="text-white italic text-xs md:text-sm mt-1">RTH és tanulmánykötetek</p>
           </div>
         </div>
       </a>
 
-      <!-- 6. KITÜNTETÉSI RENDSZERÜNK -->
+      <!-- KITÜNTETÉSI RENDSZERÜNK -->
       <a href="#kituntetesek" class="group relative block aspect-square bg-[#004E82] overflow-hidden transition-transform duration-300 hover:scale-[1.02] focus:outline-none">
         <div class="absolute inset-0 bg-[#004E82] bg-cover bg-center transition-all duration-500 group-hover:scale-105"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-        <div class="relative z-10 flex flex-col items-start p-6 md:p-8 h-full">
-          <div class="border-l-4 border-teal-400 pl-3 md:pl-4">
+        <div class="relative z-10 flex flex-col items-start p-10 h-full">
+          <div class="border-l-3 border-white pl-4">
             <h3 class="text-white font-bold uppercase text-sm md:text-base lg:text-lg tracking-wide">KITÜNTETÉSI RENDSZERÜNK</h3>
-            <p class="text-white/80 italic text-xs md:text-sm mt-1">Szakmai elismerések</p>
+            <p class="text-white italic text-xs md:text-sm mt-1">Szakmai elismerések</p>
           </div>
         </div>
       </a>
 
-      <!-- 7. EGYÜTTMŰKÖDÉSEK -->
+      <!-- EGYÜTTMŰKÖDÉSEK -->
       <a href="#egyuttmukodesek" class="group relative block aspect-square bg-[#004E82] overflow-hidden transition-transform duration-300 hover:scale-[1.02] focus:outline-none">
         <div class="absolute inset-0 bg-[#004E82] bg-cover bg-center transition-all duration-500 group-hover:scale-105"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-        <div class="relative z-10 flex flex-col items-start p-6 md:p-8 h-full">
-          <div class="border-l-4 border-teal-400 pl-3 md:pl-4">
+        <div class="relative z-10 flex flex-col items-start p-10 h-full">
+          <div class="border-l-3 border-white pl-4">
             <h3 class="text-white font-bold uppercase text-sm md:text-base lg:text-lg tracking-wide">EGYÜTTMŰKÖDÉSEK</h3>
-            <p class="text-white/80 italic text-xs md:text-sm mt-1">Hazai és nemzetközi partnerek</p>
+            <p class="text-white italic text-xs md:text-sm mt-1">Hazai és nemzetközi partnerek</p>
           </div>
         </div>
       </a>
 
-      <!-- 8. MÉDIA -->
+      <!-- MÉDIA -->
       <a href="#media" class="group relative block aspect-square bg-[#004E82] overflow-hidden transition-transform duration-300 hover:scale-[1.02] focus:outline-none">
         <div class="absolute inset-0 bg-[#004E82] bg-cover bg-center transition-all duration-500 group-hover:scale-105"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-        <div class="relative z-10 flex flex-col items-start p-6 md:p-8 h-full">
-          <div class="border-l-4 border-teal-400 pl-3 md:pl-4">
+        <div class="relative z-10 flex flex-col items-start p-10 h-full">
+          <div class="border-l-3 border-white pl-4">
             <h3 class="text-white font-bold uppercase text-sm md:text-base lg:text-lg tracking-wide">MÉDIA</h3>
-            <p class="text-white/80 italic text-xs md:text-sm mt-1">Körlevelek és sajtó</p>
+            <p class="text-white italic text-xs md:text-sm mt-1">Körlevelek és sajtó</p>
           </div>
         </div>
       </a>
 
-      <!-- 9. KAPCSOLAT -->
+      <!-- KAPCSOLAT -->
       <a href="#kapcsolat" class="group relative block aspect-square bg-[#004E82] overflow-hidden transition-transform duration-300 hover:scale-[1.02] focus:outline-none">
         <div class="absolute inset-0 bg-[#004E82] bg-cover bg-center transition-all duration-500 group-hover:scale-105"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-        <div class="relative z-10 flex flex-col items-start p-6 md:p-8 h-full">
-          <div class="border-l-4 border-teal-400 pl-3 md:pl-4">
+        <div class="relative z-10 flex flex-col items-start p-10 h-full">
+          <div class="border-l-3 border-white pl-4">
             <h3 class="text-white font-bold uppercase text-sm md:text-base lg:text-lg tracking-wide">KAPCSOLAT</h3>
-            <p class="text-white/80 italic text-xs md:text-sm mt-1">Elérhetőségek</p>
+            <p class="text-white italic text-xs md:text-sm mt-1">Elérhetőségek</p>
           </div>
         </div>
       </a>
