@@ -69,60 +69,71 @@
     }
 
     .slide img {
-      object-fit: fill; /* a kép pont kitölti a konténert, nem torzít */
+      object-fit: fill;
       object-position: center;
     }
 
-    /* ========== ASZTALI NÉZET: szöveg a képen belül (bal fehér mezőben) ========== */
+    /* ========== ASZTALI NÉZET ========== */
     @media (min-width: 1024px) {
+
+      /* Asztali szöveg konténer (a bal oldali 50%-ban) */
       .desktop-text {
         position: absolute;
         top: 0;
         left: 0;
-        width: 50%;          /* a bal oldali fehér mező */
+        width: 50%;
         height: 100%;
         z-index: 2;
         pointer-events: none;
       }
+
+      /* Mottó doboz: függőlegesen középre, jobbra igazítva */
       .desktop-motto {
         position: absolute;
-        top: 30%;
+        top: 50%;
         right: 20px;
         transform: translateY(-50%);
         text-align: right;
         opacity: 0;
       }
-      .desktop-desc {
-        position: absolute;
-        bottom: 30px;
-        right: 20px;
-        text-align: right;
-        width: auto;
-        background-color: rgba(0, 0, 0, 0.8);
-        border-right: 8px solid #0082D1;
-        padding: 12px 20px;
-        border-radius: 0;
-        opacity: 0;
-      }
-      .latin-motto {
-        font-size: 24px;
+
+      /* Mottó szövegek: fekete, vastagabb, reszponzív méret */
+      .desktop-motto .latin-motto {
+        font-size: clamp(32px, 5vw, 48px);
         font-weight: bold;
         color: #000000;
         white-space: nowrap;
       }
-      .hungarian-motto {
-        font-size: 18px;
+      .desktop-motto .hungarian-motto {
+        font-size: clamp(24px, 4vw, 36px);
         font-weight: normal;
         color: #000000;
         white-space: nowrap;
       }
-      .desc-text {
+
+      /* Leírás doboz: alsó rész, balra 0, jobbra 10px rés, automatikus szélesség */
+      .desktop-desc {
+        position: absolute;
+        bottom: 40px;
+        left: 0;
+        right: 10px;
+        width: auto;
+        background-color: rgba(0, 0, 0, 0.85);
+        border-right: 8px solid #0082D1;
+        padding: 12px 20px;
+        text-align: right;
+        opacity: 0;
+      }
+
+      /* Leírás szövege: fehér, normál méret */
+      .desktop-desc .desc-text {
         font-size: 15px;
         font-weight: normal;
         color: #ffffff;
         opacity: 0.95;
         white-space: normal;
       }
+
       /* Animációk asztali szöveghez */
       .desktop-motto.animate {
         animation: slideInFromRight 0.6s ease-out forwards;
@@ -130,16 +141,17 @@
       .desktop-desc.animate {
         animation: fadeIn 0.8s ease-out forwards;
       }
+
       /* Mobil szöveget elrejtjük asztali nézetben */
       .mobile-text-container {
         display: none;
       }
     }
 
-    /* ========== MOBIL NÉZET: szöveg a kép ALATT ========== */
+    /* ========== MOBIL NÉZET (változatlan) ========== */
     @media (max-width: 1023px) {
       .desktop-text {
-        display: none;  /* asztali szöveg elrejtése mobilban */
+        display: none;
       }
       .mobile-text-container {
         display: block;
@@ -184,16 +196,9 @@
 
     /* ========== KÖZÖS ANIMÁCIÓK ========== */
     @keyframes slideInFromRight {
-      0% {
-        opacity: 0;
-        transform: translateX(50px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateX(0);
-      }
+      0% { opacity: 0; transform: translateX(50px); }
+      100% { opacity: 1; transform: translateX(0); }
     }
-
     @keyframes fadeIn {
       0% { opacity: 0; }
       100% { opacity: 0.95; }
@@ -252,25 +257,28 @@
 <body>
 <div class="hero-slideshow">
   <div class="slides-container">
-    <!-- dia-k: csak a képek -->
+    <!-- 1. dia -->
     <div class="slide" data-index="0">
       <picture>
         <source media="(max-width: 1023px)" srcset="szbmrtt-president-dr-jozsef-paradi-inauguration-1984-mobile.jpg">
         <img src="szbmrtt-elnok-dr-paradi-jozsef-szekfoglalo-rendortiszti-foiskola1984-desktop.jpg" alt="Dr. Parádi József székfoglaló">
       </picture>
     </div>
+    <!-- 2. dia -->
     <div class="slide" data-index="1">
       <picture>
         <source media="(max-width: 1023px)" srcset="national-security-service-conference-budapest-intelligence-mobile.jpg">
         <img src="szbmrtt-nbsz-nemzetbiztonsagi-szakszolgalat-szakmatorteneti-konferencia-desktop.jpg" alt="NBSZ konferencia">
       </picture>
     </div>
+    <!-- 3. dia -->
     <div class="slide" data-index="2">
       <picture>
         <source media="(max-width: 1023px)" srcset="intelligence-reconnaissance-service-manual-1872-guide-mobile.jpg">
         <img src="anleitung-zum-kundschaftsdienste-1872-felderitoszolgalati-utasitas-szbmrtt-desktop.jpg" alt="1872-es utasítás">
       </picture>
     </div>
+    <!-- 4. dia -->
     <div class="slide" data-index="3">
       <picture>
         <source media="(max-width: 1023px)" srcset="szbmrtt-honorary-medals-zeidler-sandor-design-mobile.jpg">
@@ -353,39 +361,31 @@
     const mobileHungarian = document.querySelector('.mobile-motto .hungarian-motto');
     const mobileDescText = document.querySelector('.mobile-desc .desc-text');
 
-    // Segédfüggvény az animáció újraindításához
     function restartAnimation(element, className) {
       if (!element) return;
       element.classList.remove(className);
-      // Kényszerített reflow
-      void element.offsetWidth;
+      void element.offsetWidth; // reflow
       element.classList.add(className);
     }
 
-    // Szöveg frissítése és animációk indítása
     function updateText(index) {
       const data = slidesData[index];
 
-      // Asztali szöveg frissítése
+      // Asztali
       if (desktopLatin) desktopLatin.textContent = data.latin;
       if (desktopHungarian) desktopHungarian.textContent = data.hungarian;
       if (desktopDescText) desktopDescText.textContent = data.desc;
-
-      // Asztali animációk újraindítása
       restartAnimation(desktopMotto, 'animate');
       restartAnimation(desktopDesc, 'animate');
 
-      // Mobil szöveg frissítése (csak akkor, ha látható – de a JS frissíti a tartalmat mindkét esetben, mert a DOM-ban bent van, csak display: none. Ez nem okoz gondot.)
+      // Mobil
       if (mobileLatin) mobileLatin.textContent = data.latin;
       if (mobileHungarian) mobileHungarian.textContent = data.hungarian;
       if (mobileDescText) mobileDescText.textContent = data.desc;
-
-      // Mobil animációk újraindítása (ha látható, akkor lejátszódik; ha rejtett, akkor felesleges, de nem árt)
       restartAnimation(mobileContainer, 'animate');
       restartAnimation(mobileDescText, 'animate');
     }
 
-    // Dots-ok létrehozása
     function createDots() {
       dotsContainer.innerHTML = '';
       slides.forEach((_, idx) => {
@@ -398,10 +398,8 @@
     }
 
     function updateDots() {
-      const dots = document.querySelectorAll('.dot');
-      dots.forEach((dot, idx) => {
-        if (idx === currentIndex) dot.classList.add('active');
-        else dot.classList.remove('active');
+      document.querySelectorAll('.dot').forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === currentIndex);
       });
     }
 
@@ -423,7 +421,6 @@
       interval = setInterval(nextSlide, intervalTime);
     }
 
-    // Eseménykezelők
     prevBtn.addEventListener('click', () => { prevSlide(); resetInterval(); });
     nextBtn.addEventListener('click', () => { nextSlide(); resetInterval(); });
 
