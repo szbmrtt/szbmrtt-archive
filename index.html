@@ -90,7 +90,7 @@
         right: 20px;
         transform: translateY(-50%);
         text-align: right;
-        opacity: 0; /* alapból láthatatlan, animáció teszi láthatóvá */
+        opacity: 0;
       }
       .desktop-desc {
         position: absolute;
@@ -130,14 +130,22 @@
       .desktop-desc.animate {
         animation: fadeIn 0.8s ease-out forwards;
       }
+      /* Mobil szöveget elrejtjük asztali nézetben */
+      .mobile-text-container {
+        display: none;
+      }
     }
 
     /* ========== MOBIL NÉZET: szöveg a kép ALATT ========== */
     @media (max-width: 1023px) {
+      .desktop-text {
+        display: none;  /* asztali szöveg elrejtése mobilban */
+      }
       .mobile-text-container {
+        display: block;
         background: linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.6));
         padding: 15px 20px;
-        margin-top: 0; /* közvetlenül a kép alá kerül */
+        margin-top: 0;
       }
       .mobile-motto {
         text-align: left;
@@ -345,6 +353,15 @@
     const mobileHungarian = document.querySelector('.mobile-motto .hungarian-motto');
     const mobileDescText = document.querySelector('.mobile-desc .desc-text');
 
+    // Segédfüggvény az animáció újraindításához
+    function restartAnimation(element, className) {
+      if (!element) return;
+      element.classList.remove(className);
+      // Kényszerített reflow
+      void element.offsetWidth;
+      element.classList.add(className);
+    }
+
     // Szöveg frissítése és animációk indítása
     function updateText(index) {
       const data = slidesData[index];
@@ -355,33 +372,17 @@
       if (desktopDescText) desktopDescText.textContent = data.desc;
 
       // Asztali animációk újraindítása
-      if (desktopMotto) {
-        desktopMotto.classList.remove('animate');
-        desktopDesc.classList.remove('animate');
-        // Kényszerített reflow
-        void desktopMotto.offsetWidth;
-        void desktopDesc.offsetWidth;
-        desktopMotto.classList.add('animate');
-        desktopDesc.classList.add('animate');
-      }
+      restartAnimation(desktopMotto, 'animate');
+      restartAnimation(desktopDesc, 'animate');
 
-      // Mobil szöveg frissítése
+      // Mobil szöveg frissítése (csak akkor, ha látható – de a JS frissíti a tartalmat mindkét esetben, mert a DOM-ban bent van, csak display: none. Ez nem okoz gondot.)
       if (mobileLatin) mobileLatin.textContent = data.latin;
       if (mobileHungarian) mobileHungarian.textContent = data.hungarian;
       if (mobileDescText) mobileDescText.textContent = data.desc;
 
-      // Mobil animációk újraindítása
-      if (mobileContainer) {
-        mobileContainer.classList.remove('animate');
-        void mobileContainer.offsetWidth;
-        mobileContainer.classList.add('animate');
-      }
-      // Mobil leírás fade animáció
-      if (mobileDescText) {
-        mobileDescText.classList.remove('animate');
-        void mobileDescText.offsetWidth;
-        mobileDescText.classList.add('animate');
-      }
+      // Mobil animációk újraindítása (ha látható, akkor lejátszódik; ha rejtett, akkor felesleges, de nem árt)
+      restartAnimation(mobileContainer, 'animate');
+      restartAnimation(mobileDescText, 'animate');
     }
 
     // Dots-ok létrehozása
