@@ -1,349 +1,341 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>SzBMRTT - Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</title>
-<meta name="description" content="A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság hivatalos honlapja. Bemutatkozás, rendvédelem-történeti diszciplína, szervezet, rendezvények, kiadványok.">
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<style>
-html { scroll-behavior: smooth; }
-body {
-  font-family: 'Inter', sans-serif;
-  background-color: #f9f9f6;
-  overflow-x: hidden;
-}
-.grid a h3, .grid a p,
-.desktop-motto.latin-motto, .desktop-motto.hungarian-motto, .desktop-desc.desc-text,
-.mobile-text-container.latin-motto, .mobile-text-container.hungarian-motto, .mobile-text-container .desc-text {
-  font-family: 'Inter', sans-serif !important;
-}
-h1, h2, h3, h4, .serif-heading {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-.accent-line {
-  width: 80px;
-  height: 2px;
-  background-color: #0d9488;
-  margin-top: 0.75rem;
-  margin-bottom: 1.5rem;
-}
-.accent-line.mx-auto { margin-left: auto; margin-right: auto; }
-.group:hover .submenu, .group:focus-within .submenu { display: block; }
-.group:hover i, .group:focus-within i { transform: rotate(180deg); }
-.submenu { display: none; transition: all 0.1s ease; }
-.menu-item:focus { background-color: #e2e8f0; outline: none; }
-.mobile-menu {
-  position: fixed;
-  top: 0;
-  right: -100%;
-  width: 80%;
-  max-width: 400px;
-  height: 100%;
-  background-color: white;
-  box-shadow: -2px 0 20px rgba(0,0,0,0.1);
-  z-index: 1000;
-  transition: right 0.3s ease;
-  overflow-y: auto;
-  padding: 1.5rem;
-}
-.mobile-menu.open { right: 0; }
-.menu-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
-  z-index: 999;
-  display: none;
-}
-.menu-overlay.active { display: block; }
-@media (max-width: 1024px) {
-  .desktop-nav { display: none; }
-  .mobile-nav-toggle { display: flex; }
-}
-@media (min-width: 1025px) {
-  .mobile-nav-toggle { display: none; }
-  .desktop-nav { display: flex; }
-}
-.logo-img {
-  width: auto;
-  height: 3rem;
-  object-fit: contain;
-}
-@media (min-width: 768px) {
-  .logo-img {
-    height: auto;
-    max-height: 4rem;
-    width: auto;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>SzBMRTT - Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</title>
+  <meta name="description" content="A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság hivatalos honlapja. Bemutatkozás, rendvédelem-történeti diszciplína, szervezet, rendezvények, kiadványok.">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <style>
+    html { scroll-behavior: smooth; }
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background-color: #f9f9f6;
+      overflow-x: clip;
+    }
+    /* Egységes Inter font a csempék szövegeihez és a slideshow szövegeihez is */
+    .grid a h3, .grid a p,
+    .desktop-motto .latin-motto, .desktop-motto .hungarian-motto, .desktop-desc .desc-text,
+    .mobile-text-container .latin-motto, .mobile-text-container .hungarian-motto, .mobile-text-container .desc-text {
+      font-family: 'Inter', sans-serif !important;
+    }
+    h1, h2, h3, h4, .serif-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .accent-line {
+      width: 80px;
+      height: 2px;
+      background-color: #0d9488;
+      margin-top: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .accent-line.mx-auto { margin-left: auto; margin-right: auto; }
+    .group:hover .submenu, .group:focus-within .submenu { display: block; }
+    .group:hover i, .group:focus-within i { transform: rotate(180deg); }
+    .submenu { display: none; transition: all 0.1s ease; }
+    .menu-item:focus { background-color: #e2e8f0; outline: none; }
+    .mobile-menu {
+      position: fixed; top: 0; right: -100%; width: 80%; max-width: 400px; height: 100%;
+      background-color: white; box-shadow: -2px 0 20px rgba(0,0,0,0.1); z-index: 1000;
+      transition: right 0.3s ease; overflow-y: auto; padding: 1.5rem;
+    }
+    .mobile-menu.open { right: 0; }
+    .menu-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5); z-index: 999; display: none;
+    }
+    .menu-overlay.active { display: block; }
+    @media (max-width: 1024px) { .desktop-nav { display: none; } .mobile-nav-toggle { display: flex; } }
+    @media (min-width: 1025px) { .mobile-nav-toggle { display: none; } .desktop-nav { display: flex; } }
+    .desktop-nav { display: none !important; }
+    .mobile-nav-toggle { display: flex; }
+    .logo-img { width: auto; height: 3rem; object-fit: contain; }
+    @media (min-width: 768px) { .logo-img { height: auto; max-height: 4rem; width: auto; } }
+    .portrait-img { width: 100%; height: auto; border-radius: 1rem; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+    .gremium-card {
+      transition: all 0.25s ease;
+      border: 1px solid #f1f1f1;
+      background-color: white;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02);
+    }
+    .gremium-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.1);
+      border-color: #14b8a6;
+    }
+    .scroll-mt-24 { scroll-margin-top: 120px; }
+    #mainHeader {
+      position: -webkit-sticky;
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 50 !important;
+      background-color: #004E82;
+    }
+    @media (max-width: 768px) {
+      .logo-img-mobile { height: 3rem !important; }
+      .hide-on-mobile { display: none; }
+      .szbmrtt-mobile {
+        font-size: 1.2rem !important;
+      }
+      .mobile-header-right {
+        gap: 0.5rem !important;
+      }
+    }
+
+    /* ========== SLIDESHOW MÓDOSÍTÁSOK ========== */
+    .hero-slideshow {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+    /* Asztali nézet: 1500:500 */
+    @media (min-width: 1024px) {
+      .hero-slideshow {
+        aspect-ratio: 1500 / 500;
+      }
+    }
+    /* Mobil nézet: 1180:829 (a mobil képek eredeti aránya) */
+    @media (max-width: 1023px) {
+      .hero-slideshow {
+        aspect-ratio: 1180 / 829;
+      }
+    }
+    .slides-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+    }
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      z-index: 1;
+    }
+    .slide picture,
+    .slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .slide img {
+      object-fit: fill;
+      object-position: center;
+    }
+    @media (min-width: 1024px) {
+      .desktop-text {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 100%;
+        z-index: 2;
+        pointer-events: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 0 20px 40px 0;
+      }
+      .desktop-motto {
+        text-align: right;
+        margin-bottom: 40px;
+        opacity: 0;
+      }
+      .desktop-motto .latin-motto {
+        font-size: clamp(32px, 5vw, 48px);
+        font-weight: bold;
+        color: #000000;
+        white-space: normal;
+        word-break: break-word;
+      }
+      .desktop-motto .hungarian-motto {
+        font-size: clamp(24px, 4vw, 36px);
+        font-weight: normal;
+        color: #000000;
+        white-space: normal;
+        word-break: break-word;
+      }
+      .desktop-desc {
+        text-align: right;
+        background-color: rgba(0, 0, 0, 0.85);
+        border-right: 8px solid #0082D1;
+        padding: 12px 20px;
+        opacity: 0;
+        display: inline-block;
+        align-self: flex-end;
+      }
+      .desktop-desc .desc-text {
+        font-size: 15px;
+        font-weight: normal;
+        color: #ffffff;
+        opacity: 0.95;
+        white-space: normal;
+      }
+      .desktop-motto.animate {
+        animation: slideInFromRight 0.6s ease-out forwards;
+      }
+      .desktop-desc.animate {
+        animation: fadeIn 0.8s ease-out forwards;
+      }
+      .mobile-text-container {
+        display: none;
+      }
+    }
+    @media (max-width: 1023px) {
+      .desktop-text {
+        display: none;
+      }
+      .mobile-text-container {
+        display: block;
+        background: linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.6));
+        padding: 15px 20px;
+        margin-top: 0;
+      }
+      .mobile-motto {
+        text-align: left;
+        margin-bottom: 10px;
+      }
+      .mobile-desc {
+        text-align: left;
+      }
+      .mobile-text-container .latin-motto {
+        font-size: 4vw;
+        font-weight: bold;
+        color: #ffffff;
+        white-space: nowrap;
+      }
+      .mobile-text-container .hungarian-motto {
+        font-size: 3vw;
+        font-weight: normal;
+        color: #ffffff;
+        white-space: nowrap;
+      }
+      .mobile-text-container .desc-text {
+        font-size: 11px;
+        font-weight: normal;
+        color: #ffffff;
+        opacity: 0.9;
+        white-space: normal;
+      }
+      .mobile-text-container.animate {
+        animation: slideInFromRight 0.5s ease-out forwards;
+      }
+      .mobile-desc .desc-text.animate {
+        animation: fadeIn 0.6s ease-out forwards;
+      }
+    }
+    @keyframes slideInFromRight {
+      0% { opacity: 0; transform: translateX(50px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 0.95; }
+    }
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+    .nav-btn:hover {
+      background: rgba(0,0,0,0.8);
+    }
+    .prev { left: 20px; }
+    .next { right: 20px; }
+    .dots {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      z-index: 10;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .dot.active {
+      background: white;
+      transform: scale(1.2);
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyOrganization",
+    "name": "Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság",
+    "alternateName": "SzBMRTT",
+    "description": "Független, nem kormányzati tudományos társaság a rendvédelem-történeti kutatás és az egyetemes rendvédelem-történeti diszciplína európai központja.",
+    "url": "https://szbmrtt.github.io/szbmrtt-archive/",
+    "sameAs": [
+      "https://m2.mtmt.hu/api/institute/23079",
+      "https://www.gendarmerie.interieur.gouv.fr/",
+      "https://www.wienmuseum.at/kriminalmuseum",
+      "https://www.uni-nke.hu/",
+      "https://www.csendoeregylethu.hu/"
+    ],
+    "taxID": "19662706-1-41",
+    "foundingDate": "1990",
+    "knowsAbout": ["Law Enforcement History", "Gendarmerie History", "Rendvédelem-történet", "Historical Sciences", "Security History"],
+    "issn": ["1216-6774", "2560-144X", "1785-3257", "2560-0893"],
+    "identifier": { "@type": "PropertyValue", "propertyID": "MTMT", "value": "23079" },
+    "address": { "@type": "PostalAddress", "addressLocality": "Budapest", "addressCountry": "HU" }
   }
-}
-.portrait-img {
-  width: 100%;
-  height: auto;
-  border-radius: 1rem;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-}
-.gremium-card {
-  transition: all 0.25s ease;
-  border: 1px solid #f1f1f1;
-  background-color: white;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.02);
-}
-.gremium-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
-  border-color: #14b8a6;
-}
-.scroll-mt-24 { scroll-margin-top: 120px; }
-#mainHeader {
-  position: -webkit-sticky;
-  position: sticky !important;
-  top: 0 !important;
-  z-index: 50 !important;
-  background-color: #004E82;
-}
-@media (max-width: 768px) {
-  .logo-img-mobile { height: 3rem !important; }
-  .hide-on-mobile { display: none; }
-  .szbmrtt-mobile { font-size: 1.2rem !important; }
-  .mobile-header-right { gap: 0.5rem !important; }
-}
-/* ========== SLIDESHOW ========== */
-.hero-slideshow {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-@media (min-width: 1024px) {
-  .hero-slideshow { aspect-ratio: 1500/500; }
-}
-@media (max-width: 1023px) {
-  .hero-slideshow { aspect-ratio: 1180/829; }
-}
-.slides-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-.slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
-}
-.slide.active {
-  opacity: 1;
-  visibility: visible;
-  z-index: 1;
-}
-.slide picture, .slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-.slide img {
-  object-fit: cover;
-  object-position: center;
-}
-@media (min-width: 1024px) {
-  .desktop-text {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50%;
-    height: 100%;
-    z-index: 2;
-    pointer-events: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 0 20px 40px 0;
-  }
-  .desktop-motto {
-    text-align: right;
-    margin-bottom: 40px;
-    opacity: 0;
-  }
-  .desktop-motto.latin-motto {
-    font-size: clamp(32px, 5vw, 48px);
-    font-weight: bold;
-    color: #000000;
-    white-space: normal;
-    word-break: break-word;
-  }
-  .desktop-motto.hungarian-motto {
-    font-size: clamp(24px, 4vw, 36px);
-    font-weight: normal;
-    color: #000000;
-    white-space: normal;
-    word-break: break-word;
-  }
-  .desktop-desc {
-    text-align: right;
-    background-color: rgba(0,0,0,0.85);
-    border-right: 8px solid #0082D1;
-    padding: 12px 20px;
-    opacity: 0;
-    display: inline-block;
-    align-self: flex-end;
-  }
-  .desktop-desc.desc-text {
-    font-size: 15px;
-    font-weight: normal;
-    color: #ffffff;
-    opacity: 0.95;
-    white-space: normal;
-  }
-  .desktop-motto.animate {
-    animation: slideInFromRight 0.6s ease-out forwards;
-  }
-  .desktop-desc.animate {
-    animation: fadeIn 0.8s ease-out forwards;
-  }
-  .mobile-text-container { display: none; }
-}
-@media (max-width: 1023px) {
-  .desktop-text { display: none; }
-  .mobile-text-container {
-    display: block;
-    background: linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.6));
-    padding: 15px 20px;
-    margin-top: 0;
-  }
-  .mobile-motto {
-    text-align: left;
-    margin-bottom: 10px;
-  }
-  .mobile-desc { text-align: left; }
-  .mobile-text-container.latin-motto {
-    font-size: clamp(18px, 5vw, 32px);
-    font-weight: bold;
-    color: #ffffff;
-    white-space: normal;
-    word-break: break-word;
-  }
-  .mobile-text-container.hungarian-motto {
-    font-size: clamp(16px, 4vw, 24px);
-    font-weight: normal;
-    color: #ffffff;
-    white-space: normal;
-    word-break: break-word;
-  }
-  .mobile-text-container.desc-text {
-    font-size: clamp(12px, 2.5vw, 16px);
-    font-weight: normal;
-    color: #ffffff;
-    opacity: 0.9;
-    white-space: normal;
-  }
-  .mobile-text-container.animate {
-    animation: slideInFromRight 0.5s ease-out forwards;
-  }
-  .mobile-desc.desc-text.animate {
-    animation: fadeIn 0.6s ease-out forwards;
-  }
-}
-@keyframes slideInFromRight {
-  0% { opacity: 0; transform: translateX(50px); }
-  100% { opacity: 1; transform: translateX(0); }
-}
-@keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 0.95; }
-}
-.nav-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.5);
-  color: white;
-  border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 10;
-  font-size: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.3s;
-}
-.nav-btn:hover { background: rgba(0,0,0,0.8); }
-.prev { left: 20px; }
-.next { right: 20px; }
-.dots {
-  position: absolute;
-  bottom: 20px;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  z-index: 10;
-}
-.dot {
-  width: 10px;
-  height: 10px;
-  background: rgba(255,255,255,0.5);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-.dot.active {
-  background: white;
-  transform: scale(1.2);
-}
-</style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "ScholarlyOrganization",
-  "name": "Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság",
-  "alternateName": "SzBMRTT",
-  "description": "Független, nem kormányzati tudományos társaság a rendvédelem-történeti kutatás szolgálatában és az egyetemes rendvédelem-történeti diszciplína európai központja.",
-  "url": "https://szbmrtt.github.io/szbmrtt-archive/",
-  "sameAs": [
-    "https://www.gendarmerie.interieur.gouv.fr/",
-    "https://www.wienmuseum.at/kriminalmuseum",
-    "https://www.uni-nke.hu/",
-    "https://www.csendoeregylethu.hu/"
-  ],
-  "taxID": "19662706-1-41",
-  "foundingDate": "1990",
-  "knowsAbout": ["Law Enforcement History", "Gendarmerie History", "Rendvédelem-történet", "Historical Sciences", "Security History"],
-  "issn": ["1216-6774", "2560-144X", "1785-3257", "2560-0893"],
-  "identifier": {"@type": "PropertyValue", "propertyID": "MTMT", "value": "23079"},
-  "address": {"@type": "PostalAddress", "addressLocality": "Budapest", "addressCountry": "HU"}
-}
-</script>
-<link rel="canonical" href="https://szbmrtt.github.io/szbmrtt-archive/">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://szbmrtt.github.io/szbmrtt-archive/">
-<meta property="og:title" content="SzBMRTT – Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság">
-<meta property="og:description" content="Független NGO a magyar és az egyetemes rendvédelem-történeti kutatás szolgálatában.">
-<meta property="og:image" content="https://szbmrtt.github.io/szbmrtt-archive/szemere-bertalan-rendvedelem-torteneti-tarsasag-szbmrtt-logo-official.png">
-<meta property="og:image:alt" content="SzBMRTT logó">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="SzBMRTT – Tudományos rendvédelem-történeti társaság">
-<meta name="twitter:description" content="Független NGO a magyar rendvédelem-történeti örökség gondozásáért.">
-<meta name="twitter:image" content="https://szbmrtt.github.io/szbmrtt-archive/szemere-bertalan-rendvedelem-torteneti-tarsasag-szbmrtt-logo-official.png">
+  </script>
+
+  <link rel="canonical" href="https://szbmrtt.github.io/szbmrtt-archive/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://szbmrtt.github.io/szbmrtt-archive/">
+  <meta property="og:title" content="SzBMRTT – Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság">
+  <meta property="og:description" content="Független NGO a magyar és az egyetemes rendvédelem-történeti kutatás szolgálatában.">
+  <meta property="og:image" content="https://szbmrtt.github.io/szbmrtt-archive/szemere-bertalan-rendvedelem-torteneti-tarsasag-szbmrtt-logo-official.png">
+  <meta property="og:image:alt" content="SzBMRTT logó">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SzBMRTT – Tudományos rendvédelem-történeti társaság">
+  <meta name="twitter:description" content="Független NGO a magyar rendvédelem-történeti örökség gondozásáért.">
+  <meta name="twitter:image" content="https://szbmrtt.github.io/szbmrtt-archive/szemere-bertalan-rendvedelem-torteneti-tarsasag-szbmrtt-logo-official.png">
 </head>
 <body class="font-sans text-gray-900">
-<<header id="mainHeader" class="sticky top-0 z-50 w-full shadow-sm" style="background-color: #004E82;">
+
+<header id="mainHeader" class="sticky top-0 z-50 w-full shadow-sm" style="background-color: #004E82;">
   <div class="max-w-7xl mx-auto px-4 py-6">
     <div class="flex flex-wrap justify-between items-center gap-4">
       <div class="flex items-center gap-4">
@@ -356,14 +348,14 @@ h1, h2, h3, h4, .serif-heading {
         </div>
       </div>
       <div class="flex items-center gap-4 mobile-header-right">
-        <button id="searchIcon" class="text-white text-xl hover:text-gray-200 transition" aria-label="Keresés"><i class="fas fa-search"></i></button>
+        <button id="searchIcon" class="text-white text-xl hover:text-gray-200 transition"><i class="fas fa-search"></i></button>
         <div class="flex items-center gap-2">
-          <button class="px-3 py-1 bg-white text-blue-900 rounded-md text-sm font-semibold shadow-sm cursor-default" aria-label="Magyar nyelv">HU</button>
-          <a href="en/index.html" class="px-3 py-1 bg-gray-500 text-white rounded-md text-sm font-semibold hover:bg-gray-600 transition shadow-sm" aria-label="English language">EN</a>
+          <button class="px-3 py-1 bg-white text-blue-900 rounded-md text-sm font-semibold shadow-sm cursor-default">HU</button>
+          <a href="en/index.html" class="px-3 py-1 bg-gray-500 text-white rounded-md text-sm font-semibold hover:bg-gray-600 transition shadow-sm">EN</a>
         </div>
         <div class="flex items-center gap-2 cursor-pointer" id="menuToggleBtn">
           <span class="text-white font-bold text-sm uppercase tracking-wider hide-on-mobile">MENÜ</span>
-          <button id="hamburgerBtn" class="text-2xl text-white hover:text-gray-200 transition" aria-label="Menü megnyitása"><i class="fas fa-bars"></i></button>
+          <button id="hamburgerBtn" class="text-2xl text-white hover:text-gray-200 transition"><i class="fas fa-bars"></i></button>
         </div>
       </div>
     </div>
@@ -371,12 +363,10 @@ h1, h2, h3, h4, .serif-heading {
 </header>
 
 <div id="mobileMenu" class="mobile-menu">
-  <div class="flex justify-end mb-6">
-    <button id="closeMenuBtn" class="text-2xl" aria-label="Menü bezárása"><i class="fas fa-times"></i></button>
-  </div>
+  <div class="flex justify-end mb-6"><button id="closeMenuBtn" class="text-2xl"><i class="fas fa-times"></i></button></div>
   <div class="flex gap-4 justify-center mb-8 pb-4 border-b">
-    <button class="text-lg font-bold text-blue-800" aria-label="Magyar nyelv">HU</button>
-    <button class="text-lg font-bold text-gray-400" aria-label="English language">EN</button>
+    <button class="text-lg font-bold text-blue-800">HU</button>
+    <button class="text-lg font-bold text-gray-400">EN</button>
   </div>
   <nav class="flex flex-col gap-4" id="mobileNavLinks">
     <a href="#bemutatkozas" class="text-lg font-medium py-2 border-b">Bemutatkozás</a>
@@ -397,25 +387,25 @@ h1, h2, h3, h4, .serif-heading {
   <div class="slides-container">
     <div class="slide" data-index="0">
       <picture>
-        <source media="(max-width:1023px)" srcset="szbmrtt-president-dr-jozsef-paradi-inauguration-1984-mobile.jpg">
+        <source media="(max-width: 1023px)" srcset="szbmrtt-president-dr-jozsef-paradi-inauguration-1984-mobile.jpg">
         <img src="szbmrtt-elnok-dr-paradi-jozsef-szekfoglalo-rendortiszti-foiskola1984-desktop.jpg" alt="Dr. Parádi József székfoglaló">
       </picture>
     </div>
     <div class="slide" data-index="1">
       <picture>
-        <source media="(max-width:1023px)" srcset="national-security-service-conference-budapest-intelligence-mobile.jpg">
+        <source media="(max-width: 1023px)" srcset="national-security-service-conference-budapest-intelligence-mobile.jpg">
         <img src="szbmrtt-nbsz-nemzetbiztonsagi-szakszolgalat-szakmatorteneti-konferencia-desktop.jpg" alt="NBSZ konferencia">
       </picture>
     </div>
     <div class="slide" data-index="2">
       <picture>
-        <source media="(max-width:1023px)" srcset="intelligence-reconnaissance-service-manual-1872-guide-mobile.jpg">
+        <source media="(max-width: 1023px)" srcset="intelligence-reconnaissance-service-manual-1872-guide-mobile.jpg">
         <img src="anleitung-zum-kundschaftsdienste-1872-felderitoszolgalati-utasitas-szbmrtt-desktop.jpg" alt="1872-es utasítás">
       </picture>
     </div>
     <div class="slide" data-index="3">
       <picture>
-        <source media="(max-width:1023px)" srcset="szbmrtt-honorary-medals-zeidler-sandor-design-mobile.jpg">
+        <source media="(max-width: 1023px)" srcset="szbmrtt-honorary-medals-zeidler-sandor-design-mobile.jpg">
         <img src="szbmrtt-kituntetesek-zeidler-sandor-falerisztika-merit-awards-desktop.jpg" alt="Kitüntetések">
       </picture>
     </div>
@@ -444,9 +434,10 @@ h1, h2, h3, h4, .serif-heading {
 </div>
 
 <!-- 4 oszlopos rács (asztali) / 1 oszlop (mobil) gap-6, p-10, flat design, Inter font -->
-<<main class="py-12 md:py-16 px-4 md:px-8 bg-gray-50">
+<main class="py-12 md:py-16 px-4 md:px-8 bg-gray-50">
   <div class="max-w-7xl mx-auto">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      
       <a href="#bemutatkozas" class="group relative block aspect-square bg-[#004E82] overflow-hidden transition-transform duration-300 hover:scale-[1.02] focus:outline-none">
         <div class="absolute inset-0 bg-[#004E82] bg-cover bg-center transition-all duration-500 group-hover:scale-105"></div>
         <div class="relative z-10 flex flex-col items-start p-10 h-full">
@@ -456,6 +447,7 @@ h1, h2, h3, h4, .serif-heading {
           </div>
         </div>
       </a>
+
       <a href="#diszciplina" class="group relative block aspect-square bg-[#004E82] overflow-hidden transition-transform duration-300 hover:scale-[1.02] focus:outline-none">
         <div class="absolute inset-0 bg-[#004E82] bg-cover bg-center transition-all duration-500 group-hover:scale-105"></div>
         <div class="relative z-10 flex flex-col items-start p-10 h-full">
@@ -465,6 +457,7 @@ h1, h2, h3, h4, .serif-heading {
           </div>
         </div>
       </a>
+
       <a href="#szervezet-elnok" class="group relative block aspect-square bg-[#004E82] overflow-hidden transition-transform duration-300 hover:scale-[1.02] focus:outline-none">
         <div class="absolute inset-0 bg-[#004E82] bg-cover bg-center transition-all duration-500 group-hover:scale-105"></div>
         <div class="relative z-10 flex flex-col items-start p-10 h-full">
@@ -474,6 +467,7 @@ h1, h2, h3, h4, .serif-heading {
           </div>
         </div>
       </a>
+
       <a href="#rendezvenyek" class="group relative block aspect-square bg-[#004E82] overflow-hidden transition-transform duration-300 hover:scale-[1.02] focus:outline-none">
         <div class="absolute inset-0 bg-[#004E82] bg-cover bg-center transition-all duration-500 group-hover:scale-105"></div>
         <div class="relative z-10 flex flex-col items-start p-10 h-full">
@@ -483,33 +477,37 @@ h1, h2, h3, h4, .serif-heading {
           </div>
         </div>
       </a>
+
       <a href="#kiadvanyok" class="group relative block aspect-square bg-[#004E82] overflow-hidden transition-transform duration-300 hover:scale-[1.02] focus:outline-none">
         <div class="absolute inset-0 bg-[#004E82] bg-cover bg-center transition-all duration-500 group-hover:scale-105"></div>
         <div class="relative z-10 flex flex-col items-start p-10 h-full">
           <div class="border-l-[3px] border-white pl-4">
             <h3 class="text-white font-bold uppercase text-sm md:text-base lg:text-lg tracking-wide">KIADVÁNYAINK</h3>
-            <p class="text-white italic text-xs md:text-sm mt-1">RTH és tanulmányok</p>
+            <p class="text-white italic text-xs md:text-sm mt-1">RTH és tanulmánykötetek</p>
           </div>
         </div>
       </a>
+
       <a href="#kituntetesek" class="group relative block aspect-square bg-[#004E82] overflow-hidden transition-transform duration-300 hover:scale-[1.02] focus:outline-none">
         <div class="absolute inset-0 bg-[#004E82] bg-cover bg-center transition-all duration-500 group-hover:scale-105"></div>
         <div class="relative z-10 flex flex-col items-start p-10 h-full">
           <div class="border-l-[3px] border-white pl-4">
             <h3 class="text-white font-bold uppercase text-sm md:text-base lg:text-lg tracking-wide">KITÜNTETÉSI RENDSZERÜNK</h3>
-            <p class="text-white italic text-xs md:text-sm mt-1">Szakmai elismerés</p>
+            <p class="text-white italic text-xs md:text-sm mt-1">Szakmai elismerések</p>
           </div>
         </div>
       </a>
+
       <a href="#egyuttmukodesek" class="group relative block aspect-square bg-[#004E82] overflow-hidden transition-transform duration-300 hover:scale-[1.02] focus:outline-none">
         <div class="absolute inset-0 bg-[#004E82] bg-cover bg-center transition-all duration-500 group-hover:scale-105"></div>
         <div class="relative z-10 flex flex-col items-start p-10 h-full">
           <div class="border-l-[3px] border-white pl-4">
             <h3 class="text-white font-bold uppercase text-sm md:text-base lg:text-lg tracking-wide">EGYÜTTMŰKÖDÉSEK</h3>
-            <p class="text-white italic text-xs md:text-sm mt-1">Hazai és nemzetközi</p>
+            <p class="text-white italic text-xs md:text-sm mt-1">Hazai és nemzetközi partnerek</p>
           </div>
         </div>
       </a>
+
       <a href="#media" class="group relative block aspect-square bg-[#004E82] overflow-hidden transition-transform duration-300 hover:scale-[1.02] focus:outline-none">
         <div class="absolute inset-0 bg-[#004E82] bg-cover bg-center transition-all duration-500 group-hover:scale-105"></div>
         <div class="relative z-10 flex flex-col items-start p-10 h-full">
@@ -519,6 +517,7 @@ h1, h2, h3, h4, .serif-heading {
           </div>
         </div>
       </a>
+
       <a href="#kapcsolat" class="group relative block aspect-square bg-[#004E82] overflow-hidden transition-transform duration-300 hover:scale-[1.02] focus:outline-none">
         <div class="absolute inset-0 bg-[#004E82] bg-cover bg-center transition-all duration-500 group-hover:scale-105"></div>
         <div class="relative z-10 flex flex-col items-start p-10 h-full">
@@ -528,6 +527,7 @@ h1, h2, h3, h4, .serif-heading {
           </div>
         </div>
       </a>
+
     </div>
   </div>
 </main>
@@ -542,211 +542,178 @@ h1, h2, h3, h4, .serif-heading {
 </section>
 
 <script>
-(function() {
-  // Slideshow adatok a mottók fix sortöréseivel
-  const slidesData = [
-    {
-      latin: "Cum historia pro securitate.",
-      hungarian: "Történelemmel a biztonságért.",
-      desc: "Társaságunk elnöke, dr. Parádi József székfoglalója a Rendőrtiszti Főiskolán 1984."
-    },
-    {
-      latin: "Condita decrescit<br>vulgata scientia crescit.",
-      hungarian: "Az elrejtett tudás elsorvad,<br>a másokkal megosztott gyarapszik.",
-      desc: "Tudományos párbeszéd: Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság – Nemzetbiztonsági Szakszolgálat szakmatörténeti konferencia."
-    },
-    {
-      latin: "Veritas nunquam perit.",
-      hungarian: "Az igazság sosem vész el.",
-      desc: "Dr. Parádi József és dr. Sándor Vilmos † az 1872 Felderítőszolgálati utasítás (1872 Anleitung zum Kundschaftsdienste) című társasági kiadványunk könyvbemutatóján."
-    },
-    {
-      latin: "Honos honestum decorat, inhonestum notat.",
-      hungarian: "A kitüntetés a méltót ékesíti, a méltatlant bélyegzi.",
-      desc: "Érdem és elismerés. Társaságunk mag. Zeidler Sándor által tervezett kitüntetései."
+  (function() {
+    // Slideshow adatok a mottók fix sortöréseivel
+    const slidesData = [
+      {
+        latin: "Cum historia pro securitate.",
+        hungarian: "Történelemmel a biztonságért.",
+        desc: "Társaságunk elnöke, dr. Parádi József székfoglalója a Rendőrtiszti Főiskolán 1984."
+      },
+      {
+        latin: "Condita decrescit<br>vulgata scientia crescit.",
+        hungarian: "Az elrejtett tudás elsorvad,<br>a másokkal megosztott gyarapszik.",
+        desc: "Tudományos párbeszéd: Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság – Nemzetbiztonsági Szakszolgálat szakmatörténeti konferencia."
+      },
+      {
+        latin: "Veritas nunquam perit.",
+        hungarian: "Az igazság sosem vész el.",
+        desc: "Dr. Parádi József és dr. Sándor Vilmos † az 1872 Felderítőszolgálati utasítás (1872 Anleitung zum Kundschaftsdienste) című társasági kiadványunk könyvbemutatóján."
+      },
+      {
+        latin: "Honos honestum decorat, inhonestum notat.",
+        hungarian: "A kitüntetés a méltót ékesíti, a méltatlant bélyegezi.",
+        desc: "Érdem és elismerés. Társaságunk mag. Zeidler Sándor által tervezett kitüntetései."
+      }
+    ];
+
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+    const dotsContainer = document.querySelector('.dots');
+    let currentIndex = 0;
+    let interval;
+    const intervalTime = 8000;
+
+    const desktopMotto = document.querySelector('.desktop-motto');
+    const desktopDesc = document.querySelector('.desktop-desc');
+    const desktopLatin = document.querySelector('.desktop-motto .latin-motto');
+    const desktopHungarian = document.querySelector('.desktop-motto .hungarian-motto');
+    const desktopDescText = document.querySelector('.desktop-desc .desc-text');
+
+    const mobileContainer = document.querySelector('.mobile-text-container');
+    const mobileLatin = document.querySelector('.mobile-motto .latin-motto');
+    const mobileHungarian = document.querySelector('.mobile-motto .hungarian-motto');
+    const mobileDescText = document.querySelector('.mobile-desc .desc-text');
+
+    function restartAnimation(element, className) {
+      if (!element) return;
+      element.classList.remove(className);
+      void element.offsetWidth;
+      element.classList.add(className);
     }
-  ];
 
-  const slides = document.querySelectorAll('.slide');
-  const prevBtn = document.querySelector('.prev');
-  const nextBtn = document.querySelector('.next');
-  const dotsContainer = document.querySelector('.dots');
-  let currentIndex = 0;
-  let interval;
-  const intervalTime = 8000;
+    function updateText(index) {
+      const data = slidesData[index];
+      if (desktopLatin) desktopLatin.innerHTML = data.latin;
+      if (desktopHungarian) desktopHungarian.innerHTML = data.hungarian;
+      if (desktopDescText) desktopDescText.textContent = data.desc;
+      restartAnimation(desktopMotto, 'animate');
+      restartAnimation(desktopDesc, 'animate');
 
-  const desktopMotto = document.querySelector('.desktop-motto');
-  const desktopDesc = document.querySelector('.desktop-desc');
-  const desktopLatin = document.querySelector('.desktop-motto .latin-motto');
-  const desktopHungarian = document.querySelector('.desktop-motto .hungarian-motto');
-  const desktopDescText = document.querySelector('.desktop-desc .desc-text');
+      if (mobileLatin) mobileLatin.innerHTML = data.latin;
+      if (mobileHungarian) mobileHungarian.innerHTML = data.hungarian;
+      if (mobileDescText) mobileDescText.textContent = data.desc;
+      restartAnimation(mobileContainer, 'animate');
+      restartAnimation(mobileDescText, 'animate');
+    }
 
-  const mobileContainer = document.querySelector('.mobile-text-container');
-  const mobileLatin = document.querySelector('.mobile-motto .latin-motto');
-  const mobileHungarian = document.querySelector('.mobile-motto .hungarian-motto');
-  const mobileDescText = document.querySelector('.mobile-desc .desc-text');
+    function createDots() {
+      dotsContainer.innerHTML = '';
+      slides.forEach((_, idx) => {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        if (idx === currentIndex) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(idx));
+        dotsContainer.appendChild(dot);
+      });
+    }
 
-  function restartAnimation(element, className) {
-    if (!element) return;
-    element.classList.remove(className);
-    void element.offsetWidth;
-    element.classList.add(className);
-  }
+    function updateDots() {
+      document.querySelectorAll('.dot').forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === currentIndex);
+      });
+    }
 
-  function updateText(index) {
-    const data = slidesData[index];
-    if (desktopLatin) desktopLatin.innerHTML = data.latin;
-    if (desktopHungarian) desktopHungarian.innerHTML = data.hungarian;
-    if (desktopDescText) desktopDescText.textContent = data.desc;
-    restartAnimation(desktopMotto, 'animate');
-    restartAnimation(desktopDesc, 'animate');
+    function goToSlide(index) {
+      if (index < 0) index = slides.length - 1;
+      if (index >= slides.length) index = 0;
+      slides.forEach(slide => slide.classList.remove('active'));
+      slides[index].classList.add('active');
+      currentIndex = index;
+      updateDots();
+      updateText(currentIndex);
+      resetInterval();
+    }
 
-    if (mobileLatin) mobileLatin.innerHTML = data.latin;
-    if (mobileHungarian) mobileHungarian.innerHTML = data.hungarian;
-    if (mobileDescText) mobileDescText.textContent = data.desc;
-    restartAnimation(mobileContainer, 'animate');
-    restartAnimation(mobileDescText, 'animate');
-  }
+    function nextSlide() { goToSlide(currentIndex + 1); }
+    function prevSlide() { goToSlide(currentIndex - 1); }
+    function resetInterval() {
+      if (interval) clearInterval(interval);
+      interval = setInterval(nextSlide, intervalTime);
+    }
 
-  function createDots() {
-    dotsContainer.innerHTML = '';
-    slides.forEach((_, idx) => {
-      const dot = document.createElement('div');
-      dot.classList.add('dot');
-      if (idx === currentIndex) dot.classList.add('active');
-      dot.addEventListener('click', () => goToSlide(idx));
-      dotsContainer.appendChild(dot);
-    });
-  }
+    prevBtn.addEventListener('click', () => { prevSlide(); resetInterval(); });
+    nextBtn.addEventListener('click', () => { nextSlide(); resetInterval(); });
 
-  function updateDots() {
-    document.querySelectorAll('.dot').forEach((dot, idx) => {
-      dot.classList.toggle('active', idx === currentIndex);
-    });
-  }
-
-  function goToSlide(index) {
-    if (index < 0) index = slides.length - 1;
-    if (index >= slides.length) index = 0;
-    slides.forEach(slide => slide.classList.remove('active'));
-    slides[index].classList.add('active');
-    currentIndex = index;
-    updateDots();
-    updateText(currentIndex);
+    slides[0].classList.add('active');
+    createDots();
+    updateText(0);
     resetInterval();
-  }
+  })();
 
-  function nextSlide() { goToSlide(currentIndex + 1); }
-  function prevSlide() { goToSlide(currentIndex - 1); }
-
-  function resetInterval() {
-    if (interval) clearInterval(interval);
-    interval = setInterval(nextSlide, intervalTime);
-  }
-
-  prevBtn.addEventListener('click', () => { prevSlide(); resetInterval(); });
-  nextBtn.addEventListener('click', () => { nextSlide(); resetInterval(); });
-
-  slides[0].classList.add('active');
-  createDots();
-  updateText(0);
-  resetInterval();
-})();
-
-// Hamburger menü és interakciók
-(function() {
-  const hamburger = document.getElementById('hamburgerBtn');
-  const menuToggleBtn = document.getElementById('menuToggleBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
-  const overlay = document.getElementById('overlay');
-  const closeBtn = document.getElementById('closeMenuBtn');
-
-  function openMenu() {
-    mobileMenu.classList.add('open');
-    overlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeMenu() {
-    mobileMenu.classList.remove('open');
-    overlay.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-  if (hamburger) hamburger.addEventListener('click', openMenu);
-  if (menuToggleBtn) menuToggleBtn.addEventListener('click', openMenu);
-  if (closeBtn) closeBtn.addEventListener('click', closeMenu);
-  if (overlay) overlay.addEventListener('click', closeMenu);
-
-  const mobileLinks = document.querySelectorAll('#mobileNavLinks a');
-  mobileLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      const targetId = this.getAttribute('href');
-      closeMenu();
-      if (targetId && targetId !== '#') {
-        setTimeout(() => {
-          const targetElement = document.querySelector(targetId);
-          if (targetElement) targetElement.scrollIntoView({ behavior: 'smooth' });
-        }, 150);
-      }
+  // Hamburger menü és interakciók
+  (function() {
+    const hamburger = document.getElementById('hamburgerBtn');
+    const menuToggleBtn = document.getElementById('menuToggleBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const overlay = document.getElementById('overlay');
+    const closeBtn = document.getElementById('closeMenuBtn');
+    function openMenu() { mobileMenu.classList.add('open'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function closeMenu() { mobileMenu.classList.remove('open'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
+    if (hamburger) hamburger.addEventListener('click', openMenu);
+    if (menuToggleBtn) menuToggleBtn.addEventListener('click', openMenu);
+    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+    if (overlay) overlay.addEventListener('click', closeMenu);
+    
+    const mobileLinks = document.querySelectorAll('#mobileNavLinks a');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        closeMenu();
+        if (targetId && targetId !== '#') {
+          setTimeout(() => {
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) targetElement.scrollIntoView({ behavior: 'smooth' });
+          }, 150);
+        }
+      });
     });
-  });
-
-  const searchIcon = document.getElementById('searchIcon');
-  if (searchIcon) {
-    searchIcon.addEventListener('click', () => {
-      let searchBox = document.getElementById('dynamicSearchBox');
-      if (!searchBox) {
-        searchBox = document.createElement('div');
-        searchBox.id = 'dynamicSearchBox';
-        searchBox.innerHTML = `
-          <div class="fixed top-20 left-1/2 transform -translate-x-1/2 bg-white shadow-2xl rounded-xl p-4 z-[200] w-11/12 max-w-md border border-gray-300">
-            <div class="flex items-center gap-2">
-              <input type="text" id="searchInput" placeholder="Keresés a honlapon..." class="w-full border-b-2 border-blue-500 px-3 py-2 focus:outline-none">
-              <button id="closeSearch" class="text-gray-500 hover:text-gray-700"><i class="fas fa-times"></i></button>
-            </div>
-            <div id="searchResults" class="mt-2 text-sm text-gray-600 max-h-60 overflow-y-auto"></div>
-          </div>
-        `;
-        document.body.appendChild(searchBox);
-        const searchInput = document.getElementById('searchInput');
-        const resultsDiv = document.getElementById('searchResults');
-        searchInput.addEventListener('input', (e) => {
-          const term = e.target.value.toLowerCase().trim();
-          if (!term) { resultsDiv.innerHTML = ''; return; }
-          const sections = document.querySelectorAll('section[id], div[id]');
-          let found = [];
-          sections.forEach(section => {
-            if (section.id && section.innerText.toLowerCase().includes(term)) {
-              found.push(`<<a href="#${section.id}" class="block py-1 hover:bg-gray-100 px-2 rounded">${section.id.replace(/-/g, ' ')}</a>`);
-            }
+    
+    const searchIcon = document.getElementById('searchIcon');
+    if (searchIcon) {
+      searchIcon.addEventListener('click', () => {
+        let searchBox = document.getElementById('dynamicSearchBox');
+        if (!searchBox) {
+          searchBox = document.createElement('div');
+          searchBox.id = 'dynamicSearchBox';
+          searchBox.innerHTML = `<div class="fixed top-20 left-1/2 transform -translate-x-1/2 bg-white shadow-2xl rounded-xl p-4 z-[200] w-11/12 max-w-md border border-gray-300"><input type="text" id="searchInput" placeholder="Keresés a honlapon..." class="w-full border-b-2 border-blue-900 py-2 px-3 focus:outline-none"><button id="closeSearch" class="absolute top-2 right-2 text-gray-500"><i class="fas fa-times"></i></button><div id="searchResults" class="mt-2 text-sm text-gray-600 max-h-60 overflow-y-auto"></div></div>`;
+          document.body.appendChild(searchBox);
+          const searchInput = document.getElementById('searchInput');
+          const resultsDiv = document.getElementById('searchResults');
+          searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase().trim();
+            if (!term) { resultsDiv.innerHTML = ''; return; }
+            const sections = document.querySelectorAll('section, div[id]');
+            let found = [];
+            sections.forEach(section => { if (section.id && section.innerText.toLowerCase().includes(term)) { found.push(`<a href="#${section.id}" class="block py-1 hover:bg-gray-100">${section.id.replace(/-/g,' ')}</a>`); } });
+            resultsDiv.innerHTML = found.length ? found.join('') : 'Nincs találat';
           });
-          resultsDiv.innerHTML = found.length ? found.join('') : '<p class="text-gray-400 italic">Nincs találat</p>';
-        });
-        document.getElementById('closeSearch').addEventListener('click', () => searchBox.remove());
-      } else {
-        searchBox.style.display = searchBox.style.display === 'none' ? 'block' : 'none';
-      }
-    });
-  }
-
-  function setStickyAndScrollMargin() {
-    const header = document.getElementById('mainHeader');
-    let headerHeight = header ? header.offsetHeight : 0;
-    document.querySelectorAll('section[id]').forEach(section => {
-      section.style.scrollMarginTop = headerHeight + 'px';
-    });
-    ['#korlevelek', '#rolunkirtak', '#videotar'].forEach(selector => {
-      const el = document.querySelector(selector);
-      if (el) el.style.scrollMarginTop = headerHeight + 'px';
-    });
-  }
-
-  window.addEventListener('load', setStickyAndScrollMargin);
-  window.addEventListener('resize', setStickyAndScrollMargin);
-  new ResizeObserver(() => setStickyAndScrollMargin()).observe(document.getElementById('mainHeader'));
-})();
+          document.getElementById('closeSearch').addEventListener('click', () => searchBox.remove());
+        } else { searchBox.style.display = 'block'; }
+      });
+    }
+    function setStickyAndScrollMargin() {
+      const header = document.getElementById('mainHeader');
+      let headerHeight = header ? header.offsetHeight : 0;
+      document.querySelectorAll('section[id]').forEach(section => { section.style.scrollMarginTop = headerHeight + 'px'; });
+      ['#korlevelek', '#rolunkirtak', '#videotar'].forEach(selector => { const el = document.querySelector(selector); if (el) el.style.scrollMarginTop = headerHeight + 'px'; });
+    }
+    window.addEventListener('load', setStickyAndScrollMargin);
+    window.addEventListener('resize', setStickyAndScrollMargin);
+    new ResizeObserver(() => setStickyAndScrollMargin()).observe(document.getElementById('mainHeader'));
+  })();
 </script>
 </body>
 </html>
