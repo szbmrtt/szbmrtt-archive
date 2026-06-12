@@ -1,719 +1,825 @@
-<!DOCTYPE html>
+
+header_and_uploader = """<!DOCTYPE html>
 <html lang="hu">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>SzBMRTT - Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</title>
-  <meta name="description" content="A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság hivatalos honlapja. Bemutatkozás, rendvédelem-történeti diszciplína, szervezet, rendezvények, kiadványok.">
+  <meta name="description" content="A Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság hivatalos honlapja.">
   
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
-  
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
+    /* ===== CSS RESET & VARIABLES ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --primary: #0a2540;
+      --primary-light: #0d3a5c;
+      --accent: #c9a961;
+      --accent-hover: #b8984f;
+      --text: #1a1a2e;
+      --text-light: #4a5568;
+      --bg: #fafaf9;
+      --bg-warm: #f5f5f0;
+      --white: #ffffff;
+      --border: #e2e8f0;
+      --shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.05);
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+      --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+    
     html { scroll-behavior: smooth; }
-    body { 
-      font-family: 'Inter', sans-serif; 
-      background-color: #f9f9f6;
-      overflow-x: clip;
+    
+    body {
+      font-family: var(--font-sans);
+      color: var(--text);
+      background-color: var(--bg);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
-    /* Egységes Inter font a csempék szövegeihez és a slideshow szövegeihez is */
-    .grid a h3, .grid a p,
-    .desktop-motto .latin-motto, .desktop-motto .hungarian-motto, .desktop-desc .desc-text,
-    .mobile-text-container .latin-motto, .mobile-text-container .hungarian-motto, .mobile-text-container .desc-text {
-      font-family: 'Inter', sans-serif !important;
-    }
-    h1, h2, h3, h4, .serif-heading {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-    }
-    .accent-line {
-      width: 80px;
-      height: 2px;
-      background-color: #0d9488;
-      margin-top: 0.75rem;
-      margin-bottom: 1.5rem;
-    }
-    .accent-line.mx-auto { margin-left: auto; margin-right: auto; }
-    .group:hover .submenu, .group:focus-within .submenu { display: block; }
-    .group:hover i, .group:focus-within i { transform: rotate(180deg); }
-    .submenu { display: none; transition: all 0.1s ease; }
-    .menu-item:focus { background-color: #e2e8f0; outline: none; }
-    .mobile-menu {
-      position: fixed; top: 0; right: -100%; width: 80%; max-width: 400px; height: 100%;
-      background-color: white; box-shadow: -2px 0 20px rgba(0,0,0,0.1); z-index: 1000;
-      transition: right 0.3s ease; overflow-y: auto; padding: 1.5rem;
-    }
-    .mobile-menu.open { right: 0; }
-    .menu-overlay {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5); z-index: 999; display: none;
-    }
-    .menu-overlay.active { display: block; }
-    @media (max-width: 1024px) { .desktop-nav { display: none; } .mobile-nav-toggle { display: flex; } }
-    @media (min-width: 1025px) { .mobile-nav-toggle { display: none; } .desktop-nav { display: flex; } }
-    .desktop-nav { display: none !important; }
-    .mobile-nav-toggle { display: flex; }
-    .logo-img { width: auto; height: 3rem; object-fit: contain; }
-    @media (min-width: 768px) { .logo-img { height: auto; max-height: 4rem; width: auto; } }
-    .portrait-img { width: 100%; height: auto; border-radius: 1rem; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
-    .gremium-card {
-      transition: all 0.25s ease;
-      border: 1px solid #f1f1f1;
-      background-color: white;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02);
-    }
-    .gremium-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.1);
-      border-color: #14b8a6;
-    }
-    .scroll-mt-24 { scroll-margin-top: 120px; }
+    
+    /* ===== HEADER ===== */
     #mainHeader {
-      position: -webkit-sticky;
-      position: sticky !important;
-      top: 0 !important;
-      z-index: 50 !important;
-      background-color: #004E82;
-    }
-    @media (max-width: 768px) {
-      .logo-img-mobile { height: 3rem !important; }
-      .hide-on-mobile { display: none; }
-      .szbmrtt-mobile {
-        font-size: 1.2rem !important;
-      }
-      .mobile-header-right {
-        gap: 0.5rem !important;
-      }
-    }
-
-    /* ========== SLIDESHOW MÓDOSÍTÁSOK ========== */
-    .hero-slideshow {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-    }
-    /* Asztali nézet: 1500:500 */
-    @media (min-width: 1024px) {
-      .hero-slideshow {
-        aspect-ratio: 1500 / 500;
-      }
-    }
-    /* Mobil nézet: 1180:829 (a mobil képek eredeti aránya) */
-    @media (max-width: 1023px) {
-      .hero-slideshow {
-        aspect-ratio: 1180 / 829;
-      }
-    }
-    .slides-container {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
-    .slide {
-      position: absolute;
+      position: sticky;
       top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+      z-index: 1000;
+      background: var(--primary);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(10, 37, 64, 0.3);
+      transition: var(--transition);
     }
-    .slide.active {
-      opacity: 1;
-      visibility: visible;
-      z-index: 1;
+    
+    .header-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
     }
-    .slide picture,
-    .slide img {
-      display: block;
-      width: 100%;
-      height: 100%;
+    
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
     }
-    .slide img {
-      object-fit: fill;
-      object-position: center;
+    
+    .logo-img {
+      height: 3.5rem;
+      width: auto;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      transition: var(--transition);
     }
-    @media (min-width: 1024px) {
-      .desktop-text {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 50%;
-        height: 100%;
-        z-index: 2;
-        pointer-events: none;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        padding: 0 20px 40px 0;
-      }
-      .desktop-motto {
-        text-align: right;
-        margin-bottom: 40px;
-        opacity: 0;
-      }
-      .desktop-motto .latin-motto {
-        font-size: clamp(32px, 5vw, 48px);
-        font-weight: bold;
-        color: #000000;
-        white-space: normal;
-        word-break: break-word;
-      }
-      .desktop-motto .hungarian-motto {
-        font-size: clamp(24px, 4vw, 36px);
-        font-weight: normal;
-        color: #000000;
-        white-space: normal;
-        word-break: break-word;
-      }
-      .desktop-desc {
-        text-align: right;
-        background-color: rgba(0, 0, 0, 0.85);
-        border-right: 8px solid #0082D1;
-        padding: 12px 20px;
-        opacity: 0;
-        display: inline-block;
-        align-self: flex-end;
-      }
-      .desktop-desc .desc-text {
-        font-size: 15px;
-        font-weight: normal;
-        color: #ffffff;
-        opacity: 0.95;
-        white-space: normal;
-      }
-      .desktop-motto.animate {
-        animation: slideInFromRight 0.6s ease-out forwards;
-      }
-      .desktop-desc.animate {
-        animation: fadeIn 0.8s ease-out forwards;
-      }
-      .mobile-text-container {
-        display: none;
-      }
+    
+    .brand-text {
+      display: flex;
+      flex-direction: column;
     }
-    @media (max-width: 1023px) {
-      .desktop-text {
-        display: none;
-      }
-      .mobile-text-container {
-        display: block;
-        background: linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.6));
-        padding: 15px 20px;
-        margin-top: 0;
-      }
-      .mobile-motto {
-        text-align: left;
-        margin-bottom: 10px;
-      }
-      .mobile-desc {
-        text-align: left;
-      }
-      .mobile-text-container .latin-motto {
-        font-size: 4vw;
-        font-weight: bold;
-        color: #ffffff;
-        white-space: nowrap;
-      }
-      .mobile-text-container .hungarian-motto {
-        font-size: 3vw;
-        font-weight: normal;
-        color: #ffffff;
-        white-space: nowrap;
-      }
-      .mobile-text-container .desc-text {
-        font-size: 11px;
-        font-weight: normal;
-        color: #ffffff;
-        opacity: 0.9;
-        white-space: normal;
-      }
-      .mobile-text-container.animate {
-        animation: slideInFromRight 0.5s ease-out forwards;
-      }
-      .mobile-desc .desc-text.animate {
-        animation: fadeIn 0.6s ease-out forwards;
-      }
+    
+    .brand-abbr {
+      font-family: var(--font-sans);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.05em;
+      line-height: 1;
     }
-    @keyframes slideInFromRight {
-      0% { opacity: 0; transform: translateX(50px); }
-      100% { opacity: 1; transform: translateX(0); }
+    
+    .brand-full {
+      font-family: var(--font-serif);
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.3;
+      margin-top: 0.25rem;
+      max-width: 280px;
     }
-    @keyframes fadeIn {
-      0% { opacity: 0; }
-      100% { opacity: 0.95; }
+    
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
-    .nav-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0,0,0,0.5);
-      color: white;
+    
+    .lang-switch {
+      display: flex;
+      gap: 0.25rem;
+      background: rgba(255,255,255,0.1);
+      padding: 0.25rem;
+      border-radius: 6px;
+    }
+    
+    .lang-btn {
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
       border: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
       cursor: pointer;
-      z-index: 10;
-      font-size: 24px;
+    }
+    
+    .lang-btn.active {
+      background: var(--white);
+      color: var(--primary);
+    }
+    
+    .lang-btn:not(.active) {
+      background: transparent;
+      color: rgba(255,255,255,0.7);
+    }
+    
+    .lang-btn:not(.active):hover {
+      color: var(--white);
+      background: rgba(255,255,255,0.1);
+    }
+    
+    .icon-btn {
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 1.25rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 50%;
+      transition: var(--transition);
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background 0.3s;
+      width: 40px;
+      height: 40px;
     }
-    .nav-btn:hover {
-      background: rgba(0,0,0,0.8);
+    
+    .icon-btn:hover {
+      background: rgba(255,255,255,0.1);
     }
-    .prev { left: 20px; }
-    .next { right: 20px; }
-    .dots {
-      position: absolute;
-      bottom: 20px;
-      left: 0;
-      right: 0;
+    
+    .menu-toggle {
       display: flex;
-      justify-content: center;
-      gap: 12px;
-      z-index: 10;
-    }
-    .dot {
-      width: 10px;
-      height: 10px;
-      background: rgba(255,255,255,0.5);
-      border-radius: 50%;
+      align-items: center;
+      gap: 0.5rem;
       cursor: pointer;
-      transition: all 0.3s;
+      padding: 0.5rem;
+      border-radius: 6px;
+      transition: var(--transition);
     }
-    .dot.active {
-      background: white;
-      transform: scale(1.2);
+    
+    .menu-toggle:hover {
+      background: rgba(255,255,255,0.1);
+    }
+    
+    .menu-label {
+      color: var(--white);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    
+    /* ===== DESKTOP NAV ===== */
+    .desktop-nav {
+      display: none;
+      background: var(--primary-light);
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .desktop-nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    
+    .desktop-nav-list {
+      display: flex;
+      list-style: none;
+      gap: 0;
+    }
+    
+    .desktop-nav-item {
+      position: relative;
+    }
+    
+    .desktop-nav-link {
+      display: block;
+      padding: 0.875rem 1.25rem;
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: var(--transition);
+      border-bottom: 3px solid transparent;
+    }
+    
+    .desktop-nav-link:hover,
+    .desktop-nav-link:focus {
+      color: var(--white);
+      border-bottom-color: var(--accent);
+      background: rgba(255,255,255,0.05);
+    }
+    
+    /* ===== MOBILE MENU ===== */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 85%;
+      max-width: 400px;
+      height: 100vh;
+      background: var(--white);
+      box-shadow: -10px 0 40px rgba(0,0,0,0.2);
+      z-index: 2000;
+      transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .mobile-menu.open { right: 0; }
+    
+    .mobile-menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--primary);
+    }
+    
+    .mobile-menu-title {
+      font-family: var(--font-serif);
+      color: var(--white);
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    
+    .mobile-menu-close {
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 1.5rem;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+    
+    .mobile-menu-close:hover {
+      background: rgba(255,255,255,0.1);
+    }
+    
+    .mobile-nav-list {
+      list-style: none;
+      padding: 1rem 0;
+    }
+    
+    .mobile-nav-item {
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .mobile-nav-link {
+      display: block;
+      padding: 1rem 1.5rem;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+    }
+    
+    .mobile-nav-link:hover,
+    .mobile-nav-link:focus {
+      color: var(--primary);
+      background: var(--bg);
+      padding-left: 2rem;
+    }
+    
+    .mobile-nav-link::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--accent);
+      transform: scaleY(0);
+      transition: transform 0.3s ease;
+    }
+    
+    .mobile-nav-link:hover::before,
+    .mobile-nav-link:focus::before {
+      transform: scaleY(1);
+    }
+    
+    .menu-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 37, 64, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    
+    .menu-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    /* ===== DRAG & DROP UPLOADER ===== */
+    .upload-section {
+      padding: 3rem 1.5rem;
+      background: var(--bg-warm);
+    }
+    
+    .upload-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .upload-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .upload-header h2 {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    
+    .upload-header p {
+      color: var(--text-light);
+      font-size: 1rem;
+    }
+    
+    .drop-zone {
+      border: 2px dashed var(--border);
+      border-radius: 12px;
+      padding: 3rem 2rem;
+      text-align: center;
+      background: var(--white);
+      transition: var(--transition);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .drop-zone::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(201,169,97,0.05) 0%, rgba(10,37,64,0.05) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .drop-zone:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .drop-zone:hover::before {
+      opacity: 1;
+    }
+    
+    .drop-zone.drag-over {
+      border-color: var(--accent);
+      background: rgba(201,169,97,0.05);
+      transform: scale(1.02);
+    }
+    
+    .drop-zone-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .drop-zone-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 1.5rem;
+      color: var(--accent);
+    }
+    
+    .drop-zone-text {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    
+    .drop-zone-subtext {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+    
+    .drop-zone-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--primary);
+      color: var(--white);
+      border: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .drop-zone-btn:hover {
+      background: var(--primary-light);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(10, 37, 64, 0.3);
+    }
+    
+    .file-input {
+      display: none;
+    }
+    
+    .file-list {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    
+    .file-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: var(--transition);
+    }
+    
+    .file-item:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .file-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-warm);
+      border-radius: 8px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    
+    .file-info {
+      flex: 1;
+      min-width: 0;
+    }
+    
+    .file-name {
+      font-weight: 500;
+      color: var(--primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .file-size {
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+    
+    .file-remove {
+      background: none;
+      border: none;
+      color: var(--text-light);
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 50%;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .file-remove:hover {
+      background: rgba(239, 68, 68, 0.1);
+      color: #ef4444;
+    }
+    
+    .upload-progress {
+      width: 100%;
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      margin-top: 0.5rem;
+      overflow: hidden;
+    }
+    
+    .upload-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+      border-radius: 2px;
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+    
+    /* ===== RESPONSIVE ===== */
+    @media (min-width: 1024px) {
+      .desktop-nav { display: block !important; }
+      .menu-toggle { display: none; }
+    }
+    
+    @media (max-width: 767px) {
+      .brand-full { display: none; }
+      .menu-label { display: none; }
+      .drop-zone { padding: 2rem 1.5rem; }
+      .drop-zone-icon { width: 48px; height: 48px; }
+      .drop-zone-text { font-size: 1rem; }
+    }
+    
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
+    }
+    
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
     }
   </style>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ScholarlyOrganization",
-    "name": "Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság",
-    "alternateName": "SzBMRTT",
-    "description": "Független, nem kormányzati tudományos társaság a rendvédelem-történeti kutatás és az egyetemes rendvédelem-történeti diszciplína európai központja.",
-    "url": "https://szbmrtt.github.io/szbmrtt-archive/",
-    "sameAs": [
-      "https://m2.mtmt.hu/api/institute/23079",
-      "https://www.gendarmerie.interieur.gouv.fr/",
-      "https://www.wienmuseum.at/kriminalmuseum",
-      "https://www.uni-nke.hu/",
-      "https://www.csendoeregylethu.hu/"
-    ],
-    "taxID": "19662706-1-41",
-    "foundingDate": "1990",
-    "knowsAbout": ["Law Enforcement History", "Gendarmerie History", "Rendvédelem-történet", "Historical Sciences", "Security History"],
-    "issn": ["1216-6774", "2560-144X", "1785-3257", "2560-0893"],
-    "identifier": { "@type": "PropertyValue", "propertyID": "MTMT", "value": "23079" },
-    "address": { "@type": "PostalAddress", "addressLocality": "Budapest", "addressCountry": "HU" }
-  }
-  </script>
-
-  <link rel="canonical" href="https://szbmrtt.github.io/szbmrtt-archive/">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://szbmrtt.github.io/szbmrtt-archive/">
-  <meta property="og:title" content="SzBMRTT – Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság">
-  <meta property="og:description" content="Független NGO a magyar és az egyetemes rendvédelem-történeti kutatás szolgálatában.">
-  <meta property="og:image" content="https://szbmrtt.github.io/szbmrtt-archive/szemere-bertalan-rendvedelem-torteneti-tarsasag-szbmrtt-logo-official.png">
-  <meta property="og:image:alt" content="SzBMRTT logó">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SzBMRTT – Tudományos rendvédelem-történeti társaság">
-  <meta name="twitter:description" content="Független NGO a magyar rendvédelem-történeti örökség gondozásáért.">
-  <meta name="twitter:image" content="https://szbmrtt.github.io/szbmrtt-archive/szemere-bertalan-rendvedelem-torteneti-tarsasag-szbmrtt-logo-official.png">
 </head>
-<body class="font-sans text-gray-900">
 
-<header id="mainHeader" class="sticky top-0 z-50 w-full shadow-sm" style="background-color: #004E82;">
-  <div class="max-w-7xl mx-auto px-4 py-6">
-    <div class="flex flex-wrap justify-between items-center gap-4">
-      <div class="flex items-center gap-4">
-        <img src="szbmrtt_logo_head001.png" alt="SzBMRTT logó" class="logo-img-mobile h-24 md:h-28 w-auto hide-on-mobile">
-        <div class="flex flex-col">
-          <span class="font-normal text-white tracking-tight szbmrtt-mobile" style="font-family: 'Gill Sans', 'Gill Sans MT', 'Tw Cen MT', 'Montserrat', sans-serif; font-size: 20pt; line-height: 1.2;">SZBMRTT</span>
-          <span class="font-light text-white text-lg leading-tight mt-2 hide-on-mobile">Szemere Bertalan</span>
-          <span class="font-light text-white text-lg leading-tight hide-on-mobile">Magyar Rendvédelem-történeti</span>
-          <span class="font-light text-white text-lg leading-tight hide-on-mobile">Tudományos Társaság</span>
-        </div>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header id="mainHeader">
+  <div class="header-container">
+    <a href="#" class="header-brand" aria-label="SzBMRTT - Főoldal">
+      <img src="szbmrtt_logo_head001.png" alt="SzBMRTT logó" class="logo-img" width="120" height="56">
+      <div class="brand-text">
+        <span class="brand-abbr">SzBMRTT</span>
+        <span class="brand-full">Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság</span>
       </div>
-      <div class="flex items-center gap-4 mobile-header-right">
-        <button id="searchIcon" class="text-white text-xl hover:text-gray-200 transition"><i class="fas fa-search"></i></button>
-        <div class="flex items-center gap-2">
-          <button class="px-3 py-1 bg-white text-blue-900 rounded-md text-sm font-semibold shadow-sm cursor-default">HU</button>
-          <a href="en/index.html" class="px-3 py-1 bg-gray-500 text-white rounded-md text-sm font-semibold hover:bg-gray-600 transition shadow-sm">EN</a>
-        </div>
-        <div class="flex items-center gap-2 cursor-pointer" id="menuToggleBtn">
-          <span class="text-white font-bold text-sm uppercase tracking-wider hide-on-mobile">MENÜ</span>
-          <button id="hamburgerBtn" class="text-2xl text-white hover:text-gray-200 transition"><i class="fas fa-bars"></i></button>
-        </div>
+    </a>
+    
+    <div class="header-actions">
+      <button class="icon-btn" id="searchToggle" aria-label="Keresés">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+      </button>
+      
+      <div class="lang-switch">
+        <span class="lang-btn active" aria-current="true">HU</span>
+        <a href="en/index.html" class="lang-btn" hreflang="en">EN</a>
+      </div>
+      
+      <div class="menu-toggle" id="menuToggle" role="button" tabindex="0" aria-label="Menü megnyitása" aria-expanded="false">
+        <span class="menu-label">Menü</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
       </div>
     </div>
   </div>
+  
+  <nav class="desktop-nav" aria-label="Főmenü">
+    <div class="desktop-nav-container">
+      <ul class="desktop-nav-list">
+        <li class="desktop-nav-item"><a href="#bemutatkozas" class="desktop-nav-link">Bemutatkozás</a></li>
+        <li class="desktop-nav-item"><a href="#diszciplina" class="desktop-nav-link">A diszciplína</a></li>
+        <li class="desktop-nav-item"><a href="#szervezet-elnok" class="desktop-nav-link">Szervezet</a></li>
+        <li class="desktop-nav-item"><a href="#rendezvenyek" class="desktop-nav-link">Rendezvényeink</a></li>
+        <li class="desktop-nav-item"><a href="#kiadvanyok" class="desktop-nav-link">Kiadványaink</a></li>
+        <li class="desktop-nav-item"><a href="#kituntetesek" class="desktop-nav-link">Kitüntetések</a></li>
+        <li class="desktop-nav-item"><a href="#egyuttmukodesek" class="desktop-nav-link">Együttműködések</a></li>
+        <li class="desktop-nav-item"><a href="#media" class="desktop-nav-link">Média</a></li>
+        <li class="desktop-nav-item"><a href="#kapcsolat" class="desktop-nav-link">Kapcsolat</a></li>
+      </ul>
+    </div>
+  </nav>
 </header>
 
-<div id="mobileMenu" class="mobile-menu">
-  <div class="flex justify-end mb-6"><button id="closeMenuBtn" class="text-2xl"><i class="fas fa-times"></i></button></div>
-  <div class="flex gap-4 justify-center mb-8 pb-4 border-b">
-    <button class="text-lg font-bold text-blue-800">HU</button>
-    <button class="text-lg font-bold text-gray-400">EN</button>
+<!-- ===== MOBILE MENU ===== -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-labelledby="mobileMenuTitle">
+  <div class="mobile-menu-header">
+    <span class="mobile-menu-title" id="mobileMenuTitle">Menü</span>
+    <button class="mobile-menu-close" id="closeMenu" aria-label="Menü bezárása">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
   </div>
-  <nav class="flex flex-col gap-4" id="mobileNavLinks">
-    <a href="#bemutatkozas" class="text-lg font-medium py-2 border-b">Bemutatkozás</a>
-    <a href="#diszciplina" class="text-lg font-medium py-2 border-b">A diszciplína</a>
-    <a href="#szervezet-elnok" class="text-lg font-medium py-2 border-b">Szervezet</a>
-    <a href="#rendezvenyek" class="text-lg font-medium py-2 border-b">Rendezvényeink</a>
-    <a href="#kiadvanyok" class="text-lg font-medium py-2 border-b">Kiadványaink</a>
-    <a href="#kituntetesek" class="text-lg font-medium py-2 border-b">Kitüntetési rendszerünk</a>
-    <a href="#egyuttmukodesek" class="text-lg font-medium py-2 border-b">Együttműködések</a>
-    <a href="#media" class="text-lg font-medium py-2 border-b">Média</a>
-    <a href="#kapcsolat" class="text-lg font-medium py-2 border-b">Kapcsolat</a>
+  <nav aria-label="Mobil menü">
+    <ul class="mobile-nav-list">
+      <li class="mobile-nav-item"><a href="#bemutatkozas" class="mobile-nav-link">Bemutatkozás</a></li>
+      <li class="mobile-nav-item"><a href="#diszciplina" class="mobile-nav-link">A diszciplína</a></li>
+      <li class="mobile-nav-item"><a href="#szervezet-elnok" class="mobile-nav-link">Szervezet</a></li>
+      <li class="mobile-nav-item"><a href="#rendezvenyek" class="mobile-nav-link">Rendezvényeink</a></li>
+      <li class="mobile-nav-item"><a href="#kiadvanyok" class="mobile-nav-link">Kiadványaink</a></li>
+      <li class="mobile-nav-item"><a href="#kituntetesek" class="mobile-nav-link">Kitüntetési rendszerünk</a></li>
+      <li class="mobile-nav-item"><a href="#egyuttmukodesek" class="mobile-nav-link">Együttműködések</a></li>
+      <li class="mobile-nav-item"><a href="#media" class="mobile-nav-link">Média</a></li>
+      <li class="mobile-nav-item"><a href="#kapcsolat" class="mobile-nav-link">Kapcsolat</a></li>
+    </ul>
   </nav>
 </div>
-<div id="overlay" class="menu-overlay"></div>
+<div class="menu-overlay" id="menuOverlay"></div>
 
-<!-- Hero slideshow -->
-<div class="hero-slideshow">
-  <div class="slides-container">
-    <div class="slide" data-index="0">
-      <picture>
-        <source media="(max-width: 1023px)" srcset="szbmrtt-president-dr-jozsef-paradi-inauguration-1984-mobile.jpg">
-        <img src="szbmrtt-elnok-dr-paradi-jozsef-szekfoglalo-rendortiszti-foiskola1984-desktop.jpg" alt="Dr. Parádi József székfoglaló">
-      </picture>
+<!-- ===== DRAG & DROP UPLOADER ===== -->
+<section class="upload-section" aria-label="Fájlfeltöltés">
+  <div class="upload-container">
+    <div class="upload-header">
+      <h2>Dokumentumok feltöltése</h2>
+      <p>Húzza ide a fájlokat, vagy kattintson a feltöltéshez</p>
     </div>
-    <div class="slide" data-index="1">
-      <picture>
-        <source media="(max-width: 1023px)" srcset="national-security-service-conference-budapest-intelligence-mobile.jpg">
-        <img src="szbmrtt-nbsz-nemzetbiztonsagi-szakszolgalat-szakmatorteneti-konferencia-desktop.jpg" alt="NBSZ konferencia">
-      </picture>
+    
+    <div class="drop-zone" id="dropZone" role="button" tabindex="0" aria-label="Fájlok feltöltése">
+      <input type="file" class="file-input" id="fileInput" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.zip">
+      <div class="drop-zone-content">
+        <div class="drop-zone-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+        </div>
+        <p class="drop-zone-text">Húzza ide a fájlokat</p>
+        <p class="drop-zone-subtext">vagy kattintson a böngészéshez (PDF, DOC, JPG, PNG, ZIP)</p>
+        <button class="drop-zone-btn" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+          Fájlok kiválasztása
+        </button>
+      </div>
     </div>
-    <div class="slide" data-index="2">
-      <picture>
-        <source media="(max-width: 1023px)" srcset="intelligence-reconnaissance-service-manual-1872-guide-mobile.jpg">
-        <img src="anleitung-zum-kundschaftsdienste-1872-felderitoszolgalati-utasitas-szbmrtt-desktop.jpg" alt="1872-es utasítás">
-      </picture>
-    </div>
-    <div class="slide" data-index="3">
-      <picture>
-        <source media="(max-width: 1023px)" srcset="szbmrtt-honorary-medals-zeidler-sandor-design-mobile.jpg">
-        <img src="szbmrtt-kituntetesek-zeidler-sandor-falerisztika-merit-awards-desktop.jpg" alt="Kitüntetések">
-      </picture>
-    </div>
-  </div>
-  <div class="desktop-text">
-    <div class="desktop-motto">
-      <div class="latin-motto"></div>
-      <div class="hungarian-motto"></div>
-    </div>
-    <div class="desktop-desc">
-      <div class="desc-text"></div>
-    </div>
-  </div>
-  <button class="nav-btn prev" aria-label="Előző">‹</button>
-  <button class="nav-btn next" aria-label="Következő">›</button>
-  <div class="dots"></div>
-</div>
-<div class="mobile-text-container">
-  <div class="mobile-motto">
-    <div class="latin-motto"></div>
-    <div class="hungarian-motto"></div>
-  </div>
-  <div class="mobile-desc">
-    <div class="desc-text"></div>
-  </div>
-</div>
-
-<!-- 4 oszlopos rács (asztali) / 1 oszlop (mobil) gap-6, p-10, flat design, Inter font -->
-<main class="py-12 md:py-16 px-4 md:px-8 bg-gray-50">
-  <div class="max-w-7xl mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-      
-      <a href="#bemutatkozas" class="group relative block aspect-square bg-[#004E82] overflow-hidden transition-transform duration-300 hover:scale-[1.02] focus:outline-none">
-        <div class="absolute inset-0 bg-[#004E82] bg-cover bg-center transition-all duration-500 group-hover:scale-105"></div>
-        <div class="relative z-10 flex flex-col items-start p-10 h-full">
-          <div class="border-l-[3px] border-white pl-4">
-            <h3 class="text-white font-bold uppercase text-sm md:text-base lg:text-lg tracking-wide">BEMUTATKOZÁS</h3>
-            <p class="text-white italic text-xs md:text-sm mt-1">Múltunk és jelenünk</p>
-          </div>
-        </div>
-      </a>
-
-      <a href="#diszciplina" class="group relative block aspect-square bg-[#004E82] overflow-hidden transition-transform duration-300 hover:scale-[1.02] focus:outline-none">
-        <div class="absolute inset-0 bg-[#004E82] bg-cover bg-center transition-all duration-500 group-hover:scale-105"></div>
-        <div class="relative z-10 flex flex-col items-start p-10 h-full">
-          <div class="border-l-[3px] border-white pl-4">
-            <h3 class="text-white font-bold uppercase text-sm md:text-base lg:text-lg tracking-wide">DISZCIPLÍNA</h3>
-            <p class="text-white italic text-xs md:text-sm mt-1">A rendvédelem-történet elmélete</p>
-          </div>
-        </div>
-      </a>
-
-      <a href="#szervezet-elnok" class="group relative block aspect-square bg-[#004E82] overflow-hidden transition-transform duration-300 hover:scale-[1.02] focus:outline-none">
-        <div class="absolute inset-0 bg-[#004E82] bg-cover bg-center transition-all duration-500 group-hover:scale-105"></div>
-        <div class="relative z-10 flex flex-col items-start p-10 h-full">
-          <div class="border-l-[3px] border-white pl-4">
-            <h3 class="text-white font-bold uppercase text-sm md:text-base lg:text-lg tracking-wide">SZERVEZET</h3>
-            <p class="text-white italic text-xs md:text-sm mt-1">Tisztségviselők és grémiumok</p>
-          </div>
-        </div>
-      </a>
-
-      <a href="#rendezvenyek" class="group relative block aspect-square bg-[#004E82] overflow-hidden transition-transform duration-300 hover:scale-[1.02] focus:outline-none">
-        <div class="absolute inset-0 bg-[#004E82] bg-cover bg-center transition-all duration-500 group-hover:scale-105"></div>
-        <div class="relative z-10 flex flex-col items-start p-10 h-full">
-          <div class="border-l-[3px] border-white pl-4">
-            <h3 class="text-white font-bold uppercase text-sm md:text-base lg:text-lg tracking-wide">RENDEZVÉNYEINK</h3>
-            <p class="text-white italic text-xs md:text-sm mt-1">Konferenciák és ülések</p>
-          </div>
-        </div>
-      </a>
-
-      <a href="#kiadvanyok" class="group relative block aspect-square bg-[#004E82] overflow-hidden transition-transform duration-300 hover:scale-[1.02] focus:outline-none">
-        <div class="absolute inset-0 bg-[#004E82] bg-cover bg-center transition-all duration-500 group-hover:scale-105"></div>
-        <div class="relative z-10 flex flex-col items-start p-10 h-full">
-          <div class="border-l-[3px] border-white pl-4">
-            <h3 class="text-white font-bold uppercase text-sm md:text-base lg:text-lg tracking-wide">KIADVÁNYAINK</h3>
-            <p class="text-white italic text-xs md:text-sm mt-1">RTH és tanulmánykötetek</p>
-          </div>
-        </div>
-      </a>
-
-      <a href="#kituntetesek" class="group relative block aspect-square bg-[#004E82] overflow-hidden transition-transform duration-300 hover:scale-[1.02] focus:outline-none">
-        <div class="absolute inset-0 bg-[#004E82] bg-cover bg-center transition-all duration-500 group-hover:scale-105"></div>
-        <div class="relative z-10 flex flex-col items-start p-10 h-full">
-          <div class="border-l-[3px] border-white pl-4">
-            <h3 class="text-white font-bold uppercase text-sm md:text-base lg:text-lg tracking-wide">KITÜNTETÉSI RENDSZERÜNK</h3>
-            <p class="text-white italic text-xs md:text-sm mt-1">Szakmai elismerések</p>
-          </div>
-        </div>
-      </a>
-
-      <a href="#egyuttmukodesek" class="group relative block aspect-square bg-[#004E82] overflow-hidden transition-transform duration-300 hover:scale-[1.02] focus:outline-none">
-        <div class="absolute inset-0 bg-[#004E82] bg-cover bg-center transition-all duration-500 group-hover:scale-105"></div>
-        <div class="relative z-10 flex flex-col items-start p-10 h-full">
-          <div class="border-l-[3px] border-white pl-4">
-            <h3 class="text-white font-bold uppercase text-sm md:text-base lg:text-lg tracking-wide">EGYÜTTMŰKÖDÉSEK</h3>
-            <p class="text-white italic text-xs md:text-sm mt-1">Hazai és nemzetközi partnerek</p>
-          </div>
-        </div>
-      </a>
-
-      <a href="#media" class="group relative block aspect-square bg-[#004E82] overflow-hidden transition-transform duration-300 hover:scale-[1.02] focus:outline-none">
-        <div class="absolute inset-0 bg-[#004E82] bg-cover bg-center transition-all duration-500 group-hover:scale-105"></div>
-        <div class="relative z-10 flex flex-col items-start p-10 h-full">
-          <div class="border-l-[3px] border-white pl-4">
-            <h3 class="text-white font-bold uppercase text-sm md:text-base lg:text-lg tracking-wide">MÉDIA</h3>
-            <p class="text-white italic text-xs md:text-sm mt-1">Körlevelek és sajtó</p>
-          </div>
-        </div>
-      </a>
-
-      <a href="#kapcsolat" class="group relative block aspect-square bg-[#004E82] overflow-hidden transition-transform duration-300 hover:scale-[1.02] focus:outline-none">
-        <div class="absolute inset-0 bg-[#004E82] bg-cover bg-center transition-all duration-500 group-hover:scale-105"></div>
-        <div class="relative z-10 flex flex-col items-start p-10 h-full">
-          <div class="border-l-[3px] border-white pl-4">
-            <h3 class="text-white font-bold uppercase text-sm md:text-base lg:text-lg tracking-wide">KAPCSOLAT</h3>
-            <p class="text-white italic text-xs md:text-sm mt-1">Elérhetőségek</p>
-          </div>
-        </div>
-      </a>
-
-    </div>
-  </div>
-</main>
-
-<!-- Együttműködések szekció (ideiglenes tartalommal) -->
-<section id="egyuttmukodesek" class="py-20 bg-white scroll-mt-24">
-  <div class="max-w-6xl mx-auto px-6 text-center">
-    <h2 class="text-3xl font-bold text-blue-900 inline-block uppercase tracking-wide">Együttműködések</h2>
-    <div class="accent-line mx-auto"></div>
-    <p class="text-gray-600 italic">A tartalom kialakítás alatt. Hamarosan elérhető lesz a hazai és nemzetközi partnereink részletes bemutatása.</p>
+    
+    <div class="file-list" id="fileList" role="list" aria-label="Feltöltött fájlok"></div>
   </div>
 </section>
 
 <script>
+  // ===== MOBILE MENU =====
   (function() {
-    // Slideshow adatok a mottók fix sortöréseivel
-    const slidesData = [
-      {
-        latin: "Cum historia pro securitate.",
-        hungarian: "Történelemmel a biztonságért.",
-        desc: "Társaságunk elnöke, dr. Parádi József székfoglalója a Rendőrtiszti Főiskolán 1984."
-      },
-      {
-        latin: "Condita decrescit<br>vulgata scientia crescit.",
-        hungarian: "Az elrejtett tudás elsorvad,<br>a másokkal megosztott gyarapszik.",
-        desc: "Tudományos párbeszéd: Szemere Bertalan Magyar Rendvédelem-történeti Tudományos Társaság – Nemzetbiztonsági Szakszolgálat szakmatörténeti konferencia."
-      },
-      {
-        latin: "Veritas nunquam perit.",
-        hungarian: "Az igazság sosem vész el.",
-        desc: "Dr. Parádi József és dr. Sándor Vilmos † az 1872 Felderítőszolgálati utasítás (1872 Anleitung zum Kundschaftsdienste) című társasági kiadványunk könyvbemutatóján."
-      },
-      {
-        latin: "Honos honestum decorat, inhonestum notat.",
-        hungarian: "A kitüntetés a méltót ékesíti, a méltatlant bélyegezi.",
-        desc: "Érdem és elismerés. Társaságunk mag. Zeidler Sándor által tervezett kitüntetései."
-      }
-    ];
-
-    const slides = document.querySelectorAll('.slide');
-    const prevBtn = document.querySelector('.prev');
-    const nextBtn = document.querySelector('.next');
-    const dotsContainer = document.querySelector('.dots');
-    let currentIndex = 0;
-    let interval;
-    const intervalTime = 8000;
-
-    const desktopMotto = document.querySelector('.desktop-motto');
-    const desktopDesc = document.querySelector('.desktop-desc');
-    const desktopLatin = document.querySelector('.desktop-motto .latin-motto');
-    const desktopHungarian = document.querySelector('.desktop-motto .hungarian-motto');
-    const desktopDescText = document.querySelector('.desktop-desc .desc-text');
-
-    const mobileContainer = document.querySelector('.mobile-text-container');
-    const mobileLatin = document.querySelector('.mobile-motto .latin-motto');
-    const mobileHungarian = document.querySelector('.mobile-motto .hungarian-motto');
-    const mobileDescText = document.querySelector('.mobile-desc .desc-text');
-
-    function restartAnimation(element, className) {
-      if (!element) return;
-      element.classList.remove(className);
-      void element.offsetWidth;
-      element.classList.add(className);
-    }
-
-    function updateText(index) {
-      const data = slidesData[index];
-      if (desktopLatin) desktopLatin.innerHTML = data.latin;
-      if (desktopHungarian) desktopHungarian.innerHTML = data.hungarian;
-      if (desktopDescText) desktopDescText.textContent = data.desc;
-      restartAnimation(desktopMotto, 'animate');
-      restartAnimation(desktopDesc, 'animate');
-
-      if (mobileLatin) mobileLatin.innerHTML = data.latin;
-      if (mobileHungarian) mobileHungarian.innerHTML = data.hungarian;
-      if (mobileDescText) mobileDescText.textContent = data.desc;
-      restartAnimation(mobileContainer, 'animate');
-      restartAnimation(mobileDescText, 'animate');
-    }
-
-    function createDots() {
-      dotsContainer.innerHTML = '';
-      slides.forEach((_, idx) => {
-        const dot = document.createElement('div');
-        dot.classList.add('dot');
-        if (idx === currentIndex) dot.classList.add('active');
-        dot.addEventListener('click', () => goToSlide(idx));
-        dotsContainer.appendChild(dot);
-      });
-    }
-
-    function updateDots() {
-      document.querySelectorAll('.dot').forEach((dot, idx) => {
-        dot.classList.toggle('active', idx === currentIndex);
-      });
-    }
-
-    function goToSlide(index) {
-      if (index < 0) index = slides.length - 1;
-      if (index >= slides.length) index = 0;
-      slides.forEach(slide => slide.classList.remove('active'));
-      slides[index].classList.add('active');
-      currentIndex = index;
-      updateDots();
-      updateText(currentIndex);
-      resetInterval();
-    }
-
-    function nextSlide() { goToSlide(currentIndex + 1); }
-    function prevSlide() { goToSlide(currentIndex - 1); }
-    function resetInterval() {
-      if (interval) clearInterval(interval);
-      interval = setInterval(nextSlide, intervalTime);
-    }
-
-    prevBtn.addEventListener('click', () => { prevSlide(); resetInterval(); });
-    nextBtn.addEventListener('click', () => { nextSlide(); resetInterval(); });
-
-    slides[0].classList.add('active');
-    createDots();
-    updateText(0);
-    resetInterval();
-  })();
-
-  // Hamburger menü és interakciók
-  (function() {
-    const hamburger = document.getElementById('hamburgerBtn');
-    const menuToggleBtn = document.getElementById('menuToggleBtn');
+    const menuToggle = document.getElementById('menuToggle');
     const mobileMenu = document.getElementById('mobileMenu');
-    const overlay = document.getElementById('overlay');
-    const closeBtn = document.getElementById('closeMenuBtn');
-    function openMenu() { mobileMenu.classList.add('open'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
-    function closeMenu() { mobileMenu.classList.remove('open'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
-    if (hamburger) hamburger.addEventListener('click', openMenu);
-    if (menuToggleBtn) menuToggleBtn.addEventListener('click', openMenu);
-    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
-    if (overlay) overlay.addEventListener('click', closeMenu);
+    const menuOverlay = document.getElementById('menuOverlay');
+    const closeMenu = document.getElementById('closeMenu');
     
-    const mobileLinks = document.querySelectorAll('#mobileNavLinks a');
-    mobileLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        closeMenu();
-        if (targetId && targetId !== '#') {
-          setTimeout(() => {
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) targetElement.scrollIntoView({ behavior: 'smooth' });
-          }, 150);
-        }
+    function openMenu() {
+      mobileMenu.classList.add('open');
+      menuOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      menuToggle.setAttribute('aria-expanded', 'true');
+    }
+    
+    function closeMenuFn() {
+      mobileMenu.classList.remove('open');
+      menuOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }
+    
+    menuToggle.addEventListener('click', openMenu);
+    closeMenu.addEventListener('click', closeMenuFn);
+    menuOverlay.addEventListener('click', closeMenuFn);
+    
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        closeMenuFn();
       });
     });
+  })();
+  
+  // ===== DRAG & DROP UPLOADER =====
+  (function() {
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    const fileList = document.getElementById('fileList');
     
-    const searchIcon = document.getElementById('searchIcon');
-    if (searchIcon) {
-      searchIcon.addEventListener('click', () => {
-        let searchBox = document.getElementById('dynamicSearchBox');
-        if (!searchBox) {
-          searchBox = document.createElement('div');
-          searchBox.id = 'dynamicSearchBox';
-          searchBox.innerHTML = `<div class="fixed top-20 left-1/2 transform -translate-x-1/2 bg-white shadow-2xl rounded-xl p-4 z-[200] w-11/12 max-w-md border border-gray-300"><input type="text" id="searchInput" placeholder="Keresés a honlapon..." class="w-full border-b-2 border-blue-900 py-2 px-3 focus:outline-none"><button id="closeSearch" class="absolute top-2 right-2 text-gray-500"><i class="fas fa-times"></i></button><div id="searchResults" class="mt-2 text-sm text-gray-600 max-h-60 overflow-y-auto"></div></div>`;
-          document.body.appendChild(searchBox);
-          const searchInput = document.getElementById('searchInput');
-          const resultsDiv = document.getElementById('searchResults');
-          searchInput.addEventListener('input', (e) => {
-            const term = e.target.value.toLowerCase().trim();
-            if (!term) { resultsDiv.innerHTML = ''; return; }
-            const sections = document.querySelectorAll('section, div[id]');
-            let found = [];
-            sections.forEach(section => { if (section.id && section.innerText.toLowerCase().includes(term)) { found.push(`<a href="#${section.id}" class="block py-1 hover:bg-gray-100">${section.id.replace(/-/g,' ')}</a>`); } });
-            resultsDiv.innerHTML = found.length ? found.join('') : 'Nincs találat';
-          });
-          document.getElementById('closeSearch').addEventListener('click', () => searchBox.remove());
-        } else { searchBox.style.display = 'block'; }
+    // Click to browse
+    dropZone.addEventListener('click', () => fileInput.click());
+    dropZone.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        fileInput.click();
+      }
+    });
+    
+    // Drag events
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+      dropZone.addEventListener(eventName, preventDefaults, false);
+      document.body.addEventListener(eventName, preventDefaults, false);
+    });
+    
+    function preventDefaults(e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    
+    ['dragenter', 'dragover'].forEach(eventName => {
+      dropZone.addEventListener(eventName, () => dropZone.classList.add('drag-over'), false);
+    });
+    
+    ['dragleave', 'drop'].forEach(eventName => {
+      dropZone.addEventListener(eventName, () => dropZone.classList.remove('drag-over'), false);
+    });
+    
+    // File selection
+    fileInput.addEventListener('change', handleFiles);
+    dropZone.addEventListener('drop', (e) => handleFiles(e));
+    
+    function handleFiles(e) {
+      const files = e.target.files || e.dataTransfer.files;
+      Array.from(files).forEach(file => uploadFile(file));
+    }
+    
+    function formatFileSize(bytes) {
+      if (bytes === 0) return '0 B';
+      const k = 1024;
+      const sizes = ['B', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+    }
+    
+    function uploadFile(file) {
+      const fileItem = document.createElement('div');
+      fileItem.className = 'file-item';
+      fileItem.setAttribute('role', 'listitem');
+      
+      const fileId = 'file-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+      
+      fileItem.innerHTML = `
+        <div class="file-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+          </svg>
+        </div>
+        <div class="file-info">
+          <div class="file-name">${file.name}</div>
+          <div class="file-size">${formatFileSize(file.size)}</div>
+          <div class="upload-progress" aria-hidden="true">
+            <div class="upload-progress-bar" id="progress-${fileId}"></div>
+          </div>
+        </div>
+        <button class="file-remove" aria-label="${file.name} eltávolítása" data-file-id="${fileId}">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      `;
+      
+      fileList.appendChild(fileItem);
+      
+      // Simulate upload progress
+      const progressBar = document.getElementById('progress-' + fileId);
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += Math.random() * 15;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(interval);
+        }
+        progressBar.style.width = progress + '%';
+      }, 200);
+      
+      // Remove file
+      fileItem.querySelector('.file-remove').addEventListener('click', () => {
+        fileItem.remove();
       });
     }
-    function setStickyAndScrollMargin() {
-      const header = document.getElementById('mainHeader');
-      let headerHeight = header ? header.offsetHeight : 0;
-      document.querySelectorAll('section[id]').forEach(section => { section.style.scrollMarginTop = headerHeight + 'px'; });
-      ['#korlevelek', '#rolunkirtak', '#videotar'].forEach(selector => { const el = document.querySelector(selector); if (el) el.style.scrollMarginTop = headerHeight + 'px'; });
-    }
-    window.addEventListener('load', setStickyAndScrollMargin);
-    window.addEventListener('resize', setStickyAndScrollMargin);
-    new ResizeObserver(() => setStickyAndScrollMargin()).observe(document.getElementById('mainHeader'));
   })();
 </script>
+
 </body>
-</html>
+</html>"""
+
+with open('/mnt/agents/output/szbmrtt-header-uploader.html', 'w', encoding='utf-8') as f:
+    f.write(header_and_uploader)
+
+print("Fájl sikeresen létrehozva: szbmrtt-header-uploader.html")
+print(f"Fájl mérete: {len(header_and_uploader)} karakter")
